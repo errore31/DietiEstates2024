@@ -1,0 +1,19 @@
+{
+  "name": "dietiestates2024",
+  "version": "1.0.0",
+  "description": "Software per compravendita di case",
+  "main": "index.js",
+  "scripts": {
+    "test": "\"\\\"echo \\\\\\\"Error: no test specified\\\\\\\" && exit 1\\\"\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/errore31/DietiEstates2024.git"
+  },
+  "author": "Antonio Caruso & Gennaro De Luca",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/errore31/DietiEstates2024/issues"
+  },
+  "homepage": "https://github.com/errore31/DietiEstates2024#readme"
+}
