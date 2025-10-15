@@ -4,6 +4,7 @@
   "description": "Software per compravendita di case",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "\"\\\"echo \\\\\\\"Error: no test specified\\\\\\\" && exit 1\\\"\""
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/errore31/DietiEstates2024/issues"
   },
-  "homepage": "https://github.com/errore31/DietiEstates2024#readme"
+  "homepage": "https://github.com/errore31/DietiEstates2024#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  }
 }
