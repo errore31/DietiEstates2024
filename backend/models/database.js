@@ -33,7 +33,7 @@ Notifiche.belongsTo(Utenti, { foreignKey: 'id_utente' });
 Utenti.hasMany(Ricerche, { foreignKey: 'id_utente' });
 Ricerche.belongsTo(Utenti, { foreignKey: 'id_utente' });
 
-Immobili.hasOne(Caratteristiche_Immobili, { foreignKey: 'id' });
-Caratteristiche_Immobili.belongsTo(Immobili, { foreignKey: 'id' });
+Immobili.belongsTo(Caratteristiche_Immobili, { foreignKey: 'id_caratteristiche' });
+Caratteristiche_Immobili.hasOne(Immobili, { foreignKey: 'id_caratteristiche' });
 
 export default database;
