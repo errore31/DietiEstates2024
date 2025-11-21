@@ -3,15 +3,15 @@ import bcrypt from "bcrypt";
 
 export class utentiController {
 
-     /**
-     * Handles post requests on /auth/signup. Create a new user 
-     * @param {http.IncomingMessage} req 
-     * @param {http.ServerResponse} res 
-     */
+    /**
+    * Handles post requests on /auth/signup. Create a new user 
+    * @param {http.IncomingMessage} req 
+    * @param {http.ServerResponse} res 
+    */
     static async salvaUtente(req, res) {
         const hashed_password = await bcrypt.hash(req.body.password, 10); 
 
-        return User.create({
+        return Utenti.create({
             username: req.body.username,
             password: hashed_password
         });
@@ -23,5 +23,9 @@ export class utentiController {
      * @param {http.ServerResponse} res 
      */
     
+    static async controlloUsername(req, res) {
+        return Utenti.findAll({where: {username: req.body.username}});
+    }
+
 
 }
