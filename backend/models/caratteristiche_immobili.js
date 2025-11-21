@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 
 export function createModel(database){
-    database.define('Caratteristiche_imobili', {
+    database.define('Caratteristiche_Proprieties', {
             id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,

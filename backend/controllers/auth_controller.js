@@ -1,4 +1,4 @@
-import { Utenti } from "../models/database";
+import { Utenti } from "../models/database.js";
 import bcrypt from "bcrypt";
 
 export class authController {

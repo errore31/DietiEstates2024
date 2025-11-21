@@ -1,3 +1,5 @@
+import { DataTypes } from 'sequelize';
+
 export function createModel(database){
     database.define('Utenti', {
         id: {
@@ -34,8 +36,9 @@ export function createModel(database){
         },
         id_agenzia : {
             type: DataTypes.INTEGER,
+            allowNull: true,
             references: {
-                model: 'Agenzie',
+                model: 'Agenzies',
                 key: 'id'
             }
         }

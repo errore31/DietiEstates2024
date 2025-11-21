@@ -1,6 +1,6 @@
 import express from 'express';
-import { authController } from '../controllers/auth_controller';
-import { utentiController } from '../controllers/utenti_controller';
+import { authController } from '../controllers/auth_controller.js';
+import { utentiController } from '../controllers/utenti_controller.js';
 
 export const authRouter = express.Router();
 
@@ -39,7 +39,7 @@ authRouter.post('/', async (req, res, next) => {
 authRouter.post('/signup', async (req, res, next) =>{
 
     try{
-
+        console.log("Signup request received:", req.body);
         const utente = await utentiController.salvaUtente(req, res);
 
         res.status(201).json({
@@ -48,6 +48,8 @@ authRouter.post('/signup', async (req, res, next) =>{
         });
 
     } catch (error){
+        console.error("ERRORE SEQUELIZE:", error.message); // <--- Aggiungi questo
+    console.error("DETTAGLI:", error.original);        // <--- E questo
         next(error);
     }
 

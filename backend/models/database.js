@@ -2,9 +2,9 @@ import { Sequelize } from "sequelize";
 import { createModel as createAgenziaModel } from "./agenzie.js";
 import { createModel as createUtentiModel } from "./utenti.js";
 import { createModel as createProprietiesModel } from "./proprieties.js";
-import { createModel as createCaratteristicheProprietiesModel } from "./caratteristiche_Proprieties.js";
-import {createModel as createNotificheModel} from "./notifiche.js";
-import {createModel as createRicercheModel} from "./ricerche.js";
+import { createModel as createCaratteristicheProprietiesModel } from "./caratteristiche_immobili.js";
+import { createModel as createNotificheModel} from "./notifiche.js";
+import { createModel as createRicercheModel} from "./ricerche.js";
 
 const database = new Sequelize({
     dialect: process.env.DB_DIALECT || 'sqlite',

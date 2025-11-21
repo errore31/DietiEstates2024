@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export function createModel(database) {
-    database.define("proprieties", {
+    database.define("Proprieties", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,

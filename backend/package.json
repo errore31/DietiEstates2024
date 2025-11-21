@@ -1,6 +1,7 @@
 {
   "name": "dietiestates2024",
   "version": "1.0.0",
+  "type": "module",
   "description": "Software per compravendita di case",
   "main": "index.js",
   "scripts": {
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/errore31/DietiEstates2024#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "nodemon": "^3.1.10",
