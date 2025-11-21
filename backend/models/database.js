@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import { createModel as createAgenziaModel } from "./agenzie.js";
 import { createModel as createUtentiModel } from "./utenti.js";
-import { createModel as createImmobiliModel } from "./immobili.js";
-import { createModel as createCaratteristicheImmobiliModel } from "./caratteristiche_immobili.js";
+import { createModel as createProprietiesModel } from "./proprieties.js";
+import { createModel as createCaratteristicheProprietiesModel } from "./caratteristiche_Proprieties.js";
 import {createModel as createNotificheModel} from "./notifiche.js";
 import {createModel as createRicercheModel} from "./ricerche.js";
 
@@ -14,18 +14,18 @@ const database = new Sequelize({
 
 createUtentiModel(database);
 createAgenziaModel(database);
-createImmobiliModel(database);
-createCaratteristicheImmobiliModel(database);
+createProprietiesModel(database);
+createCaratteristicheProprietiesModel(database);
 createNotificheModel(database);
 createRicercheModel(database);
 
-export const { Utenti, Agenzie, Immobili, Caratteristiche_Immobili, Notifiche, Ricerche } = database.models;
+export const { Utenti, Agenzie, Proprieties, Caratteristiche_Proprieties, Notifiche, Ricerche } = database.models;
 
 Agenzie.hasMany(Utenti, { foreignKey: 'id_agenzia' });
 Utenti.belongsTo(Agenzie, { foreignKey: 'id_agenzia' });
 
-Utenti.hasMany(Immobili, { foreignKey: 'id_agente' });
-Immobili.belongsTo(Utenti, { foreignKey: 'id_agente' });
+Utenti.hasMany(Proprieties, { foreignKey: 'id_agente' });
+Proprieties.belongsTo(Utenti, { foreignKey: 'id_agente' });
 
 Utenti.hasMany(Notifiche, { foreignKey: 'id_utente' });
 Notifiche.belongsTo(Utenti, { foreignKey: 'id_utente' });
@@ -33,7 +33,7 @@ Notifiche.belongsTo(Utenti, { foreignKey: 'id_utente' });
 Utenti.hasMany(Ricerche, { foreignKey: 'id_utente' });
 Ricerche.belongsTo(Utenti, { foreignKey: 'id_utente' });
 
-Immobili.belongsTo(Caratteristiche_Immobili, { foreignKey: 'id_caratteristiche' });
-Caratteristiche_Immobili.hasOne(Immobili, { foreignKey: 'id_caratteristiche' });
+Proprieties.belongsTo(Caratteristiche_Proprieties, { foreignKey: 'id_caratteristiche' });
+Caratteristiche_Proprieties.hasOne(Proprieties, { foreignKey: 'id_caratteristiche' });
 
 export default database;

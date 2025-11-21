@@ -1,48 +1,48 @@
 import { DataTypes } from "sequelize";
 
 export function createModel(database) {
-    database.define("Immobili", {
+    database.define("proprieties", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        titolo: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        descrizione: {
+        description: {
             type: DataTypes.TEXT,
             allowNull: true,
         },
-        prezzo:{
+        price:{
             type: DataTypes.DECIMAL,
             allowNull: false,
         },
-        indirizzo:{
+        address:{
             type: DataTypes.STRING,
             allowNull: false,
         },
-        tipo:{
+        type:{
             type: DataTypes.STRING,
             allowNull: false,
         },
-        posizione_lat:{
+        latitude:{
             type: DataTypes.FLOAT,
             allowNull: false,
         },
-        posizione_lng:{
+        longitude:{
             type: DataTypes.FLOAT,
             allowNull: false,
         },
-        id_agente: {
+        agentId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'Utenti',
                 key: 'id'
             }
         },
-        id_caratteristiche: {
+        featuresId: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'Caratteristiche_immobili',
