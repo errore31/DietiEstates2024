@@ -17,7 +17,7 @@ export class utentiController {
             nome: req.body.nome,
             cognome: req.body.cognome,
             email: req.body.email,
-            ruolo: req.body.ruolo,
+            ruolo: req.body.ruolo, //PUNTO CRITICO: un hacker potrebbe creare un admin e prendersi il controllo del sistema
             id_agenzia: req.body.id_agenzia,
             password: hashed_password
         });
