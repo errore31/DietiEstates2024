@@ -32,6 +32,6 @@ export class utentiController {
     static async controlloUsername(req, res) {
         return Utenti.findAll({where: {username: req.body.username}});
     }
-
+    
 
 }
