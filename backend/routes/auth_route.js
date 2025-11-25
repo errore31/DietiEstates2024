@@ -17,10 +17,11 @@ authRouter.post('/', async (req, res, next) => {
         if (utente) {
             req.session.utenteId = utente.id;
             req.session.username = utente.username;
+            req.session.role = utente.role;
             req.session.auth = true;
             res.status(200).json({
                 message: "Login effettuato con successo",
-                utente: { id: utente.id, username: utente.username }
+                utente: { id: utente.id, username: utente.username, role: utente.role }
             });
         } else {
             res.status(401).json({ error: "Credenziali non valide. Riprova." });
@@ -48,8 +49,6 @@ authRouter.post('/signup', async (req, res, next) =>{
         });
 
     } catch (error){
-        console.error("ERRORE SEQUELIZE:", error.message); // <--- Aggiungi questo
-    console.error("DETTAGLI:", error.original);        // <--- E questo
         next(error);
     }
 
