@@ -1,7 +1,7 @@
 import express from 'express';
 import { authController } from '../controllers/auth_controller.js';
 import { utentiController } from '../controllers/utenti_controller.js';
-import { validationSignup } from '../middleware/validation/validationSignup.js';
+import { validationSignup, validationLogin } from '../middleware/validation/validationAuth.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 
 export const authRouter = express.Router();
@@ -11,7 +11,7 @@ export const authRouter = express.Router();
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/ 
-authRouter.post('/', async (req, res, next) => {
+authRouter.post('/', validationLogin, errorValidation, async (req, res, next) => {
 
     try {
         const utente = await authController.verificaCredenziali(req, res);
