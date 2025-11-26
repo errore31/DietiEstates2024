@@ -1,5 +1,8 @@
 import express from 'express';
 import { proprietiesController } from '../controllers/proprietiesController'
+import { enforceAuthentication } from '../middleware/authorization';
+import { ensureIsAgent } from '../middleware/authorization';
+import { ensureAgentOwnsProperty } from '../middleware/authorization';
 
 export const proprietiesRouter = express.Router();
 
@@ -8,7 +11,7 @@ export const proprietiesRouter = express.Router();
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/ 
-proprietiesRouter.post('/create', async (req, res, next) => {
+proprietiesRouter.post('/create', enforceAuthentication,  ensureIsAgent, async (req, res, next) => {
 
     try {
         //const utente = await authController.verificaCredenziali(req, res);
@@ -29,7 +32,7 @@ proprietiesRouter.post('/create', async (req, res, next) => {
 
 });
 
-proprietiesRouter.post('/delete', async (req, res, next) => {
+proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
         const propriety = req.body;
@@ -51,7 +54,7 @@ proprietiesRouter.post('/delete', async (req, res, next) => {
 
 
 
-proprietiesRouter.post('/update', async (req, res, next) => {
+proprietiesRouter.post('/update', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
         const propriety = req.body;

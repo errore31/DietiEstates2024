@@ -45,7 +45,7 @@ authRouter.post('/signup', async (req, res, next) =>{
 
         res.status(201).json({
             message: "Utente salvato con successo",
-            utente: {id: utente.id, username: utente.username}
+            utente: {id: utente.id, username: utente.username, role: utente.role}
         });
 
     } catch (error){
