@@ -1,25 +1,25 @@
 import { DataTypes } from "sequelize";
 
 export function createModel(database) {
-    database.define("Agenzie", {
+    database.define("Agencies", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        ragione_sociale: {
+        businessName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        nome: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        indirizzo: {
+        address: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        telefono: {
+        phone: {
             type: DataTypes.STRING,
             allowNull: false
         },

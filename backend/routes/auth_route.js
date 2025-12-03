@@ -23,7 +23,7 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
             req.session.auth = true;
             res.status(200).json({
                 message: "Login effettuato con successo",
-                utente: { id: utente.id, username: utente.username, role: utente.role }
+                utente: { id: utente.id, username: utente.username, ruolo: utente.ruolo, idAg: utente.agencyId }
             });
         } else {
             res.status(401).json({ error: "Credenziali non valide. Riprova." });

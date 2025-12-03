@@ -34,11 +34,11 @@ export function createModel(database){
             allowNull: false,
             
         },
-        id_agenzia : {
+        agencyId : {
             type: DataTypes.INTEGER,
             allowNull: true,
             references: {
-                model: 'Agenzies',
+                model: 'Agencies',
                 key: 'id'
             }
         }

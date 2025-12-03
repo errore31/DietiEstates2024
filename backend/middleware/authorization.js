@@ -1,4 +1,4 @@
-import { Proprieties } from "../models/database";
+import { Proprieties } from "../models/database.js";
 
 /**
  *  This middleware ensures that the user is currently authenticated and has the appropriate role.

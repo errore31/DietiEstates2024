@@ -38,16 +38,9 @@ export function createModel(database) {
         agentId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Utenti',
+                model: 'Utentis',
                 key: 'id'
             }
         },
-        featuresId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'Caratteristiche_immobili',
-                key: 'id'
-            }
-        }
-        });
+    });
 }
