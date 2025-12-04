@@ -1,5 +1,7 @@
 import express from 'express';
 import { agenciesController } from '../controllers/agenciesController.js'
+import { validationCreateAgency, validationUpdateAgency } from '../middleware/validation/validationAgencies.js';
+import { errorValidation } from '../middleware/validation/errorValidation.js';
 
 export const agenciesRouter = express.Router();
 
@@ -9,7 +11,7 @@ export const agenciesRouter = express.Router();
  * @param {http.ServerResponse} res 
  **/ 
 
-agenciesRouter.post('/create', async (req, res, next) => {
+agenciesRouter.post('/create', validationCreateAgency, errorValidation,  async (req, res, next) => {
 
     try {
         const agency = await agenciesController.createAgency(req);

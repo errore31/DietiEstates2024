@@ -3,6 +3,8 @@ import { proprietiesController } from '../controllers/proprietiesController.js'
 import { enforceAuthentication } from '../middleware/authorization.js';
 import { ensureIsAgent } from '../middleware/authorization.js';
 import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
+import { validationCreateProperties, validationUpdateProperties } from '../middleware/validation/validationProperties.js';
+import { errorValidation } from '../middleware/validation/errorValidation.js';
 
 export const proprietiesRouter = express.Router();
 
@@ -12,7 +14,7 @@ export const proprietiesRouter = express.Router();
  * @param {http.ServerResponse} res 
  **/ 
 
-proprietiesRouter.post('/create', async (req, res, next) => {
+proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreateProperties, errorValidation, async (req, res, next) => {
 
     try {
         //const utente = await authController.verificaCredenziali(req, res);
@@ -32,14 +34,15 @@ proprietiesRouter.post('/create', async (req, res, next) => {
 
 });
 
+//PER CARUSO, NON SI METTE POST MA DELETE
 proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
         const propriety = req.body;
         if (propriety) {
-            proprietiesController.deletePropriety(propriety);
+            await proprietiesController.deletePropriety(propriety);
 
-            res.status(204).json({
+            res.status(200).json({
                 message: "Proprietà eliminata con successo!",
                 propriety: { }
             });
@@ -54,15 +57,15 @@ proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty
 
 
 
-proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
+proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
 
     try {
         const propriety = req.body;
         if (propriety) {
-            proprietiesController.updatePropriety(propriety);
+           await proprietiesController.updatePropriety(propriety);
 
-            res.status(204).json({
-                message: "Proprietà eliminata con successo!",
+            res.status(200).json({
+                message: "Proprietà aggiornata con successo!",
                 propriety: { }
             });
         } else {
