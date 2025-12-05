@@ -1,8 +1,10 @@
 import express from 'express';
-import { proprietiesController } from '../controllers/proprietiesController'
-import { enforceAuthentication } from '../middleware/authorization';
-import { ensureIsAgent } from '../middleware/authorization';
-import { ensureAgentOwnsProperty } from '../middleware/authorization';
+import { proprietiesController } from '../controllers/proprietiesController.js'
+import { enforceAuthentication } from '../middleware/authorization.js';
+import { ensureIsAgent } from '../middleware/authorization.js';
+import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
+import { validationCreateProperties, validationUpdateProperties } from '../middleware/validation/validationProperties.js';
+import { errorValidation } from '../middleware/validation/errorValidation.js';
 
 export const proprietiesRouter = express.Router();
 
@@ -11,17 +13,17 @@ export const proprietiesRouter = express.Router();
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/ 
-proprietiesRouter.post('/create', enforceAuthentication,  ensureIsAgent, async (req, res, next) => {
+
+proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreateProperties, errorValidation, async (req, res, next) => {
 
     try {
         //const utente = await authController.verificaCredenziali(req, res);
-        const propriety = req.body;
+        const propriety = await proprietiesController.createPropriety(req);
         if (propriety) {
-            proprietiesController.createProprieties(propriety);
-
+            
             res.status(201).json({
                 message: "Proprietà aggiunta con successo!",
-                propriety: { }
+                propriety: { id : propriety.id }
             });
         } else {
             res.status(401).json({ error: "Richiesta non valida. Riprova." });
@@ -32,14 +34,15 @@ proprietiesRouter.post('/create', enforceAuthentication,  ensureIsAgent, async (
 
 });
 
+//PER CARUSO, NON SI METTE POST MA DELETE
 proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
         const propriety = req.body;
         if (propriety) {
-            proprietiesController.deleteProprieties(propriety);
+            await proprietiesController.deletePropriety(propriety);
 
-            res.status(204).json({
+            res.status(200).json({
                 message: "Proprietà eliminata con successo!",
                 propriety: { }
             });
@@ -54,15 +57,15 @@ proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty
 
 
 
-proprietiesRouter.post('/update', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
+proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
 
     try {
         const propriety = req.body;
         if (propriety) {
-            proprietiesController.updateProprieties(propriety);
+           await proprietiesController.updatePropriety(propriety);
 
-            res.status(204).json({
-                message: "Proprietà eliminata con successo!",
+            res.status(200).json({
+                message: "Proprietà aggiornata con successo!",
                 propriety: { }
             });
         } else {

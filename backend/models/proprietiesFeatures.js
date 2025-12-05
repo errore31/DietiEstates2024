@@ -1,29 +1,32 @@
 import { DataTypes } from 'sequelize';
 
 export function createModel(database){
-    database.define('Caratteristiche_Proprieties', {
-            id: {
+    database.define('ProprietiesFeatures', {
+        id: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,
+            references: {
+                model: 'Proprieties',
+                key: 'id'
+            }
         },
-        numero_stanze:{
+        roomCount:{
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        dimensioni: {
+        area: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        ascensore: {
+        hasElevator: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        piano: {
+        floor: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        classe_energetica: {
+        energyClass: {
             type: DataTypes.STRING,
             allowNull: false,
         }

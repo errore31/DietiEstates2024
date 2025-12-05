@@ -1,6 +1,6 @@
-import { Proprieties } from "../models/database";
+import { Proprieties } from "../models/database.js";
 
-export class ProprietiesController {
+export class proprietiesController {
     
     
     /**
@@ -9,8 +9,8 @@ export class ProprietiesController {
     **/
 
 
-    static async createProprieties(req, res) {
-
+    static async createPropriety(req, res) {
+        console.log(req.body);
         return Proprieties.create({
             title: req.body.title,
             descrption: req.body.description,
@@ -19,17 +19,16 @@ export class ProprietiesController {
             type: req.body.type,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            agentId: req.body.agentId,
-            featuresId: featuresId
+            agentId: req.body.agentId
         });
     }
 
-    static async deleteProprieties(req, res) {
+    static async deletePropriety(req, res) {
 
         return Proprieties.destroy({where: {id : req.params.id} });
     }
 
-    static async updateProprieties(req, res) {
+    static async updatePropriety(req, res) {
         const updateData = {
             title: req.body.title,
             description: req.body.description,
@@ -38,8 +37,7 @@ export class ProprietiesController {
             type: req.body.type,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            agentId: req.body.agentId,
-            featuresId: req.body.featuresId,
+            agentId: req.body.agentId
         };
         return Proprieties.update(
             updateData,
