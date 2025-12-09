@@ -1,20 +1,20 @@
 import { DataTypes } from 'sequelize';
 
 export function createModel(database){
-    database.define('Ricerche', {
+    database.define('Searches', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        criteri: {
+        criteria: {
             type: DataTypes.JSON,
             allowNull: false
         },
-        id_utente: {
+        userId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Utenti',
+                model: 'Users',
                 key: 'id'
             }
         },

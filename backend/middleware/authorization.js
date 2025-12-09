@@ -1,4 +1,4 @@
-import { Proprieties } from "../models/database.js";
+import { Properties } from "../models/database.js";
 
 /**
  *  This middleware ensures that the user is currently authenticated and has the appropriate role.
@@ -27,7 +27,7 @@ export async function ensureAgentOwnsProperty(req, res, next){
         }
 
         const propertyId = req.params.id;
-        const property = await Proprieties.findByPk(propertyId);
+        const property = await Properties.findByPk(propertyId);
 
         if (!property) {
            return next({ status: 404, message: "Immobile non trovato" });

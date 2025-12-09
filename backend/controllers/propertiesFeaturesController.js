@@ -1,4 +1,4 @@
-import { ProprietiesFeatures } from "../models/database.js";
+import { PropertiesFeatures } from "../models/database.js";
 
 export class proprietiesFeaturesController {
     
@@ -11,7 +11,7 @@ export class proprietiesFeaturesController {
 
     static async createProprietyFeatures(req, res) {
 
-        return ProprietiesFeatures.create({
+        return PropertiesFeatures.create({
             id: req.body.id,
             roomCount: req.body.roomCount,
             area: req.body.area,
@@ -23,7 +23,7 @@ export class proprietiesFeaturesController {
 
     static async deleteProprietyFeatures(req, res) {
 
-        return ProprietiesFeatures.destroy({where: {id : req.params.id} });
+        return PropertiesFeatures.destroy({where: {id : req.params.id} });
     }
 
     static async updateProprietyFeatures(req, res) {
@@ -35,7 +35,7 @@ export class proprietiesFeaturesController {
             floor: req.body.floor,
             energyClass: req.body.energyClass,
         };
-        return ProprietiesFeatures.update(
+        return PropertiesFeatures.update(
             updateData,
             {where: {id : req.params.id} });
     }

@@ -20,24 +20,20 @@ export class agenciesController {
         });
     }
 
-    static async deleteProprieties(req, res) {
+    static async deleteAgency(req, res) {
 
-        //return Proprieties.destroy({where: {id : req.params.id} });
+        return Agencies.destroy({where: {id : req.params.id} });
     }
 
-    static async updateProprieties(req, res) {
+    static async updateAgency(req, res) {
         const updateData = {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
+            businessName: req.body.businessName,
+            name: req.body.name,
             address: req.body.address,
-            type: req.body.type,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
-            agentId: req.body.agentId,
-            featuresId: req.body.featuresId,
+            phone: req.body.phone,
+            email: req.body.email
         };
-        return Proprieties.update(
+        return Agencies.update(
             updateData,
             {where: {id : req.params.id} });
     }

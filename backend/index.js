@@ -2,10 +2,13 @@ import express from 'express';
 import database from './models/database.js';
 import session from 'express-session';
 
-import { authRouter } from './routes/auth_route.js';
-import { proprietiesRouter } from './routes/proprietiesRoute.js'
-import { proprietiesFeaturesRouter } from './routes/proprietiesFeaturesRoute.js'
+import { authRouter } from './routes/authRoute.js';
+import { proprietiesRouter } from './routes/propertiesRoute.js'
+import { proprietiesFeaturesRouter } from './routes/propertiesFeaturesRoute.js'
 import { agenciesRouter } from './routes/agenciesRoute.js'
+import { searchesRouter } from './routes/searchesRoute.js'
+import { notificationsRouter } from './routes/notificationsRoute.js'
+
 
 const app = express();
 const Port = 3000;
@@ -32,9 +35,11 @@ try {
 }
 
 app.use("/auth", authRouter);
-app.use("/proprieties", proprietiesRouter)
-app.use("/proprietiesFeatures", proprietiesFeaturesRouter)
+app.use("/properties", proprietiesRouter)
+app.use("/propertiesFeatures", proprietiesFeaturesRouter)
 app.use("/agencies", agenciesRouter)
+app.use("/searches", searchesRouter)
+app.use("/notifications", notificationsRouter)
 
 
 app.listen(Port, () => {

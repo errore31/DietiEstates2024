@@ -1,23 +1,23 @@
-import { Utenti } from "../models/database.js";
+import { Users } from "../models/database.js";
 import bcrypt from "bcrypt";
 
-export class utentiController {
+export class userController {
 
     /**
     * Handles post requests on /auth/signup. Create a new user 
     * @param {http.IncomingMessage} req 
     * @param {http.ServerResponse} res 
     */
-    static async salvaUtente(req, res) {
+    static async createUser(req, res) {
         console.log(req.body);
         const hashed_password = await bcrypt.hash(req.body.password, 10); 
 
-        return Utenti.create({
+        return Users.create({
             username: req.body.username,
-            nome: req.body.nome,
-            cognome: req.body.cognome,
+            name: req.body.name,
+            surname: req.body.surname,
             email: req.body.email,
-            ruolo: req.body.ruolo, //PUNTO CRITICO: un hacker potrebbe creare un admin e prendersi il controllo del sistema
+            role: req.body.role,
             agencyId: req.body.agencyId,
             password: hashed_password
         });
@@ -29,8 +29,8 @@ export class utentiController {
      * @param {http.ServerResponse} res 
      */
     
-    static async controlloUsername(req, res) {
-        return Utenti.findAll({where: {username: req.body.username}});
+    static async checkUsername(req, res) {
+        return Users.findAll({where: {username: req.body.username}});
     }
     
 

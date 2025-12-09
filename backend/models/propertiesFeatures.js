@@ -1,12 +1,12 @@
 import { DataTypes } from 'sequelize';
 
 export function createModel(database){
-    database.define('ProprietiesFeatures', {
+    database.define('PropertiesFeatures', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             references: {
-                model: 'Proprieties',
+                model: 'Properties',
                 key: 'id'
             }
         },

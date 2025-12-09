@@ -1,17 +1,17 @@
 import { DataTypes } from 'sequelize';
 
 export function createModel(database){
-    database.define('Utenti', {
+    database.define('Users', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        nome : {
+        name : {
             type: DataTypes.STRING,
             allowNull: false
         },
-        cognome : {
+        surname : {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -29,7 +29,7 @@ export function createModel(database){
             type: DataTypes.STRING,
             allowNull: false
         },
-        ruolo : {
+        role : {
             type: DataTypes.STRING,
             allowNull: false,
             

@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export function createModel(database) {
-    database.define("Proprieties", {
+    database.define("Properties", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -38,7 +38,7 @@ export function createModel(database) {
         agentId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Utentis',
+                model: 'Users',
                 key: 'id'
             }
         },

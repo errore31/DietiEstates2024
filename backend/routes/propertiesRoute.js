@@ -1,5 +1,5 @@
 import express from 'express';
-import { proprietiesController } from '../controllers/proprietiesController.js'
+import { propertiesController } from '../controllers/propertiesController.js'
 import { enforceAuthentication } from '../middleware/authorization.js';
 import { ensureIsAgent } from '../middleware/authorization.js';
 import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
@@ -17,8 +17,7 @@ export const proprietiesRouter = express.Router();
 proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreateProperties, errorValidation, async (req, res, next) => {
 
     try {
-        //const utente = await authController.verificaCredenziali(req, res);
-        const propriety = await proprietiesController.createPropriety(req);
+        const propriety = await propertiesController.createProperty(req);
         if (propriety) {
             
             res.status(201).json({
@@ -34,13 +33,12 @@ proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validati
 
 });
 
-//PER CARUSO, NON SI METTE POST MA DELETE
-proprietiesRouter.post('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
+proprietiesRouter.delete('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
         const propriety = req.body;
         if (propriety) {
-            await proprietiesController.deletePropriety(propriety);
+            await propertiesController.deleteProperty(propriety);
 
             res.status(200).json({
                 message: "Proprietà eliminata con successo!",
@@ -62,7 +60,7 @@ proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty,
     try {
         const propriety = req.body;
         if (propriety) {
-           await proprietiesController.updatePropriety(propriety);
+           await propertiesController.updateProperty(propriety);
 
             res.status(200).json({
                 message: "Proprietà aggiornata con successo!",

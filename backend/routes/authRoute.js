@@ -1,6 +1,6 @@
 import express from 'express';
-import { authController } from '../controllers/auth_controller.js';
-import { utentiController } from '../controllers/utenti_controller.js';
+import { authController } from '../controllers/authController.js';
+import { userController } from '../controllers/usersController.js';
 import { validationSignup, validationLogin } from '../middleware/validation/validationAuth.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 
@@ -14,16 +14,16 @@ export const authRouter = express.Router();
 authRouter.post('/', validationLogin, errorValidation, async (req, res, next) => {
 
     try {
-        const utente = await authController.verificaCredenziali(req, res);
+        const user = await authController.checkCredential(req, res);
 
-        if (utente) {
-            req.session.utenteId = utente.id;
-            req.session.username = utente.username;
-            req.session.role = utente.role;
+        if (user) {
+            req.session.userId = user.id;
+            req.session.username = user.username;
+            req.session.role = user.role;
             req.session.auth = true;
             res.status(200).json({
                 message: "Login effettuato con successo",
-                utente: { id: utente.id, username: utente.username, ruolo: utente.ruolo, idAg: utente.agencyId }
+                user: { id: user.id, username: user.username, ruolo: user.ruolo, idAg: user.agencyId }
             });
         } else {
             res.status(401).json({ error: "Credenziali non valide. Riprova." });
@@ -42,11 +42,11 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
 authRouter.post('/signup', validationSignup, errorValidation, async (req, res, next) =>{
 
     try{
-        const utente = await utentiController.salvaUtente(req, res);
+        const user = await userController.createUser(req, res);
 
         res.status(201).json({
             message: "Utente salvato con successo",
-            utente: {id: utente.id, username: utente.username, role: utente.role}
+            user: {id: user.id, username: user.username, role: user.role}
         });
 
     } catch (error){
