@@ -9,7 +9,8 @@ export function createModel(database) {
         },
         businessName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         name: {
             type: DataTypes.STRING,
@@ -26,6 +27,7 @@ export function createModel(database) {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true
         }
     });
 }

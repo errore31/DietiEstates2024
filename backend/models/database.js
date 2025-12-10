@@ -21,19 +21,19 @@ createSearchesModel(database);
 
 export const { Users, Agencies, Properties, PropertiesFeatures, Notifications, Searches } = database.models;
 
-Agencies.hasMany(Users, { foreignKey: 'agencyId' });
+Agencies.hasMany(Users, { foreignKey: 'agencyId', onDelete: 'CASCADE' });
 Users.belongsTo(Agencies, { foreignKey: 'agencyId' });
 
-Users.hasMany(Properties, { foreignKey: 'agentId' });
+Users.hasMany(Properties, { foreignKey: 'agentId', onDelete: 'SET NULL'});
 Properties.belongsTo(Users, { foreignKey: 'agentId' });
 
-Users.hasMany(Notifications, { foreignKey: 'userId' });
+Users.hasMany(Notifications, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Notifications.belongsTo(Users, { foreignKey: 'userId' });
 
-Users.hasMany(Searches, { foreignKey: 'userId' });
+Users.hasMany(Searches, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Searches.belongsTo(Users, { foreignKey: 'userId' });
 
 PropertiesFeatures.belongsTo(Properties, { foreignKey: 'id' });
-Properties.hasOne(PropertiesFeatures, { foreignKey: 'id' });
+Properties.hasOne(PropertiesFeatures, { foreignKey: 'id', onDelete: 'CASCADE' });
 
 export default database;

@@ -16,7 +16,8 @@ export function createModel(database){
             references: {
                 model: 'Users',
                 key: 'id'
-            }
+            },
+            allowNull: false
         },
     });
 }
