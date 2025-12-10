@@ -9,7 +9,7 @@ export const notificationsRouter = express.Router();
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/ 
-notificationsRouter.post('/', enforceAuthentication, async (req, res, next) => {
+notificationsRouter.post('/', async (req, res, next) => {
 
     try {
         const notification = await notificationsController.createNotification(req, res);

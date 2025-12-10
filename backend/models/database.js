@@ -33,7 +33,7 @@ Notifications.belongsTo(Users, { foreignKey: 'userId' });
 Users.hasMany(Searches, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Searches.belongsTo(Users, { foreignKey: 'userId' });
 
-PropertiesFeatures.belongsTo(Properties, { foreignKey: 'id' });
+PropertiesFeatures.belongsTo(Properties, { foreignKey: 'id', onDelete: 'CASCADE' });
 Properties.hasOne(PropertiesFeatures, { foreignKey: 'id', onDelete: 'CASCADE' });
 
 export default database;

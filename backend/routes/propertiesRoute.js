@@ -12,17 +12,17 @@ export const proprietiesRouter = express.Router();
  * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
- **/ 
+ **/
 
 proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreateProperties, errorValidation, async (req, res, next) => {
 
     try {
         const propriety = await propertiesController.createProperty(req);
         if (propriety) {
-            
+
             res.status(201).json({
                 message: "Proprietà aggiunta con successo!",
-                propriety: { id : propriety.id }
+                propriety: { id: propriety.id }
             });
         } else {
             res.status(401).json({ error: "Richiesta non valida. Riprova." });
@@ -33,21 +33,27 @@ proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validati
 
 });
 
-proprietiesRouter.delete('/delete', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
+proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
-        const propriety = req.body;
-        if (propriety) {
-            await propertiesController.deleteProperty(propriety);
+        const idPropriety = req.params.id;
+        if (idPropriety) {
+            const checkDelete = await propertiesController.deleteProperty(idPropriety); //returns the number of rows eliminated
+            if (checkDelete > 0) {
+                res.status(200).json({
+                    message: "Proprietà eliminata con successo!",
+                    propriety: {}
+                });
+            } else {
 
-            res.status(200).json({
-                message: "Proprietà eliminata con successo!",
-                propriety: { }
-            });
+                return res.status(404).json({ error: "id non trovato." });
+            }
+
         } else {
             res.status(401).json({ error: "Richiesta non valida. Riprova." });
         }
     } catch (error) {
+        console.error(error);
         next(error);
     }
 
@@ -60,11 +66,11 @@ proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty,
     try {
         const propriety = req.body;
         if (propriety) {
-           await propertiesController.updateProperty(propriety);
+            await propertiesController.updateProperty(propriety);
 
             res.status(200).json({
                 message: "Proprietà aggiornata con successo!",
-                propriety: { }
+                propriety: {}
             });
         } else {
             res.status(401).json({ error: "Richiesta non valida. Riprova." });

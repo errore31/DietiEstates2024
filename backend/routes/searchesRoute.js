@@ -9,7 +9,7 @@ export const searchesRouter = express.Router();
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/ 
-searchesRouter.post('/', enforceAuthentication, async (req, res, next) => {
+searchesRouter.post('/', async (req, res, next) => {
 
     try {
         const search = await searchesController.createSearch(req, res);

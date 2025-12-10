@@ -23,9 +23,9 @@ export class propertiesController {
         });
     }
 
-    static async deleteProperty(req, res) {
-
-        return Properties.destroy({where: {id : req.params.id} });
+    static async deleteProperty(idPropriety) {
+        
+        return Properties.destroy({where: {id : idPropriety} });
     }
 
     static async updateProperty(req, res) {
