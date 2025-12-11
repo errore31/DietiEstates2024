@@ -19,7 +19,7 @@ export class propertiesController {
             type: req.body.type,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
-            agentId: req.body.agentId
+            agentId: req.session.userId
         });
     }
 

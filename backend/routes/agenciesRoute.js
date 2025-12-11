@@ -28,3 +28,30 @@ agenciesRouter.post('/create', validationCreateAgency, errorValidation,  async (
     }
 
 });
+
+agenciesRouter.delete('/delete/:id', async (req, res, next) => {
+
+    try {
+        const idAgency = req.params.id;
+        await agenciesController.deleteAgency(idAgency);
+        res.status(200).json({
+            message: "Agenzia eliminata con successo!",
+            agency: {}
+        });
+    } catch (error) {
+        next(error);
+    }
+});
+
+agenciesRouter.put('/update/:id', validationUpdateAgency, errorValidation, async (req, res, next) => {
+    try {
+        const idAgency = req.params.id;
+        const updatedAgency = await agenciesController.updateAgency(idAgency, req);
+        res.status(200).json({
+            message: "Agenzia aggiornata con successo!",
+            agency: updatedAgency
+        });
+    } catch (error) {
+        next(error);
+    }
+});

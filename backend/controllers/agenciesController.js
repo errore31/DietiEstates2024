@@ -20,22 +20,33 @@ export class agenciesController {
         });
     }
 
-    static async deleteAgency(req, res) {
+    static async deleteAgency(idAgency) {
+        const agency = await Agencies.findByPk(idAgency);
+        if (!agency) {
+             throw new customError('Agenzia non trovata', 404); 
+        }
 
-        return Agencies.destroy({where: {id : req.params.id} });
+        agency.destroy();
+        return true;
     }
 
-    static async updateAgency(req, res) {
-        const updateData = {
-            businessName: req.body.businessName,
-            name: req.body.name,
-            address: req.body.address,
-            phone: req.body.phone,
-            email: req.body.email
-        };
-        return Agencies.update(
-            updateData,
-            {where: {id : req.params.id} });
+    static async updateAgency(idAgency, req) {
+        const agency = await Agencies.findByPk(idAgency);
+        if (!agency) {
+             throw new customError('Agenzia non trovata', 404); 
+        }
+        
+        const allowedUpdates = ['businessName', 'name', 'address', 'phone', 'email'];
+
+        allowedUpdates.forEach((field) => {
+            if (req.body[field] !== undefined) {
+                agency[field] = req.body[field];
+            }
+        });
+
+        await agency.save();
+        
+        return agency;
     }
 
     

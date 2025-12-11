@@ -23,22 +23,15 @@ searchesRouter.post('/', async (req, res, next) => {
 
 });
 
-/**
- * This route handles user authentication
- * @param {http.IncomingMessage} req 
- * @param {http.ServerResponse} res 
- **/ 
-searchesRouter.delete('/delete', enforceAuthentication, async (req, res, next) =>{
-
-    try{
-        const search = await searchesController.deleteSearch(req, res);
+searchesRouter.delete('/delete/:id', enforceAuthentication, async (req, res, next) => {
+    try {
+        const idSearch = req.params.id;
+        await searchesController.deleteSearch(idSearch);
         res.status(200).json({
-            message: "Ricerca eliminata con successo",
-            search: { id: search.id, criteria: search.criteria}
+            message: "Ricerca eliminata con successo!",
+            search: {}
         });
-
-    } catch (error){
+    } catch (error) {
         next(error);
     }
-
 });

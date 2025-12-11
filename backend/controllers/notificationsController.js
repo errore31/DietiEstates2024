@@ -21,7 +21,7 @@ export class notificationsController {
         };
         return Notifications.update(
             updateData,
-            {where: {id : req.id} });
+            {where: {id : req.body.id} });
     }
 
 }

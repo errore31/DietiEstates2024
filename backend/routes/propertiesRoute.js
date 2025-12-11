@@ -36,8 +36,8 @@ proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validati
 proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsProperty, async (req, res, next) => {
 
     try {
-        const idPropriety = req.params.id;
-        await propertiesController.deleteProperty(idPropriety); 
+        const idProperty = req.params.id;
+        await propertiesController.deleteProperty(idProperty); 
 
         res.status(200).json({
             message: "Proprietà eliminata con successo!",
@@ -54,8 +54,8 @@ proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsPr
 proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
 
     try {
-        const idPropriety = req.params.id;
-        const updatedProperty = await propertiesController.updateProperty(idPropriety, req);
+        const idProperty = req.params.id;
+        const updatedProperty = await propertiesController.updateProperty(idProperty, req);
         res.status(200).json({
             message: "Proprietà aggiornata con successo!",
             data: updatedProperty 

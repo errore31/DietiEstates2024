@@ -33,20 +33,14 @@ proprietiesFeaturesRouter.post('/create', enforceAuthentication, ensureIsAgent, 
 });
 
 
-proprietiesFeaturesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty, validationUpdatePropertiesFeatures, errorValidation, async (req, res, next) => {
+proprietiesFeaturesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsProperty, validationUpdatePropertiesFeatures, errorValidation, async (req, res, next) => {
 
     try {
-        const propriety = req.body;
-        if (propriety) {
-           await proprietiesFeaturesController.updateProprietyFeatures(propriety);
+        const idPropertyFeature = req.params.id;
+        const featureUpdate = await proprietiesFeaturesController.updateProprietyFeatures(idPropertyFeature, req);
 
-            res.status(200).json({
-                message: "Caratteristiche proprietà aggiornate con successo!",
-                propriety: { }
-            });
-        } else {
-            res.status(401).json({ error: "Richiesta non valida. Riprova." });
-        }
+        res.status(200).json({ message: "Caratteristiche proprietà aggiornate con successo!", data : featureUpdate });
+       
     } catch (error) {
         next(error);
     }

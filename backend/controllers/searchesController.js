@@ -13,8 +13,14 @@ export class searchesController {
         });
     }
 
-    static async deleteSearch(req, res) {
-        return Searches.destroy({where: {id : req.params.id} });
+    static async deleteSearch(idSearch) {
+        const search = await Searches.findByPk(idSearch);
+        if (!search) {
+             throw new customError('Ricerca non trovata', 404); 
+        }
+
+        search.destroy();
+        return true;
     }
 
 }
