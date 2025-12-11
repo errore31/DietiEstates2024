@@ -8,6 +8,7 @@ import { proprietiesFeaturesRouter } from './routes/propertiesFeaturesRoute.js'
 import { agenciesRouter } from './routes/agenciesRoute.js'
 import { searchesRouter } from './routes/searchesRoute.js'
 import { notificationsRouter } from './routes/notificationsRoute.js'
+import { errorHandler } from './middleware/errorHandler.js';
 
 
 const app = express();
@@ -40,6 +41,7 @@ app.use("/propertiesFeatures", proprietiesFeaturesRouter)
 app.use("/agencies", agenciesRouter)
 app.use("/searches", searchesRouter)
 app.use("/notifications", notificationsRouter)
+app.use(errorHandler);
 
 
 app.listen(Port, () => {
