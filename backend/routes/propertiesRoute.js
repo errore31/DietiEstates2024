@@ -37,23 +37,13 @@ proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsPr
 
     try {
         const idPropriety = req.params.id;
-        if (idPropriety) {
-            const checkDelete = await propertiesController.deleteProperty(idPropriety); //returns the number of rows eliminated
-            if (checkDelete > 0) {
-                res.status(200).json({
-                    message: "Proprietà eliminata con successo!",
-                    propriety: {}
-                });
-            } else {
+        await propertiesController.deleteProperty(idPropriety); 
 
-                return res.status(404).json({ error: "id non trovato." });
-            }
-
-        } else {
-            res.status(401).json({ error: "Richiesta non valida. Riprova." });
-        }
+        res.status(200).json({
+            message: "Proprietà eliminata con successo!",
+            propriety: {}
+        });
     } catch (error) {
-        console.error(error);
         next(error);
     }
 
@@ -61,20 +51,15 @@ proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsPr
 
 
 
-proprietiesRouter.put('/update', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
+proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
 
     try {
-        const propriety = req.body;
-        if (propriety) {
-            await propertiesController.updateProperty(propriety);
-
-            res.status(200).json({
-                message: "Proprietà aggiornata con successo!",
-                propriety: {}
-            });
-        } else {
-            res.status(401).json({ error: "Richiesta non valida. Riprova." });
-        }
+        const idPropriety = req.params.id;
+        const updatedProperty = await propertiesController.updateProperty(idPropriety, req);
+        res.status(200).json({
+            message: "Proprietà aggiornata con successo!",
+            data: updatedProperty 
+        });
     } catch (error) {
         next(error);
     }

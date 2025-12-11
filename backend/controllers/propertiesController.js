@@ -10,7 +10,7 @@ export class propertiesController {
 
 
     static async createProperty(req, res) {
-        console.log(req.body);
+
         return Properties.create({
             title: req.body.title,
             descrption: req.body.description,
@@ -24,26 +24,33 @@ export class propertiesController {
     }
 
     static async deleteProperty(idPropriety) {
+        const property = await Properties.findByPk(idPropriety);
+        if (!property) {
+             throw new customError('Immobile non trovato', 404); 
+        }
+
+        property.destroy();
+        return true;
+    }
+
+    static async updateProperty(idPropriety, req) {
+
+        const property = await Properties.findByPk(idPropriety);
+        if (!property) {
+            throw new customError('Immobile non trovato', 404); 
+        }
+
+        const allowedUpdates = ['title', 'description', 'price', 'address', 'type', 'latitude', 'longitude'];
+
+        allowedUpdates.forEach((field) => {
+            if (req.body[field] !== undefined) {
+                property[field] = req.body[field];
+            }
+        });
+
+        await property.save();
         
-        return Properties.destroy({where: {id : idPropriety} });
+        return property;
     }
-
-    static async updateProperty(req, res) {
-        const updateData = {
-            title: req.body.title,
-            description: req.body.description,
-            price: req.body.price,
-            address: req.body.address,
-            type: req.body.type,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
-            agentId: req.body.agentId
-        };
-        return Properties.update(
-            updateData,
-            {where: {id : req.params.id} });
-    }
-
-    
 
 }
