@@ -1,6 +1,6 @@
 import express from 'express';
 import { searchesController } from '../controllers/searchesController.js';
-import { enforceAuthentication } from '../middleware/authorization.js';
+import { enforceAuthentication, ensureUserOwnsSearch } from '../middleware/authorization.js';
 
 export const searchesRouter = express.Router();
 
@@ -19,11 +19,11 @@ searchesRouter.post('/', async (req, res, next) => {
         });
     } catch (error) {
         next(error);
-    }
+    } 
 
 });
 
-searchesRouter.delete('/delete/:id', enforceAuthentication, async (req, res, next) => {
+searchesRouter.delete('/delete/:id', enforceAuthentication, ensureUserOwnsSearch, async (req, res, next) => {
     try {
         const idSearch = req.params.id;
         await searchesController.deleteSearch(idSearch);

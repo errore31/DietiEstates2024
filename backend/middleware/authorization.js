@@ -1,4 +1,5 @@
 import { Properties } from "../models/database.js";
+import { Searches } from "../models/database.js";
 
 /**
  *  This middleware ensures that the user is currently authenticated and has the appropriate role.
@@ -43,6 +44,25 @@ export async function ensureAgentOwnsProperty(req, res, next){
     }
 }
 
+export async function ensureUserOwnsSearch(req, res, next) {
+    try {
+        const searchId = req.params.id;
+        const search = await Searches.findByPk(searchId);
+
+        if (!search) {
+            return next({ status: 404, message: "Ricerca non trovata" });
+        }
+
+        if (search.userId !== req.user.id) {
+            return next({ status: 403, message: "Non hai il permesso per eliminare questa ricerca" });
+        }
+
+        next();
+    } catch (err) {
+        next(err);
+    }
+}
+
 export function ensureIsAgent(req, res, next) {
 
     const allowedRoles = ['agent', 'agency admin'];
@@ -56,6 +76,13 @@ export function ensureIsAgent(req, res, next) {
 export function ensureIsAgencyAdmin(req, res, next) {
     if (req.user.role !== 'agency admin') {
         return next({ status: 403, message: "Non sei un amministratore di agenzia" });
+    }
+    next();
+}
+
+export function ensureIsAdmin(req, res, next) {
+    if (req.user.role !== 'admin') {
+        return next({ status: 403, message: "Non sei un amministratore di sistema" });
     }
     next();
 }
