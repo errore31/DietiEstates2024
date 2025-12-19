@@ -5,6 +5,7 @@ import { createModel as createPropertiesModel } from "./properties.js";
 import { createModel as createCaratteristichePropertiesModel } from "./propertiesFeatures.js";
 import { createModel as createNotificationsModel} from "./notifications.js";
 import { createModel as createSearchesModel} from "./searches.js";
+import {createModel as createImagesModel} from "./images.js";
 
 const database = new Sequelize({
     dialect: process.env.DB_DIALECT || 'sqlite',
@@ -18,8 +19,9 @@ createPropertiesModel(database);
 createCaratteristichePropertiesModel(database);
 createNotificationsModel(database);
 createSearchesModel(database);
+createImagesModel(database);
 
-export const { Users, Agencies, Properties, PropertiesFeatures, Notifications, Searches } = database.models;
+export const { Users, Agencies, Properties, PropertiesFeatures, Notifications, Searches, Images } = database.models;
 
 Agencies.hasMany(Users, { foreignKey: 'agencyId', onDelete: 'CASCADE' });
 Users.belongsTo(Agencies, { foreignKey: 'agencyId' });
@@ -35,5 +37,8 @@ Searches.belongsTo(Users, { foreignKey: 'userId' });
 
 PropertiesFeatures.belongsTo(Properties, { foreignKey: 'id', onDelete: 'CASCADE' });
 Properties.hasOne(PropertiesFeatures, { foreignKey: 'id', onDelete: 'CASCADE' });
+
+Properties.hasMany(Images, { foreignKey: 'propertyId', allowNull: false, onDelete: 'CASCADE' });
+Images.belongsTo(Properties, { foreignKey: 'propertyId' });
 
 export default database;
