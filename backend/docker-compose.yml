@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # SERVIZIO 1: IL DATABASE
+  db:
+    # Immagine ufficiale con PostGIS preinstallato
+    image: postgis/postgis:15-3.3-alpine
+    container_name: dieti-db
+    restart: always
+    environment:
+      POSTGRES_USER: dieti_user        # Utente DB
+      POSTGRES_PASSWORD: dieti_password # Password DB
+      POSTGRES_DB: dietiestates         # Nome del Database
+    ports:
+      - "5432:5432" # Espone la porta al tuo PC (così puoi usare DBeaver/PgAdmin)
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persistenza: i dati restano se spegni il container
+
+  # SERVIZIO 2: IL TUO BACKEND NODE.JS
+  app:
+    build: . # Costruisce usando il Dockerfile nella cartella corrente
+    container_name: dieti-backend
+    restart: on-failure
+    ports:
+      - "3000:3000" # Mappa la porta 3000 del container alla 3000 del tuo PC
+    environment:
+      # CONFIGURAZIONE FONDAMENTALE PER SEQUELIZE
+      DB_HOST: db              # Deve coincidere col nome del servizio sopra (riga 5)
+      DB_USER: dieti_user
+      DB_PASS: dieti_password
+      DB_NAME: dietiestates
+      DB_PORT: 5432
+      PORT: 3000
+    depends_on:
+      - db # Dice a Docker di avviare prima il DB
+    volumes:
+      # "Bind Mount": collega la tua cartella codice dentro il container.
+      # Se modifichi un file su VS Code, cambia anche dentro il container!
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules # Evita di sovrascrivere i moduli interni
+
+# Definizione del volume per i dati del DB
+volumes:
+  pgdata:

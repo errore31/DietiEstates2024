@@ -7,11 +7,17 @@ import { createModel as createNotificationsModel} from "./notifications.js";
 import { createModel as createSearchesModel} from "./searches.js";
 import {createModel as createImagesModel} from "./images.js";
 
-const database = new Sequelize({
-    dialect: process.env.DB_DIALECT || 'sqlite',
-    storage: process.env.DB_PATH || './data/database.db',
-    logging: false 
-});
+const database = new Sequelize(
+  process.env.DB_NAME || 'dietiestates',
+  process.env.DB_USER || 'postgres',
+  process.env.DB_PASS || 'password',
+  {
+    host: process.env.DB_HOST || 'localhost',
+    dialect: 'postgres', 
+    port: process.env.DB_PORT || 5432,
+    logging: false,
+  }
+);
 
 createUserModel(database);
 createAgenciesModel(database);

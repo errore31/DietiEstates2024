@@ -1,0 +1,23 @@
+# Usa un'immagine ufficiale leggera di Node.js
+FROM node:18-alpine
+
+# Crea la cartella di lavoro dentro il container
+WORKDIR /usr/src/app
+
+# Copia prima i file delle dipendenze (per sfruttare la cache di Docker)
+COPY package*.json ./
+
+# Installa le dipendenze
+RUN npm install
+
+# Installa Nodemon globalmente per il ricaricamento automatico (utile in sviluppo)
+RUN npm install -g nodemon
+
+# Copia tutto il resto del codice sorgente
+COPY . .
+
+# Espone la porta (deve corrispondere a quella del tuo server.js)
+EXPOSE 3000
+
+# Comando di avvio (usa nodemon per vedere le modifiche in tempo reale)
+CMD ["nodemon", "index.js"] 

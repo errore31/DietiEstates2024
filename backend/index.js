@@ -1,6 +1,7 @@
 import express from 'express';
 import database from './models/database.js';
 import session from 'express-session';
+import 'dotenv/config';
 
 import { authRouter } from './routes/authRoute.js';
 import { proprietiesRouter } from './routes/propertiesRoute.js'
@@ -12,7 +13,7 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 
 const app = express();
-const Port = 3000;
+const Port = process.env.PORT || 3000;
 
 app.use(express.json());
 
