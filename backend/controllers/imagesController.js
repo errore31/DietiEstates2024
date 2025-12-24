@@ -1,4 +1,4 @@
-import { Images } from "../models/database";
+import { Images } from "../models/database.js";
 
 export class imagesController{
 
@@ -10,7 +10,7 @@ export class imagesController{
             propertyId: req.body.propertyId
         });
     }
-
+  
     static async deleteImage(idImage){
         const image = await Images.findByPk(idImage);
         if(!image){

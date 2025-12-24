@@ -20,4 +20,4 @@ COPY . .
 EXPOSE 3000
 
 # Comando di avvio (usa nodemon per vedere le modifiche in tempo reale)
-CMD ["nodemon", "index.js"] 
+CMD ["nodemon", "-L", "index.js"] 
