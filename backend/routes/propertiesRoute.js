@@ -1,5 +1,6 @@
 import express from 'express';
 import { propertiesController } from '../controllers/propertiesController.js'
+import { imagesController } from '../controllers/imagesController.js';
 import { enforceAuthentication } from '../middleware/authorization.js';
 import { ensureIsAgent } from '../middleware/authorization.js';
 import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
@@ -61,6 +62,51 @@ proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsPrope
             data: updatedProperty 
         });
     } catch (error) {
+        next(error);
+    }
+
+});
+
+proprietiesRouter.post('/images/create', async (req, res, next) =>{
+
+    try{
+        const image = await imagesController.createImage(req);
+        if (image) {
+
+            res.status(201).json({
+                message: "Immagine aggiunta con successo!",
+                image: { id: image.id, url: image.url }
+            });
+        } else {
+            res.status(401).json({ error: "Richiesta non valida. Riprova." });
+        }
+
+    }catch(error){
+        next(error);
+    }
+});
+
+proprietiesRouter.delete('/images/delete/:id', async (req, res, next) =>{
+    try{
+        const idImage = req.params.id;
+        await imagesController.deleteImage(idImage);
+         res.status(200).json({
+            message: "Immagine eliminata con successo!",
+        });
+    }catch(error){
+        next(error);
+    }
+});
+
+proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
+     try{
+        const idImage = req.params.id;
+        const updateImage = await imagesController.updateImage(req, idImage);
+         res.status(200).json({
+            message: "Immagine modificata con successo!",
+            data: updateImage
+        });
+    }catch(error){
         next(error);
     }
 

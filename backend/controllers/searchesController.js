@@ -19,7 +19,7 @@ export class searchesController {
              throw new customError('Ricerca non trovata', 404); 
         }
 
-        search.destroy();
+        await search.destroy();
         return true;
     }
 

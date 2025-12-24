@@ -9,7 +9,7 @@ export class propertiesController {
     **/
 
 
-    static async createProperty(req, res) {
+    static async createProperty(req) {
 
         return Properties.create({
             title: req.body.title,
@@ -29,7 +29,7 @@ export class propertiesController {
              throw new customError('Immobile non trovato', 404); 
         }
 
-        property.destroy();
+        await property.destroy();
         return true;
     }
 

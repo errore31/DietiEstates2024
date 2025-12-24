@@ -26,7 +26,7 @@ export class agenciesController {
              throw new customError('Agenzia non trovata', 404); 
         }
 
-        agency.destroy();
+        await agency.destroy();
         return true;
     }
 
