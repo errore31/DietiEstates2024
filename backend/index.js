@@ -16,13 +16,14 @@ const app = express();
 const Port = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default',
   resave: false,
   saveUninitialized: false, 
   cookie: {
-    maxAge: 5000 * 60, // 5 minutes
+    maxAge: 10000 * 60, // 5 minutes
     httpOnly: true, 
     secure: false 
   }

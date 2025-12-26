@@ -20,4 +20,4 @@ const storage = multer.diskStorage({
   }
 });
 
-export const uploadImage = multer({ storage }).single('image');
+export const uploadImage = multer({ storage }).array("image", 10); //export a array image into req.files; max 10 image

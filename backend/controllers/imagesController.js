@@ -2,13 +2,15 @@ import { Images } from "../models/database.js";
 
 export class imagesController{
 
-    static async createImage(req, res){
-        return Images.create({
-            url: req.body.url,
-            order: req.body.order,
-            description: req.body.description,
-            propertyId: req.body.propertyId
+    static async createImages(propertyId, files){
+        const ImagePromise = files.map((file, index) => {
+            return Images.create({
+                url: file.path,
+                order: index, // use a position based on the order of files
+                propertyId: propertyId
+            });
         });
+        return Promise.all(ImagePromise); //attend all the promises 
     }
   
     static async deleteImage(idImage){
@@ -27,7 +29,7 @@ export class imagesController{
             throw new customError('Immagine non trovata', 404);    
         }
 
-        const allowedUpdates = ['url', 'order', 'description'];
+        const allowedUpdates = ['url', 'order'];
 
         allowedUpdates.forEach((field) => {
             if (req.body[field] !== undefined) {

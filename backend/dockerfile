@@ -14,10 +14,13 @@ RUN npm install
 RUN npm install -g nodemon
 
 # Copia tutto il resto del codice sorgente
-COPY . .
+COPY . . 
 
-# Espone la porta (deve corrispondere a quella del tuo server.js)
+# Crea la cartella uploads se non esiste (opzionale ma consigliato)
+RUN mkdir -p uploads
+
+# Espone la porta
 EXPOSE 3000
 
-# Comando di avvio (usa nodemon per vedere le modifiche in tempo reale)
-CMD ["nodemon", "-L", "index.js"] 
+# Comando di avvio con Legacy Watch per Windows/Docker
+CMD ["nodemon", "-L", "index.js"]

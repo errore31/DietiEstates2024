@@ -14,6 +14,10 @@ const database = new Sequelize(
   {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres', 
+    retry: { // if connection fails, retry
+      match: [/ECONNREFUSED/],
+      max: 5 
+    },
     port: process.env.DB_PORT || 5432,
     logging: false,
   }

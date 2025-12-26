@@ -6,6 +6,7 @@ import { ensureIsAgent } from '../middleware/authorization.js';
 import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
 import { validationCreateProperties, validationUpdateProperties } from '../middleware/validation/validationProperties.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
+import { uploadImage } from '../middleware/uploadPhoto.js';
 
 export const proprietiesRouter = express.Router();
 
@@ -15,12 +16,11 @@ export const proprietiesRouter = express.Router();
  * @param {http.ServerResponse} res 
  **/
 
-proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreateProperties, errorValidation, async (req, res, next) => {
+proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, uploadImage, validationCreateProperties, errorValidation,  async (req, res, next) => {
 
     try {
-        const propriety = await propertiesController.createProperty(req);
+        const propriety = await propertiesController.createPropertyWithImage(req);
         if (propriety) {
-
             res.status(201).json({
                 message: "Proprietà aggiunta con successo!",
                 propriety: { id: propriety.id }
@@ -67,25 +67,6 @@ proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsPrope
 
 });
 
-proprietiesRouter.post('/images/create', async (req, res, next) =>{
-
-    try{
-        const image = await imagesController.createImage(req);
-        if (image) {
-
-            res.status(201).json({
-                message: "Immagine aggiunta con successo!",
-                image: { id: image.id, url: image.url }
-            });
-        } else {
-            res.status(401).json({ error: "Richiesta non valida. Riprova." });
-        }
-
-    }catch(error){
-        next(error);
-    }
-});
-
 proprietiesRouter.delete('/images/delete/:id', async (req, res, next) =>{
     try{
         const idImage = req.params.id;
@@ -111,3 +92,5 @@ proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
     }
 
 });
+
+
