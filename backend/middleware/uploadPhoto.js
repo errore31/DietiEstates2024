@@ -11,6 +11,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads'); // Specify the directory where files will be stored
   },
   filename: (req, file, cb) => {
+    if(!file) {
+      return cb(new Error('File is missing'));
+    }
     const ext = path.extname(file.originalname); 
     if(!['.jpg', '.jpeg', '.png',].includes(ext.toLowerCase())) {
       return cb(new Error('Only images are allowed'));
