@@ -35,3 +35,14 @@ searchesRouter.delete('/delete/:id', enforceAuthentication, ensureUserOwnsSearch
         next(error);
     }
 });
+
+searchesRouter.get('/history',enforceAuthentication, async (req, res, next) => {
+
+    try {
+        const search = await searchesController.getSearches(req, res);
+        res.send(search);
+    } catch (error) {
+        next(error);
+    } 
+
+});

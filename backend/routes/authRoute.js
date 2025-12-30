@@ -3,6 +3,7 @@ import { authController } from '../controllers/authController.js';
 import { userController } from '../controllers/usersController.js';
 import { validationSignup, validationLogin } from '../middleware/validation/validationAuth.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
+import { enforceAuthentication } from '../middleware/authorization.js';
 
 export const authRouter = express.Router();
 
@@ -54,3 +55,13 @@ authRouter.post('/signup', validationSignup, errorValidation, async (req, res, n
     }
 
 });
+
+
+authRouter.get('/user', enforceAuthentication, async(req, res, next) => {
+    try{
+        const user = await userController.getUser(req);
+        res.send(user);
+    }catch (error){
+        next(error);
+    }
+})

@@ -1,4 +1,4 @@
-import { Users } from "../models/database.js";
+import { Users, Agencies } from "../models/database.js";
 import bcrypt from "bcrypt";
 
 export class userController {
@@ -33,5 +33,15 @@ export class userController {
         return Users.findAll({where: {username: req.body.username}});
     }
     
+
+      /**
+     * Handles post requests on /auth/user. Check if the username exists
+     * @param {http.IncomingMessage} req 
+     * @param {http.ServerResponse} res 
+     */
+    
+    static async getUser(req, res) {
+        return Users.findAll({where: {id: req.session.userId}, attributes: ['name', 'surname', 'username', 'email', 'role', 'createdAt', 'updatedAt'], include: [{model: Agencies, as: 'Agency', attributes: ['name'], required: false}]});
+    }
 
 }
