@@ -14,36 +14,37 @@ export class propertiesController {
     **/
 
     static async createPropertyWithImage(req) {
-        try {
-            //create a property first
-            const property = await this.createProperty(req);
+        let property = null;
+        try{
 
-            if (!property) {
-                throw new customError('Errore nella creazione della proprietà', 500);
+        if (!req.files || req.files.length === 0) {
+                const error = new Error('Almeno una immagine è richiesta');
+                error.status = 400;
+                throw error; 
             }
 
-            //insert images linked to the property
-            if (req.files && req.files.length > 0) {
-                await imagesController.createImages(property.id, req.files);
-            } else {
-                throw new customError('Almeno una immagine è richiesta per la proprietà', 400);
-            }
+            property = await this.createProperty(req);
+
+            await imagesController.createImages(property.id, req.files);
 
             return property;
 
-        } catch (error) { //delete uploaded files in case of error
-            //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            //da capire meglio
-            if (req.files && req.files.length > 0) {
-                req.files.forEach(file => {
+            } catch (error) { //delete uploaded files in case of error (server/db error)
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                //da capire meglio
+                if(property){
+                    await this.deleteProperty(property.id);
+                }
 
-                    fs.unlink(file.path, (err) => {
-                        if (err) console.error('Errore eliminazione file:', file.path);
+                if (req.files && req.files.length > 0) {
+                    req.files.forEach(file => {
+                        fs.unlink(file.path, (err) => {
+                            if (err) console.error('Errore eliminazione file:', file.path);
+                        });
                     });
-                });
+                }
+                throw error;
             }
-            throw error;
-        }
     }
 
     static async createProperty(req) {

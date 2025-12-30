@@ -9,18 +9,41 @@ export class userController {
     * @param {http.ServerResponse} res 
     */
     static async createUser(req, res) {
-        console.log(req.body);
-        const hashed_password = await bcrypt.hash(req.body.password, 10); 
+        try{
+            const hashed_password = await bcrypt.hash(req.body.password, 10); 
 
-        return Users.create({
-            username: req.body.username,
-            name: req.body.name,
-            surname: req.body.surname,
-            email: req.body.email,
-            role: req.body.role,
-            agencyId: req.body.agencyId,
-            password: hashed_password
-        });
+            const newUser = await Users.create({
+                username: req.body.username,
+                name: req.body.name,
+                surname: req.body.surname,
+                email: req.body.email,
+                role: req.body.role,
+                agencyId: req.body.agencyId,
+                password: hashed_password
+            });
+
+            return newUser;
+    } catch(error){
+
+        if (error.name === 'SequelizeUniqueConstraintError') {
+            const duplicate = Object.keys(error.fields);
+            let message;
+
+            if(duplicate.includes("username")){
+                 message = "Username già in uso";
+            }
+            else if (duplicate.includes("email")){
+                 message = "Email già in uso";
+            }
+
+            const customError = new Error(message);
+            customError.status = 409;
+            throw customError; 
+        }
+
+        error.status = error.status || 500;
+        throw error;
+        }
     }
 
       /**
