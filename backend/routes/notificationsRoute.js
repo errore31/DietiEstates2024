@@ -48,3 +48,20 @@ notificationsRouter.put('/read', enforceAuthentication, async (req, res, next) =
     }
 
 });
+
+
+/**
+ * This route handles user authentication
+ * @param {http.IncomingMessage} req 
+ * @param {http.ServerResponse} res 
+ **/ 
+notificationsRouter.get('/get', enforceAuthentication, async (req, res, next) =>{
+    
+    try{
+        const notification = await notificationsController.getNotifications(req);
+        res.send(notification);
+    }catch (error){
+        next(error);
+    }
+
+});

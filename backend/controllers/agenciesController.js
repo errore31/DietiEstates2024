@@ -49,6 +49,9 @@ export class agenciesController {
         return agency;
     }
 
+    static async getAgency(idAgency, req) {
+        return Agencies.findByPk(idAgency);
+    }
     
 
 }

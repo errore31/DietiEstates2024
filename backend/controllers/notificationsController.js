@@ -23,5 +23,7 @@ export class notificationsController {
             updateData,
             {where: {id : req.body.id} });
     }
-
+    static async getNotifications(req, res) {
+        return Notifications.findAll({where: {userId: req.session.userId}});
+    }
 }

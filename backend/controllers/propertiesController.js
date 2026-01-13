@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { Properties } from "../models/database.js";
+import { Properties, PropertiesFeatures } from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 
 
@@ -90,6 +90,10 @@ export class propertiesController {
         await property.save();
 
         return property;
+    }
+
+    static async getProperty(propertyId,req, res) {
+        return Properties.findAll({where: {id: propertyId}, attributes: ['title', 'description', 'price', 'address', 'type', 'latitude', 'longitude'], include: [{model: PropertiesFeatures, as: 'PropertiesFeature', attributes: ['roomCount', 'area', 'hasElevator', 'floor', 'energyClass'], required: false}]});
     }
 
 }

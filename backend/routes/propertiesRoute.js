@@ -19,7 +19,7 @@ export const proprietiesRouter = express.Router();
 proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, uploadImage, validationCreateProperties, errorValidation,  async (req, res, next) => {
 
     try {
-        const propriety = await propertiesController.createPropertyWithImage(req);
+        const propriety = await propertiesController.createProperty(req);
         if (propriety) {
             res.status(201).json({
                 message: "Proprietà aggiunta con successo!",
@@ -69,8 +69,8 @@ proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsPrope
 
 proprietiesRouter.delete('/images/delete/:id', async (req, res, next) =>{
     try{
-        const idImage = req.params.id;
-        await imagesController.deleteImage(idImage);
+        const imageId = req.params.id;
+        await imagesController.deleteImage(imageId);
          res.status(200).json({
             message: "Immagine eliminata con successo!",
         });
@@ -81,8 +81,8 @@ proprietiesRouter.delete('/images/delete/:id', async (req, res, next) =>{
 
 proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
      try{
-        const idImage = req.params.id;
-        const updateImage = await imagesController.updateImage(req, idImage);
+        const imageId = req.params.id;
+        const updateImage = await imagesController.updateImage(req, imageId);
          res.status(200).json({
             message: "Immagine modificata con successo!",
             data: updateImage
@@ -94,3 +94,13 @@ proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
 });
 
 
+proprietiesRouter.get('/:id', async(req, res, next) =>{
+     try{
+         const propertyId = req.params.id;
+        const property = await propertiesController.getProperty(propertyId, req);
+        res.send(property);
+    }catch(error){
+        next(error);
+    }
+
+});

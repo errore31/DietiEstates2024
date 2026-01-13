@@ -56,3 +56,14 @@ agenciesRouter.put('/update/:id', enforceAuthentication, ensureIsAdmin, validati
         next(error);
     }
 });
+
+agenciesRouter.get('/:id', async (req, res, next) => {
+
+    try{
+        const idAgency = req.params.id;
+        const user = await agenciesController.getAgency(idAgency, req);
+        res.send(user);
+    }catch (error){
+        next(error);
+    }
+});
