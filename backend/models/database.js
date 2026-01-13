@@ -1,4 +1,5 @@
 import { Sequelize } from "sequelize";
+import bcrypt from 'bcrypt';
 import { createModel as createAgenciesModel } from "./agencies.js";
 import { createModel as createUserModel } from "./users.js";
 import { createModel as createPropertiesModel } from "./properties.js";
@@ -52,17 +53,107 @@ Properties.hasMany(Images, { foreignKey: 'propertyId', allowNull: false, onDelet
 Images.belongsTo(Properties, { foreignKey: 'propertyId' });
 
 export default database;
-
 export async function startConnection(){
   try {
-     database.authenticate(); 
-     database.sync({ force: true });
+    await database.authenticate();
+    await database.sync({  alter: true });
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);
+    throw error;
   }
 }
 
 export async function setDataTest(){
-  // create data for DB
+  try {
+    await database.sync({ force: true });
+    const hashedPassword = await bcrypt.hash('agentpassword', 10);
+    const agency = await Agencies.create({
+      businessName: 'Best Estates',
+      name: 'Best Estates Agency',
+      address: '123 Main St, Cityville',
+      phone: '123-456-7890',
+      email: 'bestestates@example.com'
+    });
+
+    const user = await Users.create({
+      name: 'Alice',
+      surname: 'Smith',
+      username: 'alicesmith',
+      email: 'alicesmith@example.com',
+      password: hashedPassword,
+      role: 'user',
+    });
+
+    const admin = await Users.create({
+      name: 'Admin',
+      surname: 'User',
+      username: 'adminuser',
+      email: 'adminuser@example.com',
+      password: hashedPassword,
+      role: 'admin',
+    });
+
+    const adminAgency = await Users.create({
+      name: 'AgencyAdmin',
+      surname: 'User',
+      username: 'agencyadmin',
+      email: 'agencyadmin@example.com',
+      password: hashedPassword,
+      role: 'agencyAdmin',
+      agencyId: agency.id
+    });
+
+    const agent = await Users.create({
+      name: 'John',
+      surname: 'Doe',
+      username: 'johndoe',
+      email: 'johndoe@example.com',
+      password: hashedPassword,
+      role: 'agent',
+      agencyId: agency.id
+    });
+
+    const property =  await Properties.create({
+      title: 'Beautiful Family Home',
+      description: 'A lovely 3-bedroom family home in a great neighborhood.',
+      price: 350000,
+      address: '456 Oak St, Cityville',
+      type: 'house',
+      latitude: 40.7128,
+      longitude: -74.0060,
+      agentId: agent.id
+    });
+
+    await PropertiesFeatures.create({
+      id: property.id,
+      roomCount: 3,
+      area: 120,
+      hasElevator: false,
+      floor: 1,
+      energyClass: 'B'
+    });
+
+    await Images.create({
+      url: 'https://picsum.photos/seed/property/800/600',
+      order: 0,
+      propertyId: property.id
+    });
+
+    await Searches.create({
+      criteria: { maxPrice: 400000, type: 'house' },
+      userId: agent.id
+    });
+
+    await Notifications.create({
+      type: 'welcome',
+      message: 'Benvenuto sulla piattaforma!',
+      userId: agent.id
+    });
+
+    console.log('Test data initialized successfully.');
+  } catch (error) {
+    console.error('Error initializing test data:', error);
+    throw error;
+  }
 }

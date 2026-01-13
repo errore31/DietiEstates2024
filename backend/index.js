@@ -1,5 +1,5 @@
 import express from 'express';
-import {startConnection} from './models/database.js';
+import {startConnection, setDataTest} from './models/database.js';
 import session from 'express-session';
 import 'dotenv/config';
 
@@ -30,6 +30,7 @@ app.use(session({
 }));
 
 await startConnection();
+await setDataTest(); // Populate the database with test data
 
 app.use("/auth", authRouter);
 app.use("/properties", proprietiesRouter)
