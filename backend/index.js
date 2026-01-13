@@ -1,5 +1,5 @@
 import express from 'express';
-import database from './models/database.js';
+import {startConnection} from './models/database.js';
 import session from 'express-session';
 import 'dotenv/config';
 
@@ -29,13 +29,7 @@ app.use(session({
   }
 }));
 
-try {
-  await database.authenticate(); 
-  await database.sync({ force: true });
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
+await startConnection();
 
 app.use("/auth", authRouter);
 app.use("/properties", proprietiesRouter)
@@ -49,3 +43,4 @@ app.use(errorHandler);
 app.listen(Port, () => {
   console.log(`Server is running on http://localhost:${Port}`);
 });
+

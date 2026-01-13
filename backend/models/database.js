@@ -52,3 +52,17 @@ Properties.hasMany(Images, { foreignKey: 'propertyId', allowNull: false, onDelet
 Images.belongsTo(Properties, { foreignKey: 'propertyId' });
 
 export default database;
+
+export async function startConnection(){
+  try {
+     database.authenticate(); 
+     database.sync({ force: true });
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+export async function setDataTest(){
+  // create data for DB
+}
