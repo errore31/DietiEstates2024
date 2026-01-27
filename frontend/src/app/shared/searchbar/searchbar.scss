@@ -1,0 +1,22 @@
+input{
+    background-color: var(--site-light);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #e0e0e0;
+    outline: none;
+    border-radius: 50px;
+    flex: 1;
+    width: 100%;
+    max-width: 900px;
+    min-width: 2vw;
+    font-size: 1rem;
+    padding: 5px;
+}
+input:focus{
+
+}
+
+input:hover{
+    background-color: color-mix(in srgb, var(--site-light), var(--site-primary) 5%);
+}
