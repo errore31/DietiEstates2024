@@ -11,8 +11,18 @@
 #searchbarContainer{
     padding : 15px;
     border-radius: 50px;
-    background-color: var(--site-light);
+    background-color: var(--site-cream);
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+#advContainer{
+    text-align: center;
+    margin-top: 60px;
+}
+
+#advContainer h1{
+    color: var(--site-primary);
+    font: 2.2rem;
 }

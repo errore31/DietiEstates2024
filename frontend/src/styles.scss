@@ -5,20 +5,33 @@
 :root {
   --site-primary: #182F53;
   --site-dark: #1C1B26;
-  --site-light: #f9EEE2;
-  --site-cream: #fffff0;
+  --site-light: #fffff0;
+  --site-cream: #f9EEE2;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--site-light);
+  border: 0;
+  background-color: var(--site-cream);
 
 }
 
 a, p, h1, h2, h3, h4, h5, h6, li, span, div, input {
     font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--site-dark);
+    
+    color: var(--site-cream);
+    
     margin: 0;
     padding: 0;
 }
+
+.cardContainer {
+  max-width:1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+

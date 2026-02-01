@@ -1,9 +1,6 @@
 input{
-    background-color: var(--site-light);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-bottom: 2px solid #e0e0e0;
+    background-color: color-mix(in srgb, var(--site-cream), var(--site-primary) 5%);
+    border: none;
     outline: none;
     border-radius: 50px;
     flex: 1;
@@ -12,11 +9,13 @@ input{
     min-width: 2vw;
     font-size: 1rem;
     padding: 5px;
+    color: var(--site-primary);
 }
+
 input:focus{
 
 }
 
 input:hover{
-    background-color: color-mix(in srgb, var(--site-light), var(--site-primary) 5%);
+    background-color: color-mix(in srgb, var(--site-cream), var(--site-primary) 10%);
 }
