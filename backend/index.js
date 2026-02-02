@@ -2,6 +2,7 @@ import express from 'express';
 import {startConnection, setDataTest} from './models/database.js';
 import session from 'express-session';
 import 'dotenv/config';
+import cors from 'cors';
 
 import { authRouter } from './routes/authRoute.js';
 import { proprietiesRouter } from './routes/propertiesRoute.js'
@@ -14,6 +15,11 @@ import { errorHandler } from './middleware/errorHandler.js';
 
 const app = express();
 const Port = process.env.PORT || 3000;
+
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true // Permette lo scambio di cookie tra domini diversi
+}));
 
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));

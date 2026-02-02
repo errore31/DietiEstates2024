@@ -1,12 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
-
+@import 'ngx-toastr/toastr'; //messaggi toastr (messaggi flash)
 // Variabili globali CSS
 :root {
   --site-primary: #182F53;
   --site-dark: #1C1B26;
   --site-light: #fffff0;
   --site-cream: #f9EEE2;
+  --site-orange: #f39c12;
 }
 
 body {
