@@ -1,1 +1,12 @@
-<a routerLink="/auth">Login</a>
+<div class="profile-container">
+  <ng-container *ngIf="isAuthenticated$ | async; else guestView">
+    <div class="user-logged" *ngIf="currentUser$ | async as user">
+      <span>Bentornato, {{ user.username }}</span>
+      <button (click)="onLogout()" class="btn-logout">Logout</button>
+    </div>
+  </ng-container>
+
+  <ng-template #guestView>
+    <a routerLink="/auth" class="login-link">Login</a>
+  </ng-template>
+</div>

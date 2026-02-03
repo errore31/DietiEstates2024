@@ -21,6 +21,7 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
             req.session.userId = user.id;
             req.session.username = user.username;
             req.session.role = user.role;
+            req.session.agencyId = user.agencyId | null;
             req.session.auth = true;
             res.status(200).json({
                 message: "Login effettuato con successo",
@@ -56,6 +57,29 @@ authRouter.post('/signup', validationSignup, errorValidation, async (req, res, n
 
 });
 
+authRouter.get('/session', (req, res) => {
+    if (req.session && req.session.auth) {  // Check if session exists and user is authenticated
+        res.status(200).json({
+            loggedIn: true,
+            user: {
+                id: req.session.userId,      
+                username: req.session.username,
+                ruolo: req.session.role,
+                idAg: req.session.agencyId
+            }
+        });
+    } else {
+        res.status(200).json({ loggedIn: false });
+    }
+});
+
+authRouter.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) return res.status(500).json({ error: "Errore nel logout" });
+    res.clearCookie('connect.sid'); 
+    res.json({ message: "Logout effettuato" });
+  });
+});
 
 authRouter.get('/user', enforceAuthentication, async(req, res, next) => {
     try{
