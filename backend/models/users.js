@@ -27,7 +27,13 @@ export function createModel(database){
         },
         password : {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true 
+        },
+        //google identifier
+        googleId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            unique: true
         },
         role : {
             type: DataTypes.STRING,

@@ -4,6 +4,7 @@ import { userController } from '../controllers/usersController.js';
 import { validationSignup, validationLogin } from '../middleware/validation/validationAuth.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 import { enforceAuthentication } from '../middleware/authorization.js';
+import passport from '../services/passportGoogle.js'; 
 
 export const authRouter = express.Router();
 
@@ -64,7 +65,7 @@ authRouter.get('/session', (req, res) => {
             user: {
                 id: req.session.userId,      
                 username: req.session.username,
-                ruolo: req.session.role,
+                role: req.session.role,
                 idAg: req.session.agencyId
             }
         });
@@ -80,6 +81,25 @@ authRouter.post('/logout', (req, res) => {
     res.json({ message: "Logout effettuato" });
   });
 });
+
+//Google route
+authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+//Callback dove Google rimanda l'utente
+authRouter.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:4200/login' }),
+  (req, res) => {
+    // Il login ha avuto successo
+    // Salviamo i dati nella TUA sessione
+    req.session.userId = req.user.id;
+    req.session.username = req.user.username;
+    req.session.role = req.user.role;
+    req.session.auth = true;
+
+    // Reindirizziamo l'utente alla home di Angular
+    res.redirect('http://localhost:4200/');
+  }
+);
 
 authRouter.get('/user', enforceAuthentication, async(req, res, next) => {
     try{

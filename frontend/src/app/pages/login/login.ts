@@ -42,8 +42,8 @@ export class Login {
     });
   }
 
-  loginWithGoogle() {
-    // Qui inserisci la logica di inizializzazione Google che abbiamo discusso
-    console.log('Avvio login Google...');
-  }
+ loginWithGoogle() {
+  // Reindirizziamo direttamente al backend, sarà lui a gestire Google
+  window.location.href = 'http://localhost:3000/auth/google';
+ }
 }

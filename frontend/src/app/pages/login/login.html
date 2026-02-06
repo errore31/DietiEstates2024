@@ -4,7 +4,7 @@
       <span class="logo-dieti">Dieti</span><span class="logo-estate">Estate24</span>
     </div>
     
-    <h2>Bentornato!</h2>
+    <h2>Benvenuto!</h2>
     <p class="subtitle">Inserisci le tue credenziali per accedere</p>
 
     <form (ngSubmit)="onLogin()">
@@ -28,7 +28,7 @@
     <div class="divider"><span>oppure accedi con</span></div>
 
     <div class="social-grid">
-      <button type="button" class="btn-social">
+      <button type="button" class="btn-social" (click)="loginWithGoogle()">
         <span class="g-icon">G</span> Continua con Google
       </button>
     </div>

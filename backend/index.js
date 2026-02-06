@@ -3,6 +3,7 @@ import {startConnection, setDataTest} from './models/database.js';
 import session from 'express-session';
 import 'dotenv/config';
 import cors from 'cors';
+import passport from 'passport';
 
 import { authRouter } from './routes/authRoute.js';
 import { proprietiesRouter } from './routes/propertiesRoute.js'
@@ -34,6 +35,9 @@ app.use(session({
     secure: false 
   }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 await startConnection();
 await setDataTest(); // Populate the database with test data
