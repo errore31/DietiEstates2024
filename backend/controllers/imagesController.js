@@ -5,7 +5,7 @@ export class imagesController{
     static async createImages(propertyId, files){
         const ImagePromise = files.map((file, index) => {
             return Images.create({
-                url: file.path,
+                url: file.filename,
                 order: index, // use a position based on the order of files
                 propertyId: propertyId
             });

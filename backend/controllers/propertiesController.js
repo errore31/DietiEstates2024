@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { Properties, PropertiesFeatures } from "../models/database.js";
+import { Properties, PropertiesFeatures, Images } from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 
 
@@ -92,8 +92,39 @@ export class propertiesController {
         return property;
     }
 
-    static async getProperty(propertyId,req, res) {
-        return Properties.findAll({where: {id: propertyId}, attributes: ['title', 'description', 'price', 'address', 'type', 'latitude', 'longitude'], include: [{model: PropertiesFeatures, as: 'PropertiesFeature', attributes: ['roomCount', 'area', 'hasElevator', 'floor', 'energyClass'], required: false}]});
+    static async getProperty(propertyId, req, res) {
+    return Properties.findOne({ 
+        where: { id: propertyId },
+        include: [
+            { 
+                model: PropertiesFeatures, 
+            },
+            { 
+                model: Images
+            }
+        ]
+    });
+}
+
+    static async getAllProperty(req){
+        try {
+        const properties = await Properties.findAll({
+           include: [
+                { model: Images }, 
+                { model: PropertiesFeatures }
+            ],
+            // ordina per data di creazione per avere le più recenti
+            order: [
+                   ['createdAt', 'DESC'],
+                   [Images, 'order', 'ASC']
+            ]
+        });
+        
+        return properties;
+    } catch (error) {
+        console.error("Errore nel recupero proprietà:", error);
+        throw error;
+    }
     }
 
 }

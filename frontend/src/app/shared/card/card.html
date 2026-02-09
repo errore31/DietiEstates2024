@@ -1,17 +1,21 @@
-<div class="container">
-    <div class="card">
-        <a href="">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=60" alt="Villa">
+<div class="card" *ngIf="properties">
+    <a [routerLink]="['/property', properties.id]">
+        <img 
+        [src]="properties.Images && properties.Images.length > 0 
+                ? (properties.Images[0].url.startsWith('http') ? properties.Images[0].url : 'http://localhost:3000/uploads/' + properties.Images[0].url)
+                : '/housePlaceholder.jpg'" 
+        (error)="handleImageError($event)"
+        alt="Immobile">
+
         <div class="card-content">
-            <div class="price">€ 380.000</div>
-            <div class="card-title">Villa Unifamiliare Indipendente</div>
-            <p class="location">📍 Caserta, Centro</p>
-            <div class="details">
-                <span>🏠 5 Locali</span>
-                <span>🚿 2 Bagni</span>
-                <span>📐 150 m²</span>
+            <div class="price">{{ properties.price | currency:'EUR':'symbol':'1.0-0' }}</div>
+            <div class="card-title">{{ properties.title }}</div>
+            <p class="location">📍 {{ properties.address }}</p>
+            
+            <div class="details" *ngIf="properties.PropertiesFeature">
+                <span>🏠 {{ properties.PropertiesFeature.roomCount }} Locali</span>
+                <span>📐 {{ properties.PropertiesFeature.area }} m²</span>
             </div>
         </div>
-        </a>
-    </div>
+    </a>
 </div>

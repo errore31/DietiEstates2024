@@ -2,3 +2,25 @@ a, span{
     color: var(--site-light);
     text-decoration: none;
 }
+
+.btn-logout{
+
+    background-color: var(--site--dark);
+    color: var(--site-cream);
+
+    text-decoration: none;
+    border: 0;
+    cursor: pointer;
+
+    margin-left: 15px;       
+    font-size: inherit;      
+    font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 5px 10px;
+
+}
+
+.user-logged {
+    display: flex;
+    align-items: center;
+}
+

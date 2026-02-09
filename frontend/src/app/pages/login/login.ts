@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Footer } from '../../shared/footer/footer';
 import { FormsModule } from '@angular/forms';
 
-import { AuthService } from '../../services/auth';
+import { AuthService } from '../../services/auth-service/auth';
 
 @Component({
   selector: 'app-login',

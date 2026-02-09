@@ -19,7 +19,7 @@ export const proprietiesRouter = express.Router();
 proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, uploadImage, validationCreateProperties, errorValidation,  async (req, res, next) => {
 
     try {
-        const propriety = await propertiesController.createProperty(req);
+        const propriety = await propertiesController.createPropertyWithImage(req);
         if (propriety) {
             res.status(201).json({
                 message: "Proprietà aggiunta con successo!",
@@ -93,6 +93,14 @@ proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
 
 });
 
+proprietiesRouter.get('/all', async(req, res, next) =>{
+     try{
+        const properties = await propertiesController.getAllProperty(req);
+        res.send(properties);
+    }catch(error){
+        next(error);
+    }
+});
 
 proprietiesRouter.get('/:id', async(req, res, next) =>{
      try{

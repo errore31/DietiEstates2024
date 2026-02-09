@@ -64,92 +64,159 @@ export async function startConnection(){
   }
 }
 
-export async function setDataTest(){
-  try {
-    await database.sync({ force: true });
-    const hashedPassword = await bcrypt.hash('agentpassword', 10);
-    const agency = await Agencies.create({
-      businessName: 'Best Estates',
-      name: 'Best Estates Agency',
-      address: '123 Main St, Cityville',
-      phone: '123-456-7890',
-      email: 'bestestates@example.com'
-    });
+async function createAgencyAndUsers(hashedPassword) {
+  // 1. Crea Agenzia
+  const agency = await Agencies.create({
+    businessName: 'Best Estates',
+    name: 'Best Estates Agency',
+    address: '123 Main St, Cityville',
+    phone: '123-456-7890',
+    email: 'bestestates@example.com'
+  });
 
-    const user = await Users.create({
-      name: 'Alice',
-      surname: 'Smith',
-      username: 'alicesmith',
-      email: 'alicesmith@example.com',
-      password: hashedPassword,
-      role: 'user',
-    });
+  // 2. Crea Utenti
+  await Users.create({
+    name: 'Alice',
+    surname: 'Smith',
+    username: 'alicesmith',
+    email: 'alicesmith@example.com',
+    password: hashedPassword,
+    role: 'user',
+  });
 
-    const admin = await Users.create({
-      name: 'Admin',
-      surname: 'User',
-      username: 'adminuser',
-      email: 'adminuser@example.com',
-      password: hashedPassword,
-      role: 'admin',
-    });
+  await Users.create({
+    name: 'Admin',
+    surname: 'User',
+    username: 'adminuser',
+    email: 'adminuser@example.com',
+    password: hashedPassword,
+    role: 'admin',
+  });
 
-    const adminAgency = await Users.create({
-      name: 'AgencyAdmin',
-      surname: 'User',
-      username: 'agencyadmin',
-      email: 'agencyadmin@example.com',
-      password: hashedPassword,
-      role: 'agencyAdmin',
-      agencyId: agency.id
-    });
+  await Users.create({
+    name: 'AgencyAdmin',
+    surname: 'User',
+    username: 'agencyadmin',
+    email: 'agencyadmin@example.com',
+    password: hashedPassword,
+    role: 'agency admin',
+    agencyId: agency.id
+  });
 
-    const agent = await Users.create({
-      name: 'John',
-      surname: 'Doe',
-      username: 'johndoe',
-      email: 'johndoe@example.com',
-      password: hashedPassword,
-      role: 'agent',
-      agencyId: agency.id
-    });
+  const agent = await Users.create({
+    name: 'John',
+    surname: 'Doe',
+    username: 'johndoe',
+    email: 'johndoe@example.com',
+    password: hashedPassword,
+    role: 'agent',
+    agencyId: agency.id
+  });
 
-    const property =  await Properties.create({
+  // Ritorniamo l'agente perché ci serve il suo ID per creare le proprietà
+  return agent;
+}
+
+/**
+ * Crea le 4 proprietà, le caratteristiche e le immagini collegate a un agente specifico
+ */
+async function createPropertiesForAgent(agentId) {
+  const propertiesData = [
+    {
       title: 'Beautiful Family Home',
       description: 'A lovely 3-bedroom family home in a great neighborhood.',
       price: 350000,
       address: '456 Oak St, Cityville',
       type: 'house',
-      latitude: 40.7128,
-      longitude: -74.0060,
-      agentId: agent.id
+      latitude: 40.7128, longitude: -74.0060,
+      features: { roomCount: 3, area: 120, hasElevator: false, floor: 1, energyClass: 'B' }
+    },
+    {
+      title: 'Modern City Apartment',
+      description: 'Luxurious apartment in the heart of the city.',
+      price: 550000,
+      address: '789 Pine Ave, Cityville',
+      type: 'apartment',
+      latitude: 40.7138, longitude: -74.0070,
+      features: { roomCount: 2, area: 90, hasElevator: true, floor: 5, energyClass: 'A' }
+    },
+    {
+      title: 'Cozy Studio Loft',
+      description: 'Perfect for singles or young couples.',
+      price: 180000,
+      address: '101 Maple Blvd, Cityville',
+      type: 'studio',
+      latitude: 40.7118, longitude: -74.0050,
+      features: { roomCount: 1, area: 45, hasElevator: true, floor: 2, energyClass: 'C' }
+    },
+    {
+      title: 'Spacious Villa with Garden',
+      description: 'Exclusive villa with private pool.',
+      price: 950000,
+      address: '202 Hilltop Rd, Cityville',
+      type: 'villa',
+      latitude: 40.7158, longitude: -74.0090,
+      features: { roomCount: 5, area: 250, hasElevator: false, floor: 0, energyClass: 'A+' }
+    }
+  ];
+
+  for (const propData of propertiesData) {
+    const property = await Properties.create({
+      title: propData.title,
+      description: propData.description,
+      price: propData.price,
+      address: propData.address,
+      type: propData.type,
+      latitude: propData.latitude,
+      longitude: propData.longitude,
+      agentId: agentId
     });
 
     await PropertiesFeatures.create({
       id: property.id,
-      roomCount: 3,
-      area: 120,
-      hasElevator: false,
-      floor: 1,
-      energyClass: 'B'
+      ...propData.features // Spread operator per copiare roomCount, area, etc.
     });
 
     await Images.create({
-      url: 'https://picsum.photos/seed/property/800/600',
+      url: `https://picsum.photos/seed/${property.id}/800/600`,
       order: 0,
       propertyId: property.id
     });
+  }
+}
 
-    await Searches.create({
-      criteria: { maxPrice: 400000, type: 'house' },
-      userId: agent.id
-    });
+/**
+ * Crea dati accessori come ricerche salvate e notifiche
+ */
+async function createExtras(userId) {
+  await Searches.create({
+    criteria: { maxPrice: 400000, type: 'house' },
+    userId: userId
+  });
 
-    await Notifications.create({
-      type: 'welcome',
-      message: 'Benvenuto sulla piattaforma!',
-      userId: agent.id
-    });
+  await Notifications.create({
+    type: 'welcome',
+    message: 'Benvenuto sulla piattaforma!',
+    userId: userId
+  });
+}
+
+// --- FUNZIONE PRINCIPALE (ESPORTATA) ---
+
+export async function setDataTest() {
+  try {
+    console.log('Starting data initialization...');
+    
+    // 1. Reset Database
+    await database.sync({ force: true });
+
+    // 2. Preparazione
+    const hashedPassword = await bcrypt.hash('agentpassword', 10);
+
+    // 3. Esecuzione Step Logici
+    const agent = await createAgencyAndUsers(hashedPassword); // Crea Utenti
+    await createPropertiesForAgent(agent.id);                 // Crea Proprietà
+    await createExtras(agent.id);                             // Crea Extra
 
     console.log('Test data initialized successfully.');
   } catch (error) {
