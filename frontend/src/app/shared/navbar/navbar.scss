@@ -11,7 +11,7 @@ a{
     padding: 15px 5%;
 }
 
-.logo h1{
+.logo span{
     font-size: 24px;
     font-weight: bold;
 }
@@ -22,3 +22,13 @@ a{
     margin: 0 auto;
     padding: 0;
 }
+
+.logo-dieti{
+    color: var(--site-cream);
+}
+
+.logo-estate{
+    color: var(--site-orange);
+}
+
+

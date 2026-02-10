@@ -1,5 +1,5 @@
 <div class="card" *ngIf="properties">
-    <a [routerLink]="['/property', properties.id]">
+    <a [routerLink]="['/advertisement', properties.id]">
         <img 
         [src]="properties.Images && properties.Images.length > 0 
                 ? (properties.Images[0].url.startsWith('http') ? properties.Images[0].url : 'http://localhost:3000/uploads/' + properties.Images[0].url)

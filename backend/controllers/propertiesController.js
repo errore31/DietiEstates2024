@@ -92,7 +92,7 @@ export class propertiesController {
         return property;
     }
 
-    static async getProperty(propertyId, req, res) {
+    static async getPropertyById(propertyId, req, res) {
     return Properties.findOne({ 
         where: { id: propertyId },
         include: [

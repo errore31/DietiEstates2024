@@ -1,1 +1,93 @@
-<p>advertisement works!</p>
+<app-navbar></app-navbar>
+
+<div class="main-container" *ngIf="property; else loading">
+    
+    <div class="gallery-container">
+        
+        <div class="main-img-wrapper" *ngIf="property.Images && property.Images.length > 0">
+            <swiper-container 
+                [attr.slides-per-view]="1" 
+                [navigation]="true" 
+                [pagination]="true" 
+                [loop]="true"
+                observer="true" 
+                observe-parents="true"
+                style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;">
+                
+                <swiper-slide *ngFor="let img of property.Images">
+                    <img [src]="getImageUrl(img.url)" 
+                         [alt]="property.title" 
+                         class="carousel-img">
+                </swiper-slide>
+                
+            </swiper-container>
+        </div>
+
+        <div class="side-imgs-wrapper" *ngIf="property.Images && property.Images.length > 1">
+            <img *ngFor="let img of property.Images | slice:1" 
+                 [src]="getImageUrl(img.url)" 
+                 alt="Dettaglio" 
+                 class="side-img">
+        </div>
+        
+    </div>
+    <div class="content-grid">
+        
+        <div class="property-info">
+            <div class="header-info">
+                <div>
+                    <span class="badge">In Vendita</span>
+                    <h1>{{ property.title }}</h1>
+                    <p class="address">📍 {{ property.address }}</p>
+                </div>
+                <div class="price-tag">
+                    {{ property.price | currency:'EUR':'symbol':'1.0-0' }}
+                </div>
+            </div>
+
+            <div class="features-grid" *ngIf="property.PropertiesFeature">
+                <div class="feature-item">
+                    <div>🏠</div>
+                    <div>{{ property.PropertiesFeature.roomCount }} Locali</div>
+                </div>
+                <div class="feature-item">
+                    <div>📐</div>
+                    <div>{{ property.PropertiesFeature.area }} m²</div>
+                </div>
+                <div class="feature-item">
+                    <div>🏢</div>
+                    <div>Piano {{ property.PropertiesFeature.floor }}</div>
+                </div>
+                <div class="feature-item">
+                    <div>↕️</div>
+                    <div *ngIf="property.PropertiesFeature.hasElevator">Ascensore</div>
+                    <div *ngIf="!property.PropertiesFeature.hasElevator">No Ascensore</div>
+                </div>
+                <div class="feature-item">
+                    <div>⚡</div>
+                    <div>Classe {{ property.PropertiesFeature.energyClass }}</div>
+                </div>
+            </div>
+
+            <div class="description">
+                <h3>Descrizione Immobile</h3>
+                <p>{{ property.description }}</p>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="placeholder-sidebar">
+                <p>Contatta l'agenzia</p>
+            </div>
+        </aside>
+
+    </div>
+</div>
+
+<ng-template #loading>
+    <div style="text-align: center; padding: 50px;">
+        <h2>Caricamento annuncio...</h2>
+    </div>
+</ng-template>
+
+<app-footer></app-footer>

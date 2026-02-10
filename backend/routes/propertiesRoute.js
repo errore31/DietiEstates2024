@@ -104,8 +104,9 @@ proprietiesRouter.get('/all', async(req, res, next) =>{
 
 proprietiesRouter.get('/:id', async(req, res, next) =>{
      try{
-         const propertyId = req.params.id;
-        const property = await propertiesController.getProperty(propertyId, req);
+        const propertyId = req.params.id;
+        const property = await propertiesController.getPropertyById(propertyId, req);
+        console.log("Proprietà trovata: ", property);
         res.send(property);
     }catch(error){
         next(error);
