@@ -1,1 +1,52 @@
-<p>agency works!</p>
+<app-navbar></app-navbar>
+
+<div class="agency-hero">
+    <button class="btn-edit-hero" (click)="editAgencyInfo()">Modifica Info Agenzia</button>
+    <h1 class="agency-name">{{ agency?.name }}</h1>
+    <p class="agency-location">address: {{ agency?.address }}</p>
+    <p>email: {{agency?.email}}</p><p>phone: {{agency?.phone}}</p>
+</div>
+
+<div class="container">
+    
+    <main class="main-content-card">
+        <h2 class="section-title">Gestione Immobili</h2>
+
+        <div class="property-grid">
+            <div class="create-card" (click)="createProperty()">
+                <div class="plus-icon">+</div>
+                <h3>Nuovo Annuncio</h3>
+            </div>
+
+            <div class="card-wrapper" *ngFor="let prop of allProperties">
+                <app-card [properties]="prop"></app-card>
+                <div class="action-admin">
+                    <button class="btn-mod" (click)="editProperty(prop.id)">Modifica</button>
+                    <button class="btn-del" (click)="deleteProperty(prop.id)">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="sidebar-card">
+        <h2 class="section-title">Team</h2>
+        
+        <ul class="agent-list">
+            <li class="agent-item" *ngFor="let member of agency?.Users">
+                <div class="agent-info">
+                    <div class="agent-name">{{ member.name }}</div>
+                    <div class="agent-role">{{ member.role }}</div>
+                </div>
+                <div class="agent-actions">
+                    <button class="text-btn" (click)="editMember(member.id)">Modifica</button>
+                    <button class="text-btn danger" (click)="deleteMember(member.id)">Elimina</button>
+                </div>
+            </li>
+        </ul>
+
+        <button class="btn-add-member" (click)="addMember()">+ Aggiungi Membro</button>
+    </aside>
+
+</div>
+
+<app-footer></app-footer>

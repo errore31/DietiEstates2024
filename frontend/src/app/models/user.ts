@@ -1,6 +1,9 @@
 export interface User {
   id: number;
   username: string;
-  ruolo: string;
+  role: string;
+  name: string;
+  surname:string;
+  email: string;
   idAg?: number; // idAgency is optional
 }

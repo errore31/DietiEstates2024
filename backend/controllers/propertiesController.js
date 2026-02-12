@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { Properties, PropertiesFeatures, Images } from "../models/database.js";
+import { Properties, PropertiesFeatures, Images, Users} from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 
 
@@ -125,6 +125,27 @@ export class propertiesController {
         console.error("Errore nel recupero proprietà:", error);
         throw error;
     }
+    }
+
+    static async getPropertiesByAgencyId(agencyId) {
+
+        try {
+            const properties = await Properties.findAll({
+                include: [
+                    { model: Images },            
+                    { model: PropertiesFeatures },
+                    { 
+                        model: Users,
+                        where: { agencyId: agencyId }, //Mi prendo gli immobili degli utenti associati all'agenzia
+                        attributes: [] 
+                    }
+                ]
+            });
+            return properties;
+        } catch (error) {
+           console.error("Errore nel recupero delle proprietà:", error);
+            throw error;
+        }
     }
 
 }

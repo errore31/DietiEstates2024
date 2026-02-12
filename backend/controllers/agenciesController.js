@@ -1,8 +1,8 @@
-import { Agencies } from "../models/database.js";
+import { Agencies, Properties, Users, Images, PropertiesFeatures} from "../models/database.js";
 
 export class agenciesController {
-    
-    
+
+
     /**
     * @param {http.IncomingMessage} req 
     * @param {http.ServerResponse} res 
@@ -23,7 +23,7 @@ export class agenciesController {
     static async deleteAgency(idAgency) {
         const agency = await Agencies.findByPk(idAgency);
         if (!agency) {
-             throw new customError('Agenzia non trovata', 404); 
+            throw new customError('Agenzia non trovata', 404);
         }
 
         await agency.destroy();
@@ -33,9 +33,9 @@ export class agenciesController {
     static async updateAgency(idAgency, req) {
         const agency = await Agencies.findByPk(idAgency);
         if (!agency) {
-             throw new customError('Agenzia non trovata', 404); 
+            throw new customError('Agenzia non trovata', 404);
         }
-        
+
         const allowedUpdates = ['businessName', 'name', 'address', 'phone', 'email'];
 
         allowedUpdates.forEach((field) => {
@@ -45,13 +45,22 @@ export class agenciesController {
         });
 
         await agency.save();
-        
+
         return agency;
     }
 
-    static async getAgency(idAgency, req) {
-        return Agencies.findByPk(idAgency);
+    static async getAgencyById(idAgency) {
+        try {
+            const agency = await Agencies.findByPk(idAgency, {
+               include: [
+                    { model: Users } //recuperiamo gli utenti di una agenzia
+                ],
+            });
+            return agency;
+        } catch (error) {
+            console.error("Errore recupero agenzia:", error);
+            throw error;
+        }
     }
-    
 
 }

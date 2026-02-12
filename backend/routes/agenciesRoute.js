@@ -3,6 +3,7 @@ import { agenciesController } from '../controllers/agenciesController.js'
 import { enforceAuthentication, ensureIsAdmin } from '../middleware/authorization.js';
 import { validationCreateAgency, validationUpdateAgency } from '../middleware/validation/validationAgencies.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
+import { propertiesController } from '../controllers/propertiesController.js';
 
 export const agenciesRouter = express.Router();
 
@@ -61,8 +62,18 @@ agenciesRouter.get('/:id', async (req, res, next) => {
 
     try{
         const idAgency = req.params.id;
-        const user = await agenciesController.getAgency(idAgency, req);
-        res.send(user);
+        const agency = await agenciesController.getAgencyById(idAgency);
+        res.send(agency);
+    }catch (error){
+        next(error);
+    }
+});
+
+agenciesRouter.get('/:id/properties', async (req, res, next) => {
+    try{
+        const agencyId = req.params.id;
+        const properties = await propertiesController.getPropertiesByAgencyId(agencyId);
+        res.send(properties);
     }catch (error){
         next(error);
     }
