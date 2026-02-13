@@ -153,3 +153,92 @@
     font-size: small;
 }
 
+
+/* --- STILE FORM AGGIUNTA MEMBRO --- */
+.add-member-container {
+    background: var(--site-cream); /* Sfondo leggermente colorato per distinguere il form */
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(24, 47, 83, 0.1); /* site-primary con trasparenza */
+    animation: fadeIn 0.3s ease-in-out;
+
+    h3 {
+        font-size: 1.1rem;
+        color: var(--site-primary);
+        margin-bottom: 15px;
+        font-weight: 800;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+
+    input, select {
+        width: 100%;
+        padding: 10px 5px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-family: 'Google Sans', sans-serif; 
+        font-size: 0.9rem;
+        color: var(--site-primary);
+        background: white;
+        transition: border-color 0.2s;
+
+        &:focus {
+            outline: none;
+            border-color: var(--site-orange); 
+        }
+    }
+
+    select {
+        cursor: pointer;
+        appearance: none; /* Rimuove lo stile di default del browser */
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 1em;
+    }
+}
+
+.form-actions {
+    display: flex;
+    flex-direction: column; /* Come da tua preferenza precedente per i pulsanti sovrapposti */
+    gap: 10px;
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.1s, opacity 0.2s;
+
+        &:active {
+            transform: scale(0.98);
+        }
+    }
+
+    .btn-save {
+        background: var(--site-orange);
+        color: white;
+        &:hover { opacity: 0.9; }
+    }
+
+    .btn-cancel {
+        background: transparent;
+        color: #e74c3c; /* Colore errore/pericolo */
+        border: 1px solid #e74c3c;
+        &:hover { background: #fff0f0; }
+    }
+}
+
+/* Animazione semplice per l'apertura */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

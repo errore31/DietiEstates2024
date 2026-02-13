@@ -4,11 +4,12 @@
     <button class="btn-edit-hero" (click)="editAgencyInfo()">Modifica Info Agenzia</button>
     <h1 class="agency-name">{{ agency?.name }}</h1>
     <p class="agency-location">address: {{ agency?.address }}</p>
-    <p>email: {{agency?.email}}</p><p>phone: {{agency?.phone}}</p>
+    <p>email: {{agency?.email}}</p>
+    <p>phone: {{agency?.phone}}</p>
 </div>
 
 <div class="container">
-    
+
     <main class="main-content-card">
         <h2 class="section-title">Gestione Immobili</h2>
 
@@ -30,21 +31,49 @@
 
     <aside class="sidebar-card">
         <h2 class="section-title">Team</h2>
-        
+
+        <button class="btn-add-member" *ngIf="!showAddMemberForm" (click)="toggleAddMemberForm()">
+            + Aggiungi Membro
+        </button>
+
+        <div class="add-member-container" *ngIf="showAddMemberForm">
+            <h3>{{ isEditing ? 'Modifica Membro' : 'Nuovo Membro' }}</h3>
+
+            <div class="form-group">
+                <input type="text" [(ngModel)]="newAgent.name" placeholder="Nome">
+                <input type="text" [(ngModel)]="newAgent.surname" placeholder="Cognome">
+                <input type="text" [(ngModel)]="newAgent.username" placeholder="Username">
+                <input type="email" [(ngModel)]="newAgent.email" placeholder="Email">
+                
+                <input type="password" [(ngModel)]="newAgent.password" 
+                       [placeholder]="isEditing ? 'Nuova password' : 'Password'">
+
+                <select [(ngModel)]="newAgent.role">
+                    <option value="agent">Agente Immobiliare</option>
+                    <option value="agencyAdmin">Amministratore Agenzia</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button class="btn-save" (click)="saveMember()">
+                    {{ isEditing ? 'Aggiorna' : 'Salva' }}
+                </button>
+                <button class="btn-cancel" (click)="closerForm()">Annulla</button>
+            </div>
+        </div>
+
         <ul class="agent-list">
             <li class="agent-item" *ngFor="let member of agency?.Users">
                 <div class="agent-info">
-                    <div class="agent-name">{{ member.name }}</div>
+                    <div class="agent-name">{{ member.name }} {{ member.surname }}</div>
                     <div class="agent-role">{{ member.role }}</div>
                 </div>
                 <div class="agent-actions">
-                    <button class="text-btn" (click)="editMember(member.id)">Modifica</button>
-                    <button class="text-btn danger" (click)="deleteMember(member.id)">Elimina</button>
+                    <button class="text-btn" (click)="editMember(member)">Modifica</button>
+                    <button class="text-btn danger" (click)="deleteMember(member.id!)">Elimina</button>
                 </div>
             </li>
         </ul>
 
-        <button class="btn-add-member" (click)="addMember()">+ Aggiungi Membro</button>
     </aside>
 
 </div>

@@ -65,7 +65,7 @@ export async function ensureUserOwnsSearch(req, res, next) {
 
 export function ensureIsAgent(req, res, next) {
 
-    const allowedRoles = ['agent', 'agency admin'];
+    const allowedRoles = ['agent', 'agencyAdmin'];
 
     if (!allowedRoles.includes(req.user.role)) {
         return next({ status: 403, message: "Non sei un agente immobiliare" });
@@ -74,7 +74,7 @@ export function ensureIsAgent(req, res, next) {
 }
 
 export function ensureIsAgencyAdmin(req, res, next) {
-    if (req.user.role !== 'agency admin') {
+    if (req.user.role !== 'agencyAdmin') {
         return next({ status: 403, message: "Non sei un amministratore di agenzia" });
     }
     next();

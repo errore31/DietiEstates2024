@@ -45,11 +45,12 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
 authRouter.post('/signup', validationSignup, errorValidation, async (req, res, next) =>{
 
     try{
+        req.body.role = "user";
         const user = await userController.createUser(req, res);
 
         res.status(201).json({
             message: "Utente salvato con successo",
-            user: {id: user.id, username: user.username, role: user.role}
+            user: user
         });
 
     } catch (error){

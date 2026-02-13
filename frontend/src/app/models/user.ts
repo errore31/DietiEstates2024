@@ -1,9 +1,10 @@
 export interface User {
-  id: number;
-  username: string;
-  role: string;
+  id?: number;
   name: string;
   surname:string;
+  username: string;
   email: string;
-  idAg?: number; // idAgency is optional
+  password: string;
+  role: string;
+  agencyId?: number; // idAgency is optional
 }

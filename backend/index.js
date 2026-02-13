@@ -11,6 +11,7 @@ import { proprietiesFeaturesRouter } from './routes/propertiesFeaturesRoute.js'
 import { agenciesRouter } from './routes/agenciesRoute.js'
 import { searchesRouter } from './routes/searchesRoute.js'
 import { notificationsRouter } from './routes/notificationsRoute.js'
+import { userRouter } from './routes/usersRoute.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 
@@ -43,11 +44,12 @@ await startConnection();
 await setDataTest(); // Populate the database with test data
 
 app.use("/auth", authRouter);
-app.use("/properties", proprietiesRouter)
-app.use("/propertiesFeatures", proprietiesFeaturesRouter)
-app.use("/agencies", agenciesRouter)
-app.use("/searches", searchesRouter)
-app.use("/notifications", notificationsRouter)
+app.use("/users", userRouter);
+app.use("/properties", proprietiesRouter);
+app.use("/propertiesFeatures", proprietiesFeaturesRouter);
+app.use("/agencies", agenciesRouter);
+app.use("/searches", searchesRouter);
+app.use("/notifications", notificationsRouter);
 app.use(errorHandler);
 
 

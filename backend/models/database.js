@@ -99,7 +99,7 @@ async function createAgencyAndUsers(hashedPassword) {
     username: 'agencyadmin',
     email: 'agencyadmin@example.com',
     password: hashedPassword,
-    role: 'agency admin',
+    role: 'agencyAdmin',
     agencyId: agency.id
   });
 
