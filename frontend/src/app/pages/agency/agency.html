@@ -1,11 +1,57 @@
 <app-navbar></app-navbar>
 
 <div class="agency-hero">
-    <button class="btn-edit-hero" (click)="editAgencyInfo()">Modifica Info Agenzia</button>
-    <h1 class="agency-name">{{ agency?.name }}</h1>
-    <p class="agency-location">address: {{ agency?.address }}</p>
-    <p>email: {{agency?.email}}</p>
-    <p>phone: {{agency?.phone}}</p>
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'name'">
+            <h1 class="agency-name">{{ agency?.name }}</h1>
+            <button class="btn-text-mod" (click)="editAgencyInfo('name')">Modifica</button>
+        </ng-container>
+        
+        <ng-container *ngIf="editingField === 'name'">
+            <input type="text" [(ngModel)]="agencyInfo.name" class="input-edit-hero">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'address'">
+            <p class="infoAgency">Indirizzo: {{ agency?.address }}</p>
+            <button class="btn-text-mod" (click)="editAgencyInfo('address')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'address'">
+            <input type="text" [(ngModel)]="agencyInfo.address" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'email'">
+            <p class="infoAgency">Email: {{agency?.email}}</p>
+            <button class="btn-text-mod" (click)="editAgencyInfo('email')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'email'">
+            <input type="email" [(ngModel)]="agencyInfo.email" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'phone'">
+            <p class="infoAgency">Telefono: {{agency?.phone}}</p>
+            <button class="btn-text-mod" (click)="editAgencyInfo('phone')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'phone'">
+            <input type="text" [(ngModel)]="agencyInfo.phone" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
 </div>
 
 <div class="container">

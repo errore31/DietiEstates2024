@@ -70,7 +70,7 @@ async function createAgencyAndUsers(hashedPassword) {
     businessName: 'Best Estates',
     name: 'Best Estates Agency',
     address: '123 Main St, Cityville',
-    phone: '123-456-7890',
+    phone: '+39 3481754639',
     email: 'bestestates@example.com'
   });
 

@@ -1,6 +1,6 @@
 import express from 'express';
 import { agenciesController } from '../controllers/agenciesController.js'
-import { enforceAuthentication, ensureIsAdmin } from '../middleware/authorization.js';
+import { enforceAuthentication, ensureIsAgencyAdmin } from '../middleware/authorization.js';
 import { validationCreateAgency, validationUpdateAgency } from '../middleware/validation/validationAgencies.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 import { propertiesController } from '../controllers/propertiesController.js';
@@ -13,7 +13,7 @@ export const agenciesRouter = express.Router();
  * @param {http.ServerResponse} res 
  **/ 
 
-agenciesRouter.post('/create', enforceAuthentication, ensureIsAdmin, validationCreateAgency, errorValidation,  async (req, res, next) => {
+agenciesRouter.post('/create', enforceAuthentication, ensureIsAgencyAdmin, validationCreateAgency, errorValidation,  async (req, res, next) => {
 
     try {
         const agency = await agenciesController.createAgency(req);
@@ -31,7 +31,7 @@ agenciesRouter.post('/create', enforceAuthentication, ensureIsAdmin, validationC
 
 });
 
-agenciesRouter.delete('/delete/:id', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
+agenciesRouter.delete('/delete/:id', enforceAuthentication, ensureIsAgencyAdmin, async (req, res, next) => {
 
     try {
         const idAgency = req.params.id;
@@ -45,7 +45,7 @@ agenciesRouter.delete('/delete/:id', enforceAuthentication, ensureIsAdmin, async
     }
 });
 
-agenciesRouter.put('/update/:id', enforceAuthentication, ensureIsAdmin, validationUpdateAgency, errorValidation, async (req, res, next) => {
+agenciesRouter.put('/update/:id', enforceAuthentication, ensureIsAgencyAdmin, validationUpdateAgency, errorValidation, async (req, res, next) => {
     try {
         const idAgency = req.params.id;
         const updatedAgency = await agenciesController.updateAgency(idAgency, req);

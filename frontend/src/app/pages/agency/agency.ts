@@ -27,6 +27,7 @@ export class Agency implements OnInit {
   isEditing = false; // Flag per capire se il form è in modalità modifica
   currentEditId: number | null = null; //id dell'utente da modificare
   showAddMemberForm = false;
+  editingField: string | null = null;
 
   newAgent: User = {
     name: '',
@@ -37,6 +38,16 @@ export class Agency implements OnInit {
     role: 'agent',
     agencyId: undefined
   };
+
+  agencyInfo: AgencyModel = {
+    id: undefined,
+    businessName: '',
+    name: '',
+    address: '',     
+    phone: '',       
+    email: '',        
+    Users: undefined,
+  }
 
   constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute, private propertyService: PropertyService, private userService: UserService, private toastr: ToastrService) { }
 
@@ -80,8 +91,20 @@ export class Agency implements OnInit {
 
   }
 
-  editAgencyInfo() {
-    alert('Modifica informazioni agenzia');
+  editAgencyInfo(field: string) {
+    this.editingField = field;
+
+    if(this.agency){
+      this.agencyInfo = {
+        id: this.agency.id,
+        businessName: this.agency.businessName,
+        name: this.agency.name,
+        address: this.agency.address,
+        phone: this.agency.phone,
+        email: this.agency.email,
+        Users: this.agency.Users,
+      }
+    }
   }
 
   toggleAddMemberForm() {
@@ -165,10 +188,35 @@ export class Agency implements OnInit {
     }
   }
 
+  saveAgencyField(){
+    if (this.agency?.id) {
+        this.agencyService.updateAgency(this.agency.id, this.agencyInfo).subscribe({
+            next: (response: any) => {
+                const updatedAgency = response.agency;
+                const currentUsers = this.agency?.Users;
+                this.agency = updatedAgency; // Aggiorna la vista
+
+                //Riattacchiamo i membri all'oggetto aggiornato
+                if (this.agency) {
+                    this.agency.Users = currentUsers;
+                }
+                
+                this.editingField = null;
+                this.toastr.success('Info aggiornate');
+            },
+            error: (err) => console.error(err)
+        });
+    }
+  }
+
   closerForm(){
     this.showAddMemberForm = false;
     this.isEditing = false;
     this.currentEditId = null;
     this.newAgent = { name: '', surname: '', username: '', email: '', password: '', role: 'agent' };
+  }
+
+  cancelEditAgency() {
+    this.editingField = null;
   }
 }
