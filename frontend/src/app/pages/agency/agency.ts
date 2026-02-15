@@ -12,6 +12,8 @@ import { Property } from '../../models/property';
 import { PropertyService } from '../../services/property/property';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user';
+import { AuthService } from '../../services/auth-service/auth';
+
 
 @Component({
   selector: 'app-agency',
@@ -21,14 +23,30 @@ import { UserService } from '../../services/user/user';
   styleUrl: './agency.scss',
 })
 export class Agency implements OnInit {
+
+  //variabili di sessione
+  currentUser$;
+
+  constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute,
+    private propertyService: PropertyService, private userService: UserService,
+    private toastr: ToastrService, private authService: AuthService) {
+
+    this.currentUser$ = this.authService.currentUser$;
+
+  }
+
+  //dati presi dal backend
   agency: AgencyModel | undefined;
   allProperties: Property[] = [];
 
+  //variabili form
   isEditing = false; // Flag per capire se il form è in modalità modifica
   currentEditId: number | null = null; //id dell'utente da modificare
   showAddMemberForm = false;
   editingField: string | null = null;
+  isAgencyAdmin = false;
 
+  //dati per modfica aggiunta
   newAgent: User = {
     name: '',
     surname: '',
@@ -43,14 +61,13 @@ export class Agency implements OnInit {
     id: undefined,
     businessName: '',
     name: '',
-    address: '',     
-    phone: '',       
-    email: '',        
+    address: '',
+    phone: '',
+    email: '',
     Users: undefined,
   }
 
-  constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute, private propertyService: PropertyService, private userService: UserService, private toastr: ToastrService) { }
-
+  
   ngOnInit(): void {
     const idParam = this.activateRoute.snapshot.paramMap.get('id'); //restituisce stringa
 
@@ -76,6 +93,14 @@ export class Agency implements OnInit {
       console.error('Errore nella estrazione ID');
     }
 
+    //Recuperiamo l'utente
+    this.authService.currentUser$.subscribe(user => {
+        if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
+            this.isAgencyAdmin = true;
+        } else {
+            this.isAgencyAdmin = false;
+        }
+    });
   }
 
   // --- Funzioni di Gestione ---
@@ -94,7 +119,7 @@ export class Agency implements OnInit {
   editAgencyInfo(field: string) {
     this.editingField = field;
 
-    if(this.agency){
+    if (this.agency) {
       this.agencyInfo = {
         id: this.agency.id,
         businessName: this.agency.businessName,
@@ -188,28 +213,28 @@ export class Agency implements OnInit {
     }
   }
 
-  saveAgencyField(){
+  saveAgencyField() {
     if (this.agency?.id) {
-        this.agencyService.updateAgency(this.agency.id, this.agencyInfo).subscribe({
-            next: (response: any) => {
-                const updatedAgency = response.agency;
-                const currentUsers = this.agency?.Users;
-                this.agency = updatedAgency; // Aggiorna la vista
+      this.agencyService.updateAgency(this.agency.id, this.agencyInfo).subscribe({
+        next: (response: any) => {
+          const updatedAgency = response.agency;
+          const currentUsers = this.agency?.Users;
+          this.agency = updatedAgency; // Aggiorna la vista
 
-                //Riattacchiamo i membri all'oggetto aggiornato
-                if (this.agency) {
-                    this.agency.Users = currentUsers;
-                }
-                
-                this.editingField = null;
-                this.toastr.success('Info aggiornate');
-            },
-            error: (err) => console.error(err)
-        });
+          //Riattacchiamo i membri all'oggetto aggiornato
+          if (this.agency) {
+            this.agency.Users = currentUsers;
+          }
+
+          this.editingField = null;
+          this.toastr.success('Info aggiornate');
+        },
+        error: (err) => console.error(err)
+      });
     }
   }
 
-  closerForm(){
+  closerForm() {
     this.showAddMemberForm = false;
     this.isEditing = false;
     this.currentEditId = null;
