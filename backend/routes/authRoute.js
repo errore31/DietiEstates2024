@@ -67,7 +67,7 @@ authRouter.get('/session', (req, res) => {
                 id: req.session.userId,      
                 username: req.session.username,
                 role: req.session.role,
-                idAg: req.session.agencyId
+                agencyId: req.session.agencyId
             }
         });
     } else {

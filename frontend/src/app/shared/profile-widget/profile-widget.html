@@ -1,7 +1,26 @@
 <div class="profile-container">
   <ng-container *ngIf="isAuthenticated$ | async; else guestView">
     <div class="user-logged" *ngIf="currentUser$ | async as user">
-      <p>Bentornato, {{ user.username }}</p>
+      <button mat-raised-button [matMenuTriggerFor]="mainMenu">{{ user.username }}</button>
+
+      <mat-menu #mainMenu="matMenu" class="profile-menu">
+        <button mat-menu-item>
+          <span>Il mio Profilo</span>
+        </button>
+
+        <button mat-menu-item *ngIf="user.role === 'agencyAdmin' || user.role ==='agent'" (click)="route('/agency', user.agencyId)">
+          <span>La mia agenzia</span>
+        </button>
+
+        <button mat-menu-item *ngIf="user.role === 'user'" (click)="route('/notification', user.id)">
+          <span>Notifiche</span>
+        </button>
+
+        <button mat-menu-item *ngIf="user.role === 'agencyAdmin' || user.role ==='agent'" (click)="route('/properties')">
+          <span>Aggiungi immobile</span>
+        </button>
+
+      </mat-menu>
       <button (click)="onLogout()" class="btn-logout">Logout</button>
     </div>
   </ng-container>

@@ -74,10 +74,15 @@ export class Agency implements OnInit {
     if (idParam) {
       const agencyId = +idParam; //conversione a number
 
-      // prendo le utenze
       this.agencyService.getAgencyById(agencyId).subscribe({
-        next: (data) => this.agency = data,
-        error: (err) => console.error('Errore Agency:', err)
+      next: (data) => {
+        this.agency = data;
+        //recuperiamo utente solo ora per no navere probelmi di asicronità
+        this.authService.currentUser$.subscribe(user => {
+          this.checkAdminPermissions(user);
+        });
+      },
+      error: (err) => console.error('Errore Agency:', err)
       });
 
       // prendo gli immobili 
@@ -92,16 +97,16 @@ export class Agency implements OnInit {
     else {
       console.error('Errore nella estrazione ID');
     }
-
-    //Recuperiamo l'utente
-    this.authService.currentUser$.subscribe(user => {
-        if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
-            this.isAgencyAdmin = true;
-        } else {
-            this.isAgencyAdmin = false;
-        }
-    });
   }
+
+  //verifca se è un agency admin di quella azienda
+  private checkAdminPermissions(user: any) {
+  if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
+    this.isAgencyAdmin = true;
+  } else {
+    this.isAgencyAdmin = false;
+  }
+}
 
   // --- Funzioni di Gestione ---
   createProperty() {

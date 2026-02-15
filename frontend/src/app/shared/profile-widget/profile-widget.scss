@@ -24,3 +24,36 @@ a, span{
     align-items: center;
 }
 
+//serve per modficare lo stile principale applicato da Angular/Material
+::ng-deep .mat-mdc-menu-panel {
+    background-color: var(--site-primary) !important;
+    min-width: 150px !important;
+    padding: 0 !important; 
+}
+
+::ng-deep .mat-mdc-menu-content {
+    background-color: var(--site-primary) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+button[mat-raised-button] {
+    background-color: transparent !important;
+    box-shadow: none !important; 
+    color: var(--site-light) !important; 
+    font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button[mat-menu-item] {
+    background-color: var(--site-primary) !important;
+    border-radius: 0 !important; 
+    
+    span {
+        color: var(--site-light) !important;
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+}
+
