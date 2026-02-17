@@ -27,6 +27,10 @@ export function createModel(database) {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        category:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         latitude:{
             type: DataTypes.DOUBLE,
             allowNull: false,

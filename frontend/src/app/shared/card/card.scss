@@ -66,3 +66,16 @@
     align-items: center;
     gap: 5px;
 }
+
+.category {
+    
+    background: var(--site-light);
+    color: var(--site-primary);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+}

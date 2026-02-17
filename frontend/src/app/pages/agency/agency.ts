@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Navbar } from '../../shared/navbar/navbar';
 import { Footer } from '../../shared/footer/footer';
@@ -13,6 +14,7 @@ import { PropertyService } from '../../services/property/property';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user';
 import { AuthService } from '../../services/auth-service/auth';
+
 
 
 @Component({
@@ -29,7 +31,7 @@ export class Agency implements OnInit {
 
   constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute,
     private propertyService: PropertyService, private userService: UserService,
-    private toastr: ToastrService, private authService: AuthService) {
+    private toastr: ToastrService, private authService: AuthService, private router: Router) {
 
     this.currentUser$ = this.authService.currentUser$;
 
@@ -38,6 +40,7 @@ export class Agency implements OnInit {
   //dati presi dal backend
   agency: AgencyModel | undefined;
   allProperties: Property[] = [];
+  selectedCategory: 'vendita' | 'affitto' = 'vendita';
 
   //variabili form
   isEditing = false; // Flag per capire se il form è in modalità modifica
@@ -99,6 +102,17 @@ export class Agency implements OnInit {
     }
   }
 
+  setCategory(category: 'vendita' | 'affitto') {
+    this.selectedCategory = category;
+  }
+
+  // Getter che restituisce solo gli immobili della categoria selezionata
+  get filteredProperties() {
+    return this.allProperties.filter(prop => 
+        prop.category?.toLowerCase() === this.selectedCategory
+    );
+  }
+
   //verifca se è un agency admin di quella azienda
   private checkAdminPermissions(user: any) {
   if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
@@ -110,7 +124,7 @@ export class Agency implements OnInit {
 
   // --- Funzioni di Gestione ---
   createProperty() {
-    alert('Apre modale creazione immobile');
+     this.router.navigate(['/properties/create']);
   }
 
   editProperty(id: number) {

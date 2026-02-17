@@ -332,3 +332,31 @@
     background: #e74c3c; 
     box-shadow: 0 2px 5px rgba(231, 76, 60, 0.4);
 }
+
+.category-selector {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 30px;
+
+    button {
+        border: none;
+        background: transparent;
+        padding: 8px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--site-primary);
+        transition: all 0.3s ease;
+
+        &.active {
+            background: var(--site-primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        &:hover:not(.active) {
+            background: rgba(24, 47, 83, 0.1);
+        }
+    }
+}

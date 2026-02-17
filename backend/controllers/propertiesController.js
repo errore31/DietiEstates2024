@@ -55,6 +55,7 @@ export class propertiesController {
             price: req.body.price,
             address: req.body.address,
             type: req.body.type,
+            category: req.body.category,
             latitude: req.body.latitude,
             longitude: req.body.longitude,
             agentId: req.session.userId
@@ -79,7 +80,7 @@ export class propertiesController {
             throw new customError('Immobile non trovato', 404);
         }
 
-        const allowedUpdates = ['title', 'description', 'price', 'address', 'type', 'latitude', 'longitude'];
+        const allowedUpdates = ['title', 'description', 'price', 'address', 'type', 'category', 'latitude', 'longitude'];
 
         allowedUpdates.forEach((field) => {
             if (req.body[field] !== undefined) {

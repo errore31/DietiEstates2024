@@ -18,6 +18,7 @@ export interface Property {
   price: number;
   address: string;
   type: string;
+  category: string;
   latitude: number;
   longitude: number;
   agentId?: number;

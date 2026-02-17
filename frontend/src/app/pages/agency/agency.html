@@ -59,8 +59,13 @@
     <main class="main-content-card">
         <h2 class="section-title" *ngIf="isAgencyAdmin; else otherTitle">Gestione Immobili</h2>
         <ng-template #otherTitle>
-            <h2 class="section-title">Immobili in vendita</h2>
+            <h2 class="section-title">I nostri Immobili</h2>
         </ng-template>
+
+        <div class="category-selector">
+            <button [class.active]="selectedCategory === 'vendita'" (click)="setCategory('vendita')">Vendita</button>
+            <button [class.active]="selectedCategory === 'affitto'" (click)="setCategory('affitto')">Affitto</button>
+        </div>
 
 
         <div class="property-grid">
@@ -69,7 +74,7 @@
                 <h3>Nuovo Annuncio</h3>
             </div>
 
-            <div class="card-wrapper" *ngFor="let prop of allProperties">
+            <div class="card-wrapper" *ngFor="let prop of filteredProperties">
                 <app-card [properties]="prop"></app-card>
                 <div class="action-admin" *ngIf="isAgencyAdmin">
                     <button class="btn-mod" (click)="editProperty(prop.id)">Modifica</button>

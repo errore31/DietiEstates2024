@@ -16,7 +16,7 @@
           <span>Notifiche</span>
         </button>
 
-        <button mat-menu-item *ngIf="user.role === 'agencyAdmin' || user.role ==='agent'" (click)="route('/properties')">
+        <button mat-menu-item *ngIf="user.role === 'agencyAdmin' || user.role ==='agent'" (click)="route('/properties/create')">
           <span>Aggiungi immobile</span>
         </button>
 
