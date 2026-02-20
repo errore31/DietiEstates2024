@@ -127,11 +127,11 @@ export class Agency implements OnInit {
      this.router.navigate(['/properties/create']);
   }
 
-  editProperty(id: number) {
+  editProperty(id?: number) {
     alert(`Modifica immobile ${id}`);
   }
 
-  deleteProperty(id: number) {
+  deleteProperty(id?: number) {
 
   }
 

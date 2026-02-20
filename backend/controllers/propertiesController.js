@@ -49,7 +49,13 @@ export class propertiesController {
 
     static async createProperty(req) {
 
-        return Properties.create({
+        let featuresData = req.body.PropertiesFeature;
+        if (typeof featuresData === 'string') {
+            featuresData = JSON.parse(featuresData);
+        }
+
+        // Creiamo la proprietà nel database
+        const newProperty = await Properties.create({
             title: req.body.title,
             description: req.body.description,
             price: req.body.price,
@@ -60,6 +66,19 @@ export class propertiesController {
             longitude: req.body.longitude,
             agentId: req.session.userId
         });
+
+        if (featuresData) {
+            await PropertiesFeatures.create({
+                id: newProperty.id, 
+                roomCount: featuresData.roomCount,
+                area: featuresData.area,
+                hasElevator: featuresData.hasElevator,
+                floor: featuresData.floor,
+                energyClass: featuresData.energyClass
+            });
+        }
+
+        return newProperty;
     }
 
 

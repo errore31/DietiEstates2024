@@ -12,7 +12,7 @@ export interface PropertyFeatures {
 }
 
 export interface Property {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   price: number;
