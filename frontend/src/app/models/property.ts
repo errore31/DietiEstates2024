@@ -12,12 +12,13 @@ export interface PropertyFeatures {
 }
 
 export interface Property {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   price: number;
   address: string;
   type: string;
+  category: string;
   latitude: number;
   longitude: number;
   agentId?: number;

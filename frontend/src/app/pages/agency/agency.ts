@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Navbar } from '../../shared/navbar/navbar';
 import { Footer } from '../../shared/footer/footer';
@@ -12,6 +13,9 @@ import { Property } from '../../models/property';
 import { PropertyService } from '../../services/property/property';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user';
+import { AuthService } from '../../services/auth-service/auth';
+
+
 
 @Component({
   selector: 'app-agency',
@@ -21,13 +25,31 @@ import { UserService } from '../../services/user/user';
   styleUrl: './agency.scss',
 })
 export class Agency implements OnInit {
+
+  //variabili di sessione
+  currentUser$;
+
+  constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute,
+    private propertyService: PropertyService, private userService: UserService,
+    private toastr: ToastrService, private authService: AuthService, private router: Router) {
+
+    this.currentUser$ = this.authService.currentUser$;
+
+  }
+
+  //dati presi dal backend
   agency: AgencyModel | undefined;
   allProperties: Property[] = [];
+  selectedCategory: 'vendita' | 'affitto' = 'vendita';
 
+  //variabili form
   isEditing = false; // Flag per capire se il form è in modalità modifica
   currentEditId: number | null = null; //id dell'utente da modificare
   showAddMemberForm = false;
+  editingField: string | null = null;
+  isAgencyAdmin = false;
 
+  //dati per modfica aggiunta
   newAgent: User = {
     name: '',
     surname: '',
@@ -38,18 +60,32 @@ export class Agency implements OnInit {
     agencyId: undefined
   };
 
-  constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute, private propertyService: PropertyService, private userService: UserService, private toastr: ToastrService) { }
+  agencyInfo: AgencyModel = {
+    id: undefined,
+    businessName: '',
+    name: '',
+    address: '',
+    phone: '',
+    email: '',
+    Users: undefined,
+  }
 
+  
   ngOnInit(): void {
     const idParam = this.activateRoute.snapshot.paramMap.get('id'); //restituisce stringa
 
     if (idParam) {
       const agencyId = +idParam; //conversione a number
 
-      // prendo le utenze
       this.agencyService.getAgencyById(agencyId).subscribe({
-        next: (data) => this.agency = data,
-        error: (err) => console.error('Errore Agency:', err)
+      next: (data) => {
+        this.agency = data;
+        //recuperiamo utente solo ora per no navere probelmi di asicronità
+        this.authService.currentUser$.subscribe(user => {
+          this.checkAdminPermissions(user);
+        });
+      },
+      error: (err) => console.error('Errore Agency:', err)
       });
 
       // prendo gli immobili 
@@ -64,24 +100,55 @@ export class Agency implements OnInit {
     else {
       console.error('Errore nella estrazione ID');
     }
-
   }
+
+  setCategory(category: 'vendita' | 'affitto') {
+    this.selectedCategory = category;
+  }
+
+  // Getter che restituisce solo gli immobili della categoria selezionata
+  get filteredProperties() {
+    return this.allProperties.filter(prop => 
+        prop.category?.toLowerCase() === this.selectedCategory
+    );
+  }
+
+  //verifca se è un agency admin di quella azienda
+  private checkAdminPermissions(user: any) {
+  if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
+    this.isAgencyAdmin = true;
+  } else {
+    this.isAgencyAdmin = false;
+  }
+}
 
   // --- Funzioni di Gestione ---
   createProperty() {
-    alert('Apre modale creazione immobile');
+     this.router.navigate(['/properties/create']);
   }
 
-  editProperty(id: number) {
+  editProperty(id?: number) {
     alert(`Modifica immobile ${id}`);
   }
 
-  deleteProperty(id: number) {
+  deleteProperty(id?: number) {
 
   }
 
-  editAgencyInfo() {
-    alert('Modifica informazioni agenzia');
+  editAgencyInfo(field: string) {
+    this.editingField = field;
+
+    if (this.agency) {
+      this.agencyInfo = {
+        id: this.agency.id,
+        businessName: this.agency.businessName,
+        name: this.agency.name,
+        address: this.agency.address,
+        phone: this.agency.phone,
+        email: this.agency.email,
+        Users: this.agency.Users,
+      }
+    }
   }
 
   toggleAddMemberForm() {
@@ -165,10 +232,35 @@ export class Agency implements OnInit {
     }
   }
 
-  closerForm(){
+  saveAgencyField() {
+    if (this.agency?.id) {
+      this.agencyService.updateAgency(this.agency.id, this.agencyInfo).subscribe({
+        next: (response: any) => {
+          const updatedAgency = response.agency;
+          const currentUsers = this.agency?.Users;
+          this.agency = updatedAgency; // Aggiorna la vista
+
+          //Riattacchiamo i membri all'oggetto aggiornato
+          if (this.agency) {
+            this.agency.Users = currentUsers;
+          }
+
+          this.editingField = null;
+          this.toastr.success('Info aggiornate');
+        },
+        error: (err) => console.error(err)
+      });
+    }
+  }
+
+  closerForm() {
     this.showAddMemberForm = false;
     this.isEditing = false;
     this.currentEditId = null;
     this.newAgent = { name: '', surname: '', username: '', email: '', password: '', role: 'agent' };
+  }
+
+  cancelEditAgency() {
+    this.editingField = null;
   }
 }

@@ -1,27 +1,82 @@
 <app-navbar></app-navbar>
 
 <div class="agency-hero">
-    <button class="btn-edit-hero" (click)="editAgencyInfo()">Modifica Info Agenzia</button>
-    <h1 class="agency-name">{{ agency?.name }}</h1>
-    <p class="agency-location">address: {{ agency?.address }}</p>
-    <p>email: {{agency?.email}}</p>
-    <p>phone: {{agency?.phone}}</p>
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'name'">
+            <h1 class="agency-name">{{ agency?.name }}</h1>
+            <button class="btn-text-mod" *ngIf="isAgencyAdmin" (click)="editAgencyInfo('name')">Modifica</button>
+        </ng-container>
+        
+        <ng-container *ngIf="editingField === 'name'">
+            <input type="text" [(ngModel)]="agencyInfo.name" class="input-edit-hero">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'address'">
+            <p class="infoAgency">Indirizzo: {{ agency?.address }}</p>
+            <button class="btn-text-mod" *ngIf="isAgencyAdmin" (click)="editAgencyInfo('address')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'address'">
+            <input type="text" [(ngModel)]="agencyInfo.address" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'email'">
+            <p class="infoAgency">Email: {{agency?.email}}</p>
+            <button class="btn-text-mod" *ngIf="isAgencyAdmin" (click)="editAgencyInfo('email')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'email'">
+            <input type="email" [(ngModel)]="agencyInfo.email" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
+
+    <div class="editable-row">
+        <ng-container *ngIf="editingField !== 'phone'">
+            <p class="infoAgency">Telefono: {{agency?.phone}}</p>
+            <button class="btn-text-mod" *ngIf="isAgencyAdmin" (click)="editAgencyInfo('phone')">Modifica</button>
+        </ng-container>
+
+        <ng-container *ngIf="editingField === 'phone'">
+            <input type="text" [(ngModel)]="agencyInfo.phone" class="input-edit">
+            <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
+            <button class="btn-cancel-mini" (click)="cancelEditAgency()">Annulla</button>
+        </ng-container>
+    </div>
 </div>
 
 <div class="container">
 
     <main class="main-content-card">
-        <h2 class="section-title">Gestione Immobili</h2>
+        <h2 class="section-title" *ngIf="isAgencyAdmin; else otherTitle">Gestione Immobili</h2>
+        <ng-template #otherTitle>
+            <h2 class="section-title">I nostri Immobili</h2>
+        </ng-template>
+
+        <div class="category-selector">
+            <button [class.active]="selectedCategory === 'vendita'" (click)="setCategory('vendita')">Vendita</button>
+            <button [class.active]="selectedCategory === 'affitto'" (click)="setCategory('affitto')">Affitto</button>
+        </div>
+
 
         <div class="property-grid">
-            <div class="create-card" (click)="createProperty()">
+            <div class="create-card" *ngIf="isAgencyAdmin" (click)="createProperty()">
                 <div class="plus-icon">+</div>
                 <h3>Nuovo Annuncio</h3>
             </div>
 
-            <div class="card-wrapper" *ngFor="let prop of allProperties">
+            <div class="card-wrapper" *ngFor="let prop of filteredProperties">
                 <app-card [properties]="prop"></app-card>
-                <div class="action-admin">
+                <div class="action-admin" *ngIf="isAgencyAdmin">
                     <button class="btn-mod" (click)="editProperty(prop.id)">Modifica</button>
                     <button class="btn-del" (click)="deleteProperty(prop.id)">Elimina</button>
                 </div>
@@ -32,11 +87,11 @@
     <aside class="sidebar-card">
         <h2 class="section-title">Team</h2>
 
-        <button class="btn-add-member" *ngIf="!showAddMemberForm" (click)="toggleAddMemberForm()">
+        <button class="btn-add-member" *ngIf="!showAddMemberForm && isAgencyAdmin" (click)="toggleAddMemberForm()">
             + Aggiungi Membro
         </button>
 
-        <div class="add-member-container" *ngIf="showAddMemberForm">
+        <div class="add-member-container" *ngIf="showAddMemberForm && isAgencyAdmin">
             <h3>{{ isEditing ? 'Modifica Membro' : 'Nuovo Membro' }}</h3>
 
             <div class="form-group">
@@ -67,7 +122,7 @@
                     <div class="agent-name">{{ member.name }} {{ member.surname }}</div>
                     <div class="agent-role">{{ member.role }}</div>
                 </div>
-                <div class="agent-actions">
+                <div class="agent-actions" *ngIf="isAgencyAdmin">
                     <button class="text-btn" (click)="editMember(member)">Modifica</button>
                     <button class="text-btn danger" (click)="deleteMember(member.id!)">Elimina</button>
                 </div>

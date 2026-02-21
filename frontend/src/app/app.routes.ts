@@ -4,7 +4,7 @@ import { Login } from './pages/login/login';
 import { Advertisement } from './pages/advertisement/advertisement';
 import { Agency } from './pages/agency/agency';
 import { Searches } from './pages/searches/searches';
-
+import { CreateAdvertisement } from './pages/create-advertisement/create-advertisement';
 export const routes: Routes = [    
     {
         path: '',
@@ -30,7 +30,11 @@ export const routes: Routes = [
         path: 'searches',
         component: Searches,
         title: 'DietiEstate2425 - Searches'
+    },
+    {
+        path: 'properties/create',
+        component: CreateAdvertisement,
+        title: 'DietiEstate2425 - Create Advertisement'
     }
-
 
 ];

@@ -1,1 +1,140 @@
-<p>create-advertisement works!</p>
+<app-navbar></app-navbar>
+
+<div class="page-container">
+    
+    <div class="page-header">
+        <h1 class="page-title">Nuovo Annuncio</h1>
+        <p class="page-subtitle">Compila i dettagli per pubblicare un nuovo immobile.</p>
+    </div>
+
+    <form class="property-form" (ngSubmit)="createProperty()">
+        
+        <section class="form-card">
+            <h3 class="card-title"> Informazioni Principali</h3>
+            
+            <div class="form-grid col-2">
+                <div class="form-group full-width">
+                    <label>Titolo dell'Annuncio</label>
+                    <input type="text" name="title" [(ngModel)]="newProperty.title" placeholder="Es: Trilocale in vendita">
+                </div>
+
+                <div class="form-group">
+                    <label>Prezzo (€)</label>
+                    <input type="number" name="price" [(ngModel)]="newProperty.price" step="10000" placeholder="Es: 250000">
+                </div>
+
+                <div class="form-group">
+                    <label>Superficie (mq)</label>
+                    <input type="number" name="area" [(ngModel)]="newProperty.PropertiesFeature.area" placeholder="Es: 120">
+                </div>
+
+                <div class="form-group">
+                    <label>Tipologia</label>
+                    <select name="type" [(ngModel)]="newProperty.type">
+                        <option value="">Seleziona...</option>
+                        <option value="appartamento">Appartamento</option>
+                        <option value="villa">Villa</option>
+                        <option value="ufficio">Ufficio</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Contratto</label>
+                    <select name="category" [(ngModel)]="newProperty.category">
+                        <option value="vendita">Vendita</option>
+                        <option value="affitto">Affitto</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="card-title">Posizione</h3>
+            
+            <div class="form-grid col-2">
+                <div class="form-group">
+                    <label>Città</label>
+                    <input type="text" name="city" [(ngModel)]="city" placeholder="Es: Napoli">
+                </div>
+                <div class="form-group">
+                    <label>Indirizzo</label>
+                    <input type="text" name="newAddress" [(ngModel)]="newAddress" placeholder="Via Roma, 12">
+                </div>
+                
+                <div class="map-placeholder full-width">
+                    <span>Mappa non disponibile in anteprima</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="card-title">Caratteristiche</h3>
+            
+            <div class="form-grid col-4">
+                <div class="form-group">
+                    <label>Locali</label>
+                    <input type="number" name="roomCount" [(ngModel)]="newProperty.PropertiesFeature.roomCount" min="1">
+                </div>
+                <div class="form-group">
+                    <label>Piano</label>
+                    <input type="number" name="floor" [(ngModel)]="newProperty.PropertiesFeature.floor">
+                </div>
+                <div class="form-group">
+                    <label>Classe En.</label>
+                    <select name="energyClass" [(ngModel)]="newProperty.PropertiesFeature.energyClass">
+                        <option>A4</option><option>A3</option><option>A2</option><option>A1</option>
+                        <option>B</option>
+                        <option>C</option>
+                        <option>D</option>
+                        <option>E</option>
+                        <option>F</option>
+                        <option>G</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <label class="section-label">Servizi Aggiuntivi</label>
+            <div class="features-wrapper">
+                <label class="checkbox-pill"><input type="checkbox" name="hasElevator" [(ngModel)]="newProperty.PropertiesFeature.hasElevator"> Ascensore</label>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="card-title">📸 Foto</h3>
+            
+            <input type="file" multiple accept="image/jpeg, image/png, image/webp" 
+                #fileInput (change)="onFileSelected($event)" style="display: none;">
+
+            <div class="upload-area" (click)="fileInput.click()">
+                <p>Trascina qui le foto o <span>clicca per caricare</span></p>
+            </div>
+
+            <div class="selected-images" *ngIf="imagePreviews.length > 0">
+                <div class="image-container" *ngFor="let url of imagePreviews; let i = index">
+                    <img [src]="url" alt="Preview immobile" class="img-preview">
+                    
+                    <button type="button" class="btn-remove-overlay" (click)="removeImage(i)">
+                        &times;
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <h3 class="card-title">Descrizione</h3>
+            <div class="form-group">
+                <textarea rows="5" name="description" [(ngModel)]="newProperty.description" placeholder="Descrivi i punti di forza dell'immobile..."></textarea>
+            </div>
+        </section>
+
+        <div class="form-actions">
+            <button type="button" class="btn-cancel" (click)="location.back()">Annulla</button>
+            <button type="submit" class="btn-submit">Pubblica Annuncio</button>
+        </div>
+
+    </form>
+</div>
+
+<app-footer></app-footer>

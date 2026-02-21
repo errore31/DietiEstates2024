@@ -1,0 +1,271 @@
+/* create-advertisement.scss */
+
+/* RESET FONDAMENTALE PER QUESTO COMPONENTE */
+* {
+    box-sizing: border-box; /* Include padding e bordi nel calcolo della larghezza */
+}
+
+.page-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Google Sans', sans-serif;
+}
+
+/* --- HEADER --- */
+.page-header {
+    margin-bottom: 30px;
+    
+    .page-title {
+        color: var(--site-primary);
+        font-size: 2rem;
+        font-weight: 800;
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .page-subtitle {
+        color: var(--site-dark); /* Assicurati che questa var esista, altrimenti usa #333 */
+    }
+}
+
+/* --- CARDS & STRUTTURA FORM --- */
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    border: 1px solid #eee;
+
+    .card-title {
+        color: var(--site-primary);
+        font-size: 1.2rem;
+        font-weight: 700;
+        border-bottom: 2px solid var(--site-cream);
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+    }
+}
+
+/* --- GRIGLIA RESPONSIVE --- */
+.form-grid {
+    display: grid;
+    /* Ho aumentato il gap orizzontale a 30px per sicurezza */
+    gap: 25px 30px; 
+    width: 100%;
+
+    &.col-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.col-4 {
+        /* minmax(150px...) assicura che se non c'è spazio vadano a capo */
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    /* Mobile: tutto a 1 colonna */
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%; /* Occupa tutto lo spazio della cella griglia */
+    min-width: 0; /* TRUCCO CSS: evita overflow nei flex/grid items */
+
+    &.full-width { grid-column: 1 / -1; } 
+
+    label {
+        font-weight: 600;
+        color: var(--site-primary);
+        font-size: 0.9rem;
+    }
+
+    /* Stile unificato Input/Select/Textarea */
+    input, select, textarea {
+        box-sizing: border-box !important; /* FORZIAMO IL CALCOLO CORRETTO */
+        width: 100%;
+        max-width: 100%; /* Impedisce di uscire dal contenitore */
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #333;
+        background: #fafafa;
+        transition: 0.2s;
+        
+        &:focus {
+            outline: none;
+            border-color: var(--site-primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(24, 47, 83, 0.1);
+        }
+    }
+}
+
+/* --- ELEMENTI SPECIALI --- */
+.map-placeholder {
+    height: 200px;
+    background: var(--site-cream);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-style: italic;
+    width: 100%;
+    border: 1px dashed #ccc;
+
+    span{
+        color: var(--site-primary);
+    }
+}
+
+.divider {
+    height: 1px;
+    background: #eee;
+    margin: 25px 0;
+}
+
+/* Checkbox a "Pillola" */
+.features-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.checkbox-pill {
+    cursor: pointer;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #555;
+
+    &:hover { background: var(--site-cream); }
+    
+    /* Supporto CSS moderno per selezionare il genitore */
+    &:has(input:checked) {
+        background: var(--site-primary);
+        color: white;
+        border-color: var(--site-primary);
+    }
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    background: #fafafa;
+    cursor: pointer;
+    transition: 0.3s;
+    box-sizing: border-box; /* Aggiunto anche qui */
+
+    &:hover {
+        border-color: var(--site-orange);
+        background: #fff8f0;
+    }
+
+    p span { color: var(--site-orange); font-weight: bold; }
+}
+
+/* --- FOOTER AZIONI --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 40px;
+    margin-bottom: 60px; 
+
+    button {
+        padding: 14px 28px;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 1rem;
+        border: none;
+        transition: transform 0.1s;
+
+        &:active { transform: scale(0.98); }
+    }
+
+    .btn-cancel {
+        background: var(--site-primary);
+        color: var(--site-cream); /* Modificato per contrasto migliore */
+        border: 1px solid transparent;
+        &:hover { background: var(--site-dark); opacity: 0.9; }
+    }
+
+    .btn-submit {
+        background: var(--site-orange); 
+        color: white;
+        box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        &:hover { background: #d35400; }
+    }
+}
+
+
+/*Box immagini selezionate*/
+.selected-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+    .img-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ritaglia l'immagine per riempire il quadrato */
+    }
+
+    .btn-remove-overlay {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(231, 76, 60, 0.9); /* Rosso semi-trasparente */
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+
+        &:hover {
+            transform: scale(1.1);
+            background: #e74c3c;
+        }
+    }
+}

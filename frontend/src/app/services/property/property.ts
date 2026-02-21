@@ -28,6 +28,6 @@ export class PropertyService {
   }
 
   createProperty(propertyData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, propertyData);
+    return this.http.post<any>(`${this.apiUrl}/create`, propertyData);
   }
 }

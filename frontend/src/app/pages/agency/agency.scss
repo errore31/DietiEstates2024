@@ -12,12 +12,15 @@
         margin-bottom: 10px;
         color: var(--site-cream);
     }
-    .agency-location { 
+    .infoAgency { 
         font-size: 1.1rem; 
         color: var(--site-cream);
         opacity: 0.9; 
     }
+
 }
+    
+
 
 .btn-edit-hero {
     position: absolute;
@@ -241,4 +244,119 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.editable-row {
+    display: flex;
+    justify-content: center; /* Mantiene il layout centrato della Hero */
+    align-items: center;     /* Allinea verticalmente testo e bottoni */
+    gap: 15px;               /* Spazio tra il testo e la matitina */
+    min-height: 50px;        /* Altezza minima per evitare che la pagina "salti" al cambio view/edit */
+    margin-bottom: 5px;
+
+    /* Rimuoviamo i margini default per allineare perfettamente input e bottoni */
+    h1, p {
+        margin: 0;
+    }
+
+    &:hover {
+        .btn-text-mod {
+            opacity: 1;              
+            visibility: visible;     
+            transform: translateX(0); 
+        }
+    }
+}
+
+/* Bottone "Modifica" testuale (per i campi piccoli) */
+.btn-text-mod {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--site-cream);
+    border-radius: 6px;
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    visibility: hidden;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Input generico per la Hero (Indirizzo, Email, Tel) */
+.input-edit {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: none;
+    color: var(--site-light);
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Input specifico per il Titolo (Nome Agenzia) */
+.input-edit-hero {
+    @extend .input-edit; /* Eredita lo stile base */
+    font-size: 2rem;     /* Grandezza simile all'H1 */
+    font-weight: 800;
+    text-align: center;
+    min-width: 300px;    /* Larghezza minima per non schiacciarsi */
+   
+}
+
+/* Bottoni Salva/Annulla */
+.btn-save-mini, .btn-cancel-mini {
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: white;
+    transition: transform 0.1s;
+
+    &:active { transform: scale(0.95); }
+}
+
+.btn-save-mini {
+    background: #27ae60; 
+    box-shadow: 0 2px 5px rgba(39, 174, 96, 0.4);
+}
+
+.btn-cancel-mini {
+    background: #e74c3c; 
+    box-shadow: 0 2px 5px rgba(231, 76, 60, 0.4);
+}
+
+.category-selector {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 30px;
+
+    button {
+        border: none;
+        background: transparent;
+        padding: 8px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--site-primary);
+        transition: all 0.3s ease;
+
+        &.active {
+            background: var(--site-primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        &:hover:not(.active) {
+            background: rgba(24, 47, 83, 0.1);
+        }
+    }
 }

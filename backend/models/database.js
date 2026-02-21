@@ -70,7 +70,7 @@ async function createAgencyAndUsers(hashedPassword) {
     businessName: 'Best Estates',
     name: 'Best Estates Agency',
     address: '123 Main St, Cityville',
-    phone: '123-456-7890',
+    phone: '+39 3481754639',
     email: 'bestestates@example.com'
   });
 
@@ -128,6 +128,7 @@ async function createPropertiesForAgent(agentId) {
       price: 350000,
       address: '456 Oak St, Cityville',
       type: 'house',
+      category: 'vendita',
       latitude: 40.7128, longitude: -74.0060,
       features: { roomCount: 3, area: 120, hasElevator: false, floor: 1, energyClass: 'B' }
     },
@@ -137,6 +138,7 @@ async function createPropertiesForAgent(agentId) {
       price: 550000,
       address: '789 Pine Ave, Cityville',
       type: 'apartment',
+      category: 'vendita',
       latitude: 40.7138, longitude: -74.0070,
       features: { roomCount: 2, area: 90, hasElevator: true, floor: 5, energyClass: 'A' }
     },
@@ -146,6 +148,7 @@ async function createPropertiesForAgent(agentId) {
       price: 180000,
       address: '101 Maple Blvd, Cityville',
       type: 'studio',
+      category: 'affitto',
       latitude: 40.7118, longitude: -74.0050,
       features: { roomCount: 1, area: 45, hasElevator: true, floor: 2, energyClass: 'C' }
     },
@@ -155,6 +158,7 @@ async function createPropertiesForAgent(agentId) {
       price: 950000,
       address: '202 Hilltop Rd, Cityville',
       type: 'villa',
+      category: 'affitto',
       latitude: 40.7158, longitude: -74.0090,
       features: { roomCount: 5, area: 250, hasElevator: false, floor: 0, energyClass: 'A+' }
     }
@@ -167,6 +171,7 @@ async function createPropertiesForAgent(agentId) {
       price: propData.price,
       address: propData.address,
       type: propData.type,
+      category: propData.category,
       latitude: propData.latitude,
       longitude: propData.longitude,
       agentId: agentId
