@@ -4,7 +4,7 @@
       <button mat-raised-button [matMenuTriggerFor]="mainMenu">{{ user.username }}</button>
 
       <mat-menu #mainMenu="matMenu" class="profile-menu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="route('/account')">
           <span>Il mio Profilo</span>
         </button>
 

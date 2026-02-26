@@ -21,6 +21,9 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
         if (user) {
             req.session.userId = user.id;
             req.session.username = user.username;
+            req.session.name = user.name;
+            req.session.surname = user.surname;
+            req.session.email = user.email;
             req.session.role = user.role;
             req.session.agencyId = user.agencyId | null;
             req.session.auth = true;
@@ -66,6 +69,9 @@ authRouter.get('/session', (req, res) => {
             user: {
                 id: req.session.userId,      
                 username: req.session.username,
+                name: req.session.name,
+                surname: req.session.surname,
+                email: req.session.email,
                 role: req.session.role,
                 agencyId: req.session.agencyId
             }
@@ -95,6 +101,9 @@ authRouter.get('/google/callback',
     req.session.userId = req.user.id;
     req.session.username = req.user.username;
     req.session.role = req.user.role;
+    req.session.name = req.user.name;
+    req.session.surname = req.user.surname;
+    req.session.email = req.user.email;
     req.session.auth = true;
 
     // Reindirizziamo l'utente alla home di Angular

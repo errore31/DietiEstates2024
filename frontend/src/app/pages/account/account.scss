@@ -1,0 +1,224 @@
+/* account.scss */
+
+/* --- 1. RESET E CONTENITORE BASE (Mancavano) --- */
+* {
+    box-sizing: border-box;
+}
+
+.page-container {
+    max-width: 1100px; /* Un po' più largo per fare spazio alla sidebar */
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Google Sans', sans-serif;
+}
+
+/* --- 2. STILI DELLE CARD E DEI FORM (Mancavano) --- */
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    border: 1px solid #eee;
+}
+
+.form-grid {
+    display: grid;
+    gap: 25px 30px; 
+    width: 100%;
+
+    &.col-2 { grid-template-columns: repeat(2, 1fr); }
+    
+    .full-width { grid-column: 1 / -1; }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%; 
+    min-width: 0;
+
+    label {
+        font-weight: 600;
+        color: var(--site-primary);
+        font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+        box-sizing: border-box !important;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        color: #333;
+        background: #fafafa;
+        transition: 0.2s;
+        
+        &:focus {
+            outline: none;
+            border-color: var(--site-primary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(24, 47, 83, 0.1);
+        }
+    }
+}
+
+.btn-submit {
+    background: var(--site-orange); 
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    border: none;
+    transition: transform 0.1s;
+    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+
+    &:hover { background: #d35400; }
+    &:active { transform: scale(0.98); }
+
+    /* Modifica per il tasto nell'header */
+    &.mini {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+        margin: 0; 
+    }
+}
+
+
+/* --- 3. LAYOUT SPECIFICO DEL PROFILO --- */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    align-items: start; 
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Sidebar Profilo */
+.profile-sidebar {
+    padding: 30px 20px;
+    text-align: center;
+
+    .user-info-brief {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .user-avatar-large {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: var(--site-orange);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin: 0 auto 15px;
+        box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+    }
+
+    .user-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--site-primary);
+        margin-bottom: 5px;
+    }
+
+    .user-role-badge {
+        font-size: 0.85rem;
+        color: var(--site-primary);
+        background: var(--site-cream);
+        padding: 4px 12px;
+        border-radius: 20px;
+        display: inline-block;
+        font-weight: 600;
+    }
+}
+
+/* Menu Navigazione Laterale */
+.profile-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+
+    li { margin-bottom: 8px; }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 15px;
+        text-decoration: none;
+        color: #555;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.2s;
+
+        &:hover, &.active {
+            background: var(--site-cream);
+            color: var(--site-primary);
+        }
+
+        &.logout {
+            color: #e74c3c;
+            margin-top: 25px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            border-radius: 0;
+            
+            &:hover {
+                background: transparent;
+                color: #c0392b;
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+/* Modifiche specifiche per i form del profilo */
+.section-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--site-cream);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+
+    .card-title {
+        border-bottom: none; 
+        margin-bottom: 0;
+        padding-bottom: 0;
+        font-size: 1.4rem;
+        color: var(--site-primary);
+    }
+}
+
+/* Input disabilitato (per il ruolo) */
+.input-disabled {
+    background: #f0f2f5 !important;
+    color: #888 !important;
+    cursor: not-allowed;
+    border-color: #e4e6eb !important;
+}
+
+.hint-text {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 4px;
+}

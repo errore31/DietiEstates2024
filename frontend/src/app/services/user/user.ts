@@ -30,5 +30,4 @@ export class UserService {
     return this.http.put<User>(`${this.baseApiUrl}/users/update/${userId}`, userData);
   }
     
-
 }

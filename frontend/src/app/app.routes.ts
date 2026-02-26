@@ -5,6 +5,7 @@ import { Advertisement } from './pages/advertisement/advertisement';
 import { Agency } from './pages/agency/agency';
 import { Searches } from './pages/searches/searches';
 import { CreateAdvertisement } from './pages/create-advertisement/create-advertisement';
+import { Account } from './pages/account/account';
 export const routes: Routes = [    
     {
         path: '',
@@ -35,6 +36,11 @@ export const routes: Routes = [
         path: 'properties/create',
         component: CreateAdvertisement,
         title: 'DietiEstate2425 - Create Advertisement'
+    },
+    {
+        path: 'account',
+        component: Account,
+        title: 'DietiEstate2425 - Account'
     }
 
 ];

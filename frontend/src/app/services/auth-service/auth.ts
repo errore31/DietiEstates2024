@@ -88,8 +88,4 @@ export class AuthService {
   }
 }
 
-  //fare funzione logout
-
-  //fare funzione che recupera la sessione
-
 
