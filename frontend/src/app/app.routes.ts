@@ -6,7 +6,10 @@ import { Agency } from './pages/agency/agency';
 import { Searches } from './pages/searches/searches';
 import { CreateAdvertisement } from './pages/create-advertisement/create-advertisement';
 import { Account } from './pages/account/account';
-import { Register } from './pages/register/register'; 
+import { Register } from './pages/register/register';
+import { authorizationAgencyGuard } from './guard/authorizationAgency-guard';
+import { authorizationGuard } from './guard/authorization-guard';
+
 export const routes: Routes = [    
     {
         path: '',
@@ -36,17 +39,19 @@ export const routes: Routes = [
     {
         path: 'searches',
         component: Searches,
-        title: 'DietiEstate2425 - Searches'
+        title: 'DietiEstate2425 - Searches',
     },
     {
         path: 'properties/create',
         component: CreateAdvertisement,
-        title: 'DietiEstate2425 - Create Advertisement'
+        title: 'DietiEstate2425 - Create Advertisement',
+        canActivate: [authorizationGuard, authorizationAgencyGuard],
     },
     {
         path: 'account',
         component: Account,
-        title: 'DietiEstate2425 - Account'
+        title: 'DietiEstate2425 - Account',
+        canActivate: [authorizationGuard],
     }
 
 ];
