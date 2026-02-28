@@ -3,11 +3,12 @@ import { userController } from '../controllers/usersController.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 import { enforceAuthentication, ensureIsAgencyAdmin } from '../middleware/authorization.js';
 import { validationUpdateUser } from '../middleware/validation/validationUsers.js';
+import { validationSignup } from '../middleware/validation/validationAuth.js';
 
 
 export const userRouter = express.Router();
 
-userRouter.post('/createAgent', enforceAuthentication, ensureIsAgencyAdmin, async (req, res, next) => {
+userRouter.post('/createAgent', enforceAuthentication, ensureIsAgencyAdmin, validationSignup, errorValidation, async (req, res, next) => {
 
     try{
         const user = await userController.createUser(req, res);
@@ -38,9 +39,21 @@ userRouter.delete('/delete/:id', enforceAuthentication, ensureIsAgencyAdmin, asy
 
 });
 
+userRouter.put('/updateUser/:id', enforceAuthentication, validationUpdateUser, errorValidation, async (req, res, next) => {
 
+    try {
+        const idUser = req.params.id;
+        const user = await userController.updateUser(idUser, req);
+        res.status(200).json({
+            message: "Utente aggiornato con successo!",
+            user: user 
+        });
+    } catch (error) {
+        next(error);
+    }
+});
 
-userRouter.put('/update/:id', enforceAuthentication, ensureIsAgencyAdmin, validationUpdateUser, errorValidation, async (req, res, next) => {
+userRouter.put('/updateAgent/:id', enforceAuthentication, ensureIsAgencyAdmin, validationUpdateUser, errorValidation, async (req, res, next) => {
 
     try {
         const idUser = req.params.id;

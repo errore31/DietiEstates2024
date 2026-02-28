@@ -172,7 +172,15 @@ export class Agency implements OnInit {
           console.log('Agente aggiunto con successo');
         },
         error: (err) => {
-          console.log('Status Errore:', err.status);
+          
+          if (err.status === 400 && err.error?.errors) {
+            this.toastr.error(err.error.errors[0].msg, 'Errore di validazione');
+          } else if (err.error && err.error.message) {
+            this.toastr.error(err.error.message, 'Errore');
+          } else {
+            this.toastr.error('Errore durante la creazione dell\'agente.', 'Errore');
+          }
+
         }
       });
     }
@@ -213,7 +221,7 @@ export class Agency implements OnInit {
 
   saveMember() {
     if (this.isEditing && this.currentEditId) {
-      this.userService.updateUser(this.currentEditId, this.newAgent).subscribe({
+      this.userService.updateAgent(this.currentEditId, this.newAgent).subscribe({
         next: (response: any) => {
           const updatedUser = response.user;
           if (this.agency?.Users) {

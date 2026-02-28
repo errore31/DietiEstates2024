@@ -1,11 +1,64 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router'; 
+import { ToastrService } from 'ngx-toastr'; 
+import { Footer } from '../../shared/footer/footer';
+import { FormsModule } from '@angular/forms';
+import { UserService } from '../../services/user/user'; 
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [Footer, FormsModule, CommonModule, RouterModule],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
+  styleUrl: './register.scss', 
 })
 export class Register {
+  
+  // Oggetto per raccogliere i dati del form
+  registerData: any = {
+    name: '',
+    surname: '',
+    username: '',
+    email: '',
+    password: ''
+  };
 
+  constructor(
+    private userService: UserService, 
+    private router: Router, 
+    private toastr: ToastrService 
+  ) { }
+
+  onRegister() {
+    // Validazione base nel frontend
+    if (!this.registerData.name || !this.registerData.surname || !this.registerData.username || !this.registerData.email || !this.registerData.password) {
+      this.toastr.warning('Per favore, compila tutti i campi.', 'Attenzione');
+      return;
+    }
+
+    // Chiamata al backend per creare l'utente
+    this.userService.createUser(this.registerData).subscribe({
+      next: () => {
+        this.toastr.success('Effettua il login.', 'Registrazione riuscita');
+        this.router.navigate(['/auth']); 
+      },
+      error: (error) => {
+        console.error('Errore registrazione:', error);
+        
+        // Gestione errori di validazione del backend
+         if(error.status === 400 && error.error.message == 'Errore nella validazione degli input') {
+          this.toastr.error('Errore nella validazione degli input', 'Errore di aggiornamento');
+        }
+        else if(error.status === 409) {
+          this.toastr.error('Username o email già utilizzati', 'Errore di registrazione');
+        } else {
+          this.toastr.error('Si è verificato un errore. Riprova più tardi.', 'Errore di sistema');
+        }
+      }
+    });
+  }
+
+  loginWithGoogle() {
+    window.location.href = 'http://localhost:3000/auth/google';
+  }
 }

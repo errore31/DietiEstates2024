@@ -27,7 +27,13 @@ export class UserService {
   }
 
   updateUser(userId: number, userData: User){
-    return this.http.put<User>(`${this.baseApiUrl}/users/update/${userId}`, userData);
+    return this.http.put<User>(`${this.baseApiUrl}/users/updateUser/${userId}`, userData);
   }
+
+  updateAgent(userId: number, userData: User){
+    return this.http.put<User>(`${this.baseApiUrl}/users/updateAgent/${userId}`, userData);
+  }
+
+  
     
 }

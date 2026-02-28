@@ -119,10 +119,10 @@
         <ul class="agent-list">
             <li class="agent-item" *ngFor="let member of agency?.Users">
                 <div class="agent-info">
-                    <div class="agent-name">{{ member.name }} {{ member.surname }}</div>
-                    <div class="agent-role">{{ member.role }}</div>
+                    <div class="agent-name">{{ member.name }} {{ member.surname }} <span *ngIf="member.id == (currentUser$ | async)?.id">(TU)</span></div> 
+                    <div class="agent-role">{{ member.role }}</div> 
                 </div>
-                <div class="agent-actions" *ngIf="isAgencyAdmin">
+                <div class="agent-actions" *ngIf="isAgencyAdmin && member.id !== (currentUser$ | async)?.id">
                     <button class="text-btn" (click)="editMember(member)">Modifica</button>
                     <button class="text-btn danger" (click)="deleteMember(member.id!)">Elimina</button>
                 </div>

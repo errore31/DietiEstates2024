@@ -6,6 +6,7 @@ import { Agency } from './pages/agency/agency';
 import { Searches } from './pages/searches/searches';
 import { CreateAdvertisement } from './pages/create-advertisement/create-advertisement';
 import { Account } from './pages/account/account';
+import { Register } from './pages/register/register'; 
 export const routes: Routes = [    
     {
         path: '',
@@ -16,6 +17,11 @@ export const routes: Routes = [
         path: 'auth',
         component: Login,
         title: 'DietiEstate2425 - Login'
+    },
+    {
+         path: 'register',
+        component: Register,
+        title: 'DietiEstate2425 - Register'
     },
     {
         path: 'advertisement/:id',
