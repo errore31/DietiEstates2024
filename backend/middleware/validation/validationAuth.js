@@ -10,7 +10,7 @@ export const validationSignup = [
     body("surname").trim().notEmpty().withMessage("Il cognome è obbligatorio.").escape(),
     body("email").trim().notEmpty().withMessage("L'email è obbligatoria.").isEmail().withMessage("Inserisci una email valida.").normalizeEmail(),
     body("password").notEmpty().withMessage("La password è obbligatoria.").isStrongPassword().withMessage("La password deve contenere minimo 8 caratteri, 1 maiuscola, 1 minuscola, 1 numero e 1 simbolo."),
-    body("role").trim().notEmpty().withMessage("Il ruolo è obbligatorio.").isIn(['admin', 'agencyAdmin', 'agent', 'user']).withMessage("Ruolo non valido.")
+    body("role").trim().optional().notEmpty().withMessage("Il ruolo è obbligatorio.").isIn(['admin', 'agencyAdmin', 'agent', 'user']).withMessage("Ruolo non valido.")
 ]
 
 export const validationLogin =[

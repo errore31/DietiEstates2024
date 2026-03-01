@@ -75,9 +75,23 @@ export class userController {
             }
         });
 
-        // Se nella richiesta è presente una nuova password, dobbiamo criptarla
-        if (req.body.password) {
-            user.password = await bcrypt.hash(req.body.password, 10);
+        // Se nella richiesta è presente una nuova password, dobbiamo compararla con quella vecchia prima di aggiornarla
+        if (req.body.newPassword) {
+            
+            if (!req.body.oldPassword) {
+                const error = new Error('Devi inserire la vecchia password per poterla cambiare');
+                error.status = 400;
+                throw error;
+            }
+
+            const isPasswordValid = await bcrypt.compare(req.body.oldPassword, user.password);
+            if (!isPasswordValid) {
+                const error = new Error('La vecchia password non è corretta');
+                error.status = 400;
+                throw error;
+            }
+
+            user.password = await bcrypt.hash(req.body.newPassword, 10);
         }
 
         await user.save();

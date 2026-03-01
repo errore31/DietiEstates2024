@@ -20,7 +20,7 @@ export class AuthService {
    * non appena chiamiamo .next(true) dopo il login, senza ricaricare la pagina.
    */
   private authState = new BehaviorSubject<boolean>(false);
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  public currentUserSubject = new BehaviorSubject<User | null>(null);
 
   // Esposizione degli Observable: i componenti usano questi per "ascoltare" i cambiamenti
   // Il simbolo $ è una convenzione per indicare uno stream di dati (RxJS)
@@ -87,9 +87,5 @@ export class AuthService {
     this.toastr.success(`Logout avvenuto con successo, arrivederci!`, 'Logout avvenuto');
   }
 }
-
-  //fare funzione logout
-
-  //fare funzione che recupera la sessione
 
 
