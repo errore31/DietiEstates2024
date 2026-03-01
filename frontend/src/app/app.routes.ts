@@ -27,7 +27,7 @@ export const routes: Routes = [
         title: 'DietiEstate2425 - Agency'
     },
     {
-        path: 'searches',
+        path: 'searches/:text',
         component: Searches,
         title: 'DietiEstate2425 - Searches'
     },

@@ -16,7 +16,7 @@ export const proprietiesRouter = express.Router();
  * @param {http.ServerResponse} res 
  **/
 
-proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, uploadImage, validationCreateProperties, errorValidation,  async (req, res, next) => {
+proprietiesRouter.post('/create', enforceAuthentication, ensureIsAgent, uploadImage, validationCreateProperties, errorValidation, async (req, res, next) => {
 
     try {
         const propriety = await propertiesController.createPropertyWithImage(req);
@@ -38,7 +38,7 @@ proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsPr
 
     try {
         const idProperty = req.params.id;
-        await propertiesController.deleteProperty(idProperty); 
+        await propertiesController.deleteProperty(idProperty);
 
         res.status(200).json({
             message: "Proprietà eliminata con successo!",
@@ -59,7 +59,7 @@ proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsPrope
         const updatedProperty = await propertiesController.updateProperty(idProperty, req);
         res.status(200).json({
             message: "Proprietà aggiornata con successo!",
-            data: updatedProperty 
+            data: updatedProperty
         });
     } catch (error) {
         next(error);
@@ -67,48 +67,68 @@ proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsPrope
 
 });
 
-proprietiesRouter.delete('/images/delete/:id', async (req, res, next) =>{
-    try{
+proprietiesRouter.delete('/images/delete/:id', async (req, res, next) => {
+    try {
         const imageId = req.params.id;
         await imagesController.deleteImage(imageId);
-         res.status(200).json({
+        res.status(200).json({
             message: "Immagine eliminata con successo!",
         });
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 });
 
-proprietiesRouter.put('/images/update/:id', async(req, res, next) =>{
-     try{
+proprietiesRouter.put('/images/update/:id', async (req, res, next) => {
+    try {
         const imageId = req.params.id;
         const updateImage = await imagesController.updateImage(req, imageId);
-         res.status(200).json({
+        res.status(200).json({
             message: "Immagine modificata con successo!",
             data: updateImage
         });
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 
 });
 
-proprietiesRouter.get('/all', async(req, res, next) =>{
-     try{
+proprietiesRouter.get('/all', async (req, res, next) => {
+    try {
         const properties = await propertiesController.getAllProperty(req);
         res.send(properties);
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 });
 
-proprietiesRouter.get('/:id', async(req, res, next) =>{
-     try{
+
+proprietiesRouter.get('/search/:text', async (req, res, next) => {
+    try {
+        const propertyText = req.params.text;
+        const properties = await propertiesController.getSearchedProperties(propertyText, req);
+        res.send(properties);
+    } catch (error) {
+        next(error);
+    }
+});
+
+proprietiesRouter.get('/advanced-search', async (req, res, next) => {
+    try {
+        const properties = await propertiesController.getAdvancedSearchedProperties(req);
+        res.send(properties);
+    } catch (error) {
+        next(error);
+    }
+});
+
+proprietiesRouter.get('/:id', async (req, res, next) => {
+    try {
         const propertyId = req.params.id;
         const property = await propertiesController.getPropertyById(propertyId, req);
         console.log("Proprietà trovata: ", property);
         res.send(property);
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import { searchesController } from '../controllers/searchesController.js';
 import { enforceAuthentication, ensureUserOwnsSearch } from '../middleware/authorization.js';
+import { geoapifySuggestion } from '../services/GeoapifyAPI.js';
 
 export const searchesRouter = express.Router();
 
@@ -46,3 +47,14 @@ searchesRouter.get('/history',enforceAuthentication, async (req, res, next) => {
     } 
 
 });
+
+
+searchesRouter.get('/searchSuggestion/:text', async (req, res) => {
+    try{
+        const suggestions = await geoapifySuggestion(req.params.text);
+        res.send(suggestions);
+    }catch(error){
+        next(error);
+    }
+});
+

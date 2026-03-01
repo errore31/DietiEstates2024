@@ -56,7 +56,7 @@ export default database;
 export async function startConnection(){
   try {
     await database.authenticate();
-    await database.sync({  alter: true });
+    await database.sync({ alter: true });
     console.log('Connection has been established successfully.');
   } catch (error) {
     console.error('Unable to connect to the database:', error);

@@ -1,1 +1,5 @@
-<input type="text" (input)="suggestion($event)" placeholder="Cerca..."/>
+<form (ngSubmit)="goToSearch()">
+<input list="options" type="text" (input)="suggestion($event)"  placeholder="Cerca..."/>
+<datalist id="options" [innerHTML]="locationOptions">
+</datalist>
+</form>
