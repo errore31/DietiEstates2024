@@ -102,29 +102,6 @@ proprietiesRouter.get('/all', async (req, res, next) => {
     }
 });
 
-<<<<<<< Updated upstream
-
-proprietiesRouter.get('/search/:text', async (req, res, next) => {
-    try {
-        const propertyText = req.params.text;
-        const properties = await propertiesController.getSearchedProperties(propertyText, req);
-        res.send(properties);
-    } catch (error) {
-        next(error);
-    }
-});
-
-proprietiesRouter.get('/advanced-search', async (req, res, next) => {
-    try {
-        const properties = await propertiesController.getAdvancedSearchedProperties(req);
-        res.send(properties);
-    } catch (error) {
-        next(error);
-    }
-});
-
-=======
->>>>>>> Stashed changes
 proprietiesRouter.get('/:id', async (req, res, next) => {
     try {
         const propertyId = req.params.id;
