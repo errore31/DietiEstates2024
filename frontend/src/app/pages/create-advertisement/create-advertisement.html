@@ -3,11 +3,11 @@
 <div class="page-container">
     
     <div class="page-header">
-        <h1 class="page-title">Nuovo Annuncio</h1>
-        <p class="page-subtitle">Compila i dettagli per pubblicare un nuovo immobile.</p>
+        <h1 class="page-title">{{ isEditMode ? 'Modifica Annuncio' : 'Nuovo Annuncio' }}</h1>
+        <p class="page-subtitle">{{ isEditMode ? 'Modifica i dettagli del tuo immobile.' : 'Compila i dettagli per pubblicare un nuovo immobile.' }}</p>
     </div>
 
-    <form class="property-form" (ngSubmit)="createProperty()">
+    <form class="property-form" (ngSubmit)="onSubmit()">
         
         <section class="form-card">
             <h3 class="card-title"> Informazioni Principali</h3>
@@ -131,7 +131,7 @@
 
         <div class="form-actions">
             <button type="button" class="btn-cancel" (click)="location.back()">Annulla</button>
-            <button type="submit" class="btn-submit">Pubblica Annuncio</button>
+            <button type="submit" class="btn-submit">{{ isEditMode ? 'Salva Modifiche' : 'Pubblica Annuncio' }}</button>
         </div>
 
     </form>

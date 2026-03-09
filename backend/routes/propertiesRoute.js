@@ -52,11 +52,11 @@ proprietiesRouter.delete('/delete/:id', enforceAuthentication, ensureAgentOwnsPr
 
 
 
-proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsProperty, validationUpdateProperties, errorValidation, async (req, res, next) => {
+proprietiesRouter.put('/update/:id', enforceAuthentication, ensureAgentOwnsProperty, uploadImage, validationUpdateProperties, errorValidation, async (req, res, next) => {
 
     try {
         const idProperty = req.params.id;
-        const updatedProperty = await propertiesController.updateProperty(idProperty, req);
+        const updatedProperty = await propertiesController.updatePropertyFull(idProperty, req);
         res.status(200).json({
             message: "Proprietà aggiornata con successo!",
             data: updatedProperty
@@ -102,6 +102,7 @@ proprietiesRouter.get('/all', async (req, res, next) => {
     }
 });
 
+<<<<<<< Updated upstream
 
 proprietiesRouter.get('/search/:text', async (req, res, next) => {
     try {
@@ -122,6 +123,8 @@ proprietiesRouter.get('/advanced-search', async (req, res, next) => {
     }
 });
 
+=======
+>>>>>>> Stashed changes
 proprietiesRouter.get('/:id', async (req, res, next) => {
     try {
         const propertyId = req.params.id;

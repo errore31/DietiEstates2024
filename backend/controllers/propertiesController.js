@@ -113,6 +113,55 @@ export class propertiesController {
         return property;
     }
 
+    static async updatePropertyFull(idPropriety, req) {
+        const property = await Properties.findByPk(idPropriety);
+        if (!property) {
+            const error = new Error('Immobile non trovato');
+            error.status = 404;
+            throw error;
+        }
+
+        const allowedUpdates = ['title', 'description', 'price', 'address', 'type', 'category', 'latitude', 'longitude'];
+        allowedUpdates.forEach((field) => {
+            if (req.body[field] !== undefined) {
+                property[field] = req.body[field];
+            }
+        });
+        await property.save();
+
+        let featuresData = req.body.PropertiesFeature;
+        if (featuresData) {
+            if (typeof featuresData === 'string') {
+                featuresData = JSON.parse(featuresData);
+            }
+            const propertyFeatures = await PropertiesFeatures.findByPk(idPropriety);
+            if (propertyFeatures) {
+                const allowedFeatures = ['roomCount', 'area', 'hasElevator', 'floor', 'energyClass'];
+                allowedFeatures.forEach((field) => {
+                    if (featuresData[field] !== undefined) {
+                        propertyFeatures[field] = featuresData[field];
+                    }
+                });
+                await propertyFeatures.save();
+            } else {
+                await PropertiesFeatures.create({
+                    id: idPropriety,
+                    roomCount: featuresData.roomCount,
+                    area: featuresData.area,
+                    hasElevator: featuresData.hasElevator,
+                    floor: featuresData.floor,
+                    energyClass: featuresData.energyClass
+                });
+            }
+        }
+
+        if (req.files && req.files.length > 0) {
+            await imagesController.createImages(idPropriety, req.files);
+        }
+
+        return property;
+    }
+
     static async getPropertyById(propertyId, req, res) {
         return Properties.findOne({
             where: { id: propertyId },

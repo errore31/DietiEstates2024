@@ -6,7 +6,7 @@
             <h1 class="agency-name">{{ agency?.name }}</h1>
             <button class="btn-text-mod" *ngIf="isAgencyAdmin" (click)="editAgencyInfo('name')">Modifica</button>
         </ng-container>
-        
+
         <ng-container *ngIf="editingField === 'name'">
             <input type="text" [(ngModel)]="agencyInfo.name" class="input-edit-hero">
             <button class="btn-save-mini" (click)="saveAgencyField()">Salva</button>
@@ -76,7 +76,7 @@
 
             <div class="card-wrapper" *ngFor="let prop of filteredProperties">
                 <app-card [properties]="prop"></app-card>
-                <div class="action-admin" *ngIf="isAgencyAdmin">
+                <div class="action-admin" *ngIf="isAgencyAdmin || isAgent">
                     <button class="btn-mod" (click)="editProperty(prop.id)">Modifica</button>
                     <button class="btn-del" (click)="deleteProperty(prop.id)">Elimina</button>
                 </div>
@@ -99,9 +99,9 @@
                 <input type="text" [(ngModel)]="newAgent.surname" placeholder="Cognome">
                 <input type="text" [(ngModel)]="newAgent.username" placeholder="Username">
                 <input type="email" [(ngModel)]="newAgent.email" placeholder="Email">
-                
-                <input type="password" [(ngModel)]="newAgent.password" 
-                       [placeholder]="isEditing ? 'Nuova password' : 'Password'">
+
+                <input type="password" [(ngModel)]="newAgent.password"
+                    [placeholder]="isEditing ? 'Nuova password' : 'Password'">
 
                 <select [(ngModel)]="newAgent.role">
                     <option value="agent">Agente Immobiliare</option>
@@ -119,8 +119,9 @@
         <ul class="agent-list">
             <li class="agent-item" *ngFor="let member of agency?.Users">
                 <div class="agent-info">
-                    <div class="agent-name">{{ member.name }} {{ member.surname }} <span *ngIf="member.id == (currentUser$ | async)?.id">(TU)</span></div> 
-                    <div class="agent-role">{{ member.role }}</div> 
+                    <div class="agent-name">{{ member.name }} {{ member.surname }} <span
+                            *ngIf="member.id == (currentUser$ | async)?.id">(TU)</span></div>
+                    <div class="agent-role">{{ member.role }}</div>
                 </div>
                 <div class="agent-actions" *ngIf="isAgencyAdmin && member.id !== (currentUser$ | async)?.id">
                     <button class="text-btn" (click)="editMember(member)">Modifica</button>

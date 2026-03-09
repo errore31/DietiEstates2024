@@ -10,7 +10,7 @@ import { Register } from './pages/register/register';
 import { authorizationAgencyGuard } from './guard/authorizationAgency-guard';
 import { authorizationGuard } from './guard/authorization-guard';
 
-export const routes: Routes = [    
+export const routes: Routes = [
     {
         path: '',
         component: Home,
@@ -22,7 +22,7 @@ export const routes: Routes = [
         title: 'DietiEstate2425 - Login'
     },
     {
-         path: 'register',
+        path: 'register',
         component: Register,
         title: 'DietiEstate2425 - Register'
     },
@@ -45,6 +45,12 @@ export const routes: Routes = [
         path: 'properties/create',
         component: CreateAdvertisement,
         title: 'DietiEstate2425 - Create Advertisement',
+        canActivate: [authorizationGuard, authorizationAgencyGuard],
+    },
+    {
+        path: 'properties/edit/:id',
+        component: CreateAdvertisement,
+        title: 'DietiEstate2425 - Edit Advertisement',
         canActivate: [authorizationGuard, authorizationAgencyGuard],
     },
     {

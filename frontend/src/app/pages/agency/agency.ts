@@ -48,6 +48,7 @@ export class Agency implements OnInit {
   showAddMemberForm = false;
   editingField: string | null = null;
   isAgencyAdmin = false;
+  isAgent = false;
 
   //dati per modfica aggiunta
   newAgent: User = {
@@ -70,7 +71,7 @@ export class Agency implements OnInit {
     Users: undefined,
   }
 
-  
+
   ngOnInit(): void {
     const idParam = this.activateRoute.snapshot.paramMap.get('id'); //restituisce stringa
 
@@ -78,14 +79,14 @@ export class Agency implements OnInit {
       const agencyId = +idParam; //conversione a number
 
       this.agencyService.getAgencyById(agencyId).subscribe({
-      next: (data) => {
-        this.agency = data;
-        //recuperiamo utente solo ora per no navere probelmi di asicronità
-        this.authService.currentUser$.subscribe(user => {
-          this.checkAdminPermissions(user);
-        });
-      },
-      error: (err) => console.error('Errore Agency:', err)
+        next: (data) => {
+          this.agency = data;
+          //recuperiamo utente solo ora per no navere probelmi di asicronità
+          this.authService.currentUser$.subscribe(user => {
+            this.checkAdminPermissions(user);
+          });
+        },
+        error: (err) => console.error('Errore Agency:', err)
       });
 
       // prendo gli immobili 
@@ -108,23 +109,30 @@ export class Agency implements OnInit {
 
   // Getter che restituisce solo gli immobili della categoria selezionata
   get filteredProperties() {
-    return this.allProperties.filter(prop => 
-        prop.category?.toLowerCase() === this.selectedCategory
+    return this.allProperties.filter(prop =>
+      prop.category?.toLowerCase() === this.selectedCategory
     );
   }
 
   //verifca se è un agency admin di quella azienda
   private checkAdminPermissions(user: any) {
-  if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
-    this.isAgencyAdmin = true;
-  } else {
-    this.isAgencyAdmin = false;
+    if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
+      this.isAgencyAdmin = true;
+    } else {
+      this.isAgencyAdmin = false;
+    }
+
+    if (user && user.role === 'agent' && user.agencyId === this.agency?.id) {
+      this.isAgent = true;
+    } else {
+      this.isAgent = false;
+    }
+
   }
-}
 
   // --- Funzioni di Gestione ---
   createProperty() {
-     this.router.navigate(['/properties/create']);
+    this.router.navigate(['/properties/create']);
   }
 
   editProperty(id?: number) {
@@ -172,7 +180,7 @@ export class Agency implements OnInit {
           console.log('Agente aggiunto con successo');
         },
         error: (err) => {
-          
+
           if (err.status === 400 && err.error?.errors) {
             this.toastr.error(err.error.errors[0].msg, 'Errore di validazione');
           } else if (err.error && err.error.message) {
