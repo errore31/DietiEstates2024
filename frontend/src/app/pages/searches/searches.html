@@ -75,6 +75,10 @@
 
     <!-- Contenuto Risultati -->
     <main>
+        <div class="map-wrapper" *ngIf="searchText || properties.length > 0">
+            <app-map class="search-map" [markers]="properties" [cityBoundary]="searchText"></app-map>
+        </div>
+
         <div class="results-header">
             <h2 *ngIf="searchText">Risultati per "{{searchText}}" ({{properties.length}} {{properties.length === 1 ?
                 'immobile' : 'immobili'}})</h2>

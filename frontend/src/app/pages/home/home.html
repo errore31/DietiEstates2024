@@ -4,11 +4,13 @@
         <app-searchbar></app-searchbar>
     </div>
 </div>
+
+<app-map class="home-map" [isEditable]="true" (locationSelected)="onLocationSelected($event)"></app-map>
+
 <div id="advContainer">
     <h1>Le offerte più recenti</h1>
     <div class="cardContainer">
-        <app-card *ngFor="let prop of properties | slice:0:6" 
-            [properties]="prop">
+        <app-card *ngFor="let prop of properties | slice:0:6" [properties]="prop">
         </app-card>
     </div>
 </div>

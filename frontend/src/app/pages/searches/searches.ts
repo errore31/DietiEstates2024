@@ -8,10 +8,11 @@ import { Searchbar } from '../../shared/searchbar/searchbar';
 import { PropertyService } from '../../services/property/property';
 import { Property } from '../../models/property';
 import { Card } from '../../shared/card/card';
+import { Map } from '../../shared/map/map';
 
 @Component({
   selector: 'app-searches',
-  imports: [CommonModule, Searchbar, Card, FormsModule],
+  imports: [CommonModule, Searchbar, Card, FormsModule, Map],
   templateUrl: './searches.html',
   styleUrl: './searches.scss',
 })

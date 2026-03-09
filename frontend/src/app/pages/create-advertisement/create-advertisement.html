@@ -1,31 +1,35 @@
 <app-navbar></app-navbar>
 
 <div class="page-container">
-    
+
     <div class="page-header">
         <h1 class="page-title">{{ isEditMode ? 'Modifica Annuncio' : 'Nuovo Annuncio' }}</h1>
-        <p class="page-subtitle">{{ isEditMode ? 'Modifica i dettagli del tuo immobile.' : 'Compila i dettagli per pubblicare un nuovo immobile.' }}</p>
+        <p class="page-subtitle">{{ isEditMode ? 'Modifica i dettagli del tuo immobile.' : 'Compila i dettagli per
+            pubblicare un nuovo immobile.' }}</p>
     </div>
 
     <form class="property-form" (ngSubmit)="onSubmit()">
-        
+
         <section class="form-card">
             <h3 class="card-title"> Informazioni Principali</h3>
-            
+
             <div class="form-grid col-2">
                 <div class="form-group full-width">
                     <label>Titolo dell'Annuncio</label>
-                    <input type="text" name="title" [(ngModel)]="newProperty.title" placeholder="Es: Trilocale in vendita">
+                    <input type="text" name="title" [(ngModel)]="newProperty.title"
+                        placeholder="Es: Trilocale in vendita">
                 </div>
 
                 <div class="form-group">
                     <label>Prezzo (€)</label>
-                    <input type="number" name="price" [(ngModel)]="newProperty.price" step="10000" placeholder="Es: 250000">
+                    <input type="number" name="price" [(ngModel)]="newProperty.price" step="10000"
+                        placeholder="Es: 250000">
                 </div>
 
                 <div class="form-group">
                     <label>Superficie (mq)</label>
-                    <input type="number" name="area" [(ngModel)]="newProperty.PropertiesFeature.area" placeholder="Es: 120">
+                    <input type="number" name="area" [(ngModel)]="newProperty.PropertiesFeature.area"
+                        placeholder="Es: 120">
                 </div>
 
                 <div class="form-group">
@@ -50,7 +54,7 @@
 
         <section class="form-card">
             <h3 class="card-title">Posizione</h3>
-            
+
             <div class="form-grid col-2">
                 <div class="form-group">
                     <label>Città</label>
@@ -60,16 +64,16 @@
                     <label>Indirizzo</label>
                     <input type="text" name="newAddress" [(ngModel)]="newAddress" placeholder="Via Roma, 12">
                 </div>
-                
-                <div class="map-placeholder full-width">
-                    <span>Mappa non disponibile in anteprima</span>
-                </div>
+
+
+                <app-map [isEditable]="true" (locationSelected)="onLocationSelected($event)"></app-map>
+
             </div>
         </section>
 
         <section class="form-card">
             <h3 class="card-title">Caratteristiche</h3>
-            
+
             <div class="form-grid col-4">
                 <div class="form-group">
                     <label>Locali</label>
@@ -82,7 +86,10 @@
                 <div class="form-group">
                     <label>Classe En.</label>
                     <select name="energyClass" [(ngModel)]="newProperty.PropertiesFeature.energyClass">
-                        <option>A4</option><option>A3</option><option>A2</option><option>A1</option>
+                        <option>A4</option>
+                        <option>A3</option>
+                        <option>A2</option>
+                        <option>A1</option>
                         <option>B</option>
                         <option>C</option>
                         <option>D</option>
@@ -97,15 +104,16 @@
 
             <label class="section-label">Servizi Aggiuntivi</label>
             <div class="features-wrapper">
-                <label class="checkbox-pill"><input type="checkbox" name="hasElevator" [(ngModel)]="newProperty.PropertiesFeature.hasElevator"> Ascensore</label>
+                <label class="checkbox-pill"><input type="checkbox" name="hasElevator"
+                        [(ngModel)]="newProperty.PropertiesFeature.hasElevator"> Ascensore</label>
             </div>
         </section>
 
         <section class="form-card">
             <h3 class="card-title">📸 Foto</h3>
-            
-            <input type="file" multiple accept="image/jpeg, image/png, image/webp" 
-                #fileInput (change)="onFileSelected($event)" style="display: none;">
+
+            <input type="file" multiple accept="image/jpeg, image/png, image/webp" #fileInput
+                (change)="onFileSelected($event)" style="display: none;">
 
             <div class="upload-area" (click)="fileInput.click()">
                 <p>Trascina qui le foto o <span>clicca per caricare</span></p>
@@ -114,7 +122,7 @@
             <div class="selected-images" *ngIf="imagePreviews.length > 0">
                 <div class="image-container" *ngFor="let url of imagePreviews; let i = index">
                     <img [src]="url" alt="Preview immobile" class="img-preview">
-                    
+
                     <button type="button" class="btn-remove-overlay" (click)="removeImage(i)">
                         &times;
                     </button>
@@ -125,7 +133,8 @@
         <section class="form-card">
             <h3 class="card-title">Descrizione</h3>
             <div class="form-group">
-                <textarea rows="5" name="description" [(ngModel)]="newProperty.description" placeholder="Descrivi i punti di forza dell'immobile..."></textarea>
+                <textarea rows="5" name="description" [(ngModel)]="newProperty.description"
+                    placeholder="Descrivi i punti di forza dell'immobile..."></textarea>
             </div>
         </section>
 

@@ -9,10 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { PropertyService } from '../../services/property/property';
 import { AuthService } from '../../services/auth-service/auth';
+import { Map } from '../../shared/map/map';
 
 @Component({
   selector: 'app-create-advertisement',
-  imports: [Navbar, Footer, CommonModule, FormsModule],
+  imports: [Navbar, Footer, Map, CommonModule, FormsModule],
   templateUrl: './create-advertisement.html',
   styleUrl: './create-advertisement.scss',
 })
@@ -73,6 +74,12 @@ export class CreateAdvertisement implements OnInit {
     this.selectedFiles.splice(index, 1);
     this.imagePreviews.splice(index, 1);
   }
+
+  onLocationSelected(event: { lat: number, lng: number }) {
+    this.newProperty.latitude = event.lat;
+    this.newProperty.longitude = event.lng;
+  }
+
 
   //Recupero agente e eventuale immobile da modificare
   ngOnInit(): void {

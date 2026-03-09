@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProfileWidget } from '../../shared/profile-widget/profile-widget';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,4 +10,9 @@ import { ProfileWidget } from '../../shared/profile-widget/profile-widget';
 })
 export class Navbar {
 
+  constructor(private router: Router) { }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
+  }
 }

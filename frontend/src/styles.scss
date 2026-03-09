@@ -1,7 +1,8 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
 @import 'ngx-toastr/toastr'; //messaggi toastr (messaggi flash)
 @import "@angular/material/prebuilt-themes/indigo-pink.css"; //menù angular material
+@import "leaflet/dist/leaflet.css";
+
 // Variabili globali CSS
 :root {
   --site-primary: #182F53;
@@ -19,21 +20,31 @@ body {
 
 }
 
-a, p, h1, h2, h3, h4, h5, h6, li, span, div, input {
-    font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
-    
-    color: var(--site-cream);
-    
-    margin: 0;
-    padding: 0;
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+span,
+div,
+input {
+  font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
+
+  color: var(--site-cream);
+
+  margin: 0;
+  padding: 0;
 }
 
 .cardContainer {
-  max-width:1200px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 30px;
 }
-
