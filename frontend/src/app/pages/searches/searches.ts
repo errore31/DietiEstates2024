@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Searchbar } from '../../shared/searchbar/searchbar';
 import { PropertyService } from '../../services/property/property';
+import { SearchesService } from '../../services/searches/searches';
+import { AuthService } from '../../services/auth-service/auth';
 import { Property } from '../../models/property';
 import { Card } from '../../shared/card/card';
 import { Map } from '../../shared/map/map';
@@ -17,7 +19,15 @@ import { Map } from '../../shared/map/map';
   styleUrl: './searches.scss',
 })
 export class Searches implements OnInit {
-  constructor(private activateRoute: ActivatedRoute, private propertyService: PropertyService) { }
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private propertyService: PropertyService,
+    private searchesService: SearchesService,
+    private authService: AuthService
+  ) { }
+
+  @ViewChild(Searchbar) searchbarComponent!: Searchbar;
+
   searchText: string = '';
   properties: Property[] = [];
 
@@ -65,6 +75,7 @@ export class Searches implements OnInit {
       next: (data) => {
         this.properties = data;
         console.log('Proprietà trovate per "' + text + '":', this.properties);
+        this.saveSearch(text);
       },
       error: (err) => {
         console.error('Errore nel caricamento:', err);
@@ -74,6 +85,10 @@ export class Searches implements OnInit {
   }
 
   applyFilters(): void {
+    if (this.searchbarComponent) {
+      this.searchText = this.searchbarComponent.inputText || '';
+    }
+
     const filters: any = {
       text: this.searchText,
       type: this.searchParams.type !== 'Tutte le tipologie' ? this.searchParams.type : null,
@@ -97,11 +112,47 @@ export class Searches implements OnInit {
       next: (data) => {
         this.properties = data;
         console.log('Risultati applicazione filtri:', this.properties);
+        this.saveSearch(this.searchText, cleanFilters);
       },
       error: (err) => {
         console.error('Errore durante i filtri:', err);
         this.properties = [];
       }
     });
+  }
+
+  saveSearch(text: string, filters?: any): void {
+    // Controlla se l'utente è autenticato. Se non lo è, non salviamo la ricerca
+    if (!this.authService.currentUserSubject.value) {
+      return;
+    }
+
+    const criteria: any = {};
+
+    // Primo parametro "area/title" a seconda del testo in input
+    if (text && text.trim() !== '') {
+      criteria['area/title'] = text.trim();
+    }
+
+    // Aggiungo i parametri secondari dalla ricerca
+    if (filters) {
+      if (filters.maxPrice) criteria['maxPrice'] = filters.maxPrice;
+      if (filters.type && filters.type !== 'Tutte le tipologie') criteria['type'] = filters.type;
+
+      // Parametri propertiesFeatures
+      if (filters.roomCount) criteria['roomCount'] = filters.roomCount;
+      if (filters.area) criteria['area'] = filters.area;
+      if (filters.floor) criteria['floor'] = filters.floor;
+      if (filters.hasElevator) criteria['hasElevator'] = filters.hasElevator;
+      if (filters.energyClass && filters.energyClass !== 'Tutte le classi') criteria['energyClass'] = filters.energyClass;
+    }
+
+    // Salva la ricerca se almeno un campo è valorizzato
+    if (Object.keys(criteria).length > 0) {
+      this.searchesService.createSearch(criteria).subscribe({
+        next: (res) => console.log('Ricerca salvata con successo:', res),
+        error: (err) => console.error('Errore durante il salvataggio della ricerca', err)
+      });
+    }
   }
 }

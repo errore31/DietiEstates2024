@@ -15,8 +15,8 @@ export class Searchbar {
   inputText = '';
   public locationOptions: SafeHtml = '';
 
-  constructor(private sanitizer: DomSanitizer, private router: Router) {}
-  
+  constructor(private sanitizer: DomSanitizer, private router: Router) { }
+
   suggestion(event: Event) {
     const valore = (event.target as HTMLInputElement).value;
     this.inputText = valore;
@@ -24,20 +24,20 @@ export class Searchbar {
     this.geoService.getAutocomplete(valore).subscribe({
       //next: (res) => {console.log(res.results)},
       next: (res) => {
-                      for(const result of res.results){
-                        //console.log(result.address_line1);
-                        options += '<option value="'+result.formatted+'">'+result.formatted+'</option>'
-                      };
-                      
-                     const rawHTML = options;
-                     this.locationOptions = this.sanitizer.bypassSecurityTrustHtml(rawHTML);
-                    },
+        for (const result of res.results) {
+          //console.log(result.address_line1);
+          options += '<option value="' + result.formatted + '">' + result.formatted + '</option>'
+        };
+
+        const rawHTML = options;
+        this.locationOptions = this.sanitizer.bypassSecurityTrustHtml(rawHTML);
+      },
       error: (err) => console.error(err)
     });;
 
   }
 
-  goToSearch(){
+  goToSearch() {
     //console.log(this.inputText)
     this.router.navigate(['/searches', this.inputText]);
   }
