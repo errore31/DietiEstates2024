@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
 
 const iconUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
@@ -24,15 +24,16 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.html',
   styleUrl: './map.scss',
 })
-export class Map implements AfterViewInit, OnChanges {
+export class Map implements AfterViewInit, OnChanges, OnDestroy {
 
+  // FIX 1: Generiamo un ID univoco casuale di default per evitare conflitti nel DOM
+  @Input() mapId: string = `map-${Math.random().toString(36).substring(2, 9)}`;
 
-  @Input() mapId: string = 'map'; // ID univoco se hai più mappe nella stessa pagina
-  @Input() center: [number, number] = [41.9028, 12.4964]; // Centro default (Roma)
+  @Input() center: [number, number] = [41.9028, 12.4964];
   @Input() zoom: number = 13;
-  @Input() isEditable: boolean = false; // Se true, permette di piazzare un marker
-  @Input() markers: any[] = []; // Per la ricerca: array di immobili con lat e lng
-  @Input() cityBoundary: string = ''; // Nome della città per mostrare i confini
+  @Input() isEditable: boolean = false;
+  @Input() markers: any[] = [];
+  @Input() cityBoundary: string = '';
 
   @Output() locationSelected = new EventEmitter<{ lat: number, lng: number }>();
 
@@ -41,11 +42,23 @@ export class Map implements AfterViewInit, OnChanges {
   private markerLayer = L.layerGroup();
   private boundaryLayer: L.GeoJSON | undefined;
 
+  // Aggiungiamo il ResizeObserver
+  private resizeObserver: ResizeObserver | undefined;
+
   ngAfterViewInit() {
     this.initMap();
   }
 
-  // Se i markers o la città cambiano, aggiorniamo la mappa
+  ngOnDestroy() {
+    // FIX 2: Pulizia accurata dell'observer e della mappa
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+    }
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (this.map) {
       if (changes['markers']) {
@@ -65,18 +78,13 @@ export class Map implements AfterViewInit, OnChanges {
 
     if (!this.cityBoundary || this.cityBoundary.trim() === '') return;
 
-    // Estraiamo solo il nome principale (es: "San Giovanni a Teduccio" da "San Giovanni a Teduccio, NA, Ita")
-    // Questo aiuta Nominatim a trovare il quartiere/comune come area (poligono) e non come punto specifico.
     const baseLocation = this.cityBoundary.split(',')[0].trim();
-
-    // Aumentiamo il limite a 15 per trovare il risultato che ha i confini (poligono) tra i vari risultati (es: quartieri)
     const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(baseLocation)}&format=json&polygon_geojson=1&limit=15&countrycodes=it`;
 
     fetch(url)
       .then(res => res.json())
       .then(data => {
         if (data && data.length > 0) {
-          // Cerchiamo il primo risultato che contenga un poligono o multipoligono
           const areaData = data.find((item: any) =>
             item.geojson && (item.geojson.type === 'Polygon' || item.geojson.type === 'MultiPolygon')
           ) || data[0];
@@ -92,11 +100,9 @@ export class Map implements AfterViewInit, OnChanges {
               }
             }).addTo(this.map);
 
-            // Adatta la visuale ai confini trovati con un po' di padding
             const bounds = this.boundaryLayer.getBounds();
             this.map.fitBounds(bounds, { padding: [30, 30] });
           } else {
-            // Se non c'è un poligono (es: risultato puntuale), centriamo solo la mappa
             this.map.setView([parseFloat(areaData.lat), parseFloat(areaData.lon)], 14);
           }
         }
@@ -113,12 +119,21 @@ export class Map implements AfterViewInit, OnChanges {
 
     this.markerLayer.addTo(this.map);
 
+    const mapElement = document.getElementById(this.mapId);
+    if (mapElement) {
+      this.resizeObserver = new ResizeObserver(() => {
+        if (this.map) {
+          this.map.invalidateSize();
+        }
+      });
+      this.resizeObserver.observe(mapElement);
+    }
+
     if (this.isEditable) {
       this.map.on('click', (e: L.LeafletMouseEvent) => {
         const { lat, lng } = e.latlng;
         this.setSingleMarker(lat, lng);
         this.locationSelected.emit({ lat, lng });
-        console.log(lat, lng);
       });
     } else {
       this.displayMarkers();
@@ -126,7 +141,6 @@ export class Map implements AfterViewInit, OnChanges {
     }
   }
 
-  // Per la creazione: gestisce un solo marker
   private setSingleMarker(lat: number, lng: number) {
     if (this.singleMarker) {
       this.singleMarker.setLatLng([lat, lng]);
@@ -135,7 +149,6 @@ export class Map implements AfterViewInit, OnChanges {
     }
   }
 
-  // Per la ricerca: visualizza molti markers
   private displayMarkers() {
     this.markerLayer.clearLayers();
     this.markers.forEach(m => {
@@ -146,5 +159,4 @@ export class Map implements AfterViewInit, OnChanges {
       }
     });
   }
-
 }

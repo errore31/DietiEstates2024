@@ -16,7 +16,7 @@ export class searchesController {
     static async deleteSearch(idSearch) {
         const search = await Searches.findByPk(idSearch);
         if (!search) {
-             throw new customError('Ricerca non trovata', 404); 
+            throw new customError('Ricerca non trovata', 404);
         }
 
         await search.destroy();
@@ -27,9 +27,9 @@ export class searchesController {
      * @param {http.IncomingMessage} req 
      * @param {http.ServerResponse} res 
      */
-    
+
     static async getSearches(req, res) {
-       const results = await Searches.findAll({
+        const results = await Searches.findAll({
             where: { userId: req.session.userId }
         });
         return res.json(results);

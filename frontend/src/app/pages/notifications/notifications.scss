@@ -1,0 +1,117 @@
+/* Utilizzo la classe contenitore richiesta .page-container e lo sfondo --site-cream */
+.page-container {
+  min-height: 100vh;
+  background-color: var(--site-cream);
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.notifications-wrapper {
+  width: 100%;
+  max-width: 800px;
+}
+
+.header-title {
+  color: var(--site-primary);
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Stile dei bottoni Filtro (Tab) */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+
+  button {
+    background-color: transparent;
+    border: 2px solid var(--site-primary);
+    color: var(--site-primary);
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+      background-color: var(--site-primary);
+      color: var(--site-cream); /* Testo diventa color panna/chiaro se attivo */
+    }
+  }
+}
+
+/* Lista card Notifiche */
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* Stile architetturale .form-card rivisitato per lista notifiche */
+.form-card.notification-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+
+  /* Bordo laterale standard (blu scuro) per property */
+  border-left: 5px solid var(--site-primary);
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  /* Modifichiamo colore bordo laterale a livello visivo se promozionale */
+  &.type-promo {
+    border-left-color: var(--site-orange);
+  }
+
+  .icon {
+    font-size: 2.2rem;
+    line-height: 1;
+  }
+
+  .content {
+    flex: 1;
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      color: var(--site-dark);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin: 0 0 0.8rem 0;
+      color: #555;
+      line-height: 1.5;
+      font-size: 1rem;
+    }
+    
+    .date {
+      font-size: 0.85rem;
+      color: #888;
+    }
+  }
+}
+
+.no-notifications {
+  text-align: center;
+  padding: 3rem;
+  color: var(--site-dark);
+  font-size: 1.1rem;
+  background-color: #fff;
+}

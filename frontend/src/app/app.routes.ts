@@ -7,6 +7,7 @@ import { Searches } from './pages/searches/searches';
 import { CreateAdvertisement } from './pages/create-advertisement/create-advertisement';
 import { Account } from './pages/account/account';
 import { Register } from './pages/register/register';
+import { Notifications } from './pages/notifications/notifications';
 import { authorizationAgencyGuard } from './guard/authorizationAgency-guard';
 import { authorizationGuard } from './guard/authorization-guard';
 
@@ -57,6 +58,12 @@ export const routes: Routes = [
         path: 'account',
         component: Account,
         title: 'DietiEstate2425 - Account',
+        canActivate: [authorizationGuard],
+    },
+    {
+        path: 'notifications',
+        component: Notifications,
+        title: 'DietiEstate2425 - Notifiche',
         canActivate: [authorizationGuard],
     }
 

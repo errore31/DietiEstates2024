@@ -75,7 +75,7 @@ async function createAgencyAndUsers(hashedPassword) {
   });
 
   // 2. Crea Utenti
-  await Users.create({
+  const alice = await Users.create({
     name: 'Alice',
     surname: 'Smith',
     username: 'alicesmith',
@@ -113,8 +113,8 @@ async function createAgencyAndUsers(hashedPassword) {
     agencyId: agency.id
   });
 
-  // Ritorniamo l'agente perché ci serve il suo ID per creare le proprietà
-  return agent;
+  // Ritorniamo l'agente e alice perché ci serve il loro ID per creare dati mockup
+  return { agent, alice };
 }
 
 /**
@@ -219,9 +219,22 @@ export async function setDataTest() {
     const hashedPassword = await bcrypt.hash('agentpassword', 10);
 
     // 3. Esecuzione Step Logici
-    const agent = await createAgencyAndUsers(hashedPassword); // Crea Utenti
+    const { agent, alice } = await createAgencyAndUsers(hashedPassword); // Crea Utenti
     await createPropertiesForAgent(agent.id);                 // Crea Proprietà
     await createExtras(agent.id);                             // Crea Extra
+
+    // Generiamo notifiche mock "immobiliari" e "promozionali" specifiche per l'utente Alice Smith
+    await Notifications.create({
+      type: 'property',
+      message: 'Un nuovo appartamento moderno è stato aggiunto in Cityville! Corrisponde alle ultime tue ricerche in "Centro".',
+      userId: alice.id
+    });
+
+    await Notifications.create({
+      type: 'promo',
+      message: 'Super Offerta: Solo per questa settimana, consulenza mutui gratuita presso la nostra agenzia Best Estates!',
+      userId: alice.id
+    });
 
     console.log('Test data initialized successfully.');
   } catch (error) {

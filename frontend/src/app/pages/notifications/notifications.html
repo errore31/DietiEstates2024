@@ -1,0 +1,62 @@
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="notifications-wrapper">
+    <h1 class="header-title">Le tue Notifiche</h1>
+
+    <!-- Bottoni di Filtraggio -->
+    <div class="filter-tabs">
+      <button 
+        [class.active]="activeFilter === 'all'" 
+        (click)="setFilter('all')">
+        Tutte
+      </button>
+      <button 
+        [class.active]="activeFilter === 'property'" 
+        (click)="setFilter('property')">
+        Nuovi Immobili
+      </button>
+      <button 
+        [class.active]="activeFilter === 'promo'" 
+        (click)="setFilter('promo')">
+        Promozioni
+      </button>
+    </div>
+
+    <!-- Stato di caricamento o Errore -->
+    <p *ngIf="isLoading" style="text-align:center;">Caricamento in corso...</p>
+    <p *ngIf="errorMessage" style="color:red; text-align:center;">{{ errorMessage }}</p>
+
+    <!-- Lista di Notifiche -->
+    <div class="notifications-list" *ngIf="!isLoading && !errorMessage">
+      
+      <!-- Fallback nessun risultato -->
+      <div class="form-card no-notifications" *ngIf="filteredNotifications.length === 0">
+        Nessuna notifica trovata per questa categoria.
+      </div>
+
+      <!-- Iterazione per la lista di notifiche usando la classe card .form-card standard -->
+      <div 
+        class="form-card notification-card" 
+        [ngClass]="'type-' + notification.type"
+        *ngFor="let notification of filteredNotifications">
+        
+        <div class="icon">
+          <!-- Icone in base al type -->
+          <span *ngIf="notification.type === 'property'">🏠</span>
+          <span *ngIf="notification.type === 'promo'">🏷️</span>
+        </div>
+
+        <div class="content">
+          <h3>{{ notification.title }}</h3>
+          <p>{{ notification.message }}</p>
+          <span class="date">{{ notification.date | date: 'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

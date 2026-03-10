@@ -1,6 +1,6 @@
 import fs from "fs";
 
-import { Properties, PropertiesFeatures, Images, Users } from "../models/database.js";
+import { Properties, PropertiesFeatures, Images, Users, Searches, Notifications } from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 import { Op } from 'sequelize';
 
@@ -77,6 +77,62 @@ export class propertiesController {
                 floor: featuresData.floor,
                 energyClass: featuresData.energyClass
             });
+        }
+
+        // TRIGGER NOTIFICHE: Controlla se il nuovo immobile corrisponde a recenti ricerche
+        try {
+            const propertyAddress = newProperty.address ? newProperty.address.toLowerCase() : '';
+            const propertyTitle = newProperty.title ? newProperty.title.toLowerCase() : '';
+            
+            // Trova tutte le ricerche salvate
+            const recentSearches = await Searches.findAll({
+                order: [['createdAt', 'DESC']]
+            });
+
+            // Group by userId e prendi solo le ultime 3 ricerche per utente
+            const userRecentSearches = {};
+            for (const search of recentSearches) {
+                if (!userRecentSearches[search.userId]) {
+                    userRecentSearches[search.userId] = [];
+                }
+                if (userRecentSearches[search.userId].length < 3) {
+                    userRecentSearches[search.userId].push(search);
+                }
+            }
+
+            // Controlla il match e crea le notifiche
+            const usersToNotify = new Set();
+            for (const userId in userRecentSearches) {
+                const searches = userRecentSearches[userId];
+                for (const search of searches) {
+                     // Check se i criteri della ricerca testuale matchano la keyword
+                    const searchTitle = search.criteria && (search.criteria['area/title'] || search.criteria.text);
+                    if (searchTitle) {
+                        // Prendi solo la prima parte della stringa di ricerca (es: da "Napoli, NA, Italia" prendi "napoli")
+                        const searchTerm = searchTitle.split(',')[0].trim().toLowerCase();
+                        
+                        // Controlla se l'indirizzo o il titolo dell'immobile contengono il termine cercato
+                        if (propertyAddress.includes(searchTerm) || propertyTitle.includes(searchTerm)) {
+                            usersToNotify.add(userId);
+                            break; // Basta una ricerca matchata per notificare l'utente
+                        }
+                    }
+                }
+            }
+
+            // Crea le notifiche in blocco
+            const notificationPromises = Array.from(usersToNotify).map(userId => {
+                return Notifications.create({
+                    type: 'property',
+                    message: `Un nuovo immobile in "${newProperty.address}" è appena stato aggiunto e corrisponde alle tue ultime ricerche!`,
+                    userId: userId
+                });
+            });
+
+            await Promise.all(notificationPromises);
+        } catch (error) {
+             console.error('Errore durante la generazione delle notifiche automatiche:', error);
+             // Non bloccare la creazione della proprietà se le notifiche falliscono
         }
 
         return newProperty;
