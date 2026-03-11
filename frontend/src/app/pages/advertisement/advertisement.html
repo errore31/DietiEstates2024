@@ -1,38 +1,27 @@
-<app-navbar></app-navbar>
-
 <div class="main-container" *ngIf="property; else loading">
-    
+
     <div class="gallery-container">
-        
+
         <div class="main-img-wrapper" *ngIf="property.Images && property.Images.length > 0">
-            <swiper-container 
-                [attr.slides-per-view]="1" 
-                [navigation]="true" 
-                [pagination]="true" 
-                [loop]="true"
-                observer="true" 
-                observe-parents="true"
+            <swiper-container [attr.slides-per-view]="1" [navigation]="true" [pagination]="true" [loop]="true"
+                observer="true" observe-parents="true"
                 style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;">
-                
+
                 <swiper-slide *ngFor="let img of property.Images">
-                    <img [src]="getImageUrl(img.url)" 
-                         [alt]="property.title" 
-                         class="carousel-img">
+                    <img [src]="getImageUrl(img.url)" [alt]="property.title" class="carousel-img">
                 </swiper-slide>
-                
+
             </swiper-container>
         </div>
 
         <div class="side-imgs-wrapper" *ngIf="property.Images && property.Images.length > 1">
-            <img *ngFor="let img of property.Images | slice:1" 
-                 [src]="getImageUrl(img.url)" 
-                 alt="Dettaglio" 
-                 class="side-img">
+            <img *ngFor="let img of property.Images | slice:1" [src]="getImageUrl(img.url)" alt="Dettaglio"
+                class="side-img">
         </div>
-        
+
     </div>
     <div class="content-grid">
-        
+
         <div class="property-info">
             <div class="header-info">
                 <div>
@@ -75,11 +64,26 @@
             </div>
         </div>
 
-        <aside class="sidebar">
-            <div class="placeholder-sidebar">
-                <p>Contatta l'agenzia</p>
+        <div class="sidebar">
+            <div class="agency-card">
+                <h3>Agenzia Immobiliare</h3>
+                <div class="agency-info" *ngIf="property.User?.Agency; else noAgency">
+                    <h2 class="agency-name">{{ property.User?.Agency?.name }}</h2>
+                    <p class="agency-business">{{ property.User?.Agency?.businessName }}</p>
+                    <div class="agency-details">
+                        <p>📍 {{ property.User?.Agency?.address }}</p>
+                        <p>📞 {{ property.User?.Agency?.phone }}</p>
+                        <p>✉️ {{ property.User?.Agency?.email }}</p>
+                    </div>
+                    <button class="btn-agency" [routerLink]="['/agency', property.User?.Agency?.id]">
+                        Vedi Info Agenzia
+                    </button>
+                </div>
+                <ng-template #noAgency>
+                    <p class="no-agency-text">Contatta l'agenzia</p>
+                </ng-template>
             </div>
-        </aside>
+        </div>
 
     </div>
 </div>
@@ -89,5 +93,3 @@
         <h2>Caricamento annuncio...</h2>
     </div>
 </ng-template>
-
-<app-footer></app-footer>

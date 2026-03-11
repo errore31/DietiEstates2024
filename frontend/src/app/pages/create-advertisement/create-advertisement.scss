@@ -1,8 +1,16 @@
 /* create-advertisement.scss */
 
+p,
+span,
+label {
+    color: var(--site-primary);
+}
+
+
 /* RESET FONDAMENTALE PER QUESTO COMPONENTE */
 * {
-    box-sizing: border-box; /* Include padding e bordi nel calcolo della larghezza */
+    box-sizing: border-box;
+    /* Include padding e bordi nel calcolo della larghezza */
 }
 
 .page-container {
@@ -15,7 +23,7 @@
 /* --- HEADER --- */
 .page-header {
     margin-bottom: 30px;
-    
+
     .page-title {
         color: var(--site-primary);
         font-size: 2rem;
@@ -25,7 +33,8 @@
     }
 
     .page-subtitle {
-        color: var(--site-dark); /* Assicurati che questa var esista, altrimenti usa #333 */
+        color: var(--site-dark);
+        /* Assicurati che questa var esista, altrimenti usa #333 */
     }
 }
 
@@ -35,7 +44,7 @@
     border-radius: 12px;
     padding: 30px;
     margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
 
     .card-title {
@@ -52,7 +61,7 @@
 .form-grid {
     display: grid;
     /* Ho aumentato il gap orizzontale a 30px per sicurezza */
-    gap: 25px 30px; 
+    gap: 25px 30px;
     width: 100%;
 
     &.col-2 {
@@ -79,10 +88,14 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 100%; /* Occupa tutto lo spazio della cella griglia */
-    min-width: 0; /* TRUCCO CSS: evita overflow nei flex/grid items */
+    width: 100%;
+    /* Occupa tutto lo spazio della cella griglia */
+    min-width: 0;
+    /* TRUCCO CSS: evita overflow nei flex/grid items */
 
-    &.full-width { grid-column: 1 / -1; } 
+    &.full-width {
+        grid-column: 1 / -1;
+    }
 
     label {
         font-weight: 600;
@@ -91,10 +104,14 @@
     }
 
     /* Stile unificato Input/Select/Textarea */
-    input, select, textarea {
-        box-sizing: border-box !important; /* FORZIAMO IL CALCOLO CORRETTO */
+    input,
+    select,
+    textarea {
+        box-sizing: border-box !important;
+        /* FORZIAMO IL CALCOLO CORRETTO */
         width: 100%;
-        max-width: 100%; /* Impedisce di uscire dal contenitore */
+        max-width: 100%;
+        /* Impedisce di uscire dal contenitore */
         padding: 12px;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -102,7 +119,7 @@
         color: #333;
         background: #fafafa;
         transition: 0.2s;
-        
+
         &:focus {
             outline: none;
             border-color: var(--site-primary);
@@ -125,7 +142,7 @@
     width: 100%;
     border: 1px dashed #ccc;
 
-    span{
+    span {
         color: var(--site-primary);
     }
 }
@@ -157,8 +174,10 @@
     gap: 8px;
     color: #555;
 
-    &:hover { background: var(--site-cream); }
-    
+    &:hover {
+        background: var(--site-cream);
+    }
+
     /* Supporto CSS moderno per selezionare il genitore */
     &:has(input:checked) {
         background: var(--site-primary);
@@ -176,14 +195,18 @@
     background: #fafafa;
     cursor: pointer;
     transition: 0.3s;
-    box-sizing: border-box; /* Aggiunto anche qui */
+    box-sizing: border-box;
+    /* Aggiunto anche qui */
 
     &:hover {
         border-color: var(--site-orange);
         background: #fff8f0;
     }
 
-    p span { color: var(--site-orange); font-weight: bold; }
+    p span {
+        color: var(--site-orange);
+        font-weight: bold;
+    }
 }
 
 /* --- FOOTER AZIONI --- */
@@ -192,7 +215,7 @@
     justify-content: flex-end;
     gap: 15px;
     margin-top: 40px;
-    margin-bottom: 60px; 
+    margin-bottom: 60px;
 
     button {
         padding: 14px 28px;
@@ -203,21 +226,31 @@
         border: none;
         transition: transform 0.1s;
 
-        &:active { transform: scale(0.98); }
+        &:active {
+            transform: scale(0.98);
+        }
     }
 
     .btn-cancel {
         background: var(--site-primary);
-        color: var(--site-cream); /* Modificato per contrasto migliore */
+        color: var(--site-cream);
+        /* Modificato per contrasto migliore */
         border: 1px solid transparent;
-        &:hover { background: var(--site-dark); opacity: 0.9; }
+
+        &:hover {
+            background: var(--site-dark);
+            opacity: 0.9;
+        }
     }
 
     .btn-submit {
-        background: var(--site-orange); 
+        background: var(--site-orange);
         color: white;
         box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
-        &:hover { background: #d35400; }
+
+        &:hover {
+            background: #d35400;
+        }
     }
 }
 
@@ -237,19 +270,21 @@
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
     .img-preview {
         width: 100%;
         height: 100%;
-        object-fit: cover; /* Ritaglia l'immagine per riempire il quadrato */
+        object-fit: cover;
+        /* Ritaglia l'immagine per riempire il quadrato */
     }
 
     .btn-remove-overlay {
         position: absolute;
         top: 5px;
         right: 5px;
-        background: rgba(231, 76, 60, 0.9); /* Rosso semi-trasparente */
+        background: rgba(231, 76, 60, 0.9);
+        /* Rosso semi-trasparente */
         color: white;
         border: none;
         border-radius: 50%;

@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import * as L from 'leaflet';
 
 const iconUrl = 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png';
@@ -34,8 +35,12 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
   @Input() isEditable: boolean = false;
   @Input() markers: any[] = [];
   @Input() cityBoundary: string = '';
+  @Input() navigationOnMapClick: boolean = false; // Nuovo input per abilitare/disabilitare il click navigazione
+
+  constructor(private router: Router) { }
 
   @Output() locationSelected = new EventEmitter<{ lat: number, lng: number }>();
+  @Output() mapClicked = new EventEmitter<string>(); // Nuovo output che emette il nome del luogo
 
   private map!: L.Map;
   private singleMarker: L.Marker | undefined;
@@ -138,7 +143,35 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
     } else {
       this.displayMarkers();
       if (this.cityBoundary) this.drawCityBoundary();
+
+      // Quando clicco sulla mappa in modalità non-editabile, se la navigazione è abilitata cerco il luogo
+      this.map.on('click', (e: L.LeafletMouseEvent) => {
+        if (this.navigationOnMapClick) {
+          const { lat, lng } = e.latlng;
+          this.reverseGeocodeAndNavigate(lat, lng);
+        }
+      });
     }
+  }
+
+  private reverseGeocodeAndNavigate(lat: number, lng: number) {
+    const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.display_name) {
+          const address = data.address;
+          const locationName = address.city || address.town || address.village || address.suburb || data.display_name.split(',')[0];
+
+          if (locationName) {
+            console.log('Emissione luogo cliccato:', locationName);
+            this.mapClicked.emit(locationName);
+            this.router.navigate(['/searches', locationName]);
+          }
+        }
+      })
+      .catch(err => console.error('Errore durante il reverse geocoding:', err));
   }
 
   private setSingleMarker(lat: number, lng: number) {

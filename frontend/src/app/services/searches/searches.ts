@@ -14,4 +14,8 @@ export class SearchesService {
     createSearch(criteria: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}`, { criteria }, { withCredentials: true });
     }
+
+    getSearches(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/history`, { withCredentials: true });
+    }
 }

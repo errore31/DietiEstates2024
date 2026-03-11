@@ -6,7 +6,7 @@ import { Searches } from "../models/database.js";
  * If not, it responds with an error message.
  */
 
-export function enforceAuthentication(req, res, next){
+export function enforceAuthentication(req, res, next) {
     if (req.session && req.session.auth) {
         req.user = {
             id: req.session.userId,
@@ -19,9 +19,9 @@ export function enforceAuthentication(req, res, next){
     }
 }
 
-export async function ensureAgentOwnsProperty(req, res, next){
+export async function ensureAgentOwnsProperty(req, res, next) {
     try {
-        const allowedRoles = ['agent', 'agency admin'];
+        const allowedRoles = ['agent', 'agencyAdmin'];
 
         if (!allowedRoles.includes(req.user.role)) {
             return next({ status: 403, message: "Non hai i permessi per modifcare l'immobile" });
@@ -31,10 +31,10 @@ export async function ensureAgentOwnsProperty(req, res, next){
         const property = await Properties.findByPk(propertyId);
 
         if (!property) {
-           return next({ status: 404, message: "Immobile non trovato" });
+            return next({ status: 404, message: "Immobile non trovato" });
         }
 
-        if (property.agentId !== req.user.id) {
+        if (property.agentId !== req.user.id && !(req.user.role === 'agencyAdmin' && property.agencyId === req.user.agencyId)) {
             return next({ status: 403, message: "Non hai il permesso per modificare l'immobile" });
         }
 

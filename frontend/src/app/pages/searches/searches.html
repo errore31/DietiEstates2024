@@ -1,84 +1,13 @@
-<div class="search-layout">
+<div class="search-page-container">
 
-    <!-- Sidebar Filtri -->
-    <aside class="filters-sidebar">
-        <h3>Filtra Ricerca</h3>
-
-        <div class="filter-group">
-            <label>Località</label>
-            <app-searchbar></app-searchbar>
-        </div>
-
-        <div class="filter-group">
-            <label>Tipologia</label>
-            <select [(ngModel)]="searchParams.type">
-                <option>Tutte le tipologie</option>
-                <option>Appartamento</option>
-                <option>Villa</option>
-                <option>Rustico</option>
-                <option>Ufficio</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label>Prezzo Massimo: {{maxPrice | number:'1.0-0'}}€</label>
-            <div class="slider-wrapper">
-                <input type="range" [min]="minRange" [max]="maxRange" step="10000" [value]="maxPrice"
-                    (input)="onPriceChange($event)" class="premium-slider"
-                    [style.background]="'linear-gradient(to right, var(--site-primary) ' + sliderPercentage + '%, var(--site-cream) ' + sliderPercentage + '%)'">
-                <div class="price-labels">
-                    <span style="color: var(--site-primary);">{{minRange | number:'1.0-0'}}€</span>
-                    <span style="color: var(--site-primary);">{{maxRange | number:'1.0-0'}}€</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="filter-group">
-            <label>Locali (Minimi)</label>
-            <input type="number" min="1" [(ngModel)]="searchParams.roomCount" placeholder="Es. 2">
-        </div>
-
-        <div class="filter-group">
-            <label>Superficie (m² minimi)</label>
-            <input type="number" min="1" [(ngModel)]="searchParams.area" placeholder="Es. 80">
-        </div>
-
-        <div class="filter-group">
-            <label>Piano</label>
-            <input type="number" [(ngModel)]="searchParams.floor" placeholder="Es. 1">
-        </div>
-
-        <div class="filter-group">
-            <label>Classe Energetica</label>
-            <select [(ngModel)]="searchParams.energyClass">
-                <option>Tutte le classi</option>
-                <option>A</option>
-                <option>B</option>
-                <option>C</option>
-                <option>D</option>
-                <option>E</option>
-                <option>F</option>
-                <option>G</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label>Caratteristiche</label>
-            <div class="checkbox-group">
-                <label class="checkbox-item"><input type="checkbox" [(ngModel)]="searchParams.hasElevator">
-                    Ascensore</label>
-            </div>
-        </div>
-
-        <button class="btn-apply" (click)="applyFilters()">Applica Filtri</button>
-    </aside>
-
-    <!-- Contenuto Risultati -->
-    <main>
+    <main class="results-main">
         <div class="map-wrapper" *ngIf="searchText || properties.length > 0">
             <app-map class="search-map" [markers]="properties" [cityBoundary]="searchText"></app-map>
         </div>
 
+        <div class="top-searchbar-container">
+            <app-searchbar></app-searchbar>
+        </div>
         <div class="results-header">
             <h2 *ngIf="searchText">Risultati per "{{searchText}}" ({{properties.length}} {{properties.length === 1 ?
                 'immobile' : 'immobili'}})</h2>
@@ -93,10 +22,7 @@
         </div>
 
         <div class="cardContainer">
-            <app-card *ngFor="let prop of properties | slice:0:6" [properties]="prop">
-            </app-card>
+            <app-card *ngFor="let prop of properties | slice:0:6" [properties]="prop"></app-card>
         </div>
     </main>
 </div>
-
-<p>searches works! {{searchText }}</p>

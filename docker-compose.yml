@@ -19,7 +19,7 @@ services:
 
   # SERVIZIO 2: IL TUO BACKEND NODE.JS
   app:
-    build: . # Costruisce usando il Dockerfile nella cartella corrente
+    build: ./backend # Costruisce usando il Dockerfile nella cartella backend
     container_name: dieti-backend
     restart: on-failure
     ports:
@@ -37,9 +37,19 @@ services:
     volumes:
       # "Bind Mount": collega la tua cartella codice dentro il container.
       # Se modifichi un file su VS Code, cambia anche dentro il container!
-      - ./:/usr/src/app
+      - ./backend:/usr/src/app
       - /usr/src/app/node_modules # Evita di sovrascrivere i moduli interni
-      - ./uploads:/usr/src/app/uploads # Monta la cartella uploads per le immagini
+      - ./backend/uploads:/usr/src/app/uploads # Monta la cartella uploads per le immagini
+
+  # SERVIZIO 3: IL FRONTEND ANGULAR (NGINX)
+  frontend:
+    build: ./frontend
+    container_name: dieti-frontend
+    restart: on-failure
+    ports:
+      - "4200:80" # Mappa la porta 8080 del PC alla 80 di NGINX
+    depends_on:
+      - app # Avvia il frontend dopo che il backend è pronto
 
 # Definizione del volume per i dati del DB
 volumes:

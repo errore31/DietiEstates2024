@@ -29,10 +29,9 @@ export class searchesController {
      */
 
     static async getSearches(req, res) {
-        const results = await Searches.findAll({
+        return await Searches.findAll({
             where: { userId: req.session.userId }
         });
-        return res.json(results);
     }
 
 }

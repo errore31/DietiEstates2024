@@ -1,5 +1,197 @@
-<form (ngSubmit)="goToSearch()">
-<input list="options" type="text" (input)="suggestion($event)"  placeholder="Cerca..."/>
-<datalist id="options" [innerHTML]="locationOptions">
-</datalist>
-</form>
+<div class="searchbar-wrapper">
+    <div class="search-main">
+        <div class="input-group search-input">
+            <svg class="icon search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" (focus)="onInputFocus()" (blur)="onInputBlur()" (input)="suggestion($event)"
+                [(ngModel)]="inputText" autocomplete="off" placeholder="Dove vuoi vivere? (es. Milano, Roma...)" />
+        </div>
+
+        <!-- Pannello dei suggerimenti autocompletamento custom -->
+        <div class="suggestions-panel" *ngIf="isInputFocused">
+
+            <!-- Mostra Ricerche Recenti se input è vuoto e l'utente ha uno storico -->
+            <div class="recent-searches" *ngIf="!inputText && recentSearches.length > 0">
+                <div class="suggestion-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="var(--site-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <polyline points="23 20 23 14 17 14"></polyline>
+                        <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                    </svg>
+                    <span
+                        style="font-size: 0.85rem; font-weight: 600; color: #718096; text-transform: uppercase;">Ultime
+                        ricerche</span>
+                </div>
+                <div class="suggestion-item recent-item" *ngFor="let search of recentSearches"
+                    (click)="selectRecentSearch(search)">
+                    <svg class="icon-location" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    <div class="recent-details">
+                        <span class="recent-title">{{ search.criteria['area/title'] }}</span>
+                        <span class="recent-filters" *ngIf="search.criteria.type || search.criteria.maxPrice">
+                            {{ search.criteria.type || 'Tutte' }} • Fino a {{ (search.criteria.maxPrice / 1000) || 1000
+                            }}K €
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mostra un messaggio di fallback se input è vuoto e NON ci sono ricerche recenti
+      <div class="recent-searches-empty" *ngIf="!inputText && recentSearches.length === 0">
+        Inizia a digitare per cercare una località.
+      </div> -->
+
+            <!-- Mostra Suggerimenti se ci sono elementi -->
+            <div class="location-suggestions" *ngIf="inputText && locationSuggestions.length > 0">
+                <div class="suggestion-item" *ngFor="let suggestion of locationSuggestions"
+                    (click)="selectSuggestion(suggestion)">
+                    <svg class="icon-location text-primary" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <span class="suggestion-text">{{ suggestion }}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="input-group type-select">
+            <svg class="icon home-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <select [(ngModel)]="searchParams.type">
+                <option>Tutte le tipologie</option>
+                <option>Appartamento</option>
+                <option>Villa</option>
+                <option>Rustico</option>
+                <option>Ufficio</option>
+            </select>
+        </div>
+
+        <button type="button" class="btn-filters" (click)="toggleFilters()">
+            <svg class="icon filter-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg>
+            Filtri
+            <svg class="chevron-icon" [ngClass]="{'rotated': isFiltersOpen}" xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+
+        <button type="button" class="btn-search" (click)="goToSearch()">Cerca</button>
+    </div>
+
+    <div class="filters-panel" *ngIf="isFiltersOpen">
+        <div class="filters-grid">
+
+            <!-- Prezzo Massimo -->
+            <div class="filter-section">
+                <div class="section-title text-dark">
+                    <strong>€ Prezzo Massimo: {{maxPrice | number:'1.0-0'}}€</strong>
+                </div>
+                <div class="slider-wrapper">
+                    <input type="range" [min]="minRange" [max]="maxRange" step="10000" [value]="maxPrice"
+                        (input)="onPriceChange($event)" class="premium-slider"
+                        [style.background]="'linear-gradient(to right, var(--site-primary) ' + sliderPercentage + '%, var(--site-cream) ' + sliderPercentage + '%)'">
+                    <div class="price-labels">
+                        <span>{{minRange / 1000}}k €</span>
+                        <span>2M €</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Caratteristiche Spazio -->
+            <div class="filter-section">
+                <div class="section-title text-dark">
+                    <svg style="margin-right: 5px; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg"
+                        width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                    <strong>Caratteristiche Spazio</strong>
+                </div>
+                <div class="inputs-row">
+                    <div class="input-box" style="margin-right: 10px;">
+                        <label>Locali (min)</label>
+                        <input type="number" min="1" [(ngModel)]="searchParams.roomCount" placeholder="Es. 2">
+                    </div>
+                    <div class="input-box">
+                        <label>Superficie (m²)</label>
+                        <input type="number" min="1" [(ngModel)]="searchParams.area" placeholder="Es. 80">
+                    </div>
+                </div>
+                <div class="inputs-row mt-3">
+                    <div class="input-box">
+                        <label>Piano</label>
+                        <input type="number" [(ngModel)]="searchParams.floor" placeholder="Es. 1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe Energetica -->
+            <div class="filter-section">
+                <div class="section-title text-dark">
+                    <svg style="margin-right: 5px; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg"
+                        width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <strong>Classe Energetica</strong>
+                </div>
+                <select class="styled-select mb-4" [(ngModel)]="searchParams.energyClass">
+                    <option>Tutte le classi</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                    <option>D</option>
+                    <option>E</option>
+                    <option>F</option>
+                    <option>G</option>
+                </select>
+
+                <label class="checkbox-container">
+                    <input type="checkbox" [(ngModel)]="searchParams.hasElevator">
+                    <span class="checkmark"></span>
+                    Presenza Ascensore
+                </label>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="filters-footer">
+            <a href="javascript:void(0)" class="reset-link" (click)="resetFilters()">Resetta filtri</a>
+            <div class="action-buttons">
+                <button type="button" class="btn-close-filter" (click)="toggleFilters()">Chiudi</button>
+                <button type="button" class="btn-apply-filter" (click)="applyFilters()">Applica Filtri</button>
+            </div>
+        </div>
+    </div>
+</div>

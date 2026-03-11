@@ -132,3 +132,15 @@ proprietiesRouter.get('/:id', async (req, res, next) => {
     }
 
 });
+
+proprietiesRouter.post('/:id/promotion', enforceAuthentication, async (req, res, next) => {
+    try {
+        const propertyId = req.params.id;
+        await propertiesController.createPromotion(propertyId, req, res);
+        res.status(200).json({
+            message: "Promozione inviata con successo!"
+        });
+    } catch (error) {
+        next(error);
+    }
+});

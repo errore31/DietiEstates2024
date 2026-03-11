@@ -49,4 +49,12 @@ export class PropertyService {
   updateProperty(id: number, propertyData: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, propertyData);
   }
+
+  deleteProperty(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
+  }
+
+  sendPromotion(id: number, promotionText: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/${id}/promotion`, { promotionText }, { withCredentials: true });
+  }
 }

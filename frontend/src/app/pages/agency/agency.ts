@@ -136,11 +136,20 @@ export class Agency implements OnInit {
   }
 
   editProperty(id?: number) {
-    alert(`Modifica immobile ${id}`);
+    this.router.navigate(['/properties/edit', id]);
   }
 
-  deleteProperty(id?: number) {
-
+  deleteProperty(id: number) {
+    this.propertyService.deleteProperty(id).subscribe({
+      next: () => {
+        this.allProperties = this.allProperties.filter(prop => prop.id !== id);
+        this.toastr.success(`Immobile eliminato con successo`, 'Immobile eliminato')
+        this.router.navigate(['/agency', this.agency?.id]);
+      },
+      error: (err) => {
+        console.log('Status Errore:', err.status);
+      }
+    });
   }
 
   editAgencyInfo(field: string) {
@@ -278,5 +287,41 @@ export class Agency implements OnInit {
 
   cancelEditAgency() {
     this.editingField = null;
+  }
+
+  isPromoModalOpen = false;
+  currentPromoPropertyId: number | null = null;
+  promoMessageText: string = '';
+
+  createPromotion(id?: number) {
+    if (!id) return;
+    this.currentPromoPropertyId = id;
+    this.promoMessageText = '';
+    this.isPromoModalOpen = true;
+  }
+
+  closePromoModal() {
+    this.isPromoModalOpen = false;
+    this.currentPromoPropertyId = null;
+    this.promoMessageText = '';
+  }
+
+  submitPromotion() {
+    if (!this.currentPromoPropertyId || !this.promoMessageText.trim()) {
+      this.toastr.warning('Inserisci il testo della promozione', 'Attenzione');
+      return;
+    }
+
+    this.propertyService.sendPromotion(this.currentPromoPropertyId, this.promoMessageText).subscribe({
+      next: (res) => {
+        this.toastr.success('Promozione inviata con successo!', 'Notifiche Generate');
+        this.closePromoModal();
+      },
+      error: (err) => {
+        console.error(err);
+        this.toastr.error('Errore durante l\'invio della promozione', 'Errore');
+        this.closePromoModal();
+      }
+    });
   }
 }

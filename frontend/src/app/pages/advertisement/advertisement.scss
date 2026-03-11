@@ -8,10 +8,12 @@
 /* --- GALLERIA IBRIDA --- */
 .gallery-container {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* 2 parti a sinistra (carosello), 1 a destra (miniature) */
+    grid-template-columns: 2fr 1fr;
+    /* 2 parti a sinistra (carosello), 1 a destra (miniature) */
     gap: 15px;
     margin-bottom: 30px;
-    height: 450px; /* Altezza fissa per tenere tutto allineato */
+    height: 450px;
+    /* Altezza fissa per tenere tutto allineato */
 }
 
 /* Colonna Sinistra (Carosello) */
@@ -42,20 +44,32 @@ swiper-container {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    overflow-y: auto; /* Scroll se ci sono tante foto */
-    padding-right: 5px; /* Spazio per la scrollbar */
-    
+    overflow-y: auto;
+    /* Scroll se ci sono tante foto */
+    padding-right: 5px;
+    /* Spazio per la scrollbar */
+
     /* Scrollbar personalizzata più carina */
-    &::-webkit-scrollbar { width: 6px; }
-    &::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 4px; }
-    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
 }
 
 .side-img {
     width: 100%;
     /* Calcolo preciso: (100% altezza - 15px di gap) diviso 2 immagini = 2 immagini piene visibili */
-    height: calc(50% - 7.5px); 
-    min-height: 200px; /* Sicurezza per schermi strani */
+    height: calc(50% - 7.5px);
+    min-height: 200px;
+    /* Sicurezza per schermi strani */
     object-fit: cover;
     border-radius: 12px;
     cursor: pointer;
@@ -79,7 +93,7 @@ swiper-container {
     background: white;
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid #edf2f7;
 }
 
@@ -161,31 +175,78 @@ h1 {
     top: 20px;
 }
 
-.placeholder-sidebar {
-    background: #f8fafc;
-    border: 2px dashed #cbd5e0;
+.agency-card {
+    background: white;
+    padding: 25px;
     border-radius: 15px;
-    height: 200px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #edf2f7;
+}
+
+.agency-name {
+    font-size: 1.5rem;
+    color: var(--site-primary, #1a2a6c);
+    margin: 5px 0;
+}
+
+.agency-business {
+    color: #718096;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.agency-details p {
+    margin-bottom: 8px;
+    color: #4a5568;
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #a0aec0;
+    gap: 10px;
+}
+
+.btn-agency {
+    width: 100%;
+    padding: 12px;
+    background: var(--site-primary, #1a2a6c);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
     font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
+
+    &:hover {
+        background: #2a3a7c;
+        transform: translateY(-2px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.no-agency-text {
+    color: #a0aec0;
+    text-align: center;
+    font-style: italic;
 }
 
 /* Responsive Tablet e Mobile */
 @media (max-width: 900px) {
     .gallery-container {
-        grid-template-columns: 1fr; /* Una sola colonna */
+        grid-template-columns: 1fr;
+        /* Una sola colonna */
         height: auto;
     }
-    
+
     .main-img-wrapper {
-        height: 300px; /* Altezza fissa per il carosello su mobile */
+        height: 300px;
+        /* Altezza fissa per il carosello su mobile */
     }
 
     .side-imgs-wrapper {
-        flex-direction: row; /* Miniature in orizzontale sotto */
+        flex-direction: row;
+        /* Miniature in orizzontale sotto */
         overflow-x: auto;
         height: 120px;
         margin-top: 0;
@@ -200,7 +261,7 @@ h1 {
     .content-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .sidebar {
         display: none;
     }

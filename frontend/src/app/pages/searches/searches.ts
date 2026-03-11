@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Searchbar } from '../../shared/searchbar/searchbar';
@@ -11,6 +9,7 @@ import { AuthService } from '../../services/auth-service/auth';
 import { Property } from '../../models/property';
 import { Card } from '../../shared/card/card';
 import { Map } from '../../shared/map/map';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-searches',
@@ -18,7 +17,7 @@ import { Map } from '../../shared/map/map';
   templateUrl: './searches.html',
   styleUrl: './searches.scss',
 })
-export class Searches implements OnInit {
+export class Searches implements OnInit, AfterViewInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private propertyService: PropertyService,
@@ -31,39 +30,76 @@ export class Searches implements OnInit {
   searchText: string = '';
   properties: Property[] = [];
 
-  // Variabili per lo slider del prezzo
-  maxPrice: number = 1000000;
-  minRange: number = 50000;
-  maxRange: number = 1000000;
-
-  // Oggetto contenente i parametri di ricerca basato sul DB (Properties e PropertiesFeatures)
-  searchParams = {
-    type: 'Tutte le tipologie',
-    roomCount: null as number | null,
-    area: null as number | null,
-    floor: null as number | null,
-    hasElevator: false,
-    energyClass: 'Tutte le classi'
-  };
-
-  get sliderPercentage(): number {
-    return ((this.maxPrice - this.minRange) / (this.maxRange - this.minRange)) * 100;
-  }
-
-  onPriceChange(event: any): void {
-    this.maxPrice = event.target.value;
-  }
-
   ngOnInit(): void {
-    this.activateRoute.params.subscribe(params => {
+    // Reagisce ai cambiamenti di rotta e parametri di ricerca (URL come fonte di verità)
+    combineLatest([
+      this.activateRoute.params,
+      this.activateRoute.queryParams
+    ]).subscribe(([params, queryParams]) => {
       this.searchText = params['text'] || '';
-      this.loadProperties(this.searchText);
+
+      const filters: any = {
+        text: this.searchText,
+        type: queryParams['type'] || null,
+        maxPrice: queryParams['maxPrice'] ? Number(queryParams['maxPrice']) : null,
+        roomCount: queryParams['roomCount'] ? Number(queryParams['roomCount']) : null,
+        area: queryParams['area'] ? Number(queryParams['area']) : null,
+        floor: queryParams['floor'] ? Number(queryParams['floor']) : null,
+        hasElevator: queryParams['hasElevator'] === 'true' ? true : null,
+        energyClass: queryParams['energyClass'] || null
+      };
+
+      const cleanFilters: any = {};
+      for (const key in filters) {
+        if (filters[key] !== null && filters[key] !== undefined && filters[key] !== '') {
+          cleanFilters[key] = filters[key];
+        }
+      }
+
+      // Se ci sono filtri oltre al testo, usiamo la ricerca avanzata
+      if (Object.keys(cleanFilters).length > 1 || queryParams['maxPrice']) {
+        this.propertyService.getPropertiesByAdvancedSearch(cleanFilters).subscribe({
+          next: (data) => {
+            this.properties = data;
+            console.log('Risultati applicazione filtri da URL:', this.properties);
+            this.saveSearch(this.searchText, cleanFilters);
+          },
+          error: (err) => {
+            console.error('Errore durante i filtri:', err);
+            this.properties = [];
+          }
+        });
+      } else {
+        // Altrimenti ricerca base
+        this.loadProperties(this.searchText);
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    // Sincronizza la UI della Searchbar con i parametri dell'URL
+    combineLatest([
+      this.activateRoute.params,
+      this.activateRoute.queryParams
+    ]).subscribe(([params, queryParams]) => {
+      if (this.searchbarComponent) {
+        setTimeout(() => {
+          this.searchbarComponent.inputText = params['text'] || '';
+
+          if (queryParams['type']) this.searchbarComponent.searchParams.type = queryParams['type'];
+          if (queryParams['maxPrice']) this.searchbarComponent.maxPrice = Number(queryParams['maxPrice']);
+          if (queryParams['roomCount']) this.searchbarComponent.searchParams.roomCount = Number(queryParams['roomCount']);
+          if (queryParams['area']) this.searchbarComponent.searchParams.area = Number(queryParams['area']);
+          if (queryParams['floor']) this.searchbarComponent.searchParams.floor = Number(queryParams['floor']);
+          if (queryParams['hasElevator']) this.searchbarComponent.searchParams.hasElevator = queryParams['hasElevator'] === 'true';
+          if (queryParams['energyClass']) this.searchbarComponent.searchParams.energyClass = queryParams['energyClass'];
+        }, 0);
+      }
     });
   }
 
   loadProperties(text: string): void {
     if (!text.trim()) {
-      // Se il testo è vuoto, carichiamo tutte le proprietà (fallback)
       this.propertyService.getAllProperties().subscribe({
         next: (data) => this.properties = data,
         error: (err) => console.error('Errore nel caricamento totale:', err)
@@ -79,67 +115,24 @@ export class Searches implements OnInit {
       },
       error: (err) => {
         console.error('Errore nel caricamento:', err);
-        this.properties = []; // Pulisce la lista in caso di errore (es: rotta non trovata)
-      }
-    });
-  }
-
-  applyFilters(): void {
-    if (this.searchbarComponent) {
-      this.searchText = this.searchbarComponent.inputText || '';
-    }
-
-    const filters: any = {
-      text: this.searchText,
-      type: this.searchParams.type !== 'Tutte le tipologie' ? this.searchParams.type : null,
-      maxPrice: this.maxPrice,
-      roomCount: this.searchParams.roomCount,
-      area: this.searchParams.area,
-      floor: this.searchParams.floor,
-      hasElevator: this.searchParams.hasElevator ? true : null,
-      energyClass: this.searchParams.energyClass !== 'Tutte le classi' ? this.searchParams.energyClass : null,
-    };
-
-    // Rimuove chiavi null o undefined per pulire la richiesta HTTP
-    const cleanFilters: any = {};
-    for (const key in filters) {
-      if (filters[key] !== null && filters[key] !== undefined && filters[key] !== '') {
-        cleanFilters[key] = filters[key];
-      }
-    }
-
-    this.propertyService.getPropertiesByAdvancedSearch(cleanFilters).subscribe({
-      next: (data) => {
-        this.properties = data;
-        console.log('Risultati applicazione filtri:', this.properties);
-        this.saveSearch(this.searchText, cleanFilters);
-      },
-      error: (err) => {
-        console.error('Errore durante i filtri:', err);
         this.properties = [];
       }
     });
   }
 
   saveSearch(text: string, filters?: any): void {
-    // Controlla se l'utente è autenticato. Se non lo è, non salviamo la ricerca
     if (!this.authService.currentUserSubject.value) {
       return;
     }
 
     const criteria: any = {};
-
-    // Primo parametro "area/title" a seconda del testo in input
     if (text && text.trim() !== '') {
       criteria['area/title'] = text.trim();
     }
 
-    // Aggiungo i parametri secondari dalla ricerca
     if (filters) {
       if (filters.maxPrice) criteria['maxPrice'] = filters.maxPrice;
       if (filters.type && filters.type !== 'Tutte le tipologie') criteria['type'] = filters.type;
-
-      // Parametri propertiesFeatures
       if (filters.roomCount) criteria['roomCount'] = filters.roomCount;
       if (filters.area) criteria['area'] = filters.area;
       if (filters.floor) criteria['floor'] = filters.floor;
@@ -147,7 +140,6 @@ export class Searches implements OnInit {
       if (filters.energyClass && filters.energyClass !== 'Tutte le classi') criteria['energyClass'] = filters.energyClass;
     }
 
-    // Salva la ricerca se almeno un campo è valorizzato
     if (Object.keys(criteria).length > 0) {
       this.searchesService.createSearch(criteria).subscribe({
         next: (res) => console.log('Ricerca salvata con successo:', res),

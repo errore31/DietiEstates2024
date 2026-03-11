@@ -1,11 +1,10 @@
-<app-navbar></app-navbar>
 <div class="center">
     <div id="searchbarContainer">
         <app-searchbar></app-searchbar>
     </div>
 </div>
-
-<app-map class="home-map" [isEditable]="true" (locationSelected)="onLocationSelected($event)"></app-map>
+<h1 style="text-align: center; color: var(--primary-color); margin-top: 20px;">Clicca e Cerca!</h1>
+<app-map class="home-map" [isEditable]="false" [navigationOnMapClick]="true"></app-map>
 
 <div id="advContainer">
     <h1>Le offerte più recenti</h1>
@@ -14,4 +13,3 @@
         </app-card>
     </div>
 </div>
-<app-footer></app-footer>

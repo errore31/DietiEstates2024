@@ -7,31 +7,31 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.SECRET_CLIENT,
     callbackURL: process.env.CALLBACK_URL,
     passReqToCallback: true
-  },
-  async (req, accessToken, refreshToken, profile, done) => {
-    try {
-        // 1. Cerchiamo se l'utente esiste già nel DB tramite googleId
-        let user = await Users.findOne({ where: { googleId: profile.id } });
+},
+    async (req, accessToken, refreshToken, profile, done) => {
+        try {
+            // 1. Cerchiamo se l'utente esiste già nel DB tramite googleId
+            let user = await Users.findOne({ where: { googleId: profile.id } });
 
-        if (user) {
+            if (user) {
+                return done(null, user);
+            }
+
+            // 2. Se non esiste, lo creiamo usando i dati forniti da Google
+            user = await Users.create({
+                googleId: profile.id,
+                name: profile.name.givenName,
+                surname: profile.name.familyName,
+                email: profile.emails[0].value,
+                username: profile.emails[0].value.split('@')[0], // Generiamo un username dall'email
+                role: 'user'
+            });
+
             return done(null, user);
+        } catch (err) {
+            return done(err, null);
         }
-
-        // 2. Se non esiste, lo creiamo usando i dati forniti da Google
-        user = await Users.create({
-            googleId: profile.id,
-            name: profile.name.givenName,
-            surname: profile.name.familyName,
-            email: profile.emails[0].value,
-            username: profile.emails[0].value.split('@')[0], // Generiamo un username dall'email
-            role: 'user' 
-        });
-
-        return done(null, user);
-    } catch (err) {
-        return done(err, null);
     }
-  }
 ));
 
 // Serve per salvare l'utente nella sessione

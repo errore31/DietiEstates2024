@@ -49,7 +49,7 @@ searchesRouter.get('/history', enforceAuthentication, async (req, res, next) => 
 });
 
 
-searchesRouter.get('/searchSuggestion/:text', async (req, res) => {
+searchesRouter.get('/searchSuggestion/:text', async (req, res, next) => {
     try {
         const suggestions = await geoapifySuggestion(req.params.text);
         res.send(suggestions);

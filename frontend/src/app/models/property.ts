@@ -22,8 +22,20 @@ export interface Property {
   latitude: number;
   longitude: number;
   agentId?: number;
-  
-  
-  Images?: PropertyImage[]; 
-  PropertiesFeature?: PropertyFeatures; 
+
+
+  Images?: PropertyImage[];
+  PropertiesFeature?: PropertyFeatures;
+  User?: {
+    name: string;
+    surname: string;
+    Agency?: {
+      id: number;
+      name: string;
+      businessName: string;
+      address: string;
+      phone: string;
+      email: string;
+    }
+  }
 }

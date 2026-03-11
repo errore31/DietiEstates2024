@@ -5,21 +5,22 @@
     padding: 80px 20px;
     text-align: center;
     position: relative;
-    
-    .agency-name { 
-        font-size: 2.5rem; 
-        font-weight: 800; 
+
+    .agency-name {
+        font-size: 2.5rem;
+        font-weight: 800;
         margin-bottom: 10px;
         color: var(--site-cream);
     }
-    .infoAgency { 
-        font-size: 1.1rem; 
+
+    .infoAgency {
+        font-size: 1.1rem;
         color: var(--site-cream);
-        opacity: 0.9; 
+        opacity: 0.9;
     }
 
 }
-    
+
 
 
 .btn-edit-hero {
@@ -38,22 +39,30 @@
 /* --- CONTAINER E SCHEDE BIANCHE --- */
 .container {
     max-width: 1200px;
-    margin: 40px auto; /* Spazio netto per evitare sovrapposizioni */
+    margin: 40px auto;
+    /* Spazio netto per evitare sovrapposizioni */
     padding: 0 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
 }
 
-.main-content-card, .sidebar-card {
-    background: #ffffff; /* Sfondo bianco per le sezioni di gestione */
+.main-content-card,
+.sidebar-card {
+    background: #ffffff;
+    /* Sfondo bianco per le sezioni di gestione */
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     height: fit-content;
-    
+
     /* Override per il testo scuro dentro le card bianche */
-    h2, h3, p, span, div, button {
+    h2,
+    h3,
+    p,
+    span,
+    div,
+    button {
         color: var(--site-primary);
     }
 }
@@ -92,17 +101,31 @@
     background: var(--site-light);
     min-height: 250px;
     transition: 0.3s;
-    
-    .plus-icon { font-size: 3rem; color: var(--site-primary); }
-    h3 { color: var(--site-primary); }
-    
-    &:hover { border-color: var(--site-orange); h3, .plus-icon { color: var(--site-orange); } }
+
+    .plus-icon {
+        font-size: 3rem;
+        color: var(--site-primary);
+    }
+
+    h3 {
+        color: var(--site-primary);
+    }
+
+    &:hover {
+        border-color: var(--site-orange);
+
+        h3,
+        .plus-icon {
+            color: var(--site-orange);
+        }
+    }
 }
 
 /* --- PULSANTI AZIONE PROPRIETA'--- */
 .action-admin {
     display: flex;
     border-top: 1px solid #eee;
+
     button {
         flex: 1;
         padding: 12px;
@@ -113,30 +136,54 @@
         transition: 0.2s;
     }
 }
-.btn-mod { color: var(--site-primary) !important; border-right: 1px solid #eee; }
-.btn-mod:hover { background: var(--site-cream); }
 
-.btn-del { color: #e74c3c !important; }
-.btn-del:hover { background: #fff0f0; }
+.btn-mod {
+    color: var(--site-primary) !important;
+    border-right: 1px solid #eee;
+}
+
+.btn-mod:hover {
+    background: var(--site-cream);
+}
+
+.btn-promo {
+    color: var(--site-orange) !important;
+    border-right: 1px solid #eee;
+}
+
+.btn-promo:hover {
+    background: #fff8f0;
+}
+
+.btn-del {
+    color: #e74c3c !important;
+}
+
+.btn-del:hover {
+    background: #fff0f0;
+}
 
 /* --- TEAM --- */
 .agent-item {
     display: flex;
     flex-direction: column;
-    gap: 10px;            
+    gap: 10px;
     padding: 15px 0;
     border-bottom: 1px solid var(--site-cream);
 }
 
 .text-btn {
     background: none;
-    margin-left: 0;        
-    text-align: right; 
+    margin-left: 0;
+    text-align: right;
     border: none;
     cursor: pointer;
     font-weight: 800;
     color: var(--site-primary);
-    &.danger { color: #e74c3c !important;  }
+
+    &.danger {
+        color: #e74c3c !important;
+    }
 }
 
 .btn-add-member {
@@ -151,7 +198,7 @@
     cursor: pointer;
 }
 
-.agent-role{
+.agent-role {
     color: gray !important;
     font-size: small;
 }
@@ -159,11 +206,13 @@
 
 /* --- STILE FORM AGGIUNTA MEMBRO --- */
 .add-member-container {
-    background: var(--site-cream); /* Sfondo leggermente colorato per distinguere il form */
+    background: var(--site-cream);
+    /* Sfondo leggermente colorato per distinguere il form */
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 25px;
-    border: 1px solid rgba(24, 47, 83, 0.1); /* site-primary con trasparenza */
+    border: 1px solid rgba(24, 47, 83, 0.1);
+    /* site-primary con trasparenza */
     animation: fadeIn 0.3s ease-in-out;
 
     h3 {
@@ -180,12 +229,13 @@
     gap: 12px;
     margin-bottom: 20px;
 
-    input, select {
+    input,
+    select {
         width: 100%;
         padding: 10px 5px;
         border: 1px solid #ddd;
         border-radius: 8px;
-        font-family: 'Google Sans', sans-serif; 
+        font-family: 'Google Sans', sans-serif;
         font-size: 0.9rem;
         color: var(--site-primary);
         background: white;
@@ -193,13 +243,14 @@
 
         &:focus {
             outline: none;
-            border-color: var(--site-orange); 
+            border-color: var(--site-orange);
         }
     }
 
     select {
         cursor: pointer;
-        appearance: none; /* Rimuove lo stile di default del browser */
+        appearance: none;
+        /* Rimuove lo stile di default del browser */
         background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 10px center;
@@ -209,7 +260,8 @@
 
 .form-actions {
     display: flex;
-    flex-direction: column; /* Come da tua preferenza precedente per i pulsanti sovrapposti */
+    flex-direction: column;
+    /* Come da tua preferenza precedente per i pulsanti sovrapposti */
     gap: 10px;
 
     button {
@@ -229,41 +281,60 @@
     .btn-save {
         background: var(--site-orange);
         color: white;
-        &:hover { opacity: 0.9; }
+
+        &:hover {
+            opacity: 0.9;
+        }
     }
 
     .btn-cancel {
         background: transparent;
-        color: #e74c3c; /* Colore errore/pericolo */
+        color: #e74c3c;
+        /* Colore errore/pericolo */
         border: 1px solid #e74c3c;
-        &:hover { background: #fff0f0; }
+
+        &:hover {
+            background: #fff0f0;
+        }
     }
 }
 
 /* Animazione semplice per l'apertura */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .editable-row {
     display: flex;
-    justify-content: center; /* Mantiene il layout centrato della Hero */
-    align-items: center;     /* Allinea verticalmente testo e bottoni */
-    gap: 15px;               /* Spazio tra il testo e la matitina */
-    min-height: 50px;        /* Altezza minima per evitare che la pagina "salti" al cambio view/edit */
+    justify-content: center;
+    /* Mantiene il layout centrato della Hero */
+    align-items: center;
+    /* Allinea verticalmente testo e bottoni */
+    gap: 15px;
+    /* Spazio tra il testo e la matitina */
+    min-height: 50px;
+    /* Altezza minima per evitare che la pagina "salti" al cambio view/edit */
     margin-bottom: 5px;
 
     /* Rimuoviamo i margini default per allineare perfettamente input e bottoni */
-    h1, p {
+    h1,
+    p {
         margin: 0;
     }
 
     &:hover {
         .btn-text-mod {
-            opacity: 1;              
-            visibility: visible;     
-            transform: translateX(0); 
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
         }
     }
 }
@@ -296,21 +367,25 @@
     font-family: inherit;
     font-size: 1rem;
     outline: none;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Input specifico per il Titolo (Nome Agenzia) */
 .input-edit-hero {
-    @extend .input-edit; /* Eredita lo stile base */
-    font-size: 2rem;     /* Grandezza simile all'H1 */
+    @extend .input-edit;
+    /* Eredita lo stile base */
+    font-size: 2rem;
+    /* Grandezza simile all'H1 */
     font-weight: 800;
     text-align: center;
-    min-width: 300px;    /* Larghezza minima per non schiacciarsi */
-   
+    min-width: 300px;
+    /* Larghezza minima per non schiacciarsi */
+
 }
 
 /* Bottoni Salva/Annulla */
-.btn-save-mini, .btn-cancel-mini {
+.btn-save-mini,
+.btn-cancel-mini {
     border: none;
     padding: 8px 14px;
     border-radius: 6px;
@@ -320,16 +395,18 @@
     color: white;
     transition: transform 0.1s;
 
-    &:active { transform: scale(0.95); }
+    &:active {
+        transform: scale(0.95);
+    }
 }
 
 .btn-save-mini {
-    background: #27ae60; 
+    background: #27ae60;
     box-shadow: 0 2px 5px rgba(39, 174, 96, 0.4);
 }
 
 .btn-cancel-mini {
-    background: #e74c3c; 
+    background: #e74c3c;
     box-shadow: 0 2px 5px rgba(231, 76, 60, 0.4);
 }
 
@@ -352,11 +429,60 @@
         &.active {
             background: var(--site-primary);
             color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         &:hover:not(.active) {
             background: rgba(24, 47, 83, 0.1);
         }
+    }
+}
+
+/* Modale Promozione */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s ease-out forwards;
+
+    h3 {
+        margin-top: 0;
+        color: var(--site-primary, #001f3f);
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    p {
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
