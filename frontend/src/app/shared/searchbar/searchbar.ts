@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SearchesService } from '../../services/searches/searches';
 import { AuthService } from '../../services/auth-service/auth';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-searchbar',
@@ -16,6 +17,7 @@ export class Searchbar implements OnInit {
   private geoService = inject(Geoapify);
   private searchesService = inject(SearchesService);
   private authService = inject(AuthService);
+  private toastr: ToastrService = inject(ToastrService);
 
   inputText = '';
 
@@ -159,6 +161,27 @@ export class Searchbar implements OnInit {
   }
 
   goToSearch() {
+    if (!this.inputText.trim()) {
+      this.toastr.error('Inserisci una località per iniziare la ricerca.', 'Campo mancante');
+      return;
+    }
+
+    // Validazioni per i filtri numerici
+    if (this.searchParams.roomCount !== null && (this.searchParams.roomCount < 0 || this.searchParams.roomCount > 100)) {
+      this.toastr.error('Il numero di stanze deve essere compreso tra 0 e 100.', 'Valore non valido');
+      return;
+    }
+
+    if (this.searchParams.area !== null && (this.searchParams.area < 1 || this.searchParams.area > 100000)) {
+      this.toastr.error('L\'area deve essere compresa tra 1 e 100.000 m².', 'Valore non valido');
+      return;
+    }
+
+    if (this.searchParams.floor !== null && (this.searchParams.floor < -10 || this.searchParams.floor > 200)) {
+      this.toastr.error('Il piano deve essere compreso tra -10 e 200.', 'Valore non valido');
+      return;
+    }
+
     this.isInputFocused = false;
     this.searchApplied.emit();
 

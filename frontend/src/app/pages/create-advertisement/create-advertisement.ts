@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Navbar } from '../../shared/navbar/navbar';
-import { Footer } from '../../shared/footer/footer';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Property } from '../../models/property';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +11,7 @@ import { Map } from '../../shared/map/map';
 
 @Component({
   selector: 'app-create-advertisement',
-  imports: [Navbar, Footer, Map, CommonModule, FormsModule],
+  imports: [Map, CommonModule, FormsModule],
   templateUrl: './create-advertisement.html',
   styleUrl: './create-advertisement.scss',
 })
@@ -28,6 +26,9 @@ export class CreateAdvertisement implements OnInit {
 
   newAddress: string = '';
   city: string = '';
+
+  initialMapCenter: [number, number] = [40.8518, 14.2681]; // Default center (Napoli)
+  initialMapMarker: [number, number] | null = null;
 
   newProperty = {
     title: '',
@@ -102,6 +103,16 @@ export class CreateAdvertisement implements OnInit {
   loadProperty(id: number) {
     this.propertyService.getPropertyById(id).subscribe({
       next: (property) => {
+        const currentUser = this.authService.currentUserSubject?.value;
+        const isOwner = currentUser?.id === property.agentId;
+        const isAgencyAdmin = currentUser?.role === 'agencyAdmin' && currentUser?.agencyId === property.User?.Agency?.id;
+
+        if (!isOwner && !isAgencyAdmin) {
+          this.toastr.error('Non hai i permessi per modificare questo immobile', 'Accesso Negato');
+          this.location.back();
+          return;
+        }
+
         this.newProperty = {
           title: property.title || '',
           description: property.description || '',
@@ -130,12 +141,17 @@ export class CreateAdvertisement implements OnInit {
         if (property.address) {
           const parts = property.address.split(',');
           if (parts.length > 1) {
-            this.city = parts.pop()?.trim() || '';
+            this.city = parts.pop()?.trim() || 'Napoli';
             this.newAddress = parts.join(',').trim();
           } else {
-            this.city = '';
+            this.city = 'Napoli';
             this.newAddress = property.address;
           }
+        }
+
+        if (this.newProperty.latitude && this.newProperty.longitude) {
+          this.initialMapMarker = [this.newProperty.latitude, this.newProperty.longitude];
+          this.initialMapCenter = this.initialMapMarker;
         }
       },
       error: (err) => {
@@ -147,6 +163,11 @@ export class CreateAdvertisement implements OnInit {
 
   onSubmit() {
     this.newProperty.address = `${this.newAddress}, ${this.city}`;
+
+    if (!this.newProperty.latitude || !this.newProperty.longitude) {
+      this.toastr.error('Seleziona una posizione sulla mappa.', 'Posizione mancante');
+      return;
+    }
 
     // Creazione del FormData per passare le immagini (come su postman)
     const formData = new FormData();
@@ -180,7 +201,13 @@ export class CreateAdvertisement implements OnInit {
           this.location.back();
         },
         error: (err) => {
-          this.toastr.error('Errore durante la modifica dell\'immobile.');
+          if (err.status === 400 && err.error?.error && Array.isArray(err.error.error)) {
+            err.error.error.forEach((errItem: any) => {
+              this.toastr.error(errItem.msg, 'Errore di Validazione');
+            });
+          } else {
+            this.toastr.error('Errore durante la modifica dell\'immobile.');
+          }
           console.error(err);
         }
       });
@@ -192,7 +219,13 @@ export class CreateAdvertisement implements OnInit {
           this.location.back();
         },
         error: (err) => {
-          this.toastr.error('Errore durante la creazione immobile.');
+          if (err.status === 400 && err.error?.error && Array.isArray(err.error.error)) {
+            err.error.error.forEach((errItem: any) => {
+              this.toastr.error(errItem.msg, 'Errore di Validazione');
+            });
+          } else {
+            this.toastr.error('Errore durante la creazione immobile.');
+          }
           console.error(err);
         }
       });

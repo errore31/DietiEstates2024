@@ -62,7 +62,20 @@
                     <label>Indirizzo</label>
                     <input type="text" name="newAddress" [(ngModel)]="newAddress" placeholder="Via Roma, 12">
                 </div>
+            </div>
 
+            <div class="form-group mt-3">
+                <label>Seleziona Posizione sulla Mappa (richiesto)</label>
+                <div class="map-wrapper" style="height: 300px; border-radius: 8px; overflow: hidden; margin-top: 10px;">
+                    <app-map [isEditable]="true" [center]="initialMapCenter" [initialMarker]="initialMapMarker"
+                        (locationSelected)="onLocationSelected($event)">
+                    </app-map>
+                </div>
+                <!-- Messaggio visivo in caso manchi la posizione -->
+                <small *ngIf="newProperty.latitude === 0 || newProperty.longitude === 0"
+                    style="color: #dc3545; display: block; margin-top: 8px;">
+                    <i class="fas fa-exclamation-circle"></i> Clicca sulla mappa per inserire il marker.
+                </small>
             </div>
         </section>
 

@@ -1,8 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../shared/navbar/navbar';
-import { Footer } from '../../shared/footer/footer';
 import { AuthService } from '../../services/auth-service/auth';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../services/user/user';
@@ -13,11 +11,11 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'app-account',
-  imports: [Navbar, Footer, FormsModule, CommonModule, RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './account.html',
   styleUrl: './account.scss',
 })
-export class Account implements OnInit{
+export class Account implements OnInit {
 
   currentUser: User | null = null;
   formPassword: boolean = false;
@@ -27,17 +25,17 @@ export class Account implements OnInit{
     surname: '',
     username: '',
     email: '',
-    oldPassword: '', 
-    newPassword: ''  
+    oldPassword: '',
+    newPassword: ''
   };
 
-  constructor(private authService: AuthService, private userService: UserService, 
-              private router: Router, private toastr: ToastrService){ }
+  constructor(private authService: AuthService, private userService: UserService,
+    private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(
       user => {
-        if(user){
+        if (user) {
           this.currentUser = user;
 
           this.editUser = {
@@ -50,18 +48,28 @@ export class Account implements OnInit{
       });
   }
 
-  saveProfile(){
+  saveProfile() {
 
     if (!this.currentUser || !this.currentUser.id) {
       console.error('Errore nel recupero utente');
       return;
     }
 
+    if (!this.editUser.name || !this.editUser.surname || !this.editUser.username || !this.editUser.email) {
+      this.toastr.error('I campi nome, cognome, username ed email sono obbligatori.', 'Attenzione');
+      return;
+    }
+
     console.log('Dati inviati per aggiornamento:', this.editUser);
 
     this.userService.updateUser(this.currentUser.id, this.editUser).subscribe({
-      next: () => {
+      next: (response: any) => {
+        // Aggiorniamo l'utente locale
         this.currentUser = { ...this.currentUser!, ...this.editUser };
+
+        // Sincronizziamo lo stato globale in AuthService
+        this.authService.updateUserState(this.currentUser!);
+
         this.router.navigate(['/account']);
         this.toastr.success('Profilo aggiornato con successo!');
         this.formPassword = false;
@@ -77,10 +85,15 @@ export class Account implements OnInit{
       error: (error) => {
         console.error('Error updating profile:', error.error);
 
-        if(error.status === 400 && error.error.message == 'Errore nella validazione degli input') {
+        if (error.status === 400 && error.error?.error && Array.isArray(error.error.error)) {
+          error.error.error.forEach((errItem: any) => {
+            this.toastr.error(errItem.msg, 'Errore di Validazione');
+          });
+        }
+        else if (error.status === 400 && error.error.message == 'Errore nella validazione degli input') {
           this.toastr.error('Errore nella validazione degli input', 'Errore di aggiornamento');
         }
-        else if(error.status === 400) {
+        else if (error.status === 400) {
           this.toastr.error('La vecchia password non è corretta', 'Errore di aggiornamento');
         }
         else {
@@ -90,14 +103,14 @@ export class Account implements OnInit{
     });
   }
 
-  enablePassword(){
+  enablePassword() {
     this.formPassword = !this.formPassword;
-    
+
     if (!this.formPassword) {
-        this.editUser.oldPassword = '';
-        this.editUser.newPassword = '';
+      this.editUser.oldPassword = '';
+      this.editUser.newPassword = '';
     }
-    
+
   }
 
 }

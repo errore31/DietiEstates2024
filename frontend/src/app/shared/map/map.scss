@@ -26,3 +26,58 @@
     overflow: hidden;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
+
+// Styling per i popup di Leaflet
+:host ::ng-deep {
+    .leaflet-popup-content-wrapper {
+        border-radius: 12px;
+        padding: 0; // Più compatto
+        overflow: hidden;
+    }
+
+    .leaflet-popup-content {
+        margin: 12px !important;
+        line-height: 1.2;
+    }
+
+    .map-popup-text {
+        text-align: center;
+
+        .popup-title {
+            color: var(--site-primary) !important;
+            font-size: 0.95rem;
+            display: block;
+            margin-bottom: 2px;
+            font-weight: 700;
+        }
+
+        .popup-price {
+            color: #777 !important;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .popup-actions {
+            .btn-popup-detail {
+                background-color: var(--site-primary);
+                color: white;
+                border: none;
+                padding: 6px 12px;
+                border-radius: 8px;
+                font-size: 0.75rem;
+                font-weight: 600;
+                cursor: pointer;
+                width: 100%;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background-color: var(--site-dark);
+                    transform: translateY(-1px);
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+    }
+}

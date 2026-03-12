@@ -7,7 +7,7 @@
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
             <input type="text" (focus)="onInputFocus()" (blur)="onInputBlur()" (input)="suggestion($event)"
-                [(ngModel)]="inputText" autocomplete="off" placeholder="Dove vuoi vivere? (es. Milano, Roma...)" />
+                [(ngModel)]="inputText" autocomplete="off" placeholder="Inserisci un luogo (es. Milano, Roma...)" />
         </div>
 
         <!-- Pannello dei suggerimenti autocompletamento custom -->
@@ -77,7 +77,6 @@
                 <option>Tutte le tipologie</option>
                 <option>Appartamento</option>
                 <option>Villa</option>
-                <option>Rustico</option>
                 <option>Ufficio</option>
             </select>
         </div>
@@ -167,7 +166,10 @@
                 </div>
                 <select class="styled-select mb-4" [(ngModel)]="searchParams.energyClass">
                     <option>Tutte le classi</option>
-                    <option>A</option>
+                    <option>A4</option>
+                    <option>A3</option>
+                    <option>A2</option>
+                    <option>A1</option>
                     <option>B</option>
                     <option>C</option>
                     <option>D</option>

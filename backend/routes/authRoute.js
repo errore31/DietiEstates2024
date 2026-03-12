@@ -4,7 +4,7 @@ import { userController } from '../controllers/usersController.js';
 import { validationSignup, validationLogin } from '../middleware/validation/validationAuth.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
 import { enforceAuthentication } from '../middleware/authorization.js';
-import passport from '../services/passportGoogle.js'; 
+import passport from '../services/passportGoogle.js';
 
 export const authRouter = express.Router();
 
@@ -12,7 +12,7 @@ export const authRouter = express.Router();
  * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
- **/ 
+ **/
 authRouter.post('/', validationLogin, errorValidation, async (req, res, next) => {
 
     try {
@@ -44,10 +44,10 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
  * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
- **/ 
-authRouter.post('/signup', validationSignup, errorValidation, async (req, res, next) =>{
+ **/
+authRouter.post('/signup', validationSignup, errorValidation, async (req, res, next) => {
 
-    try{
+    try {
         req.body.role = "user";
         const user = await userController.createUser(req, res);
 
@@ -56,7 +56,7 @@ authRouter.post('/signup', validationSignup, errorValidation, async (req, res, n
             user: user
         });
 
-    } catch (error){
+    } catch (error) {
         next(error);
     }
 
@@ -67,7 +67,7 @@ authRouter.get('/session', (req, res) => {
         res.status(200).json({
             loggedIn: true,
             user: {
-                id: req.session.userId,      
+                id: req.session.userId,
                 username: req.session.username,
                 name: req.session.name,
                 surname: req.session.surname,
@@ -82,40 +82,49 @@ authRouter.get('/session', (req, res) => {
 });
 
 authRouter.post('/logout', (req, res) => {
-  req.session.destroy(err => {
-    if (err) return res.status(500).json({ error: "Errore nel logout" });
-    res.clearCookie('connect.sid'); 
-    res.json({ message: "Logout effettuato" });
-  });
+    req.session.destroy(err => {
+        if (err) return res.status(500).json({ error: "Errore nel logout" });
+        res.clearCookie('connect.sid');
+        res.json({ message: "Logout effettuato" });
+    });
 });
 
 //Google route
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 //Callback dove Google rimanda l'utente
-authRouter.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:4200/login' }),
-  (req, res) => {
-    // Il login ha avuto successo
-    // Salviamo i dati nella TUA sessione
-    req.session.userId = req.user.id;
-    req.session.username = req.user.username;
-    req.session.role = req.user.role;
-    req.session.name = req.user.name;
-    req.session.surname = req.user.surname;
-    req.session.email = req.user.email;
-    req.session.auth = true;
+authRouter.get('/google/callback', (req, res, next) => {
+    passport.authenticate('google', (err, user, info) => {
+        if (err) {
+            return res.redirect('http://localhost:4200/login?error=server_error');
+        }
 
-    // Reindirizziamo l'utente alla home di Angular
-    res.redirect('http://localhost:4200/');
-  }
-);
+        if (!user) {
+            // User wasn't created/found, check info.message
+            const errorMsg = info && info.message ? info.message : 'auth_failed';
+            return res.redirect(`http://localhost:4200/auth?error=${errorMsg}`);
+        }
 
-authRouter.get('/user', enforceAuthentication, async(req, res, next) => {
-    try{
+        // Il login ha avuto successo
+        // Salviamo i dati nella TUA sessione
+        req.session.userId = user.id;
+        req.session.username = user.username;
+        req.session.role = user.role;
+        req.session.name = user.name;
+        req.session.surname = user.surname;
+        req.session.email = user.email;
+        req.session.auth = true;
+
+        // Reindirizziamo l'utente alla home di Angular
+        res.redirect('http://localhost:4200/');
+    })(req, res, next);
+});
+
+authRouter.get('/user', enforceAuthentication, async (req, res, next) => {
+    try {
         const user = await userController.getUser(req);
         res.send(user);
-    }catch (error){
+    } catch (error) {
         next(error);
     }
 })

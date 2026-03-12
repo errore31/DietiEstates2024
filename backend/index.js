@@ -1,5 +1,5 @@
 import express from 'express';
-import {startConnection, setDataTest} from './models/database.js';
+import { startConnection, setDataTest } from './models/database.js';
 import session from 'express-session';
 import 'dotenv/config';
 import cors from 'cors';
@@ -29,11 +29,11 @@ app.use('/uploads', express.static('uploads'));
 app.use(session({
   secret: process.env.SESSION_SECRET || 'default',
   resave: false,
-  saveUninitialized: false, 
+  saveUninitialized: false,
   cookie: {
-    maxAge: 10000 * 60, // 5 minutes
-    httpOnly: true, 
-    secure: false 
+    maxAge: 1000 * 60 * 60, //1 ORA
+    httpOnly: true,
+    secure: false
   }
 }));
 

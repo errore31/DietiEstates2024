@@ -1,14 +1,12 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; //angular riconosce qualsiasi tipo di tag
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../shared/navbar/navbar';
-import { Footer } from '../../shared/footer/footer';
 import { Property } from '../../models/property';
 import { PropertyService } from '../../services/property/property';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-advertisement',
-  imports: [Navbar, Footer, CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './advertisement.html',
   styleUrl: './advertisement.scss',

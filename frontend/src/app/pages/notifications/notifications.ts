@@ -1,15 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationService, AppNotification } from './notification.service';
-import { Navbar } from '../../shared/navbar/navbar';
-import { Footer } from '../../shared/footer/footer';
 
 type FilterType = 'all' | 'property' | 'promo';
 
 @Component({
   selector: 'app-notifications',
   standalone: true,
-  imports: [CommonModule, Navbar, Footer], 
+  imports: [CommonModule],
   templateUrl: './notifications.html',
   styleUrl: './notifications.scss',
 })

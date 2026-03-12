@@ -17,6 +17,12 @@ passport.use(new GoogleStrategy({
                 return done(null, user);
             }
 
+            // Aggiunta: controlliamo se l'email esiste già sul database per una registrazione classica
+            let existingEmail = await Users.findOne({ where: { email: profile.emails[0].value } });
+            if (existingEmail) {
+                return done(null, false, { message: 'email_exists' });
+            }
+
             // 2. Se non esiste, lo creiamo usando i dati forniti da Google
             user = await Users.create({
                 googleId: profile.id,

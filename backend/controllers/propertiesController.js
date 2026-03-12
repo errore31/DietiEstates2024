@@ -243,7 +243,7 @@ export class propertiesController {
 
     static async getSearchedProperties(propertyText, req, res) {
         try {
-            const searchText = propertyText.trim();
+            const searchText = propertyText.split(',')[0].trim();
             const properties = await Properties.findAll({
                 where: {
                     [Op.or]: [
@@ -276,10 +276,11 @@ export class propertiesController {
 
             const propertyWhere = {};
             if (text) {
+                const searchText = text.split(',')[0].trim();
                 propertyWhere[Op.or] = [
-                    { address: { [Op.iLike]: `%${text}%` } },
-                    { title: { [Op.iLike]: `%${text}%` } },
-                    { description: { [Op.iLike]: `%${text}%` } }
+                    { address: { [Op.iLike]: `%${searchText}%` } },
+                    { title: { [Op.iLike]: `%${searchText}%` } },
+                    { description: { [Op.iLike]: `%${searchText}%` } }
                 ];
             }
             if (type) {

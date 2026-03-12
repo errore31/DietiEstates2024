@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Navbar } from '../../shared/navbar/navbar';
 import { Searchbar } from '../../shared/searchbar/searchbar';
-import { Footer } from '../../shared/footer/footer';
 import { Card } from '../../shared/card/card';
 import { PropertyService } from '../../services/property/property';
 import { Map } from '../../shared/map/map';
@@ -11,7 +9,7 @@ import { Property } from '../../models/property';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, Navbar, Map, Searchbar, Footer, Card],
+  imports: [CommonModule, Map, Searchbar, Card],
   templateUrl: './home.html',
   styleUrl: './home.scss'
 })

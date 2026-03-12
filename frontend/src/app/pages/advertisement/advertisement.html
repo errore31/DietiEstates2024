@@ -66,10 +66,9 @@
 
         <div class="sidebar">
             <div class="agency-card">
-                <h3>Agenzia Immobiliare</h3>
+                <h3 style="color: var(--site-primary);">Agenzia Immobiliare</h3>
                 <div class="agency-info" *ngIf="property.User?.Agency; else noAgency">
                     <h2 class="agency-name">{{ property.User?.Agency?.name }}</h2>
-                    <p class="agency-business">{{ property.User?.Agency?.businessName }}</p>
                     <div class="agency-details">
                         <p>📍 {{ property.User?.Agency?.address }}</p>
                         <p>📞 {{ property.User?.Agency?.phone }}</p>

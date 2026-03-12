@@ -34,6 +34,7 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
   @Input() zoom: number = 13;
   @Input() isEditable: boolean = false;
   @Input() markers: any[] = [];
+  @Input() initialMarker: [number, number] | null = null;
   @Input() cityBoundary: string = '';
   @Input() navigationOnMapClick: boolean = false; // Nuovo input per abilitare/disabilitare il click navigazione
 
@@ -135,6 +136,11 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     if (this.isEditable) {
+      if (this.initialMarker) {
+        this.setSingleMarker(this.initialMarker[0], this.initialMarker[1]);
+        this.map.setView(this.initialMarker, this.zoom);
+      }
+
       this.map.on('click', (e: L.LeafletMouseEvent) => {
         const { lat, lng } = e.latlng;
         this.setSingleMarker(lat, lng);
@@ -186,9 +192,38 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
     this.markerLayer.clearLayers();
     this.markers.forEach(m => {
       if (m.latitude && m.longitude) {
-        L.marker([m.latitude, m.longitude])
-          .bindPopup(`<b>${m.title}</b><br>${m.price}€`)
-          .addTo(this.markerLayer);
+        const popupContent = `
+            <div class="map-popup-text">
+              <b class="popup-title">${m.title}</b>
+              <span class="popup-price">${m.price}€</span>
+              <div class="popup-actions">
+                <button class="btn-popup-detail" data-id="${m.id}">Vedi Dettagli</button>
+              </div>
+            </div>
+          `;
+
+        const marker = L.marker([m.latitude, m.longitude])
+          .bindPopup(popupContent, {
+            maxWidth: 200,
+            minWidth: 150
+          });
+
+        marker.on('popupopen', (e) => {
+          const container = e.popup.getElement();
+          if (container) {
+            const btn = container.querySelector('.btn-popup-detail');
+            if (btn) {
+              btn.addEventListener('click', () => {
+                const id = btn.getAttribute('data-id');
+                if (id) {
+                  this.router.navigate(['/advertisement', id]);
+                }
+              });
+            }
+          }
+        });
+
+        marker.addTo(this.markerLayer);
       }
     });
   }

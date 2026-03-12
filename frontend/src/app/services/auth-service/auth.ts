@@ -4,21 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr'; 
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/auth'; 
+  private apiUrl = 'http://localhost:3000/auth';
 
-   /**
-   * SCELTA TECNICA: BehaviorSubject invece di semplici booleani.
-   * A differenza di una variabile normale, il BehaviorSubject "emette" il valore a chiunque sia iscritto.
-   * Se la Navbar si iscrive a 'isAuthenticated$', riceverà l'aggiornamento istantaneo 
-   * non appena chiamiamo .next(true) dopo il login, senza ricaricare la pagina.
-   */
+  /**
+  * SCELTA TECNICA: BehaviorSubject invece di semplici booleani.
+  * A differenza di una variabile normale, il BehaviorSubject "emette" il valore a chiunque sia iscritto.
+  * Se la Navbar si iscrive a 'isAuthenticated$', riceverà l'aggiornamento istantaneo 
+  * non appena chiamiamo .next(true) dopo il login, senza ricaricare la pagina.
+  */
   private authState = new BehaviorSubject<boolean>(false);
   public currentUserSubject = new BehaviorSubject<User | null>(null);
 
@@ -27,7 +27,7 @@ export class AuthService {
   isAuthenticated$ = this.authState.asObservable(); //quando si modifica authState allora modifica questa variabile
   currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router,  private toastr: ToastrService ) {
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {
     /**
      * GESTIONE REFRESH (F5): 
      * Angular è una Single Page Application; se l'utente preme F5, la memoria viene cancellata.
@@ -37,15 +37,15 @@ export class AuthService {
     this.checkAuth().subscribe();
   }
 
-   login(credentials: any): Observable<any> {
+  login(credentials: any): Observable<any> {
     // Invia i dati al backend 
     return this.http.post<any>(`${this.apiUrl}`, credentials, { withCredentials: true }).pipe(
-        tap(response => {
-          // Aggiorniamo lo stato globale: la "radio" trasmette i nuovi dati a tutti i componenti
-          this.authState.next(true);
-          this.currentUserSubject.next(response.user);
-        })
-      );
+      tap(response => {
+        // Aggiorniamo lo stato globale: la "radio" trasmette i nuovi dati a tutti i componenti
+        this.authState.next(true);
+        this.currentUserSubject.next(response.user);
+      })
+    );
   }
 
   logout(): void {
@@ -77,6 +77,10 @@ export class AuthService {
         return of(false);
       })
     );
+  }
+
+  updateUserState(user: User): void {
+    this.currentUserSubject.next(user);
   }
 
   private logoutCleanup() {

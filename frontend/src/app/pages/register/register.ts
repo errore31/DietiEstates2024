@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; 
-import { ToastrService } from 'ngx-toastr'; 
+import { Router, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Footer } from '../../shared/footer/footer';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../../services/user/user'; 
+import { UserService } from '../../services/user/user';
 
 @Component({
   selector: 'app-register',
   imports: [Footer, FormsModule, CommonModule, RouterModule],
   templateUrl: './register.html',
-  styleUrl: './register.scss', 
+  styleUrl: './register.scss',
 })
 export class Register {
-  
+
   // Oggetto per raccogliere i dati del form
   registerData: any = {
     name: '',
@@ -24,15 +24,15 @@ export class Register {
   };
 
   constructor(
-    private userService: UserService, 
-    private router: Router, 
-    private toastr: ToastrService 
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   onRegister() {
     // Validazione base nel frontend
     if (!this.registerData.name || !this.registerData.surname || !this.registerData.username || !this.registerData.email || !this.registerData.password) {
-      this.toastr.warning('Per favore, compila tutti i campi.', 'Attenzione');
+      this.toastr.error('Per favore, compila tutti i campi.', 'Attenzione');
       return;
     }
 
@@ -40,16 +40,22 @@ export class Register {
     this.userService.createUser(this.registerData).subscribe({
       next: () => {
         this.toastr.success('Effettua il login.', 'Registrazione riuscita');
-        this.router.navigate(['/auth']); 
+        this.router.navigate(['/auth']);
       },
       error: (error) => {
         console.error('Errore registrazione:', error);
-        
+
         // Gestione errori di validazione del backend
-         if(error.status === 400 && error.error.message == 'Errore nella validazione degli input') {
-          this.toastr.error('Errore nella validazione degli input', 'Errore di aggiornamento');
+        if (error.status === 400 && error.error?.error && Array.isArray(error.error.error)) {
+          // Cicla l'array degli errori di express-validator
+          error.error.error.forEach((errItem: any) => {
+            this.toastr.error(errItem.msg, 'Errore di Validazione');
+          });
         }
-        else if(error.status === 409) {
+        else if (error.status === 400 && error.error?.message === 'Errore nella validazione degli input') {
+          this.toastr.error('Errore nella validazione degli input', 'Errore');
+        }
+        else if (error.status === 409) {
           this.toastr.error('Username o email già utilizzati', 'Errore di registrazione');
         } else {
           this.toastr.error('Si è verificato un errore. Riprova più tardi.', 'Errore di sistema');

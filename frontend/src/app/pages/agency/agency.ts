@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Navbar } from '../../shared/navbar/navbar';
-import { Footer } from '../../shared/footer/footer';
 import { Card } from '../../shared/card/card';
 import { AgencyModel } from '../../models/agency';
 import { AgencyService } from '../../services/agency/agency';
@@ -20,7 +18,7 @@ import { AuthService } from '../../services/auth-service/auth';
 @Component({
   selector: 'app-agency',
   standalone: true,
-  imports: [CommonModule, FormsModule, Navbar, Footer, Card],
+  imports: [CommonModule, FormsModule, Card],
   templateUrl: './agency.html',
   styleUrl: './agency.scss',
 })
@@ -136,7 +134,14 @@ export class Agency implements OnInit {
   }
 
   editProperty(id?: number) {
-    this.router.navigate(['/properties/edit', id]);
+    const user = this.authService.currentUserSubject?.value;
+    const isOwner = this.allProperties.find(prop => prop.id === id)?.agentId === user?.id;
+
+    if (isOwner || this.isAgencyAdmin) {
+      this.router.navigate(['/properties/edit', id]);
+    } else {
+      this.toastr.error('Non hai il permesso per modificare l\'immobile', 'Errore');
+    }
   }
 
   deleteProperty(id: number) {
@@ -147,6 +152,11 @@ export class Agency implements OnInit {
         this.router.navigate(['/agency', this.agency?.id]);
       },
       error: (err) => {
+        if (err.status === 403) {
+          this.toastr.error('Non hai il permesso per eliminare questo immobile', 'Errore');
+        } else {
+          this.toastr.error('Errore durante l\'eliminazione dell\'immobile', 'Errore');
+        }
         console.log('Status Errore:', err.status);
       }
     });
@@ -173,6 +183,10 @@ export class Agency implements OnInit {
   }
 
   addMember() {
+    if (!this.newAgent.name || !this.newAgent.surname || !this.newAgent.username || !this.newAgent.email || !this.newAgent.password) {
+      this.toastr.error('Compila tutti i campi obbligatori per l\'agente.', 'Attenzione');
+      return;
+    }
 
     if (this.agency?.id) { //serve per aggiungere l'id all'utente
 
@@ -190,7 +204,11 @@ export class Agency implements OnInit {
         },
         error: (err) => {
 
-          if (err.status === 400 && err.error?.errors) {
+          if (err.status === 400 && err.error?.error && Array.isArray(err.error.error)) {
+            err.error.error.forEach((errItem: any) => {
+              this.toastr.error(errItem.msg, 'Errore di validazione');
+            });
+          } else if (err.status === 400 && err.error?.errors) {
             this.toastr.error(err.error.errors[0].msg, 'Errore di validazione');
           } else if (err.error && err.error.message) {
             this.toastr.error(err.error.message, 'Errore');
@@ -238,6 +256,11 @@ export class Agency implements OnInit {
 
   saveMember() {
     if (this.isEditing && this.currentEditId) {
+      if (!this.newAgent.name || !this.newAgent.surname || !this.newAgent.username || !this.newAgent.email) {
+        this.toastr.error('Compila i campi obbligatori per l\'agente.', 'Attenzione');
+        return;
+      }
+
       this.userService.updateAgent(this.currentEditId, this.newAgent).subscribe({
         next: (response: any) => {
           const updatedUser = response.user;
@@ -250,6 +273,15 @@ export class Agency implements OnInit {
           }
           this.closerForm();
           this.toastr.success('Agente aggiornato');
+        },
+        error: (err) => {
+          if (err.status === 400 && err.error?.error && Array.isArray(err.error.error)) {
+            err.error.error.forEach((errItem: any) => {
+              this.toastr.error(errItem.msg, 'Errore di validazione');
+            });
+          } else {
+            this.toastr.error('Errore durante l\'aggiornamento dell\'agente.', 'Errore');
+          }
         }
       });
     } else {
@@ -259,6 +291,7 @@ export class Agency implements OnInit {
 
   saveAgencyField() {
     if (this.agency?.id) {
+
       this.agencyService.updateAgency(this.agency.id, this.agencyInfo).subscribe({
         next: (response: any) => {
           const updatedAgency = response.agency;
@@ -308,7 +341,7 @@ export class Agency implements OnInit {
 
   submitPromotion() {
     if (!this.currentPromoPropertyId || !this.promoMessageText.trim()) {
-      this.toastr.warning('Inserisci il testo della promozione', 'Attenzione');
+      this.toastr.error('Inserisci il testo della promozione', 'Attenzione');
       return;
     }
 
