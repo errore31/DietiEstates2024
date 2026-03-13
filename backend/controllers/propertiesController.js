@@ -278,9 +278,7 @@ export class propertiesController {
             if (text) {
                 const searchText = text.split(',')[0].trim();
                 propertyWhere[Op.or] = [
-                    { address: { [Op.iLike]: `%${searchText}%` } },
-                    { title: { [Op.iLike]: `%${searchText}%` } },
-                    { description: { [Op.iLike]: `%${searchText}%` } }
+                    { address: { [Op.iLike]: `%${searchText}%` } }
                 ];
             }
             if (type) {
