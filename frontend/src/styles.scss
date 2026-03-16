@@ -5,11 +5,18 @@
 
 // Variabili globali CSS
 :root {
-  --site-primary: #182F53;
-  --site-dark: #1C1B26;
-  --site-light: #fffff0;
-  --site-cream: #f9EEE2;
+  --site-primary: #173857;
+  /* Deep Navy - Primario / Trust */
+  --site-secondary: #4D7396;
+  /* Muted Steel Blue - Secondario / Hover */
+  --site-dark: #573E17;
+  /* Dark Bronze - Testi / Contrasto */
+  --site-light: #A3BDD6;
+  /* Soft Sky - Decorativo / Testi secondari */
+  --site-cream: #FFF3DF;
+  /* Cream White - Sfondo / Superfici pulite */
   --site-orange: #f39c12;
+  /* Orange - CTA / Contrast / Prezzi */
 }
 
 body {
@@ -34,7 +41,7 @@ div,
 input {
   font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
 
-  color: var(--site-cream);
+  color: var(--site-dark);
 
   margin: 0;
   padding: 0;

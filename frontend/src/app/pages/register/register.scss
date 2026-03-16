@@ -51,7 +51,7 @@ input {
   color : var(--site-dark);
   box-sizing: border-box;
 
-  &:focus { border-color: var(--site-primary); }
+  &:focus { border-color: var(--site-orange); }
 }
 
 .hint-text {
@@ -63,7 +63,7 @@ input {
 
 /* Bottone Principale */
 .btn-primary {
-  width: 100%; padding: 15px; background-color: var(--site-primary);
+  width: 100%; padding: 15px; background-color: var(--site-orange);
   color: white; border: none; border-radius: 12px; font-weight: 700;
   font-size: 1rem; cursor: pointer; transition: transform 0.2s, filter 0.2s;
 

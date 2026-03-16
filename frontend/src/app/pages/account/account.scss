@@ -63,9 +63,9 @@
         
         &:focus {
             outline: none;
-            border-color: var(--site-primary);
+            border-color: var(--site-orange);
             background: white;
-            box-shadow: 0 0 0 3px rgba(24, 47, 83, 0.1);
+            box-shadow: 0 0 0 3px rgba(172, 145, 102, 0.1);
         }
     }
 }
@@ -82,7 +82,7 @@
     transition: transform 0.1s;
     box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
 
-    &:hover { background: #d35400; }
+    &:hover { filter: brightness(1.1); }
     &:active { transform: scale(0.98); }
 
     /* Modifica per il tasto nell'header */

@@ -122,9 +122,9 @@ label {
 
         &:focus {
             outline: none;
-            border-color: var(--site-primary);
+            border-color: var(--site-orange);
             background: white;
-            box-shadow: 0 0 0 3px rgba(24, 47, 83, 0.1);
+            box-shadow: 0 0 0 3px rgba(172, 145, 102, 0.1);
         }
     }
 }
@@ -180,9 +180,9 @@ label {
 
     /* Supporto CSS moderno per selezionare il genitore */
     &:has(input:checked) {
-        background: var(--site-primary);
+        background: var(--site-orange);
         color: white;
-        border-color: var(--site-primary);
+        border-color: var(--site-orange);
     }
 }
 
@@ -249,7 +249,7 @@ label {
         box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
 
         &:hover {
-            background: #d35400;
+            filter: brightness(1.1);
         }
     }
 }

@@ -69,7 +69,7 @@ input {
   color : var(--site-dark);
 
   &:focus {
-    border-color: var(--site-primary);
+    border-color: var(--site-orange);
   }
 }
 
@@ -90,7 +90,7 @@ input {
 .btn-primary {
   width: 100%;
   padding: 15px;
-  background-color: var(--site-primary);
+  background-color: var(--site-orange);
   color: white;
   border: none;
   border-radius: 12px;

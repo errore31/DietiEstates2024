@@ -159,8 +159,8 @@ span {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #f0f4ff;
-    color: #4361ee;
+    background: #fff5eb;
+    color: var(--site-orange);
     border: none;
     padding: 10px 16px;
     border-radius: 20px;
@@ -171,7 +171,7 @@ span {
 }
 
 .btn-filters:hover {
-    background: #e0e8ff;
+    background: #ffe8cc;
 }
 
 .chevron-icon {
@@ -183,7 +183,7 @@ span {
 }
 
 .btn-search {
-    background: var(--site-primary);
+    background: var(--site-orange);
     color: white;
     border: none;
     padding: 12px 24px;
@@ -195,7 +195,8 @@ span {
 }
 
 .btn-search:hover {
-    background: var(--site-primary);
+    background: var(--site-orange);
+    filter: brightness(1.1);
 }
 
 /* Filters Panel */
@@ -250,7 +251,7 @@ span {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--site-primary, #2d3748);
+    background: var(--site-orange);
     cursor: pointer;
 }
 
@@ -291,7 +292,7 @@ span {
 }
 
 .input-box input:focus {
-    border-color: var(--site-primary);
+    border-color: var(--site-orange);
 }
 
 .mt-3 {
@@ -373,7 +374,7 @@ span {
 }
 
 .btn-apply-filter {
-    background: var(--site-primary);
+    background: var(--site-orange);
     color: white;
     border: none;
     padding: 12px 25px;
@@ -384,7 +385,8 @@ span {
 }
 
 .btn-apply-filter:hover {
-    background: var(--site-primary);
+    background: var(--site-orange);
+    filter: brightness(1.1);
 }
 
 @media (max-width: 768px) {

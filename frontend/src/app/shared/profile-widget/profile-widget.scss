@@ -1,9 +1,10 @@
-a, span{
+a,
+span {
     color: var(--site-light);
     text-decoration: none;
 }
 
-.btn-logout{
+.btn-logout {
 
     background-color: var(--site--dark);
     color: var(--site-cream);
@@ -12,8 +13,8 @@ a, span{
     border: 0;
     cursor: pointer;
 
-    margin-left: 15px;       
-    font-size: inherit;      
+    margin-left: 15px;
+    font-size: inherit;
     font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
     padding: 5px 10px;
 
@@ -28,7 +29,7 @@ a, span{
 ::ng-deep .mat-mdc-menu-panel {
     background-color: var(--site-primary) !important;
     min-width: 150px !important;
-    padding: 0 !important; 
+    padding: 0 !important;
 }
 
 ::ng-deep .mat-mdc-menu-content {
@@ -39,15 +40,20 @@ a, span{
 
 button[mat-raised-button] {
     background-color: transparent !important;
-    box-shadow: none !important; 
-    color: var(--site-light) !important; 
+    box-shadow: none !important;
+    color: var(--site-orange) !important;
     font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
+
+    // Forza il colore anche sugli elementi interni (come lo span generato da Angular Material)
+    ::ng-deep .mdc-button__label {
+        color: var(--site-orange) !important;
+    }
 }
 
 button[mat-menu-item] {
     background-color: var(--site-primary) !important;
-    border-radius: 0 !important; 
-    
+    border-radius: 0 !important;
+
     span {
         color: var(--site-light) !important;
     }
@@ -56,4 +62,3 @@ button[mat-menu-item] {
         background-color: rgba(255, 255, 255, 0.1) !important;
     }
 }
-
