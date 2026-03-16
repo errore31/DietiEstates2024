@@ -12,6 +12,7 @@ import { agenciesRouter } from './routes/agenciesRoute.js'
 import { searchesRouter } from './routes/searchesRoute.js'
 import { notificationsRouter } from './routes/notificationsRoute.js'
 import { userRouter } from './routes/usersRoute.js';
+import { requestAgencyRouter } from './routes/requestAgencyRoute.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 
@@ -50,6 +51,7 @@ app.use("/propertiesFeatures", proprietiesFeaturesRouter);
 app.use("/agencies", agenciesRouter);
 app.use("/searches", searchesRouter);
 app.use("/notifications", notificationsRouter);
+app.use("/requestAgency", requestAgencyRouter);
 app.use(errorHandler);
 
 

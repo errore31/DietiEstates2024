@@ -1,0 +1,88 @@
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh; 
+  background-color: var(--site-cream); 
+  font-family: 'Google Sans', sans-serif;
+  padding: 40px 20px;
+}
+
+.register-card {
+  background: white; 
+  padding: 30px;
+  border-radius: 25px;
+  width: 100%;
+  max-width: 550px; 
+  box-shadow: 0 10px 30px rgba(24, 47, 83, 0.1); 
+  text-align: center;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.logo-dieti { color: var(--site-primary); font-weight: bold; font-size: 1.8rem; }
+.logo-estate { color: var(--site-orange); font-weight: bold; font-size: 1.8rem; }
+
+h2 { color: var(--site-dark); margin-top: 15px; font-weight: bold; }
+.subtitle { color: #888; font-size: 0.9rem; margin-bottom: 25px; }
+
+.section-title {
+    text-align: left;
+    font-weight: 700;
+    color: var(--site-primary);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+/* Form Styling */
+.form-group { text-align: left; margin-bottom: 15px; }
+
+label { 
+  display: block; font-weight: 600; color: var(--site-dark); 
+  margin-bottom: 6px; font-size: 0.85rem; 
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid #eee;
+  border-radius: 12px;
+  background-color: #fcfcfc;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+  color : var(--site-dark);
+  box-sizing: border-box;
+
+  &:focus { border-color: var(--site-primary); }
+}
+
+.divider {
+  margin: 20px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+/* Bottone Principale */
+.btn-primary {
+  width: 100%; padding: 15px; background-color: var(--site-primary);
+  color: white; border: none; border-radius: 12px; font-weight: 700;
+  font-size: 1rem; cursor: pointer; transition: transform 0.2s, filter 0.2s;
+  margin-top: 10px;
+
+  &:hover { filter: brightness(1.2); transform: translateY(-1px); }
+}
+
+.footer-text { 
+  margin-top: 25px; font-size: 0.9rem; color: #777; 
+  a { color: var(--site-orange); font-weight: 700; text-decoration: none; cursor: pointer;}
+}
+
+.back-link { 
+  display: block; margin-top: 20px; color: #8d8b8b; text-decoration: none; font-size: 0.8rem; cursor: pointer;
+}

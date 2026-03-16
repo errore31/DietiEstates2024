@@ -1,0 +1,54 @@
+<div class="admin-wrapper">
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>Richieste Creazione Agenzia</h1>
+            <p>Gestione delle richieste pendenti per l'adesione alla piattaforma</p>
+        </header>
+
+        <main class="dashboard-content">
+            <div *ngIf="loading" class="loading-state">
+                Caricamento in corso...
+            </div>
+
+            <div *ngIf="!loading && requests.length === 0" class="empty-state">
+                <div class="icon">📁</div>
+                <h3>Nessuna richiesta pendente</h3>
+                <p>Al momento non ci sono nuove richieste di creazione agenzia da valutare.</p>
+            </div>
+
+            <div *ngIf="!loading && requests.length > 0" class="request-grid">
+                <div *ngFor="let req of requests" class="request-card">
+                    <div class="card-header">
+                        <h3>{{ req.agencyName }}</h3>
+                        <span class="badge">Pendente</span>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="info-group">
+                            <label>Ragione Sociale:</label>
+                            <span>{{ req.businessName }}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Sede:</label>
+                            <span>{{ req.address }}</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Referente:</label>
+                            <span>{{ req.name }} {{ req.surname }} ({{ req.username }})</span>
+                        </div>
+                        <div class="info-group">
+                            <label>Contatti:</label>
+                            <span>{{ req.email }} | {{ req.phone }}</span>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button (click)="approve(req.id!)" class="btn-approve">Approva</button>
+                        <button (click)="reject(req.id!)" class="btn-reject">Rifiuta</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -8,8 +8,11 @@ import { CreateAdvertisement } from './pages/create-advertisement/create-adverti
 import { Account } from './pages/account/account';
 import { Register } from './pages/register/register';
 import { Notifications } from './pages/notifications/notifications';
+import { CreateAgencyRequest } from './pages/create-agency-request/create-agency-request';
+import { AdminDashboard } from './pages/admin/admin-dashboard/admin-dashboard';
 import { authorizationAgencyGuard } from './guard/authorizationAgency-guard';
 import { authorizationGuard } from './guard/authorization-guard';
+import { adminGuard } from './guard/admin-guard';
 
 export const routes: Routes = [
     {
@@ -26,6 +29,17 @@ export const routes: Routes = [
         path: 'register',
         component: Register,
         title: 'DietiEstate2425 - Register'
+    },
+    {
+        path: 'agency-request',
+        component: CreateAgencyRequest,
+        title: 'DietiEstate2425 - Crea Agenzia'
+    },
+    {
+        path: 'admin',
+        component: AdminDashboard,
+        title: 'DietiEstate2425 - Admin Dashboard',
+        canActivate: [authorizationGuard, adminGuard]
     },
     {
         path: 'advertisement/:id',

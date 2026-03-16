@@ -4,9 +4,10 @@ import { createModel as createAgenciesModel } from "./agencies.js";
 import { createModel as createUserModel } from "./users.js";
 import { createModel as createPropertiesModel } from "./properties.js";
 import { createModel as createCaratteristichePropertiesModel } from "./propertiesFeatures.js";
-import { createModel as createNotificationsModel} from "./notifications.js";
-import { createModel as createSearchesModel} from "./searches.js";
-import {createModel as createImagesModel} from "./images.js";
+import { createModel as createNotificationsModel } from "./notifications.js";
+import { createModel as createSearchesModel } from "./searches.js";
+import { createModel as createImagesModel } from "./images.js";
+import { createModel as createRequestAgenciesModel } from "./requestAgency.js";
 
 const database = new Sequelize(
   process.env.DB_NAME || 'dietiestates',
@@ -14,10 +15,10 @@ const database = new Sequelize(
   process.env.DB_PASS || 'password',
   {
     host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres', 
+    dialect: 'postgres',
     retry: { // if connection fails, retry
       match: [/ECONNREFUSED/],
-      max: 5 
+      max: 5
     },
     port: process.env.DB_PORT || 5432,
     logging: false,
@@ -31,13 +32,14 @@ createCaratteristichePropertiesModel(database);
 createNotificationsModel(database);
 createSearchesModel(database);
 createImagesModel(database);
+createRequestAgenciesModel(database);
 
-export const { Users, Agencies, Properties, PropertiesFeatures, Notifications, Searches, Images } = database.models;
+export const { Users, Agencies, Properties, PropertiesFeatures, Notifications, Searches, Images, RequestAgencies } = database.models;
 
 Agencies.hasMany(Users, { foreignKey: 'agencyId', onDelete: 'CASCADE' });
 Users.belongsTo(Agencies, { foreignKey: 'agencyId' });
 
-Users.hasMany(Properties, { foreignKey: 'agentId', onDelete: 'SET NULL'});
+Users.hasMany(Properties, { foreignKey: 'agentId', onDelete: 'SET NULL' });
 Properties.belongsTo(Users, { foreignKey: 'agentId' });
 
 Users.hasMany(Notifications, { foreignKey: 'userId', onDelete: 'CASCADE' });
@@ -53,7 +55,7 @@ Properties.hasMany(Images, { foreignKey: 'propertyId', allowNull: false, onDelet
 Images.belongsTo(Properties, { foreignKey: 'propertyId' });
 
 export default database;
-export async function startConnection(){
+export async function startConnection() {
   try {
     await database.authenticate();
     await database.sync({ alter: true });
@@ -211,7 +213,7 @@ async function createExtras(userId) {
 export async function setDataTest() {
   try {
     console.log('Starting data initialization...');
-    
+
     // 1. Reset Database
     await database.sync({ force: true });
 

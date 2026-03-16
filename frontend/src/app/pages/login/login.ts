@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormsModule } from '@angular/forms';
 
@@ -8,7 +8,8 @@ import { AuthService } from '../../services/auth-service/auth';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
@@ -47,8 +48,12 @@ export class Login implements OnInit {
     console.log('Dati inviati:', this.loginData);
     // Qui chiamerai il tuo service per fare il login al backend
     this.authService.login(this.loginData).subscribe({
-      next: () => {
-        this.router.navigate(['/']); // vai in home se login OK
+      next: (response) => {
+        if (response.user && response.user.role === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/']); // vai in home se login OK
+        }
         this.toastr.success(`Bentornat* ${this.loginData.username}!`, 'Accesso riuscito');
       },
       error: (error) => {
