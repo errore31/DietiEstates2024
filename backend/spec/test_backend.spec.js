@@ -82,7 +82,6 @@ describe("Verifica Funzionalità Critiche Backend - DietiEstates2024", () => {
         it("TC_08 - Dovrebbe matchare la località ignorando spazi e case", () => {
             expect(TestTarget.checkMatch("Via Roma 10, Napoli", "NAPOLI , NA")).toBeTrue();
         });
-        it
         it("TC_09 - Dovrebbe restituire false se la località non matcha", () => {
         expect(TestTarget.checkMatch("Via Roma 10, Napoli", "Milano, MI")).toBeFalse();
         });
