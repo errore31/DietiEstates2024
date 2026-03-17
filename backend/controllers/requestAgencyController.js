@@ -1,8 +1,7 @@
 import { Agencies, Users, RequestAgencies } from "../models/database.js";
 import bcrypt from "bcrypt";
-import { randomBytes } from "crypto";
 
-export class requestAgencyController {
+export class RequestAgencyController {
 
     static async createRequest(req) {
         try {
@@ -58,10 +57,9 @@ export class requestAgencyController {
             throw error;
         }
 
-        // Generiamo una password sicura
+        
         const hashedPassword = await bcrypt.hash("admin", 10);
 
-        // ---- Operazione Atomica ----
         try {
             // 1. Crea l'agenzia
             const agency = await Agencies.create({

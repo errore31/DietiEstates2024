@@ -1,6 +1,9 @@
 const TestTarget = {
     // TEST 1: Registrazione Utente 
     validateRegistration: (email, password, role) => {
+        
+        if (!email || email.length > 254) return "EMAIL_INVALIDA";
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const validRoles = ['User', 'Agency', 'Admin'];
 

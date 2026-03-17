@@ -16,7 +16,7 @@ export const validationCreateRequestAgency = [
     body("phone")
         .trim().notEmpty().withMessage("Il telefono è obbligatorio")
         .isLength({ min: 6, max: 20 }).withMessage("Il numero di telefono non è valido")
-        .matches(/^[0-9\s\+]+$/).withMessage("Il telefono può contenere solo numeri, spazi e il simbolo +"),
+        .matches(/^[\d\s+]+$/).withMessage("Il telefono può contenere solo numeri, spazi e il simbolo +"),
 
     body("email")
         .trim().notEmpty().withMessage("L'email è obbligatoria")
@@ -35,5 +35,5 @@ export const validationCreateRequestAgency = [
     body("username")
         .trim().notEmpty().withMessage("Lo username è obbligatorio")
         .isLength({ min: 3, max: 50 }).withMessage("Lo username deve avere tra 3 e 50 caratteri")
-        .matches(/^[a-zA-Z0-9_]+$/).withMessage("Lo username può contenere solo lettere, numeri e underscore"),
+        .matches(/^\w+$/).withMessage("Lo username può contenere solo lettere, numeri e underscore"),
 ];

@@ -2,5 +2,5 @@ projectKey=DietiEstates-Backend
 serverUrl=http://localhost:9000
 serverVersion=10.7.0.96327
 dashboardUrl=http://localhost:9000/dashboard?id=DietiEstates-Backend
-ceTaskId=1431df32-dd6d-4374-b88e-9b2f647b1ddd
-ceTaskUrl=http://localhost:9000/api/ce/task?id=1431df32-dd6d-4374-b88e-9b2f647b1ddd
+ceTaskId=dc98dfa7-ec0e-4a5f-bd7d-57d2905db1bd
+ceTaskUrl=http://localhost:9000/api/ce/task?id=dc98dfa7-ec0e-4a5f-bd7d-57d2905db1bd

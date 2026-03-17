@@ -1,5 +1,5 @@
 import express from 'express';
-import { requestAgencyController } from '../controllers/requestAgencyController.js';
+import { RequestAgencyController } from '../controllers/requestAgencyController.js';
 import { enforceAuthentication, ensureIsAdmin } from '../middleware/authorization.js';
 import { validationCreateRequestAgency } from '../middleware/validation/validationRequestAgency.js';
 import { errorValidation } from '../middleware/validation/errorValidation.js';
@@ -12,7 +12,7 @@ export const requestAgencyRouter = express.Router();
  */
 requestAgencyRouter.post('/', validationCreateRequestAgency, errorValidation, async (req, res, next) => {
     try {
-        const request = await requestAgencyController.createRequest(req);
+        const request = await RequestAgencyController.createRequest(req);
         res.status(201).json({
             message: "Richiesta inviata con successo! Verrai contattato a breve.",
             request: { id: request.id }
@@ -28,7 +28,7 @@ requestAgencyRouter.post('/', validationCreateRequestAgency, errorValidation, as
  */
 requestAgencyRouter.get('/', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
-        const requests = await requestAgencyController.getAllRequests();
+        const requests = await RequestAgencyController.getAllRequests();
         res.status(200).json(requests);
     } catch (error) {
         next(error);
@@ -42,7 +42,7 @@ requestAgencyRouter.get('/', enforceAuthentication, ensureIsAdmin, async (req, r
 requestAgencyRouter.post('/:id/approve', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
         const id = req.params.id;
-        const { agency, agencyAdmin } = await requestAgencyController.approveRequest(id);
+        const { agency, agencyAdmin } = await RequestAgencyController.approveRequest(id);
         res.status(201).json({
             message: "Richiesta approvata! Agenzia e amministratore creati con successo.",
             agency: { id: agency.id, businessName: agency.businessName },
@@ -60,7 +60,7 @@ requestAgencyRouter.post('/:id/approve', enforceAuthentication, ensureIsAdmin, a
 requestAgencyRouter.delete('/:id/reject', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
         const id = req.params.id;
-        await requestAgencyController.rejectRequest(id);
+        await RequestAgencyController.rejectRequest(id);
         res.status(200).json({
             message: "Richiesta rifiutata ed eliminata con successo."
         });

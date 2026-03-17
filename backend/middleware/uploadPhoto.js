@@ -5,6 +5,7 @@
 
 import multer from 'multer';
 import path from 'path';
+import crypto from 'crypto';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -18,9 +19,15 @@ const storage = multer.diskStorage({
     if(!['.jpg', '.jpeg', '.png',].includes(ext.toLowerCase())) {
       return cb(new Error('Only images are allowed'));
     }
-    const uniqueName = Date.now() + '-' + Math.round(Math.random() * 1E9) + ext;
+    const randomString = crypto.randomBytes(16).toString('hex'); 
+    const uniqueName = `${Date.now()}-${randomString}${ext}`;
     cb(null, uniqueName); 
   }
 });
 
-export const uploadImage = multer({ storage }).array("image", 10); //export a array image into req.files; max 10 image
+export const uploadImage = multer({ 
+    storage: storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024 
+    },
+}).array('images', 10);
