@@ -16,6 +16,11 @@
 \geometry{a4paper, margin=1in}
 \usepackage{pdfpages}
 \usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=1.18}
 
 % --- GESTIONE COLORI (Tutti qui, senza duplicati) ---
 \usepackage[table, svgnames]{xcolor} 
@@ -1411,6 +1416,118 @@ Al termine della fase di \textbf{Unit Testing}, sono stati eseguiti complessivam
     \caption{Esito dell'esecuzione dei 13 Unit Test tramite console (con Jasmine)}
     \label{fig:risultati-console}
 \end{figure}
+\newpage
+
+\section{Analisi dell'Usabilità e Validazione UI}
+Per accertare la qualità dell'interazione uomo-macchina (HCI) all'interno di DietiEstates, è stato strutturato un rigoroso protocollo di validazione. L'obiettivo primario è stato misurare il grado di intuitività del sistema, con un focus mirato sull'efficacia dello storico delle ricerche e sulla tempestività delle notifiche push. La strategia di testing si è divisa in due macro-fasi: una revisione analitica da parte degli addetti ai lavori (Expert Review) e una sessione di validazione sul campo con un campione rappresentativo (Usability Testing).
+
+\subsection{Fase 1: Expert Review e Ispezione Euristica}
+Prima di coinvolgere gli utenti, il prototipo è stato sottoposto a una Ispezione Euristica. Il team ha valutato le interfacce utilizzando come perimetro di riferimento le celebri 10 euristiche di Nielsen, declinandole sulle necessità specifiche di un portale immobiliare.
+
+\subsubsection{Definizione della Checklist Sistematica}
+Il processo di review è stato guidato dalla seguente checklist valutativa:
+\begin{enumerate}
+    \item \textbf{Visibilità e Feedback immediato:} Il sistema comunica in tempo reale i cambiamenti? (Verifica focalizzata sul badge delle notifiche push).
+    \item \textbf{Aderenza al mondo reale:} I termini utilizzati ("Vani", "Locazione", "Classe Energetica") sono comprensibili senza ambiguità tecniche?
+    \item \textbf{Libertà d'azione e reversibilità:} L'utente può facilmente tornare sui propri passi? (Es. visualizzare ricerche precedenti).
+    \item \textbf{Standardizzazione visiva:} I bottoni di call-to-action e le gerarchie tipografiche mantengono la stessa coerenza tra la homepage e le viste di dettaglio?
+    \item \textbf{Prevenzione strutturale degli errori:} I form di filtraggio bloccano l'inserimento di dati contrastanti (es. prezzo minimo maggiore del massimo)?
+    \item \textbf{Supporto cognitivo (Riconoscere vs Ricordare):} L'interfaccia solleva l'utente dallo sforzo mnemonico? \textit{(Punto focale per testare la validità dello "Storico Ricerche")}.
+    \item \textbf{Flessibilità d'uso:} Sono presenti shortcut per gli utenti più esperti che desiderano bypassare la navigazione standard?
+    \item \textbf{Minimalismo estetico:} Le card degli immobili mettono in risalto la componente fotografica evitando sovraccarichi informativi?
+    \item \textbf{Gestione trasparente degli errori:} Le pagine vuote (es. "Nessun immobile trovato") offrono percorsi alternativi chiari?
+    \item \textbf{Help contestuale:} La documentazione e i tooltip di supporto sono accessibili direttamente nei punti di maggiore frizione?
+\end{enumerate}
+
+\subsubsection{Applicazione della Checklist e Interventi Correttivi}
+L'applicazione di questa griglia ha confermato la validità dell'architettura dell'informazione. La feature dello \textit{Storico Ricerche} ha superato a pieni voti il controllo sul "Supporto cognitivo", permettendo di recuperare query complesse con una singola interazione. Allo stesso modo, le \textit{Notifiche} hanno garantito un eccellente livello di "Visibilità e Feedback". 
+Durante la review sono emerse solo criticità minori: è stato necessario aumentare il contrasto cromatico delle notifiche lette rispetto a quelle da leggere e inserire un pulsante più visibile per il reset totale dei filtri di ricerca.
+
+\subsection{Fase 2: Usability Testing sul Campo}
+Risolti i problemi preliminari, si è passati alla conduzione di un test empirico basato sulla metodologia del \textit{Discount Usability Engineering}. L'esperimento ha combinato metriche oggettive (time-on-task) e valutazioni soggettive.
+
+\subsubsection{Procedura Sperimentale, Metriche e Soggetti}
+Il campione di test è stato accuratamente profilato per coprire diversi livelli di alfabetizzazione digitale e molteplici casi d'uso (acquisto, affitto, monitoraggio). Le metriche considerate includono il tempo di completamento delle operazioni e il tasso di soddisfazione post-esperimento.
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\textwidth}{c c c c X X}
+\toprule
+\textbf{ID} & \textbf{Età} & \textbf{Genere} & \textbf{Skill IT} & \textbf{Occupazione} & \textbf{Obiettivo del Tester} \\
+\midrule
+P1 & 23 & M & Avanzata & Studente Univ. & Ricerca di immobili economici tramite filtri avanzati e mappa. \\
+P2 & 34 & F & Media & Impiegata & Monitoraggio degli immobili tramite alert e notifiche. \\
+P3 & 48 & M & Media & Professionista & Utilizzo basato sul recupero dello storico delle ricerche. \\
+P4 & 58 & F & Base & Casalinga & Navigazione visuale ed esplorazione del portale. \\
+P5 & 65 & M & Critica & Pensionato & Valutazione della chiarezza delle informazioni. \\
+\bottomrule
+\end{tabularx}
+\caption{Demografia e profilazione del campione coinvolto nell'esperimento.}
+\label{tab:usability_users}
+\end{table}
+
+\subsubsection{Definizione dei Task (Scenari d'Uso)}
+Ogni soggetto ha affrontato quattro scenari operativi senza alcun supporto esterno:
+\begin{enumerate}
+    \item [Task 1] \textbf{Ricerca Strutturata:} Configurare una query inserendo città, range di prezzo e metratura minima.
+    \item [Task 2] \textbf{Recupero Rapido:} Interrompere la sessione, tornare alla pagina principale e ripristinare la ricerca precedente usando lo Storico.
+    \item [Task 3] \textbf{Gestione Alert:} Notare l'arrivo di un aggiornamento, aprire il pannello notifiche e leggerne il contenuto.
+    \item [Task 4] \textbf{Contatto Diretto:} Aprire una scheda immobile e individuare i bottoni per comunicare con l'agenzia di riferimento.
+\end{enumerate}
+
+\subsubsection{Survey Post-Esperimento}
+Per raccogliere il feedback qualitativo, i tester hanno compilato un questionario basato su scala Likert a 5 punti (1 = Pessimo/Disaccordo, 5 = Ottimo/D'accordo), strutturato per validare i principi di usabilità:
+
+\begin{table}[h!]
+\centering
+\small
+\begin{tabularx}{\textwidth}{c X l}
+\toprule
+\textbf{ID} & \textbf{Domanda di Valutazione} & \textbf{Principio Analizzato} \\
+\midrule
+Q1 & Il vocabolario del portale è stato sempre chiaro e non ambiguo. & Linguaggio Naturale \\
+Q2 & Richiamare le mie ricerche passate è stato immediato e utile. & Carico Cognitivo \\
+Q3 & Il sistema di notifiche mi ha avvisato in modo tempestivo. & Visibilità di Stato \\
+Q4 & L'interfaccia si comporta in modo prevedibile in ogni schermata. & Coerenza Visiva \\
+Q5 & Quando ho sbagliato a inserire un filtro, è stato facile rimediare. & Controllo Utente \\
+Q6 & I messaggi del sistema sono rassicuranti e costruttivi. & Gestione Errori \\
+\bottomrule
+\end{tabularx}
+\caption{Questionario di gradimento (Adattamento SUS).}
+\label{tab:usability_survey}
+\end{table}
+
+\subsubsection{Analisi e Discussione dei Risultati}
+I dati raccolti certificano l'eccellente usabilità del prodotto. Sul fronte dell'efficienza oggettiva (Figura \ref{fig:times}), l'interazione con le Notifiche (Task 3) e lo Storico (Task 2) ha richiesto tempi brevissimi (rispettivamente 12 e 15 secondi di media), dimostrando che le feature abbattono efficacemente i tempi di navigazione. Il Task 1, prevedibilmente più lungo (65 secondi), rientra comunque in un range ottimale per la compilazione di moduli complessi.
+
+\begin{figure}[h!]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xbar,
+    y axis line style = { opacity = 0 },
+    axis x line       = none,
+    tickwidth         = 0pt,
+    enlarge y limits  = 0.2,
+    enlarge x limits  = 0.02,
+    symbolic y coords = {Task 4 - Contatto, Task 3 - Alert, Task 2 - Recupero, Task 1 - Ricerca},
+    nodes near coords,
+    nodes near coords align={horizontal},
+    width=10cm,
+    height=6cm,
+    bar width=15pt,
+    fill=blue!30,
+    draw=blue!80
+  ]
+  \addplot coordinates { (45,Task 4 - Contatto) (12,Task 3 - Alert) (15,Task 2 - Recupero) (65,Task 1 - Ricerca) };
+\end{axis}
+\end{tikzpicture}
+\caption{Metriche oggettive: Tempo medio speso per Task (in secondi).}
+\label{fig:times}
+\end{figure}
+
+L'analisi soggettiva derivata dal survey (Figura \ref{fig:radar}) conferma pienamente le metriche temporali. La voce Q2 (relativa allo Storico) ha dominato il questionario con un punteggio di 4.8 su 5, confermandosi la funzionalità più apprezzata per l'abbattimento del carico cognitivo. Ottimi risultati anche per le Notifiche (Q3 - 4.6/5). Le uniche lievi flessioni si registrano sulla voce Q5 (4.0/5), suggerendo che, per futuri aggiornamenti, i pulsanti di reset delle form dovrebbero essere resi ancor più evidenti visivamente.
 
 
 

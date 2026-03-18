@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.17)  17 MAR 2026 21:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.17)  18 MAR 2026 18:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/Users/gdelu/Desktop/progettoDocumentazione/main.tex
-(c:/Users/gdelu/Desktop/progettoDocumentazione/main.tex
+**c:/Users/gdelu/Documents/GitHub/DietiEstates2024/Documentazione/main.tex
+(c:/Users/gdelu/Documents/GitHub/DietiEstates2024/Documentazione/main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -693,16 +693,60 @@ File: tikzlibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 File: pgflibraryfadings.code.tex 2025-08-29 v3.1.11a (3.1.11a)
 ))) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcbposter.code.tex
 Library (tcolorbox): 'tcbposter.code.tex' version '6.9.0'
-)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/pgfplots\pgfplots.sty (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+ (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscore.code.tex
+\t@pgfplots@toka=\toks50
+\t@pgfplots@tokb=\toks51
+\t@pgfplots@tokc=\toks52
+\pgfplots@tmpa=\dimen314
+\c@pgfplots@coordindex=\count367
+\c@pgfplots@scanlineindex=\count368
+ (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgfplotssysgeneric.code.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgfplotslibrary.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_loader.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryfpu.code.tex)
+Package pgfplots: loading complementary utilities for your pgf version...
+\t@pgf@toka=\toks53
+\t@pgf@tokb=\toks54
+\t@pgf@tokc=\toks55
+(C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/oldpgfcompatib\pgfplotsoldpgfsupp_pgfutil-common-lists.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructure.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsliststructureext.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count369
+) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsmatrix.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/numtable\pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count370
+\t@pgfplotstable@a=\toks56
+) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/liststructure\pgfplotsdeque.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsbinary.data.code.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotsutil.verb.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count371
+ (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/sys\pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotscolormap.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/util\pgfplotscolor.code.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsstackedplots.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsplothandlers.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplothandler.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsmeshplotimage.code.tex))) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.scaling.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotscoordprocessing.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.errorbars.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.markers.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplotsticks.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots\pgfplots.paths.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen315
+\pgfdecoratedremainingdistance=\dimen316
+\pgfdecoratedinputsegmentcompleteddistance=\dimen317
+\pgfdecoratedinputsegmentremainingdistance=\dimen318
+\pgf@decorate@distancetomove=\dimen319
+\pgf@decorate@repeatstate=\count372
+\pgfdecorationsegmentamplitude=\dimen320
+\pgfdecorationsegmentlength=\dimen321
+)
+\tikz@lib@dec@box=\box88
+) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.pathmorphing.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathmorphing.code.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarydecorations.pathreplacing.code.tex (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries/decorations\pgflibrarydecorations.pathreplacing.code.tex)) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count373
+\pgfplots@xmin@reg=\dimen322
+\pgfplots@xmax@reg=\dimen323
+\pgfplots@ymin@reg=\dimen324
+\pgfplots@ymax@reg=\dimen325
+\pgfplots@zmin@reg=\dimen326
+\pgfplots@zmax@reg=\dimen327
+) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/generic/pgfplots/libs\tikzlibrarypgfplots.polar.code.tex) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
 Package: colortbl 2024/10/29 v1.0k Color table columns (DPC)
-\everycr=\toks50
+\everycr=\toks57
 \minrowclearance=\skip74
-\rownum=\count367
+\rownum=\count374
 ) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\svgnam.def
 File: svgnam.def 2024/09/29 v3.02 Predefined colors according to SVG 1.1 (UK)
 ) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count368
+\l__color_backend_stack_int=\count375
 ) (main.aux
 
 LaTeX Warning: Label `fig:usecase' multiply defined.
@@ -746,46 +790,46 @@ LaTeX Warning: Label `fig:usecase' multiply defined.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Info: Redefining \it@ocap on input line 87.
-LaTeX Info: Redefining \it@ccap on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Info: Redefining \it@ocap on input line 92.
+LaTeX Info: Redefining \it@ccap on input line 92.
  (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count369
-\scratchdimen=\dimen314
-\scratchbox=\box88
-\nofMPsegments=\count370
-\nofMParguments=\count371
-\everyMPshowfont=\toks51
-\MPscratchCnt=\count372
-\MPscratchDim=\dimen315
-\MPnumerator=\count373
-\makeMPintoPDFobject=\count374
-\everyMPtoPDFconversion=\toks52
+\scratchcounter=\count376
+\scratchdimen=\dimen328
+\scratchbox=\box89
+\nofMPsegments=\count377
+\nofMParguments=\count378
+\everyMPshowfont=\toks58
+\MPscratchCnt=\count379
+\MPscratchDim=\dimen329
+\MPnumerator=\count380
+\makeMPintoPDFobject=\count381
+\everyMPtoPDFconversion=\toks59
 ) (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (C:\Users\gdelu\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 87.
+Package hyperref Info: Link coloring OFF on input line 92.
  (main.out) (main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
@@ -834,328 +878,331 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-\c@lstlisting=\count375
-<images/LogoUnina.jpg, id=318, 1204.5pt x 391.4625pt>
+\c@lstlisting=\count382
+
+Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
+
+<images/LogoUnina.jpg, id=354, 1204.5pt x 391.4625pt>
 File: images/LogoUnina.jpg Graphic file (type jpg)
 <use images/LogoUnina.jpg>
-Package pdftex.def Info: images/LogoUnina.jpg  used on input line 99.
+Package pdftex.def Info: images/LogoUnina.jpg  used on input line 104.
 (pdftex.def)             Requested size: 226.48395pt x 73.60213pt.
- [1
+[1
 
 {C:/Users/gdelu/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/LogoUnina.jpg>] (main.toc [2])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
  [3] [4] [5]
-<images/fotoUseCase/UseCaseFinale.png, id=431, 862.22125pt x 1472.50125pt>
+<images/fotoUseCase/UseCaseFinale.png, id=476, 862.22125pt x 1472.50125pt>
 File: images/fotoUseCase/UseCaseFinale.png Graphic file (type png)
 <use images/fotoUseCase/UseCaseFinale.png>
-Package pdftex.def Info: images/fotoUseCase/UseCaseFinale.png  used on input line 208.
+Package pdftex.def Info: images/fotoUseCase/UseCaseFinale.png  used on input line 213.
 (pdftex.def)             Requested size: 330.66463pt x 564.7016pt.
  [6 <./images/fotoUseCase/UseCaseFinale.png>]
-<images/fotoUseCase/UtenteGenericoUseCase.png, id=439, 607.068pt x 112.62074pt>
+<images/fotoUseCase/UtenteGenericoUseCase.png, id=484, 607.068pt x 112.62074pt>
 File: images/fotoUseCase/UtenteGenericoUseCase.png Graphic file (type png)
 <use images/fotoUseCase/UtenteGenericoUseCase.png>
-Package pdftex.def Info: images/fotoUseCase/UtenteGenericoUseCase.png  used on input line 216.
+Package pdftex.def Info: images/fotoUseCase/UtenteGenericoUseCase.png  used on input line 221.
 (pdftex.def)             Requested size: 452.9679pt x 84.03229pt.
-<images/fotoUseCase/UtenteNonRegistratoUseCase.png, id=440, 743.77875pt x 245.11575pt>
+<images/fotoUseCase/UtenteNonRegistratoUseCase.png, id=485, 743.77875pt x 245.11575pt>
 File: images/fotoUseCase/UtenteNonRegistratoUseCase.png Graphic file (type png)
 <use images/fotoUseCase/UtenteNonRegistratoUseCase.png>
-Package pdftex.def Info: images/fotoUseCase/UtenteNonRegistratoUseCase.png  used on input line 229.
+Package pdftex.def Info: images/fotoUseCase/UtenteNonRegistratoUseCase.png  used on input line 234.
 (pdftex.def)             Requested size: 452.9679pt x 149.281pt.
  [7 <./images/fotoUseCase/UtenteGenericoUseCase.png> <./images/fotoUseCase/UtenteNonRegistratoUseCase.png>]
-<images/fotoUseCase/UtenteRegistratoUseCase.png, id=448, 649.2255pt x 278.2395pt>
+<images/fotoUseCase/UtenteRegistratoUseCase.png, id=493, 649.2255pt x 278.2395pt>
 File: images/fotoUseCase/UtenteRegistratoUseCase.png Graphic file (type png)
 <use images/fotoUseCase/UtenteRegistratoUseCase.png>
-Package pdftex.def Info: images/fotoUseCase/UtenteRegistratoUseCase.png  used on input line 243.
+Package pdftex.def Info: images/fotoUseCase/UtenteRegistratoUseCase.png  used on input line 248.
 (pdftex.def)             Requested size: 452.9679pt x 194.12947pt.
-<images/fotoUseCase/AgenteImmobilirareUseCase.png, id=449, 563.10374pt x 364.36125pt>
+<images/fotoUseCase/AgenteImmobilirareUseCase.png, id=494, 563.10374pt x 364.36125pt>
 File: images/fotoUseCase/AgenteImmobilirareUseCase.png Graphic file (type png)
 <use images/fotoUseCase/AgenteImmobilirareUseCase.png>
-Package pdftex.def Info: images/fotoUseCase/AgenteImmobilirareUseCase.png  used on input line 256.
+Package pdftex.def Info: images/fotoUseCase/AgenteImmobilirareUseCase.png  used on input line 261.
 (pdftex.def)             Requested size: 452.9679pt x 293.09615pt.
  [8 <./images/fotoUseCase/UtenteRegistratoUseCase.png> <./images/fotoUseCase/AgenteImmobilirareUseCase.png>]
-<images/fotoUseCase/AmministratoreAgenziaUseCase.png, id=456, 552.8655pt x 328.8285pt>
+<images/fotoUseCase/AmministratoreAgenziaUseCase.png, id=501, 552.8655pt x 328.8285pt>
 File: images/fotoUseCase/AmministratoreAgenziaUseCase.png Graphic file (type png)
 <use images/fotoUseCase/AmministratoreAgenziaUseCase.png>
-Package pdftex.def Info: images/fotoUseCase/AmministratoreAgenziaUseCase.png  used on input line 269.
+Package pdftex.def Info: images/fotoUseCase/AmministratoreAgenziaUseCase.png  used on input line 274.
 (pdftex.def)             Requested size: 452.9679pt x 269.42035pt.
  [9 <./images/fotoUseCase/AmministratoreAgenziaUseCase.png>] [10]
-<images/Personas1.jpg, id=466, 1445.4pt x 813.0375pt>
+<images/Personas1.jpg, id=511, 1445.4pt x 813.0375pt>
 File: images/Personas1.jpg Graphic file (type jpg)
 <use images/Personas1.jpg>
-Package pdftex.def Info: images/Personas1.jpg  used on input line 340.
+Package pdftex.def Info: images/Personas1.jpg  used on input line 345.
 (pdftex.def)             Requested size: 452.9679pt x 254.79314pt.
-<images/Personas2.jpg, id=467, 1445.4pt x 813.0375pt>
+<images/Personas2.jpg, id=512, 1445.4pt x 813.0375pt>
 File: images/Personas2.jpg Graphic file (type jpg)
 <use images/Personas2.jpg>
-Package pdftex.def Info: images/Personas2.jpg  used on input line 341.
+Package pdftex.def Info: images/Personas2.jpg  used on input line 346.
 (pdftex.def)             Requested size: 452.9679pt x 254.79314pt.
-<images/Personas3.jpg, id=468, 1445.4pt x 813.0375pt>
+<images/Personas3.jpg, id=513, 1445.4pt x 813.0375pt>
 File: images/Personas3.jpg Graphic file (type jpg)
 <use images/Personas3.jpg>
-Package pdftex.def Info: images/Personas3.jpg  used on input line 347.
+Package pdftex.def Info: images/Personas3.jpg  used on input line 352.
 (pdftex.def)             Requested size: 452.9679pt x 254.79314pt.
-<images/Personas4.jpg, id=469, 1445.4pt x 813.0375pt>
+<images/Personas4.jpg, id=514, 1445.4pt x 813.0375pt>
 File: images/Personas4.jpg Graphic file (type jpg)
 <use images/Personas4.jpg>
-Package pdftex.def Info: images/Personas4.jpg  used on input line 348.
+Package pdftex.def Info: images/Personas4.jpg  used on input line 353.
 (pdftex.def)             Requested size: 452.9679pt x 254.79314pt.
  [11 <./images/Personas1.jpg> <./images/Personas2.jpg>] [12 <./images/Personas3.jpg> <./images/Personas4.jpg>]
-<images/CockBurnRicercaImmobile.png, id=478, 485.56406pt x 612.78937pt>
+<images/CockBurnRicercaImmobile.png, id=523, 485.56406pt x 612.78937pt>
 File: images/CockBurnRicercaImmobile.png Graphic file (type png)
 <use images/CockBurnRicercaImmobile.png>
-Package pdftex.def Info: images/CockBurnRicercaImmobile.png  used on input line 360.
+Package pdftex.def Info: images/CockBurnRicercaImmobile.png  used on input line 365.
 (pdftex.def)             Requested size: 330.66463pt x 417.29903pt.
-<images/CockBurnRicercaImmobile2.png, id=479, 487.8225pt x 491.58656pt>
+<images/CockBurnRicercaImmobile2.png, id=524, 487.8225pt x 491.58656pt>
 File: images/CockBurnRicercaImmobile2.png Graphic file (type png)
 <use images/CockBurnRicercaImmobile2.png>
-Package pdftex.def Info: images/CockBurnRicercaImmobile2.png  used on input line 365.
+Package pdftex.def Info: images/CockBurnRicercaImmobile2.png  used on input line 370.
 (pdftex.def)             Requested size: 330.66463pt x 333.2168pt.
  [13 <./images/CockBurnRicercaImmobile.png>] [14 <./images/CockBurnRicercaImmobile2.png>]
-<images/CockBurnCaricamentoImmobile.png, id=491, 544.28343pt x 575.14874pt>
+<images/CockBurnCaricamentoImmobile.png, id=536, 544.28343pt x 575.14874pt>
 File: images/CockBurnCaricamentoImmobile.png Graphic file (type png)
 <use images/CockBurnCaricamentoImmobile.png>
-Package pdftex.def Info: images/CockBurnCaricamentoImmobile.png  used on input line 372.
+Package pdftex.def Info: images/CockBurnCaricamentoImmobile.png  used on input line 377.
 (pdftex.def)             Requested size: 330.66463pt x 349.40973pt.
  [15 <./images/CockBurnCaricamentoImmobile.png>]
-<images/CockBurnAggiornamentoImmobile.png, id=497, 492.33937pt x 531.48563pt>
+<images/CockBurnAggiornamentoImmobile.png, id=542, 492.33937pt x 531.48563pt>
 File: images/CockBurnAggiornamentoImmobile.png Graphic file (type png)
 <use images/CockBurnAggiornamentoImmobile.png>
-Package pdftex.def Info: images/CockBurnAggiornamentoImmobile.png  used on input line 379.
+Package pdftex.def Info: images/CockBurnAggiornamentoImmobile.png  used on input line 384.
 (pdftex.def)             Requested size: 330.66463pt x 356.96938pt.
  [16 <./images/CockBurnAggiornamentoImmobile.png>]
-<images/CockBurnCreazioneAgente.png, id=503, 493.0922pt x 523.20468pt>
+<images/CockBurnCreazioneAgente.png, id=548, 493.0922pt x 523.20468pt>
 File: images/CockBurnCreazioneAgente.png Graphic file (type png)
 <use images/CockBurnCreazioneAgente.png>
-Package pdftex.def Info: images/CockBurnCreazioneAgente.png  used on input line 386.
+Package pdftex.def Info: images/CockBurnCreazioneAgente.png  used on input line 391.
 (pdftex.def)             Requested size: 330.66463pt x 350.87263pt.
  [17 <./images/CockBurnCreazioneAgente.png>]
-<images/fotomockup/index/1.png, id=509, 1429.59094pt x 712.16063pt>
+<images/fotomockup/index/1.png, id=554, 1429.59094pt x 712.16063pt>
 File: images/fotomockup/index/1.png Graphic file (type png)
 <use images/fotomockup/index/1.png>
-Package pdftex.def Info: images/fotomockup/index/1.png  used on input line 409.
+Package pdftex.def Info: images/fotomockup/index/1.png  used on input line 414.
 (pdftex.def)             Requested size: 362.37569pt x 180.51732pt.
-<images/fotomockup/index/2.png, id=510, 1424.32124pt x 703.87968pt>
+<images/fotomockup/index/2.png, id=555, 1424.32124pt x 703.87968pt>
 File: images/fotomockup/index/2.png Graphic file (type png)
 <use images/fotomockup/index/2.png>
-Package pdftex.def Info: images/fotomockup/index/2.png  used on input line 415.
+Package pdftex.def Info: images/fotomockup/index/2.png  used on input line 420.
 (pdftex.def)             Requested size: 362.37569pt x 179.07344pt.
  [18
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.423 \textbf{Funzionalità principali:}
+l.428 \textbf{Funzionalità principali:}
                                         
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.423 \textbf{Funzionalità principali:}
+l.428 \textbf{Funzionalità principali:}
                                          <./images/fotomockup/index/1.png> <./images/fotomockup/index/2.png>]
-<images/fotomockup/Ricerca.png, id=519, 1927.2pt x 1062.97125pt>
+<images/fotomockup/Ricerca.png, id=564, 1927.2pt x 1062.97125pt>
 File: images/fotomockup/Ricerca.png Graphic file (type png)
 <use images/fotomockup/Ricerca.png>
-Package pdftex.def Info: images/fotomockup/Ricerca.png  used on input line 432.
+Package pdftex.def Info: images/fotomockup/Ricerca.png  used on input line 437.
 (pdftex.def)             Requested size: 362.37569pt x 199.85808pt.
  [19
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.436 \newpage
+l.441 \newpage
                <./images/fotomockup/Ricerca.png>]
-<images/fotomockup/visualizzazione immobile.png, id=527, 1927.2pt x 1276.77pt>
+<images/fotomockup/visualizzazione immobile.png, id=572, 1927.2pt x 1276.77pt>
 File: images/fotomockup/visualizzazione immobile.png Graphic file (type png)
 <use images/fotomockup/visualizzazione immobile.png>
-Package pdftex.def Info: images/fotomockup/visualizzazione immobile.png  used on input line 450.
+Package pdftex.def Info: images/fotomockup/visualizzazione immobile.png  used on input line 455.
 (pdftex.def)             Requested size: 362.37569pt x 240.05617pt.
  [20
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.453 \newpage
+l.458 \newpage
                <./images/fotomockup/visualizzazione immobile.png>]
-<images/fotomockup/mia agenzia/3.png, id=534, 1430.34375pt x 704.6325pt>
+<images/fotomockup/mia agenzia/3.png, id=579, 1430.34375pt x 704.6325pt>
 File: images/fotomockup/mia agenzia/3.png Graphic file (type png)
 <use images/fotomockup/mia agenzia/3.png>
-Package pdftex.def Info: images/fotomockup/mia agenzia/3.png  used on input line 466.
+Package pdftex.def Info: images/fotomockup/mia agenzia/3.png  used on input line 471.
 (pdftex.def)             Requested size: 362.37569pt x 178.51234pt.
  [21
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.470 \newpage
+l.475 \newpage
                <./images/fotomockup/mia agenzia/3.png>]
-<images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png, id=541, 1927.2pt x 2863.69875pt>
+<images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png, id=586, 1927.2pt x 2863.69875pt>
 File: images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png Graphic file (type png)
 <use images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png>
-Package pdftex.def Info: images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png  used on input line 484.
+Package pdftex.def Info: images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png  used on input line 489.
 (pdftex.def)             Requested size: 362.37569pt x 538.42789pt.
  [22] [23
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.488 \newpage
+l.493 \newpage
                <./images/fotomockup/inserimento immobile/screencapture-file-C-Users-giggi-Desktop-DieitiEstateFrontEnd-aggiuntaImmobile-html-2026-03-16-17_07_54.png>]
-<images/fotomockup/login.png, id=552, 1101.11375pt x 940.51375pt>
+<images/fotomockup/login.png, id=597, 1101.11375pt x 940.51375pt>
 File: images/fotomockup/login.png Graphic file (type png)
 <use images/fotomockup/login.png>
-Package pdftex.def Info: images/fotomockup/login.png  used on input line 500.
+Package pdftex.def Info: images/fotomockup/login.png  used on input line 505.
 (pdftex.def)             Requested size: 271.7835pt x 232.14284pt.
-<images/fotomockup/registrazione.png, id=553, 1927.2pt x 950.55125pt>
+<images/fotomockup/registrazione.png, id=598, 1927.2pt x 950.55125pt>
 File: images/fotomockup/registrazione.png Graphic file (type png)
 <use images/fotomockup/registrazione.png>
-Package pdftex.def Info: images/fotomockup/registrazione.png  used on input line 506.
+Package pdftex.def Info: images/fotomockup/registrazione.png  used on input line 511.
 (pdftex.def)             Requested size: 271.7835pt x 134.04805pt.
  [24
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.510 \newpage
+l.515 \newpage
               
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.510 \newpage
+l.515 \newpage
                <./images/fotomockup/login.png> <./images/fotomockup/registrazione.png>]
-<images/fotomockup/profilo utente.png, id=562, 1101.11375pt x 1342.01375pt>
+<images/fotomockup/profilo utente.png, id=607, 1101.11375pt x 1342.01375pt>
 File: images/fotomockup/profilo utente.png Graphic file (type png)
 <use images/fotomockup/profilo utente.png>
-Package pdftex.def Info: images/fotomockup/profilo utente.png  used on input line 519.
+Package pdftex.def Info: images/fotomockup/profilo utente.png  used on input line 524.
 (pdftex.def)             Requested size: 362.37569pt x 441.65775pt.
  [25
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.523 \newpage
+l.528 \newpage
                <./images/fotomockup/profilo utente.png>]
-<images/fotomockup/profilo agente.png, id=570, 1927.2pt x 962.59625pt>
+<images/fotomockup/profilo agente.png, id=615, 1927.2pt x 962.59625pt>
 File: images/fotomockup/profilo agente.png Graphic file (type png)
 <use images/fotomockup/profilo agente.png>
-Package pdftex.def Info: images/fotomockup/profilo agente.png  used on input line 529.
+Package pdftex.def Info: images/fotomockup/profilo agente.png  used on input line 534.
 (pdftex.def)             Requested size: 362.37569pt x 180.98575pt.
  [26
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.539 \newpage
+l.544 \newpage
                <./images/fotomockup/profilo agente.png>] [27] [28] [29] [30] [31]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 678.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 683.
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 679.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 684.
  [32]
-<images/DatabaseUML.pdf, id=686, 1927.2pt x 1084.05pt>
+<images/DatabaseUML.pdf, id=731, 1927.2pt x 1084.05pt>
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf>
-Package pdftex.def Info: images/DatabaseUML.pdf  used on input line 751.
+Package pdftex.def Info: images/DatabaseUML.pdf  used on input line 756.
 (pdftex.def)             Requested size: 1927.19533pt x 1084.04736pt.
-<images/DatabaseUML.pdf, id=688, page=1, 1927.2pt x 1084.05pt>
+<images/DatabaseUML.pdf, id=733, page=1, 1927.2pt x 1084.05pt>
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf, page 1>
-Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 751.
+Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 756.
 (pdftex.def)             Requested size: 1927.19533pt x 1084.04736pt.
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf, page 1>
-Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 751.
+Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 756.
 (pdftex.def)             Requested size: 1734.46402pt x 975.636pt.
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf, page 1>
-Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 751.
+Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 756.
 (pdftex.def)             Requested size: 1734.46402pt x 975.636pt.
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf, page 1>
-Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 751.
+Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 756.
 (pdftex.def)             Requested size: 1734.46402pt x 975.636pt.
 File: images/DatabaseUML.pdf Graphic file (type pdf)
 <use images/DatabaseUML.pdf, page 1>
-Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 755.
+Package pdftex.def Info: images/DatabaseUML.pdf , page1 used on input line 760.
 (pdftex.def)             Requested size: 1734.46402pt x 975.636pt.
  [33
 
  <./images/DatabaseUML.pdf>] [34] [35] [36]
-<images/fotoUML/UserAuthUML.png, id=849, 1903.11pt x 2758.305pt>
+<images/fotoUML/UserAuthUML.png, id=894, 1903.11pt x 2758.305pt>
 File: images/fotoUML/UserAuthUML.png Graphic file (type png)
 <use images/fotoUML/UserAuthUML.png>
-Package pdftex.def Info: images/fotoUML/UserAuthUML.png  used on input line 937.
+Package pdftex.def Info: images/fotoUML/UserAuthUML.png  used on input line 942.
 (pdftex.def)             Requested size: 362.37569pt x 525.1777pt.
  [37] [38
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.941 \newpage
+l.946 \newpage
                <./images/fotoUML/UserAuthUML.png>]
-<images/fotoUML/PropertiesImagesUML.png, id=861, 2284.535pt x 3171.85pt>
+<images/fotoUML/PropertiesImagesUML.png, id=906, 2284.535pt x 3171.85pt>
 File: images/fotoUML/PropertiesImagesUML.png Graphic file (type png)
 <use images/fotoUML/PropertiesImagesUML.png>
-Package pdftex.def Info: images/fotoUML/PropertiesImagesUML.png  used on input line 945.
+Package pdftex.def Info: images/fotoUML/PropertiesImagesUML.png  used on input line 950.
 (pdftex.def)             Requested size: 362.37569pt x 503.10211pt.
  [39
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.948 \newpage
+l.953 \newpage
                <./images/fotoUML/PropertiesImagesUML.png>]
-<images/fotoUML/PropertiesFeaturesUML.png, id=868, 1658.195pt x 2095.83pt>
+<images/fotoUML/PropertiesFeaturesUML.png, id=913, 1658.195pt x 2095.83pt>
 File: images/fotoUML/PropertiesFeaturesUML.png Graphic file (type png)
 <use images/fotoUML/PropertiesFeaturesUML.png>
-Package pdftex.def Info: images/fotoUML/PropertiesFeaturesUML.png  used on input line 953.
+Package pdftex.def Info: images/fotoUML/PropertiesFeaturesUML.png  used on input line 958.
 (pdftex.def)             Requested size: 271.7835pt x 343.49449pt.
  [40
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.956 \newpage
+l.961 \newpage
                <./images/fotoUML/PropertiesFeaturesUML.png>]
-<images/fotoUML/AgenciesUML.png, id=875, 1096.095pt x 2396.955pt>
+<images/fotoUML/AgenciesUML.png, id=920, 1096.095pt x 2396.955pt>
 File: images/fotoUML/AgenciesUML.png Graphic file (type png)
 <use images/fotoUML/AgenciesUML.png>
-Package pdftex.def Info: images/fotoUML/AgenciesUML.png  used on input line 961.
+Package pdftex.def Info: images/fotoUML/AgenciesUML.png  used on input line 966.
 (pdftex.def)             Requested size: 226.48395pt x 495.25586pt.
  [41
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.964 \newpage
+l.969 \newpage
                <./images/fotoUML/AgenciesUML.png>]
-<images/fotoUML/RequestAgenciesUML.png, id=882, 1039.885pt x 2517.405pt>
+<images/fotoUML/RequestAgenciesUML.png, id=927, 1039.885pt x 2517.405pt>
 File: images/fotoUML/RequestAgenciesUML.png Graphic file (type png)
 <use images/fotoUML/RequestAgenciesUML.png>
-Package pdftex.def Info: images/fotoUML/RequestAgenciesUML.png  used on input line 969.
+Package pdftex.def Info: images/fotoUML/RequestAgenciesUML.png  used on input line 974.
 (pdftex.def)             Requested size: 226.48395pt x 548.26102pt.
  [42
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.972 \newpage
+l.977 \newpage
                <./images/fotoUML/RequestAgenciesUML.png>]
-<images/fotoUML/NotificationsUML.png, id=889, 1128.215pt x 2216.28pt>
+<images/fotoUML/NotificationsUML.png, id=934, 1128.215pt x 2216.28pt>
 File: images/fotoUML/NotificationsUML.png Graphic file (type png)
 <use images/fotoUML/NotificationsUML.png>
-Package pdftex.def Info: images/fotoUML/NotificationsUML.png  used on input line 977.
+Package pdftex.def Info: images/fotoUML/NotificationsUML.png  used on input line 982.
 (pdftex.def)             Requested size: 226.48395pt x 444.90521pt.
  [43
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.980 \newpage
+l.985 \newpage
                <./images/fotoUML/NotificationsUML.png>]
-<images/fotoUML/SearchesUML.png, id=897, 959.585pt x 2095.83pt>
+<images/fotoUML/SearchesUML.png, id=942, 959.585pt x 2095.83pt>
 File: images/fotoUML/SearchesUML.png Graphic file (type png)
 <use images/fotoUML/SearchesUML.png>
-Package pdftex.def Info: images/fotoUML/SearchesUML.png  used on input line 985.
+Package pdftex.def Info: images/fotoUML/SearchesUML.png  used on input line 990.
 (pdftex.def)             Requested size: 226.48395pt x 494.66277pt.
  [44
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.988 \newpage
+l.993 \newpage
                <./images/fotoUML/SearchesUML.png>]
-<images/fotoSequenceDiagram/aggiornametoImmobile.png, id=904, 1101.36469pt x 532.99126pt>
+<images/fotoSequenceDiagram/aggiornametoImmobile.png, id=949, 1101.36469pt x 532.99126pt>
 File: images/fotoSequenceDiagram/aggiornametoImmobile.png Graphic file (type png)
 <use images/fotoSequenceDiagram/aggiornametoImmobile.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/aggiornametoImmobile.png  used on input line 1011.
+Package pdftex.def Info: images/fotoSequenceDiagram/aggiornametoImmobile.png  used on input line 1016.
 (pdftex.def)             Requested size: 498.26744pt x 241.12883pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1011--1012
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1016--1017
  [][] 
  []
 
@@ -1163,15 +1210,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1011--1012
 pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1015 \newpage
+l.1020 \newpage
                 <./images/fotoSequenceDiagram/aggiornametoImmobile.png>]
-<images/fotoSequenceDiagram/caricamentoImmobile.png, id=911, 1099.10625pt x 499.11469pt>
+<images/fotoSequenceDiagram/caricamentoImmobile.png, id=956, 1099.10625pt x 499.11469pt>
 File: images/fotoSequenceDiagram/caricamentoImmobile.png Graphic file (type png)
 <use images/fotoSequenceDiagram/caricamentoImmobile.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/caricamentoImmobile.png  used on input line 1019.
+Package pdftex.def Info: images/fotoSequenceDiagram/caricamentoImmobile.png  used on input line 1024.
 (pdftex.def)             Requested size: 498.26744pt x 226.2674pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1019--1020
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1024--1025
  [][] 
  []
 
@@ -1179,15 +1226,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1019--1020
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1022 \newpage
+l.1027 \newpage
                 <./images/fotoSequenceDiagram/caricamentoImmobile.png>]
-<images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png, id=918, 1120.185pt x 496.85625pt>
+<images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png, id=963, 1120.185pt x 496.85625pt>
 File: images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png Graphic file (type png)
 <use images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png  used on input line 1027.
+Package pdftex.def Info: images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png  used on input line 1032.
 (pdftex.def)             Requested size: 498.26744pt x 221.00555pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1027--1028
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1032--1033
  [][] 
  []
 
@@ -1195,15 +1242,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1027--1028
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1030 \newpage
+l.1035 \newpage
                 <./images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png>]
-<images/fotoSequenceDiagram/ricercaImmobile.png, id=925, 1110.39844pt x 554.82281pt>
+<images/fotoSequenceDiagram/ricercaImmobile.png, id=970, 1110.39844pt x 554.82281pt>
 File: images/fotoSequenceDiagram/ricercaImmobile.png Graphic file (type png)
 <use images/fotoSequenceDiagram/ricercaImmobile.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/ricercaImmobile.png  used on input line 1035.
+Package pdftex.def Info: images/fotoSequenceDiagram/ricercaImmobile.png  used on input line 1040.
 (pdftex.def)             Requested size: 498.26744pt x 248.96529pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1035--1036
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1040--1041
  [][] 
  []
 
@@ -1211,15 +1258,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1035--1036
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1039 \newpage
+l.1044 \newpage
                 <./images/fotoSequenceDiagram/ricercaImmobile.png>]
-<images/fotoSequenceDiagram/ricercaPrezzo.png, id=932, 1050.92625pt x 596.2275pt>
+<images/fotoSequenceDiagram/ricercaPrezzo.png, id=977, 1050.92625pt x 596.2275pt>
 File: images/fotoSequenceDiagram/ricercaPrezzo.png Graphic file (type png)
 <use images/fotoSequenceDiagram/ricercaPrezzo.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/ricercaPrezzo.png  used on input line 1044.
+Package pdftex.def Info: images/fotoSequenceDiagram/ricercaPrezzo.png  used on input line 1049.
 (pdftex.def)             Requested size: 498.26744pt x 282.68333pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1044--1045
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1049--1050
  [][] 
  []
 
@@ -1227,15 +1274,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1044--1045
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1048 \newpage
+l.1053 \newpage
                 <./images/fotoSequenceDiagram/ricercaPrezzo.png>]
-<images/fotoSequenceDiagram/ricercaMappa.png, id=940, 1102.87032pt x 556.32843pt>
+<images/fotoSequenceDiagram/ricercaMappa.png, id=985, 1102.87032pt x 556.32843pt>
 File: images/fotoSequenceDiagram/ricercaMappa.png Graphic file (type png)
 <use images/fotoSequenceDiagram/ricercaMappa.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/ricercaMappa.png  used on input line 1053.
+Package pdftex.def Info: images/fotoSequenceDiagram/ricercaMappa.png  used on input line 1058.
 (pdftex.def)             Requested size: 498.26744pt x 251.34717pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1053--1054
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1058--1059
  [][] 
  []
 
@@ -1243,15 +1290,15 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1053--1054
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1057 \newpage
+l.1062 \newpage
                 <./images/fotoSequenceDiagram/ricercaMappa.png>]
-<images/fotoSequenceDiagram/ricercaFiltri.png, id=947, 1105.88156pt x 563.10374pt>
+<images/fotoSequenceDiagram/ricercaFiltri.png, id=992, 1105.88156pt x 563.10374pt>
 File: images/fotoSequenceDiagram/ricercaFiltri.png Graphic file (type png)
 <use images/fotoSequenceDiagram/ricercaFiltri.png>
-Package pdftex.def Info: images/fotoSequenceDiagram/ricercaFiltri.png  used on input line 1062.
+Package pdftex.def Info: images/fotoSequenceDiagram/ricercaFiltri.png  used on input line 1067.
 (pdftex.def)             Requested size: 498.26744pt x 253.71225pt.
 
-Overfull \hbox (45.29955pt too wide) in paragraph at lines 1062--1063
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 1067--1068
  [][] 
  []
 
@@ -1259,56 +1306,56 @@ Overfull \hbox (45.29955pt too wide) in paragraph at lines 1062--1063
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1066 \newpage
+l.1071 \newpage
                 <./images/fotoSequenceDiagram/ricercaFiltri.png>]
-<images/CommitGitHub.jpeg, id=954, 925.4575pt x 690.58pt>
+<images/CommitGitHub.jpeg, id=999, 925.4575pt x 690.58pt>
 File: images/CommitGitHub.jpeg Graphic file (type jpg)
 <use images/CommitGitHub.jpeg>
-Package pdftex.def Info: images/CommitGitHub.jpeg  used on input line 1072.
+Package pdftex.def Info: images/CommitGitHub.jpeg  used on input line 1077.
 (pdftex.def)             Requested size: 452.9679pt x 338.00781pt.
  [52
 pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1077 \newpage
+l.1082 \newpage
                 <./images/CommitGitHub.jpeg>]
-<images/ReportSonarQube.png, id=960, 904.5795pt x 437.2335pt>
+<images/ReportSonarQube.png, id=1005, 904.5795pt x 437.2335pt>
 File: images/ReportSonarQube.png Graphic file (type png)
 <use images/ReportSonarQube.png>
-Package pdftex.def Info: images/ReportSonarQube.png  used on input line 1082.
+Package pdftex.def Info: images/ReportSonarQube.png  used on input line 1087.
 (pdftex.def)             Requested size: 452.9679pt x 218.94312pt.
  [53
 pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1087 \newpage
+l.1092 \newpage
                 <./images/ReportSonarQube.png>] [54] [55]
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 []|[]\T1/cmr/bx/n/10 Input (email,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 []|\T1/cmr/m/n/10 ("mario@email.it",
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 []|\T1/cmr/m/n/10 ("mario@email.it",
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 \T1/cmr/m/n/10 "Pas-sword-Si-cu-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 []|\T1/cmr/m/n/10 ("mario@email.it",
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
+Underfull \hbox (badness 10000) in paragraph at lines 1195--1195
 \T1/cmr/m/n/10 "Pas-sword-Si-cu-
  []
 
@@ -1316,34 +1363,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 1190--1190
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1193 \newpage
+l.1198 \newpage
                
 pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1193 \newpage
+l.1198 \newpage
                ] [57]
-Underfull \hbox (badness 10000) in paragraph at lines 1265--1265
+Underfull \hbox (badness 10000) in paragraph at lines 1270--1270
 []|[]\T1/cmr/bx/n/10 Input (pri-ce,
  []
 
 
-Underfull \hbox (badness 2781) in paragraph at lines 1265--1265
+Underfull \hbox (badness 2781) in paragraph at lines 1270--1270
 []|\T1/cmr/m/n/10 (6000, 'Af-fit-to',
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 1265--1265
+Underfull \hbox (badness 1831) in paragraph at lines 1270--1270
 \T1/cmr/m/n/10 'Bel-lis-si-mo at-ti-
  []
 
 
-Underfull \hbox (badness 2781) in paragraph at lines 1265--1265
+Underfull \hbox (badness 2781) in paragraph at lines 1270--1270
 []|\T1/cmr/m/n/10 (3000, 'Af-fit-to',
  []
 
 
-Underfull \hbox (badness 1831) in paragraph at lines 1265--1265
+Underfull \hbox (badness 1831) in paragraph at lines 1270--1270
 \T1/cmr/m/n/10 'Bel-lis-si-mo at-ti-
  []
 
@@ -1351,14 +1398,14 @@ Underfull \hbox (badness 1831) in paragraph at lines 1265--1265
 pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1268 \newpage
+l.1273 \newpage
                
 pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1268 \newpage
+l.1273 \newpage
                ] [59]
-Underfull \hbox (badness 10000) in paragraph at lines 1331--1331
+Underfull \hbox (badness 10000) in paragraph at lines 1336--1336
 []|[]\T1/cmr/bx/n/10 Input (ad-dress,
  []
 
@@ -1366,57 +1413,81 @@ Underfull \hbox (badness 10000) in paragraph at lines 1331--1331
 pdfTeX warning (ext4): destination with the same identifier (name{table.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1333 \newpage
+l.1338 \newpage
                
 pdfTeX warning (ext4): destination with the same identifier (name{table.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1333 \newpage
+l.1338 \newpage
                ] [61] [62
 pdfTeX warning (ext4): destination with the same identifier (name{table.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1403 \newpage
+l.1408 \newpage
                
 pdfTeX warning (ext4): destination with the same identifier (name{table.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1403 \newpage
+l.1408 \newpage
                ]
-<images/TestResult.png, id=1119, 671.50874pt x 319.1925pt>
+<images/TestResult.png, id=1164, 671.50874pt x 319.1925pt>
 File: images/TestResult.png Graphic file (type png)
 <use images/TestResult.png>
-Package pdftex.def Info: images/TestResult.png  used on input line 1410.
+Package pdftex.def Info: images/TestResult.png  used on input line 1415.
 (pdftex.def)             Requested size: 317.07614pt x 150.71696pt.
  [63
 pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.1417 \end{document}
-                      <./images/TestResult.png>] (main.aux)
+l.1419 \newpage
+                <./images/TestResult.png>] [64] [65
+pdfTeX warning (ext4): destination with the same identifier (name{table.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1503 
+       
+pdfTeX warning (ext4): destination with the same identifier (name{table.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1503 
+       ]
+Package pgfplots info on input line 1522: Using 'lua backend=false' for axis: x coord trafo unsupported.
+
+
+LaTeX Warning: Reference `fig:radar' on page 66 undefined on input line 1530.
+
+[66
+pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1534 \end{document}
+                     ] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1B407F86E29AFEE10BF2CBCC714B9648;15884.
+(rerunfilecheck)             Checksum: C2E9B795DF9A78A567A8BB92D5734220;18294.
  ) 
 Here is how much of TeX's memory you used:
- 31890 strings out of 467867
- 645330 string characters out of 5418334
- 1455933 words of memory out of 5000000
- 59777 multiletter control sequences out of 15000+600000
- 639822 words of font info for 59 fonts, out of 8000000 for 9000
+ 42425 strings out of 467867
+ 1001228 string characters out of 5418334
+ 1927080 words of memory out of 5000000
+ 70140 multiletter control sequences out of 15000+600000
+ 642862 words of font info for 68 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,18n,108p,908b,2063s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (63 pages, 5258265 bytes).
+ 94i,18n,108p,926b,2386s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt0800.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0500.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0700.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\gdelu\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx0900.pk><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/gdelu/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on main.pdf (66 pages, 5306355 bytes).
 PDF statistics:
- 1805 PDF objects out of 2073 (max. 8388607)
- 485 named destinations out of 1000 (max. 500000)
- 939 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1971 PDF objects out of 2073 (max. 8388607)
+ 510 named destinations out of 1000 (max. 500000)
+ 1011 words of extra memory for PDF output out of 10000 (max. 10000000)
 
