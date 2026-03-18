@@ -1,0 +1,75 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {section}{\numberline {1}Introduzione}{4}{section.1}%
+\contentsline {section}{\numberline {2}Analisi e specifica dei requisiti}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Modelazione dei casi d'uso}{6}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Use Case Diagram Completo}{6}{subsubsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.2}Diagramma caso d'uso - Utente Generico}{7}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Attori}{7}{subsubsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.3}Diagramma caso d'uso - Utente non registrato}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Diagramma caso d'uso - Utente registrato}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Diagramma caso d'uso - Agente immobiliare}{8}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Diagramma caso d'uso - Amministratore agenzia}{9}{subsection.2.6}%
+\contentsline {subsubsection}{\numberline {2.6.1}Tabella dei casi d'uso}{10}{subsubsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.7}Personas}{11}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Descrizione testuale strutturate dei casi d'uso}{13}{subsection.2.8}%
+\contentsline {subsubsection}{\numberline {2.8.1}Cockburn caso uso: Ricerca immobile}{13}{subsubsection.2.8.1}%
+\contentsline {subsubsection}{\numberline {2.8.2}Cockburn caso uso: Caricamento di un immobile}{15}{subsubsection.2.8.2}%
+\contentsline {subsubsection}{\numberline {2.8.3}Cockburn caso uso: Aggiornamento di un immobile}{16}{subsubsection.2.8.3}%
+\contentsline {subsubsection}{\numberline {2.8.4}Cockburn caso uso: Creazione account agente immobiliare}{17}{subsubsection.2.8.4}%
+\contentsline {subsection}{\numberline {2.9}Introduzione Mockup a bassa fedeltà}{18}{subsection.2.9}%
+\contentsline {subsection}{\numberline {2.10}Homepage}{18}{subsection.2.10}%
+\contentsline {subsection}{\numberline {2.11}Pagina di Ricerca}{19}{subsection.2.11}%
+\contentsline {subsection}{\numberline {2.12}Dettaglio Immobile}{20}{subsection.2.12}%
+\contentsline {subsection}{\numberline {2.13}Pagina Agenzia Immobiliare}{21}{subsection.2.13}%
+\contentsline {subsection}{\numberline {2.14}Inserimento Immobile}{22}{subsection.2.14}%
+\contentsline {subsection}{\numberline {2.15}Accesso e Registrazione}{24}{subsection.2.15}%
+\contentsline {subsection}{\numberline {2.16}Pannelli di Profilo}{25}{subsection.2.16}%
+\contentsline {subsection}{\numberline {2.17}Profilo Utente Privato}{25}{subsection.2.17}%
+\contentsline {subsection}{\numberline {2.18}Profilo Agente}{26}{subsection.2.18}%
+\contentsline {subsection}{\numberline {2.19}Descrizione dei requisiti non funzionali e di dominio}{27}{subsection.2.19}%
+\contentsline {subsubsection}{\numberline {2.19.1}Requisiti non funzionali}{27}{subsubsection.2.19.1}%
+\contentsline {subsubsection}{\numberline {2.19.2}Requisiti di Dominio}{28}{subsubsection.2.19.2}%
+\contentsline {section}{\numberline {3}Design del sistema}{29}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Descrizione dell’architettura proposta}{29}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Descrizione e motivazione delle scelte tecnologiche}{30}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Comunicazione Backend-Frontend}{31}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Protocollo di Comunicazione e Formato Dati}{31}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Mapping delle Operazioni CRUD}{31}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Sicurezza e Validazione}{31}{subsubsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.4}Descrizione dello schema per la persistenza dati}{33}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Implementazione}{34}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.5.1}Creazione del database}{34}{subsubsection.3.5.1}%
+\contentsline {subsubsection}{\numberline {3.5.2}Creazione di un modello}{35}{subsubsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.6}Descrizione delle scelte di design dell'interfaccia utente}{37}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Diagramma delle Classi}{37}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Organizzazione a Livelli e Responsabilità}{37}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Diagramma UML del modulo "Auth \& User"}{38}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Diagramma UML del modulo "Properties \& Images"}{39}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Diagramma UML del modello "PropertiesFeatures"}{40}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Diagramma UML del modello "Agencies"}{41}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Diagramma UML del modello "RequestAgencies"}{42}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Diagramma UML del modello "Notifications"}{43}{subsubsection.3.7.7}%
+\contentsline {subsubsection}{\numberline {3.7.8}Diagramma UML del modello "Searches"}{44}{subsubsection.3.7.8}%
+\contentsline {subsection}{\numberline {3.8}Diagrammi di sequenza di design}{45}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Diagramma di sequenza aggiornamento immobile}{45}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Diagramma di sequenza caricamento immobile}{46}{subsection.3.10}%
+\contentsline {subsection}{\numberline {3.11}Diagramma di sequenza creazione agente immobiliare}{47}{subsection.3.11}%
+\contentsline {subsection}{\numberline {3.12}Diagramma di sequenza ricerca immobile}{48}{subsection.3.12}%
+\contentsline {subsection}{\numberline {3.13}Diagramma di sequenza ricerca tramite prezzo}{49}{subsection.3.13}%
+\contentsline {subsection}{\numberline {3.14}Diagramma di sequenza ricerca tramite mappa}{50}{subsection.3.14}%
+\contentsline {subsection}{\numberline {3.15}Diagramma di sequenza ricerca tramite filtri}{51}{subsection.3.15}%
+\contentsline {subsection}{\numberline {3.16}Sistema di versionamento}{52}{subsection.3.16}%
+\contentsline {subsubsection}{\numberline {3.16.1}Report della qualità del codice}{53}{subsubsection.3.16.1}%
+\contentsline {section}{\numberline {4}Testing}{54}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Strategia e tecnologie}{54}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Metodi di test}{55}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}TEST 1: Registrazione utente}{55}{subsubsection.4.2.1}%
+\contentsline {paragraph}{Strategia Adottata}{55}{section*.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}TEST 2: Controllo input creazione proprietà}{57}{subsubsection.4.2.2}%
+\contentsline {paragraph}{Strategia Adottata}{57}{section*.3}%
+\contentsline {subsubsection}{\numberline {4.2.3}TEST 3: Matching Località}{59}{subsubsection.4.2.3}%
+\contentsline {paragraph}{Strategia Adottata}{59}{section*.4}%
+\contentsline {subsubsection}{\numberline {4.2.4}TEST 4: Generazione titolo notifica}{61}{subsubsection.4.2.4}%
+\contentsline {paragraph}{Strategia Adottata}{61}{section*.5}%
+\contentsline {subsection}{\numberline {4.3}Risultati}{63}{subsection.4.3}%
