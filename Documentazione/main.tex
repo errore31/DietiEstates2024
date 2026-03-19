@@ -30,6 +30,13 @@
 \definecolor{backcolour}{rgb}{0.97,0.97,0.98}
 \definecolor{DarkBlue}{HTML}{356698}
 \definecolor{highlight}{HTML}{0072B2} % Definizione mancante aggiunta qui
+% Definizione dei colori della palette
+\definecolor{DeepNavy}{HTML}{173857}
+\definecolor{SteelBlue}{HTML}{4D7396}
+\definecolor{DeepEarth}{HTML}{573E17}
+\definecolor{SandGold}{HTML}{AC9166}
+\definecolor{WarmCream}{HTML}{FFF3DF}
+\definecolor{AccentOrange}{HTML}{F39C12}
 
 % --- CONFIGURAZIONE LISTINGS ---
 \usepackage{listings}
@@ -93,28 +100,28 @@
 
 % Frontespizio
 \begin{center}
-\textbf{\small UNIVERSIT\`A DEGLI STUDI DI NAPOLI FEDERICO II}
+    \textbf{\small UNIVERSIT\`A DEGLI STUDI DI NAPOLI FEDERICO II}
 
-\vspace{0.125 cm} \footnotesize SCUOLA POLITECNICA E DELLE SCIENZE DI BASE\\
-\vspace{0.125cm}
-\scriptsize DIPARTIMENTO DI INGEGNERIA ELETTRICA E TECNOLOGIE DELL'INFORMAZIONE \\
-\vspace{0.125 cm}
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/LogoUnina.jpg}
-    \label{fig:enter-label}
-\end{figure}
+    \vspace{0.125 cm} \footnotesize SCUOLA POLITECNICA E DELLE SCIENZE DI BASE\\
+    \vspace{0.125cm}
+    \scriptsize DIPARTIMENTO DI INGEGNERIA ELETTRICA E TECNOLOGIE DELL'INFORMAZIONE \\
+    \vspace{0.125 cm}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\linewidth]{images/LogoUnina.jpg}
+        \label{fig:enter-label}
+    \end{figure}
 
-\scriptsize CORSO DI LAUREA IN INFORMATICA \\
-INSEGNAMENTO DI BASE DI DATI E SISTEMI INFORMATIVI I
+    \scriptsize CORSO DI LAUREA IN INFORMATICA \\
+    INSEGNAMENTO DI BASE DI DATI E SISTEMI INFORMATIVI I
 
-\vspace{2cm}
+    \vspace{2cm}
 
-\LARGE \textbf{DietiEstates-INGSW2425\_071} \\
-\vspace{0.5cm}
-\normalsize Gennaro De Luca (N86004471), Antonio Caruso (N86004571)
-\vspace{2cm}
-\LARGE \\ Marzo 2026
+    \LARGE \textbf{DietiEstates-INGSW2425\_071} \\
+    \vspace{0.5cm}
+    \normalsize Gennaro De Luca (N86004471), Antonio Caruso (N86004571)
+    \vspace{2cm}
+    \LARGE \\ Marzo 2026
 \end{center}
 
 % Indice
@@ -133,7 +140,7 @@ L'applicazione \`e stata progettata per garantire alte prestazioni e affidabilit
 La funzionalit\`a principali che il cliente ha richiesto sono le seguenti:
 
 \begin{enumerate}
-    
+
     \item Ogni installazione di DietiEstates25 include un'utenza di amministrazione per il gestore dell'agenzia immobiliare, che viene creata con credenziali predefinite. Dopo aver effettuato l'accesso, \`e possibile modificare la password di amministrazione. L'amministratore pu\`o creare altri account di supporto all'amministrazione. I gestori di agenzie immobiliari possono a loro volta creare account per gli agenti immobiliari. Un utente interessato ai servizi immobiliari pu\`o registrarsi con un'e-mail e una password. \`E apprezzata la possibilit\`a di effettuare la registrazione/login tramite credenziali di terze parti (e.g.: accedi con account Google, Facebook o GitHub). Gli utenti possono effettuare il login e accedere all'applicativo. Le credenziali devono essere salvate in modo sicuro.
 
     \item Gli agenti immobiliari possono caricare nuovi immobili con una serie di dettagli: foto, descrizione, prezzo, dimensioni, indirizzo, numero di stanze, piano, presenza di ascensore, classe energetica, ulteriori servizi presenti (portineria, climatizzazione, ...), ecc. Gli immobili devono essere categorizzati in \emph{vendita} e \emph{affitto}. Forse in futuro sar\`a introdotto il supporto per affitti brevi e \emph{case vacanze} (ma questa funzionalit\`a al momento non \`e prevista). Ogni immobile inoltre \`e associato alla posizione geografica esatta, individuata interagendo con una mappa interattiva (tipo Google Maps).
@@ -148,56 +155,56 @@ La funzionalit\`a principali che il cliente ha richiesto sono le seguenti:
 \newpage
 Abbiamo dunque reinterpretato le sopracitate funzionalità nei seguenti modi:
 \begin{enumerate}
-    
+
     \item Abbiamo assunto che alla creazione di DietiEstate25 sono già presenti degli utenti amministratori ({\color{highlight}Amministratori di sistema}) per agenzie immobiliari quali avranno il compito di verificare ed eventualmente approvare un'agenzia che ha fatto richiesta di registrazione sul sistema.
-Una volta che l'amministratore del sistema ha approvato l'agenzia, quest'ultima riceverà delle credenziali di accesso, collegate ad un account amministrativo di quella agenzia ({\color{highlight}Account amministrativo agenzia}), con password provvisoria che dovrà essere obbligatoriamente cambiata una volta effettuato il primo login.
-L'account amministratore dell'agenzia può creare a sua volta altri account amministratore dell'agenzia, oltre a ciò possono anche creare degli account per gli agenti immobiliari ({\color{highlight}Account agente immobiliare}).
-Un utente comune può registrarsi tramite un'email e password, inoltre, si può accedere anche tramite credenziali di terze parti ({\color{highlight}Account utente}).
-\vspace{0.25cm}
+          Una volta che l'amministratore del sistema ha approvato l'agenzia, quest'ultima riceverà delle credenziali di accesso, collegate ad un account amministrativo di quella agenzia ({\color{highlight}Account amministrativo agenzia}), con password provvisoria che dovrà essere obbligatoriamente cambiata una volta effettuato il primo login.
+          L'account amministratore dell'agenzia può creare a sua volta altri account amministratore dell'agenzia, oltre a ciò possono anche creare degli account per gli agenti immobiliari ({\color{highlight}Account agente immobiliare}).
+          Un utente comune può registrarsi tramite un'email e password, inoltre, si può accedere anche tramite credenziali di terze parti ({\color{highlight}Account utente}).
+          \vspace{0.25cm}
 
-Inoltre assumiamo l’esistenza di un altro tipo di utente, ossia di colui che accede al sistema senza avere un account ({\color{highlight}Utente non registrato}).
+          Inoltre assumiamo l’esistenza di un altro tipo di utente, ossia di colui che accede al sistema senza avere un account ({\color{highlight}Utente non registrato}).
 
-    \item Gli agenti immobiliari hanno la possibilità di caricare nuovi {\color{highlight}immobili} all'interno del sistema. 
+    \item Gli agenti immobiliari hanno la possibilità di caricare nuovi {\color{highlight}immobili} all'interno del sistema.
 
-Gli immobili saranno classificati principalmente tra quelli in \emph{vendita} e in \emph{affitto}, con la possibilità di ulteriori categorie in futuro. Ogni immobile verrà visualizzato in una pagina dedicata contenente le seguenti informazioni:
+          Gli immobili saranno classificati principalmente tra quelli in \emph{vendita} e in \emph{affitto}, con la possibilità di ulteriori categorie in futuro. Ogni immobile verrà visualizzato in una pagina dedicata contenente le seguenti informazioni:
 
-\begin{itemize}
-    \item foto;
-    \item descrizione;
-    \item prezzo;
-    \item dimensioni;
-    \item indirizzo;
-    \item numero di stanze;
-    \item piano;
-    \item presenza di ascensore;
-    \item classe energetica;
-    \item ulteriori servizi presenti (ad esempio, portineria, climatizzazione, ecc.).
-\end{itemize}
+          \begin{itemize}
+              \item foto;
+              \item descrizione;
+              \item prezzo;
+              \item dimensioni;
+              \item indirizzo;
+              \item numero di stanze;
+              \item piano;
+              \item presenza di ascensore;
+              \item classe energetica;
+              \item ulteriori servizi presenti (ad esempio, portineria, climatizzazione, ecc.).
+          \end{itemize}
 
-Inoltre, nella medesima pagina, sarà disponibile una mappa digitale che mostra la posizione geografica dell’immobile, fornendo così un'esperienza utente più chiara e completa.
+          Inoltre, nella medesima pagina, sarà disponibile una mappa digitale che mostra la posizione geografica dell’immobile, fornendo così un'esperienza utente più chiara e completa.
 
     \item Gli utenti possono effettuare la ricerca degli immobili attraverso una pagina dedicata, utilizzando diversi parametri di filtro. Tra i principali criteri di ricerca disponibili si includono:
 
-\begin{itemize}
-    \item tipologia di inserzione;
-    \item prezzo minimo e massimo;
-    \item numero di stanze;
-    \item classe energetica;
-    \item posizione geografica;
-    \item altri parametri aggiuntivi specifici.
-\end{itemize}
+          \begin{itemize}
+              \item tipologia di inserzione;
+              \item prezzo minimo e massimo;
+              \item numero di stanze;
+              \item classe energetica;
+              \item posizione geografica;
+              \item altri parametri aggiuntivi specifici.
+          \end{itemize}
 
-Un filtro avanzato permette di interagire geograficamente con la ricerca, consentendo agli utenti di individuare immobili in aree specifiche, come un comune o una città. 
+          Un filtro avanzato permette di interagire geograficamente con la ricerca, consentendo agli utenti di individuare immobili in aree specifiche, come un comune o una città.
 
-Gli immobili trovati tramite i criteri di ricerca vengono inoltre visualizzati all'interno di una mappa interattiva, che evidenzia i punti in cui essi sono geograficamente localizzati, offrendo un'esperienza utente intuitiva e immediata.
+          Gli immobili trovati tramite i criteri di ricerca vengono inoltre visualizzati all'interno di una mappa interattiva, che evidenzia i punti in cui essi sono geograficamente localizzati, offrendo un'esperienza utente intuitiva e immediata.
 
-\item il sistema deve tenere traccia delle ricerche effettuate da un utente in precedenza, in modo tale
-che un utente possa facilmente ri-eseguire interrogazioni gi`a eseguite in passato per vedere se sono
-presenti nuove inserzioni che soddisfano le caratteristiche richieste
+    \item il sistema deve tenere traccia delle ricerche effettuate da un utente in precedenza, in modo tale
+          che un utente possa facilmente ri-eseguire interrogazioni gi`a eseguite in passato per vedere se sono
+          presenti nuove inserzioni che soddisfano le caratteristiche richieste
 
-\item Il sistema deve inviare notifiche agli utenti per vari eventi: nuove proprietà in linea con le loro
-ricerche precedenti e messaggi promozionali.Gli utenti devono poter
-visualizzare singole categorie di notifiche.
+    \item Il sistema deve inviare notifiche agli utenti per vari eventi: nuove proprietà in linea con le loro
+          ricerche precedenti e messaggi promozionali.Gli utenti devono poter
+          visualizzare singole categorie di notifiche.
 
 \end{enumerate}
 \newpage
@@ -224,9 +231,9 @@ I casi d'uso rappresentano uno strumento per descrivere le interazioni tra un ut
 Questo diagramma rappresenta le funzionalità accessibili a un utente generico, ovvero a chiunque acceda al sistema senza effettuare il login. In questo caso, l'unica funzionalità disponibile è la ricerca di immobili, che consente agli utenti di esplorare le offerte presenti sulla piattaforma senza dover necessariamente registrarsi o autenticarsi.
 \subsubsection{Attori}
 \begin{itemize}
-        \item \textbf{Attore principale}: Utente generico
-        \item \textbf{Attori secondari}: Nessuno
-    \end{itemize}
+    \item \textbf{Attore principale}: Utente generico
+    \item \textbf{Attori secondari}: Nessuno
+\end{itemize}
 
 \subsection{Diagramma caso d'uso - Utente non registrato}
 \begin{figure}[H]
@@ -236,10 +243,10 @@ Questo diagramma rappresenta le funzionalità accessibili a un utente generico, 
 \end{figure}
 Questo diagramma rappresenta le funzionalità accessibili a un utente non registrato, ovvero tutte le funzionalità di un utente generico più la possibilità di registrarsi e di registrare un'azienda. Queste funzionalità consentono agli utenti di creare un account per accedere a funzionalità più avanzate e di registrare un'azienda per gestire le proprie inserzioni immobiliari.
 \begin{itemize}
-        \item \textbf{Attore principale}: Utente non registrato
-        \item \textbf{Attori secondari}: Controller sistema, Api google, Amministratore sistema
-        \item \textbf{Eredità da}: Utente generico
-    \end{itemize}
+    \item \textbf{Attore principale}: Utente non registrato
+    \item \textbf{Attori secondari}: Controller sistema, Api google, Amministratore sistema
+    \item \textbf{Eredità da}: Utente generico
+\end{itemize}
 \newpage
 
 \subsection{Diagramma caso d'uso - Utente registrato}
@@ -250,10 +257,10 @@ Questo diagramma rappresenta le funzionalità accessibili a un utente non regist
 \end{figure}
 Questo diagramma rappresenta le funzionalità accessibili a un utente registrato, ovvero tutte le funzionalità di un utente generico più la possibilità di accedere a funzionalità avanzate. Queste funzionalità consentono agli utenti di ricevere e gestire le notifiche, visualizzare lo storico delle ricerche e modficare le proprie credenziali.
 \begin{itemize}
-        \item \textbf{Attore principale}: Utente registrato
-        \item \textbf{Attori secondari}: Controller sistema, Api google
-        \item \textbf{Eredità da}: Utente generico
-    \end{itemize}
+    \item \textbf{Attore principale}: Utente registrato
+    \item \textbf{Attori secondari}: Controller sistema, Api google
+    \item \textbf{Eredità da}: Utente generico
+\end{itemize}
 
 \subsection{Diagramma caso d'uso - Agente immobiliare}
 \begin{figure}[H]
@@ -263,10 +270,10 @@ Questo diagramma rappresenta le funzionalità accessibili a un utente registrato
 \end{figure}
 Questo diagramma rappresenta le funzionalità accessibili a un agente immobiliare, ovvero tutte le funzionalità di un utente generico più la possibilità di inserire e gestire immobili. Queste funzionalità consentono agli agenti immobiliari di caricare, modficare, eliminare immobili nel sistema, inoltre può aggiornare anche le informazioni dell'account.
 \begin{itemize}
-        \item \textbf{Attore principale}: Agente immobiliare
-        \item \textbf{Attori secondari}: Nessuno
-        \item \textbf{Eredità da}: Utente generico
-    \end{itemize}
+    \item \textbf{Attore principale}: Agente immobiliare
+    \item \textbf{Attori secondari}: Nessuno
+    \item \textbf{Eredità da}: Utente generico
+\end{itemize}
 
 \subsection{Diagramma caso d'uso - Amministratore agenzia}
 \begin{figure}[H]
@@ -276,10 +283,10 @@ Questo diagramma rappresenta le funzionalità accessibili a un agente immobiliar
 \end{figure}
 Questo diagramma rappresenta le funzionalità accessibili a un amministratore dell'agenzia, ovvero tutte le funzionalità di un agente immobiliare più la possibilità di creare e gestire account, promozioni e l'agenzia. Queste funzionalità consentono agli amministratori di creare e gestire account amministrativi e degli agenti, poter modificare tutte le informazioni dell'agenzia e creare promozioni in una zona specifica dato un'immobile.
 \begin{itemize}
-        \item \textbf{Attore principale}: Amministratore agenzia
-        \item \textbf{Attori secondari}: Nessuno
-        \item \textbf{Eredità da}: Agente immobiliare
-    \end{itemize}
+    \item \textbf{Attore principale}: Amministratore agenzia
+    \item \textbf{Attori secondari}: Nessuno
+    \item \textbf{Eredità da}: Agente immobiliare
+\end{itemize}
 
 \newpage
 
@@ -287,41 +294,41 @@ Questo diagramma rappresenta le funzionalità accessibili a un amministratore de
 \subsubsection{Tabella dei casi d'uso}
 \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
     \hline
-    \textbf{Attore} & \textbf{Casi d'uso} & \textbf{Descrizione} \\ 
+    \textbf{Attore}                               & \textbf{Casi d'uso} & \textbf{Descrizione}                                                                                                                                 \\
     \hline
-    Utente non registrato & 
+    Utente non registrato                         &
     \begin{itemize}
         \item Esegue Registrazione
         \item Registra azienda
-    \end{itemize} & 
-    Utenti che non hanno ancora un account nel sistema possono registrarsi o registrare una azienda per accedere alle funzionalità. \\ 
+    \end{itemize}                    &
+    Utenti che non hanno ancora un account nel sistema possono registrarsi o registrare una azienda per accedere alle funzionalità.                                                                                            \\
     \hline
-    Utente registrato & 
+    Utente registrato                             &
     \begin{itemize}
         \item Esegue autenticazione
         \item Visualizza storico ricerche
         \item Visualizza categorie di notifiche
         \item Modifica profilo
-    \end{itemize} & 
-    Gli utenti registrati possono autenticarsi (tramite anche account di terze parti) per accedere ai servizi, gestire notifiche, visualizzare ricerche precedenti, ricevere notifiche rilevanti e modificare il loro profilo. \\ 
+    \end{itemize}       &
+    Gli utenti registrati possono autenticarsi (tramite anche account di terze parti) per accedere ai servizi, gestire notifiche, visualizzare ricerche precedenti, ricevere notifiche rilevanti e modificare il loro profilo. \\
     \hline
-    Utente generico & 
+    Utente generico                               &
     \begin{itemize}
         \item Ricerca immobile
-    \end{itemize} & 
-    Gli utenti possono effettuare ricerche avanzate di immobili utilizzando diversi parametri per individuare proprietà che soddisfano i loro criteri, inoltre possono visualizzare dettagli specifici di ogni immobile. \\ 
+    \end{itemize}                        &
+    Gli utenti possono effettuare ricerche avanzate di immobili utilizzando diversi parametri per individuare proprietà che soddisfano i loro criteri, inoltre possono visualizzare dettagli specifici di ogni immobile.       \\
     \hline
-    Agente immobiliare & 
+    Agente immobiliare                            &
     \begin{itemize}
         \item Inserisce immobili
         \item Elimina immobili
         \item Esegue autenticazione
         \item Modifica profilo
         \item Aggiorna immobili
-    \end{itemize} & 
-    Gli agenti immobiliari possono autenticarsi per caricare immobili nel sistema, aggiornare le informazioni delle proprietà, ed eliminare immobili. \\ 
+    \end{itemize}                   &
+    Gli agenti immobiliari possono autenticarsi per caricare immobili nel sistema, aggiornare le informazioni delle proprietà, ed eliminare immobili.                                                                          \\
     \hline
-    Amministratore agenzia & 
+    Amministratore agenzia                        &
     \begin{itemize}
         \item Crea account amministrativo agenzia
         \item Aggiorna account amministrativo agenzia
@@ -331,14 +338,22 @@ Questo diagramma rappresenta le funzionalità accessibili a un amministratore de
         \item Crea account agente immobiliare
         \item Aggiorna account agente immobiliare
         \item Elimina account agente immobiliare
-    \end{itemize} & 
-    Gli amministratori dell'agenzia possono creare e gestire account amministrativi e degli agenti, aggiornare le informazioni dell'agenzia e creare promozioni. \\ 
+    \end{itemize} &
+    Gli amministratori dell'agenzia possono creare e gestire account amministrativi e degli agenti, aggiornare le informazioni dell'agenzia e creare promozioni.                                                               \\
     \hline
 \end{tabularx}
 
 \newpage
 \subsection{Personas}
----Descrizione Personas--- aggiungere 
+Le \textit{Personas} di riferimento per delineare i requisiti funzionali e di usabilità del sistema. La scelta dei profili è stata guidata dalla necessità di rappresentare scenari d'uso estremamente eterogenei, garantendo che il software possa rispondere efficacemente a diverse categorie di utenti.
+
+I casi analizzati di seguito sono stati selezionati per coprire un ampio spettro di target:
+\begin{itemize}
+    \item \textbf{Utenti privati con diverse competenze digitali:} dall'utente senior che necessita di estrema semplicità, al genitore focalizzato su parametri logistici e familiari.
+    \item \textbf{Profili professionali e tecnici:} soggetti che richiedono strumenti avanzati di monitoraggio, rapidità di esecuzione e funzionalità specifiche per il mercato immobiliare e degli investimenti.
+\end{itemize}
+
+Tale diversificazione permette di validare l'architettura del software sotto molteplici punti di vista, assicurando un'esperienza d'uso inclusiva e performante per ogni tipologia di utente finale.
 
 \begin{figure}[H]
     \centering
@@ -547,35 +562,35 @@ Nella presente sezione saranno individuati e illustrati in modo dettagliato i re
 
 \subsubsection{Requisiti non funzionali}
 I requisiti non funzionali possono essere distinti in:\begin{enumerate}
-    
+
     \item \textbf{Requisiti di prodotto}:\begin{itemize}
-        \item \textbf{Usabilità}: \begin{enumerate}
-            \item L'interfaccia dovrebbe essere facile da usare e accessibile a tutti gli utenti.
-            \item Il sistema deve permettere l'utilizzo di app di terze parti (Facebook, Google, GitHub) per semplificare il processo di registrazione e accesso.
-        \end{enumerate}
-        \item \textbf{Prestazioni}: \begin{enumerate}
-            \item Il sistema dovrebbe assicurare tempi di risposta inferiori a 3 secondi per operazioni comuni come la ricerca di immobili e il caricamento delle pagine. 
-            \item La ricerca con filtri avanzati dovrebbe fornire i risultati in meno di 5 secondi, anche quando vengono applicati numerosi filtri.
-        \end{enumerate}
-        \item \textbf{Sicurezza}: \begin{enumerate}
-            \item Il sistema dovrebbe supportare diversi livelli di accesso (Amministratori di agenzia, Agenti immobiliari).
-            \item Le password devono essere salvate nel database utilizzando algoritmi di hashing.
-            \item Il sistema deve impedire attacchi SQL Injection.
-        \end{enumerate}
-        \item \textbf{Affidabilità}: \begin{enumerate}
-            \item È necessario che il sistema assicuri un uptime del 99,9% per minimizzare le interruzioni del servizio.
-        \end{enumerate}
-        \item \textbf{Scalabilità}: \begin{enumerate}
-            \item Il sistema dovrebbe supportare la distribuzione su server cloud scalabili come AWS e Azure.
-        \end{enumerate}
-        \item \textbf{Manutenibilità}: \begin{enumerate}
-            \item Il codice dovrebbe essere modulare per semplificare l'integrazione di nuove funzionalità.
-        \end{enumerate}
-    \end{itemize}
+              \item \textbf{Usabilità}: \begin{enumerate}
+                        \item L'interfaccia dovrebbe essere facile da usare e accessibile a tutti gli utenti.
+                        \item Il sistema deve permettere l'utilizzo di app di terze parti (Facebook, Google, GitHub) per semplificare il processo di registrazione e accesso.
+                    \end{enumerate}
+              \item \textbf{Prestazioni}: \begin{enumerate}
+                        \item Il sistema dovrebbe assicurare tempi di risposta inferiori a 3 secondi per operazioni comuni come la ricerca di immobili e il caricamento delle pagine.
+                        \item La ricerca con filtri avanzati dovrebbe fornire i risultati in meno di 5 secondi, anche quando vengono applicati numerosi filtri.
+                    \end{enumerate}
+              \item \textbf{Sicurezza}: \begin{enumerate}
+                        \item Il sistema dovrebbe supportare diversi livelli di accesso (Amministratori di agenzia, Agenti immobiliari).
+                        \item Le password devono essere salvate nel database utilizzando algoritmi di hashing.
+                        \item Il sistema deve impedire attacchi SQL Injection.
+                    \end{enumerate}
+              \item \textbf{Affidabilità}: \begin{enumerate}
+                        \item È necessario che il sistema assicuri un uptime del 99,9% per minimizzare le interruzioni del servizio.
+                    \end{enumerate}
+              \item \textbf{Scalabilità}: \begin{enumerate}
+                        \item Il sistema dovrebbe supportare la distribuzione su server cloud scalabili come AWS e Azure.
+                    \end{enumerate}
+              \item \textbf{Manutenibilità}: \begin{enumerate}
+                        \item Il codice dovrebbe essere modulare per semplificare l'integrazione di nuove funzionalità.
+                    \end{enumerate}
+          \end{itemize}
     \item \textbf{Requisiti organizzativi}: \begin{enumerate}
-        \item Il sistema dev'essere costruito come un sistema distribuito composto da due componenti principali: Back-end e Front-end.
-        \item Dev'essere sviluppato usando linguaggi di programmazione Object-Oriented.
-    \end{enumerate}
+              \item Il sistema dev'essere costruito come un sistema distribuito composto da due componenti principali: Back-end e Front-end.
+              \item Dev'essere sviluppato usando linguaggi di programmazione Object-Oriented.
+          \end{enumerate}
 \end{enumerate}
 
 \newpage
@@ -594,7 +609,7 @@ In seguito verranno elencati i vari requisiti di dominio
 \section{Design del sistema}
 Una volta completata l’acquisizione e l’analisi dei requisiti, è necessario tradurre il dominio dei requisiti nel dominio del sistema, definendo l'architettura e le tecnologie da adottare.
 Il primo passo consiste nella selezione dell'architettura più adeguata alle esigenze del sistema, tenendo conto di fattori quali scalabilità, manutenibilità e prestazioni. Successivamente, si procede alla scelta delle tecnologie, includendo i linguaggi di programmazione e il database più idonei per l’implementazione.
-Infine, il sistema viene descritto anche attraverso diagrammi UML, che ne rappresentano la struttura e il comportamento, facilitando la comprensione e la documentazione del progetto. 
+Infine, il sistema viene descritto anche attraverso diagrammi UML, che ne rappresentano la struttura e il comportamento, facilitando la comprensione e la documentazione del progetto.
 
 \vspace{0.25cm} % Spaziatura verticale
 \noindent % Disabilita l'indentazione del nuovo paragrafo
@@ -633,7 +648,7 @@ L’architettura segue il paradigma monolitico modulare, organizzato in diversi 
 \vspace{0.25cm} % Spaziatura verticale
 \noindent % Disabilita l'indentazione del nuovo paragrafo
 \begin{tcolorbox}[colback=gray!10,colframe=black,title=Nota architetturale]
-Sebbene l'architettura sia stata progettata con una chiara separazione logica dei domini, abbiamo optato per un'implementazione Monolitica Modulare anziché a microservizi. Questa scelta è motivata dalla necessità di garantire una forte consistenza e gestione dei dati tramite l'uso di un database relazionale unico e di minimizzare l'overhead di rete e la complessità di gestione dell'infrastruttura, pur mantenendo una struttura del codice scalabile e pronta per un'eventuale futura migrazione verso sistemi a microservizi.
+    Sebbene l'architettura sia stata progettata con una chiara separazione logica dei domini, abbiamo optato per un'implementazione Monolitica Modulare anziché a microservizi. Questa scelta è motivata dalla necessità di garantire una forte consistenza e gestione dei dati tramite l'uso di un database relazionale unico e di minimizzare l'overhead di rete e la complessità di gestione dell'infrastruttura, pur mantenendo una struttura del codice scalabile e pronta per un'eventuale futura migrazione verso sistemi a microservizi.
 \end{tcolorbox}
 
 
@@ -902,13 +917,83 @@ export function createModel(database){
 \end{lstlisting}
 
 \begin{tcolorbox}[colback=gray!10,colframe=black,title=Nota sulla definizione dei modelli]
-Il frammento di codice presentato illustra a titolo esemplificativo la definizione del modello \texttt{Users}. Gli altri modelli presenti nel sistema (come \texttt{Agencies}, \texttt{Properties} o \texttt{Notifications}) seguono una struttura di implementazione analoga: ciascuno viene istanziato tramite il metodo \texttt{database.define}, variando esclusivamente negli attributi specifici e nei vincoli di integrità relativi al proprio dominio funzionale.
+    Il frammento di codice presentato illustra a titolo esemplificativo la definizione del modello \texttt{Users}. Gli altri modelli presenti nel sistema (come \texttt{Agencies}, \texttt{Properties} o \texttt{Notifications}) seguono una struttura di implementazione analoga: ciascuno viene istanziato tramite il metodo \texttt{database.define}, variando esclusivamente negli attributi specifici e nei vincoli di integrità relativi al proprio dominio funzionale.
 \end{tcolorbox}
 
 
 \newpage
 
 \subsection{Descrizione delle scelte di design dell'interfaccia utente}
+
+\subsubsection{Introduzione}
+Abbiamo adottato per la piattaforma di compravendita immobiliare una palette di colori che risponde a precise necessità psicologiche: la generazione di fiducia, il richiamo alla solidità materica e la massimizzazione dei tassi di conversione attraverso il contrasto visivo.
+
+\subsubsection{Visualizzazione della Palette}
+
+Di seguito sono riportati i codici colore principali che compongono l'identità visiva:
+
+\begin{center}
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=DeepNavy, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Navy}, center title]
+            \vfill \centering \color{white} \#173857
+        \end{tcolorbox}
+    \end{minipage}
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=SteelBlue, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Steel Blue}, center title]
+            \vfill \centering \color{white} \#4D7396
+        \end{tcolorbox}
+    \end{minipage}
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=DeepEarth, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Earth}, center title]
+            \vfill \centering \color{white} \#573E17
+        \end{tcolorbox}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=SandGold, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Sand Gold}, center title]
+            \vfill \centering \color{white} \#AC9166
+        \end{tcolorbox}
+    \end{minipage}
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=WarmCream, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Warm Cream}, center title]
+            \vfill \centering \color{DeepEarth} \#FFF3DF
+        \end{tcolorbox}
+    \end{minipage}
+    \begin{minipage}{0.3\textwidth}
+        \begin{tcolorbox}[colback=AccentOrange, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Accent Color}, center title]
+            \vfill \centering \color{white} \#F39C12
+        \end{tcolorbox}
+    \end{minipage}
+\end{center}
+
+\subsubsection{Il Pilastro della Fiducia: Deep Navy (\#173857)}
+Il colore dominante della composizione è il \textbf{Deep Navy}. In un mercato dove l'investimento del cliente è massivo, il blu scuro funge da ancora psicologica.
+\begin{itemize}
+    \item \textbf{Istituzionalità:} Comunica che l'agenzia non è solo un intermediario, ma un'istituzione solida.
+    \item \textbf{Serietà Finanziaria:} È il colore associato globalmente ai servizi bancari e legali, essenziali nella fase di rogito e mutuo.
+    \item \textbf{Leggibilità:} Utilizzato per gli header e la tipografia principale, garantisce un'esperienza utente riposante e autorevole.
+\end{itemize}
+
+\subsubsection{Elementi Materici e Accoglienza}
+Mentre il blu stabilisce la professionalità, i toni terra (\textbf{\#573E17} e \textbf{\#AC9166}) introducono il concetto di ``Casa''.
+\begin{itemize}
+    \item \textbf{Richiamo Naturale:} Questi colori evocano materiali nobili come il legno di rovere, il cuoio e la pietra.
+    \item \textbf{Comfort Domestico:} Il \textbf{Warm Cream (\#FFF3DF)}, utilizzato per gli sfondi delle schede o delle sezioni, sostituisce il bianco puro per eliminare il senso di freddezza, creando un ambiente digitale accogliente.
+\end{itemize}
+
+\subsubsection{Il Trigger di Conversione: Arancione Ambra (\#F39C12)}
+L'elemento di forza della strategia è l'uso di piccoli ma intensi punti di contrasto in \textbf{Arancione Ambra}. Questo colore è posizionato strategicamente al di fuori dell'armonia principale per creare un'interruzione visiva.
+
+\begin{tcolorbox}[colback=AccentOrange!10, colframe=AccentOrange, title=Logica della Call to Action (CTA)]
+    L'arancione è il colore complementare dinamico dei toni bluastri. Quando l'utente scorre una lista di immobili (dominata dai blu e dai marroni), l'occhio viene naturalmente attratto dai pulsanti \textit{``Cerca''} o \textit{``Prezzo''} colorati con \#F39C12. Questo riduce il carico cognitivo e accelera la decisione d'acquisto.
+\end{tcolorbox}
+
+\subsubsection{Conclusioni}
+L'equilibrio tra la freddezza autorevole del blu e il calore organico dei toni sabbia crea un'immagine di marca premium. L'integrazione dell'arancione come elemento di contrasto puro garantisce che il sito non sia solo una vetrina elegante, ma una macchina da conversione efficiente.
+
+\newpage
 
 \subsection{Diagramma delle Classi}
 
@@ -924,16 +1009,16 @@ La scomposizione in classi segue una stratificazione logica dove ogni livello ri
 
 \begin{itemize}
     \item \textbf{Routing Layer (Rotte)}: Gestisce esclusivamente l'interfaccia con il protocollo HTTP. La sua unica responsabilità è mappare gli endpoint alle funzioni dei controller e orchestrare la catena di middleware (autenticazione, autorizzazione e validazione). Questo layer non contiene logica di business, garantendo un \textit{disaccoppiamento} totale tra l'endpoint e l'implementazione della funzione.
-    
+
     \item \textbf{Controller Layer (Logica di Business)}: Costituisce il cuore operativo. La sua responsabilità è l'orchestrazione dei dati e l'applicazione delle regole di business. Grazie al basso accoppiamento, i controller rimangono agnostici rispetto al trasporto (HTTP) e si interfacciano con il database esclusivamente tramite i modelli, facilitando la scrittura di \textbf{Unit Test} isolati.
-    
+
     \item \textbf{Model Layer (Persistenza)}: Ha l'unica responsabilità di definire la struttura dei dati e le relazioni tra le entità tramite l'ORM Sequelize. Centralizzando la definizione dello schema e dei vincoli di integrità, si assicura che la validità dei dati sia garantita in modo uniforme in tutta l'applicazione.
 \end{itemize}
 
 \vspace{0.25cm} % Spaziatura verticale
 \noindent % Disabilita l'indentazione del nuovo paragrafo
 \begin{tcolorbox}[colback=gray!10,colframe=black,title=Nota schema UML]
-Alcuni modelli sono stati raggruppati insieme ad altri siccome il loro accoppiamento serve per riflettere le dipendenze funzionali strette e l'uso di modelli di dati condivisi, garantendo una visione d'insieme più aderente alla logica del codice. Questa scelta progettuale permette di ridurre la complessità visiva dello schema, evidenziando come i controller collaborino per operare sugli stessi set di dati fondamentali.
+    Alcuni modelli sono stati raggruppati insieme ad altri siccome il loro accoppiamento serve per riflettere le dipendenze funzionali strette e l'uso di modelli di dati condivisi, garantendo una visione d'insieme più aderente alla logica del codice. Questa scelta progettuale permette di ridurre la complessità visiva dello schema, evidenziando come i controller collaborino per operare sugli stessi set di dati fondamentali.
 \end{tcolorbox}
 
 \subsubsection{Diagramma UML del modulo "Auth \& User"}
@@ -1007,7 +1092,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 \vspace{0.25cm} % Spaziatura verticale
 \noindent % Disabilita l'indentazione del nuovo paragrafo
 \begin{tcolorbox}[colback=gray!10,colframe=black,title=Nota schema UML]
-Il processo di "Ricerca Immobile" è stato suddiviso in diagrammi distinti (Ricerca per Mappa, Ricerca per Filtri e Ricerca per Prezzo). Questa scelta è stata adottata per ridurre la complessità visiva dei singoli schemi, facilitando la comprensione granulare di come i diversi parametri di input interagiscano con il controller e il database per restituire i risultati filtrati.
+    Il processo di "Ricerca Immobile" è stato suddiviso in diagrammi distinti (Ricerca per Mappa, Ricerca per Filtri e Ricerca per Prezzo). Questa scelta è stata adottata per ridurre la complessità visiva dei singoli schemi, facilitando la comprensione granulare di come i diversi parametri di input interagiscano con il controller e il database per restituire i risultati filtrati.
 \end{tcolorbox}
 
 \subsection{Diagramma di sequenza aggiornamento immobile}
@@ -1102,11 +1187,11 @@ Di seguito sono descritti i pilastri metodologici utilizzati:
 \begin{itemize}
     \item \textbf{Approccio Signature-based}: I test sono stati progettati basandosi esclusivamente sulla \textit{firma} dei metodi (parametri di input e tipi di ritorno). Questo ha permesso di validare l'interfaccia dei controller garantendo che il sistema risponda correttamente alle sollecitazioni esterne previste dal contratto software.
 
-    \item \textbf{Copertura R-WECT} (\textit{Robust Weak Equivalence Class Testing}): Si è scelto questo specifico approccio di partizione per bilanciare efficacia e manutenibilità. 
-    \begin{itemize}
-        \item \textbf{Weak (Debole)}: Si assume che le anomalie siano causate raramente dalla combinazione simultanea di più errori; pertanto, ogni test case sollecita una sola classe invalida alla volta, mantenendo gli altri parametri entro i range di validità.
-        \item \textbf{Robust (Robusta)}: A differenza del WECT standard, questa variante include esplicitamente il testing delle \textbf{classi di errore} (input nulli, fuori range o malformati), garantendo che il backend gestisca le eccezioni senza crash di sistema.
-    \end{itemize}
+    \item \textbf{Copertura R-WECT} (\textit{Robust Weak Equivalence Class Testing}): Si è scelto questo specifico approccio di partizione per bilanciare efficacia e manutenibilità.
+          \begin{itemize}
+              \item \textbf{Weak (Debole)}: Si assume che le anomalie siano causate raramente dalla combinazione simultanea di più errori; pertanto, ogni test case sollecita una sola classe invalida alla volta, mantenendo gli altri parametri entro i range di validità.
+              \item \textbf{Robust (Robusta)}: A differenza del WECT standard, questa variante include esplicitamente il testing delle \textbf{classi di errore} (input nulli, fuori range o malformati), garantendo che il backend gestisca le eccezioni senza crash di sistema.
+          \end{itemize}
 
     \item \textbf{Analisi dei Valori al Limite} (\textit{Boundary Value Analysis}): Integrata alla partizione in classi, questa tecnica è stata fondamentale per verificare il comportamento del sistema in corrispondenza delle soglie critiche (es. lunghezze minime delle password o soglie di prezzo per il contratto), dove statisticamente si annida la maggior parte dei bug logici.
 \end{itemize}
@@ -1150,9 +1235,9 @@ describe("Metodo: validateRegistration", () => {
 \end{lstlisting}
 
 \begin{itemize}
-\item \textbf{email}: Stringa rappresentante l'indirizzo di posta elettronica dell'utente. Viene validata tramite espressione regolare per garantirne il formato standard.
-\item \textbf{password}: Stringa alfanumerica scelta dall'utente. Il sistema impone un vincolo di sicurezza minimo di 8 caratteri.
-\item \textbf{role}: Stringa che definisce il livello di accesso dell'account. I valori ammessi sono limitati a un set predefinito: \texttt{'User'}, \texttt{'Agency'}, \texttt{'Admin'}.
+    \item \textbf{email}: Stringa rappresentante l'indirizzo di posta elettronica dell'utente. Viene validata tramite espressione regolare per garantirne il formato standard.
+    \item \textbf{password}: Stringa alfanumerica scelta dall'utente. Il sistema impone un vincolo di sicurezza minimo di 8 caratteri.
+    \item \textbf{role}: Stringa che definisce il livello di accesso dell'account. I valori ammessi sono limitati a un set predefinito: \texttt{'User'}, \texttt{'Agency'}, \texttt{'Admin'}.
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
@@ -1162,37 +1247,37 @@ Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura 
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
-\centering
-\caption{Classi di Equivalenza - validateRegistration}
-\begin{tabularx}{\textwidth}{|l|X|c|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza} & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
-\rowcolor[gray]{0.95}
-\textit{email} & Formato sintatticamente corretto (es. user@test.it) & Valida & CE1 \\ \hline
-\textit{email} & Formato mancante di @ o dominio (es. user.it) & Invalida & CE2 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{password} & Lunghezza superiore o uguale a 8 caratteri & Valida & CE3 \\ \hline
-\textit{password} & Lunghezza inferiore a 8 caratteri & Invalida & CE4 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{role} & Valore incluso nel set \{User, Agency, Admin\} & Valida & CE5 \\ \hline
-\textit{role} & Valore non censito o nullo & Invalida & CE6 \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Classi di Equivalenza - validateRegistration}
+    \begin{tabularx}{\textwidth}{|l|X|c|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{email}                  & Formato sintatticamente corretto (es. user@test.it) & Valida                         & CE1                         \\ \hline
+        \textit{email}                  & Formato mancante di @ o dominio (es. user.it)       & Invalida                       & CE2                         \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{password}               & Lunghezza superiore o uguale a 8 caratteri          & Valida                         & CE3                         \\ \hline
+        \textit{password}               & Lunghezza inferiore a 8 caratteri                   & Invalida                       & CE4                         \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{role}                   & Valore incluso nel set \{User, Agency, Admin\}      & Valida                         & CE5                         \\ \hline
+        \textit{role}                   & Valore non censito o nullo                          & Invalida                       & CE6                         \\ \hline
+    \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\centering
-\caption{Matrice dei Casi di Test - validateRegistration}
-\rowcolors{2}{white}{gray!10}
-\begin{tabularx}{\textwidth}{|l|l|X|l|l|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito} \\ \hline
-\textbf{TC\_01} & CE2 + CE3 + CE5 & ("mario.rossi", "Segreta123", "User") & EMAIL\_INVALIDA & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_02} & CE1 + CE4 + CE5 & ("mario@email.it", "Pass123", "User") & PASSWORD\_TROPPO\_CORTA & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_03} & CE1 + CE3 + CE6 & ("mario@email.it", "PasswordSicura123", "Guest") & RUOLO\_NON\_VALIDO & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_04} & CE1 + CE3 + CE5 & ("mario@email.it", "PasswordSicura123", "User") & REGISTRAZIONE\_OK & {\color{codegreen}\textbf{PASS}} \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Matrice dei Casi di Test - validateRegistration}
+    \rowcolors{2}{white}{gray!10}
+    \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)}   & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_01}               & CE2 + CE3 + CE5               & ("mario.rossi", "Segreta123", "User")            & EMAIL\_INVALIDA                     & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_02}               & CE1 + CE4 + CE5               & ("mario@email.it", "Pass123", "User")            & PASSWORD\_TROPPO\_CORTA             & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03}               & CE1 + CE3 + CE6               & ("mario@email.it", "PasswordSicura123", "Guest") & RUOLO\_NON\_VALIDO                  & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04}               & CE1 + CE3 + CE5               & ("mario@email.it", "PasswordSicura123", "User")  & REGISTRAZIONE\_OK                   & {\color{codegreen}\textbf{PASS}} \\ \hline
+    \end{tabularx}
 \end{table}
 
 \newpage
@@ -1226,9 +1311,9 @@ describe("Metodo: checkPropertyConstraints", () => {
 \end{lstlisting}
 
 \begin{itemize}
-\item \textbf{price}: Valore numerico indicante il costo dell'immobile. Deve essere un numero positivo e coerente con la tipologia di contratto scelta.
-\item \textbf{contractType}: Stringa che definisce la natura della transazione. I valori ammessi (in linea con i validatori del backend) sono \texttt{'Affitto'} e \texttt{'Vendita'}.
-\item \textbf{description}: Stringa descrittiva dell'immobile. Per garantire la qualità degli annunci, il sistema impone una lunghezza minima di 10 caratteri.
+    \item \textbf{price}: Valore numerico indicante il costo dell'immobile. Deve essere un numero positivo e coerente con la tipologia di contratto scelta.
+    \item \textbf{contractType}: Stringa che definisce la natura della transazione. I valori ammessi (in linea con i validatori del backend) sono \texttt{'Affitto'} e \texttt{'Vendita'}.
+    \item \textbf{description}: Stringa descrittiva dell'immobile. Per garantire la qualità degli annunci, il sistema impone una lunghezza minima di 10 caratteri.
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
@@ -1238,36 +1323,36 @@ Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura 
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
-\centering
-\caption{Classi di Equivalenza - checkPropertyConstraints}
-\begin{tabularx}{\textwidth}{|l|X|c|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza} & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
-\rowcolor[gray]{0.95}
-\textit{price} & Valore numerico strettamente positivo ($> 0$) & Valida & CE7 \\ \hline
-\textit{price} & Valore nullo, negativo o non numerico & Invalida & CE8 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{description} & Lunghezza della stringa $\geq 10$ caratteri & Valida & CE9 \\ \hline
-\textit{description} & Lunghezza della stringa $< 10$ caratteri & Invalida & CE10 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{contractType} & Prezzo $> 5000$ con contratto di tipo 'Affitto' & Invalida & CE11 \\ \hline
-\textit{contractType} & Prezzo $< 10000$ con contratto di tipo 'Vendita' & Invalida & CE12 \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Classi di Equivalenza - checkPropertyConstraints}
+    \begin{tabularx}{\textwidth}{|l|X|c|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}      & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{price}                  & Valore numerico strettamente positivo ($> 0$)    & Valida                         & CE7                         \\ \hline
+        \textit{price}                  & Valore nullo, negativo o non numerico            & Invalida                       & CE8                         \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{description}            & Lunghezza della stringa $\geq 10$ caratteri      & Valida                         & CE9                         \\ \hline
+        \textit{description}            & Lunghezza della stringa $< 10$ caratteri         & Invalida                       & CE10                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{contractType}           & Prezzo $> 5000$ con contratto di tipo 'Affitto'  & Invalida                       & CE11                        \\ \hline
+        \textit{contractType}           & Prezzo $< 10000$ con contratto di tipo 'Vendita' & Invalida                       & CE12                        \\ \hline
+    \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\centering
-\caption{Matrice dei Casi di Test - checkPropertyConstraints}
-\rowcolors{2}{white}{gray!10}
-\begin{tabularx}{\textwidth}{|l|c|X|l|l|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (price, type, desc)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito} \\ \hline
-\textbf{TC\_05} & CE7 + CE10 & (150000, 'Vendita', 'Casa') & DESCRIZIONE\_INSUFFICIENTE & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_06} & CE7 + CE11 + CE9 & (6000, 'Affitto', 'Bellissimo attico panoramico') & ANOMALIA\_PREZZO\_AFFITTO & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_07} & CE7 + CE9 & (3000, 'Affitto', 'Bellissimo attico panoramico') & VALIDO & {\color{codegreen}\textbf{PASS}} \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Matrice dei Casi di Test - checkPropertyConstraints}
+    \rowcolors{2}{white}{gray!10}
+    \begin{tabularx}{\textwidth}{|l|c|X|l|l|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (price, type, desc)}   & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_05}               & CE7 + CE10                    & (150000, 'Vendita', 'Casa')                       & DESCRIZIONE\_INSUFFICIENTE          & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_06}               & CE7 + CE11 + CE9              & (6000, 'Affitto', 'Bellissimo attico panoramico') & ANOMALIA\_PREZZO\_AFFITTO           & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_07}               & CE7 + CE9                     & (3000, 'Affitto', 'Bellissimo attico panoramico') & VALIDO                              & {\color{codegreen}\textbf{PASS}} \\ \hline
+    \end{tabularx}
 \end{table}
 
 \newpage
@@ -1294,8 +1379,8 @@ describe("Metodo: checkMatch", () => {
 \end{lstlisting}
 
 \begin{itemize}
-\item \textbf{propertyAddress}: Stringa contenente l'indirizzo completo dell'immobile (es. "Via Roma 10, Napoli").
-\item \textbf{searchString}: Stringa di ricerca inserita dall'utente, che può contenere informazioni aggiuntive separate da virgole (es. "Napoli, NA, Italia").
+    \item \textbf{propertyAddress}: Stringa contenente l'indirizzo completo dell'immobile (es. "Via Roma 10, Napoli").
+    \item \textbf{searchString}: Stringa di ricerca inserita dall'utente, che può contenere informazioni aggiuntive separate da virgole (es. "Napoli, NA, Italia").
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
@@ -1304,36 +1389,36 @@ Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura 
 \newpage
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
-\centering
-\caption{Classi di Equivalenza - checkMatch}
-\begin{tabularx}{\textwidth}{|l|X|c|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza} & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
-\rowcolor[gray]{0.95}
-\textit{propertyAddress} & Stringa indirizzo valida (es. "Via Roma") & Valida & CE13 \\ \hline
-\textit{propertyAddress} & Valore nullo o non definito (\texttt{null}) & Invalida & CE14 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{searchString} & Sottostringa presente nell'indirizzo & Valida & CE15 \\ \hline
-\textit{searchString} & Sottostringa NON presente nell'indirizzo & Valida & CE16 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{searchString} & Formato con spazi/maiuscole/virgole (es. " NAPOLI ,") & Valida & CE17 \\ \hline
-\textit{searchString} & Valore nullo o non definito (\texttt{null}) & Invalida & CE18 \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Classi di Equivalenza - checkMatch}
+    \begin{tabularx}{\textwidth}{|l|X|c|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}           & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{propertyAddress}        & Stringa indirizzo valida (es. "Via Roma")             & Valida                         & CE13                        \\ \hline
+        \textit{propertyAddress}        & Valore nullo o non definito (\texttt{null})           & Invalida                       & CE14                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{searchString}           & Sottostringa presente nell'indirizzo                  & Valida                         & CE15                        \\ \hline
+        \textit{searchString}           & Sottostringa NON presente nell'indirizzo              & Valida                         & CE16                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{searchString}           & Formato con spazi/maiuscole/virgole (es. " NAPOLI ,") & Valida                         & CE17                        \\ \hline
+        \textit{searchString}           & Valore nullo o non definito (\texttt{null})           & Invalida                       & CE18                        \\ \hline
+    \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\centering
-\caption{Matrice dei Casi di Test - checkMatch}
-\rowcolors{2}{white}{gray!10}
-\begin{tabularx}{\textwidth}{|l|c|X|X|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (address, search)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito} \\ \hline
-\textbf{TC\_08} & CE13 + CE15 + CE17 & ("Via Roma 10, Napoli", "NAPOLI , NA") & \texttt{true} & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_09} & CE13 + CE16 + CE17 & ("Via Roma 10, Napoli", "Milano, MI") & \texttt{false} & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_10} & CE14 + CE18 & (\texttt{null}, \texttt{null}) & \texttt{false} & {\color{codegreen}\textbf{PASS}} \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Matrice dei Casi di Test - checkMatch}
+    \rowcolors{2}{white}{gray!10}
+    \begin{tabularx}{\textwidth}{|l|c|X|X|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (address, search)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_08}               & CE13 + CE15 + CE17            & ("Via Roma 10, Napoli", "NAPOLI , NA")        & \texttt{true}                       & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_09}               & CE13 + CE16 + CE17            & ("Via Roma 10, Napoli", "Milano, MI")         & \texttt{false}                      & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_10}               & CE14 + CE18                   & (\texttt{null}, \texttt{null})                & \texttt{false}                      & {\color{codegreen}\textbf{PASS}} \\ \hline
+    \end{tabularx}
 \end{table}
 \newpage
 \subsubsection{TEST 4: Generazione titolo notifica}
@@ -1364,8 +1449,8 @@ describe("Metodo: generateNotificationText", () => {
 \end{lstlisting}
 
 \begin{itemize}
-\item \textbf{type}: Stringa che definisce la categoria della notifica[cite: 202]. Determina il prefisso del messaggio (es. \texttt{'promo'}, \texttt{'property'})[cite: 202].
-\item \textbf{propertyTitle}: Stringa contenente il nome dell'immobile[cite: 203]. Viene elaborata per essere visualizzata in maiuscolo all'interno del messaggio[cite: 203].
+    \item \textbf{type}: Stringa che definisce la categoria della notifica[cite: 202]. Determina il prefisso del messaggio (es. \texttt{'promo'}, \texttt{'property'})[cite: 202].
+    \item \textbf{propertyTitle}: Stringa contenente il nome dell'immobile[cite: 203]. Viene elaborata per essere visualizzata in maiuscolo all'interno del messaggio[cite: 203].
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
@@ -1374,35 +1459,35 @@ Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura 
 \newpage
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
-\centering
-\caption{Classi di Equivalenza - generateNotificationText}
-\begin{tabularx}{\textwidth}{|l|X|c|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza} & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
-\rowcolor[gray]{0.95}
-\textit{type} & Categoria promozionale (\texttt{'promo'}) & Valida & CE19 \\ \hline
-\textit{type} & Categoria di corrispondenza (\texttt{'property'}) & Valida & CE20 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{type} & Qualsiasi altro valore (Categoria generica) & Valida & CE21 \\ \hline
-\textit{propertyTitle} & Stringa titolo valida (non vuota) & Valida & CE22 \\ \hline
-\rowcolor[gray]{0.95}
-\textit{propertyTitle} & Stringa vuota o non definita (\texttt{null}) & Invalida & CE23 \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Classi di Equivalenza - generateNotificationText}
+    \begin{tabularx}{\textwidth}{|l|X|c|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}       & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{type}                   & Categoria promozionale (\texttt{'promo'})         & Valida                         & CE19                        \\ \hline
+        \textit{type}                   & Categoria di corrispondenza (\texttt{'property'}) & Valida                         & CE20                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{type}                   & Qualsiasi altro valore (Categoria generica)       & Valida                         & CE21                        \\ \hline
+        \textit{propertyTitle}          & Stringa titolo valida (non vuota)                 & Valida                         & CE22                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{propertyTitle}          & Stringa vuota o non definita (\texttt{null})      & Invalida                       & CE23                        \\ \hline
+    \end{tabularx}
 \end{table}
 
 \begin{table}[H]
-\centering
-\caption{Matrice dei Casi di Test - generateNotificationText}
-\rowcolors{2}{white}{gray!10}
-\begin{tabularx}{\textwidth}{|l|c|X|X|c|}
-\hline
-\rowcolor{DarkBlue}
-\textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (type, title)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito} \\ \hline
-\textbf{TC\_11} & CE19 + CE22 & ('promo', 'Appartamento centro') & 'OFFERTA SPECIALE: APPARTAMENTO CENTRO' & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_12} & CE20 + CE22 & ('property', 'Villa con piscina') & 'CORRISPONDENZA TROVATA: VILLA CON PISCINA' & {\color{codegreen}\textbf{PASS}} \\ \hline
-\textbf{TC\_13} & CE19 + CE23 & ('promo', '') & 'Nuova Notifica' & {\color{codegreen}\textbf{PASS}} \\ \hline
-\end{tabularx}
+    \centering
+    \caption{Matrice dei Casi di Test - generateNotificationText}
+    \rowcolors{2}{white}{gray!10}
+    \begin{tabularx}{\textwidth}{|l|c|X|X|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (type, title)} & \textbf{\color{white}Output Atteso}         & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_11}               & CE19 + CE22                   & ('promo', 'Appartamento centro')          & 'OFFERTA SPECIALE: APPARTAMENTO CENTRO'     & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_12}               & CE20 + CE22                   & ('property', 'Villa con piscina')         & 'CORRISPONDENZA TROVATA: VILLA CON PISCINA' & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_13}               & CE19 + CE23                   & ('promo', '')                             & 'Nuova Notifica'                            & {\color{codegreen}\textbf{PASS}} \\ \hline
+    \end{tabularx}
 \end{table}
 
 \newpage
@@ -1412,7 +1497,7 @@ Al termine della fase di \textbf{Unit Testing}, sono stati eseguiti complessivam
 
 \begin{figure}[H] % L'opzione [H] forza la posizione "qui"
     \centering
-    \includegraphics[width=0.7\linewidth]{images/TestResult.png} 
+    \includegraphics[width=0.7\linewidth]{images/TestResult.png}
     \caption{Esito dell'esecuzione dei 13 Unit Test tramite console (con Jasmine)}
     \label{fig:risultati-console}
 \end{figure}
@@ -1440,7 +1525,7 @@ Il processo di review è stato guidato dalla seguente checklist valutativa:
 \end{enumerate}
 
 \subsubsection{Applicazione della Checklist e Interventi Correttivi}
-L'applicazione di questa griglia ha confermato la validità dell'architettura dell'informazione. La feature dello \textit{Storico Ricerche} ha superato a pieni voti il controllo sul "Supporto cognitivo", permettendo di recuperare query complesse con una singola interazione. Allo stesso modo, le \textit{Notifiche} hanno garantito un eccellente livello di "Visibilità e Feedback". 
+L'applicazione di questa griglia ha confermato la validità dell'architettura dell'informazione. La feature dello \textit{Storico Ricerche} ha superato a pieni voti il controllo sul "Supporto cognitivo", permettendo di recuperare query complesse con una singola interazione. Allo stesso modo, le \textit{Notifiche} hanno garantito un eccellente livello di "Visibilità e Feedback".
 Durante la review sono emerse solo criticità minori: è stato necessario aumentare il contrasto cromatico delle notifiche lette rispetto a quelle da leggere e inserire un pulsante più visibile per il reset totale dei filtri di ricerca.
 
 \subsection{Fase 2: Usability Testing sul Campo}
@@ -1450,21 +1535,21 @@ Risolti i problemi preliminari, si è passati alla conduzione di un test empiric
 Il campione di test è stato accuratamente profilato per coprire diversi livelli di alfabetizzazione digitale e molteplici casi d'uso (acquisto, affitto, monitoraggio). Le metriche considerate includono il tempo di completamento delle operazioni e il tasso di soddisfazione post-esperimento.
 
 \begin{table}[h!]
-\centering
-\small
-\begin{tabularx}{\textwidth}{c c c c X X}
-\toprule
-\textbf{ID} & \textbf{Età} & \textbf{Genere} & \textbf{Skill IT} & \textbf{Occupazione} & \textbf{Obiettivo del Tester} \\
-\midrule
-P1 & 23 & M & Avanzata & Studente Univ. & Ricerca di immobili economici tramite filtri avanzati e mappa. \\
-P2 & 34 & F & Media & Impiegata & Monitoraggio degli immobili tramite alert e notifiche. \\
-P3 & 48 & M & Media & Professionista & Utilizzo basato sul recupero dello storico delle ricerche. \\
-P4 & 58 & F & Base & Casalinga & Navigazione visuale ed esplorazione del portale. \\
-P5 & 65 & M & Critica & Pensionato & Valutazione della chiarezza delle informazioni. \\
-\bottomrule
-\end{tabularx}
-\caption{Demografia e profilazione del campione coinvolto nell'esperimento.}
-\label{tab:usability_users}
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{c c c c X X}
+        \toprule
+        \textbf{ID} & \textbf{Età} & \textbf{Genere} & \textbf{Skill IT} & \textbf{Occupazione} & \textbf{Obiettivo del Tester}                                  \\
+        \midrule
+        P1          & 23           & M               & Avanzata          & Studente Univ.       & Ricerca di immobili economici tramite filtri avanzati e mappa. \\
+        P2          & 34           & F               & Media             & Impiegata            & Monitoraggio degli immobili tramite alert e notifiche.         \\
+        P3          & 48           & M               & Media             & Professionista       & Utilizzo basato sul recupero dello storico delle ricerche.     \\
+        P4          & 58           & F               & Base              & Casalinga            & Navigazione visuale ed esplorazione del portale.               \\
+        P5          & 65           & M               & Critica           & Pensionato           & Valutazione della chiarezza delle informazioni.                \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Demografia e profilazione del campione coinvolto nell'esperimento.}
+    \label{tab:usability_users}
 \end{table}
 
 \subsubsection{Definizione dei Task (Scenari d'Uso)}
@@ -1480,51 +1565,51 @@ Ogni soggetto ha affrontato quattro scenari operativi senza alcun supporto ester
 Per raccogliere il feedback qualitativo, i tester hanno compilato un questionario basato su scala Likert a 5 punti (1 = Pessimo/Disaccordo, 5 = Ottimo/D'accordo), strutturato per validare i principi di usabilità:
 
 \begin{table}[h!]
-\centering
-\small
-\begin{tabularx}{\textwidth}{c X l}
-\toprule
-\textbf{ID} & \textbf{Domanda di Valutazione} & \textbf{Principio Analizzato} \\
-\midrule
-Q1 & Il vocabolario del portale è stato sempre chiaro e non ambiguo. & Linguaggio Naturale \\
-Q2 & Richiamare le mie ricerche passate è stato immediato e utile. & Carico Cognitivo \\
-Q3 & Il sistema di notifiche mi ha avvisato in modo tempestivo. & Visibilità di Stato \\
-Q4 & L'interfaccia si comporta in modo prevedibile in ogni schermata. & Coerenza Visiva \\
-Q5 & Quando ho sbagliato a inserire un filtro, è stato facile rimediare. & Controllo Utente \\
-Q6 & I messaggi del sistema sono rassicuranti e costruttivi. & Gestione Errori \\
-\bottomrule
-\end{tabularx}
-\caption{Questionario di gradimento (Adattamento SUS).}
-\label{tab:usability_survey}
+    \centering
+    \small
+    \begin{tabularx}{\textwidth}{c X l}
+        \toprule
+        \textbf{ID} & \textbf{Domanda di Valutazione}                                     & \textbf{Principio Analizzato} \\
+        \midrule
+        Q1          & Il vocabolario del portale è stato sempre chiaro e non ambiguo.     & Linguaggio Naturale           \\
+        Q2          & Richiamare le mie ricerche passate è stato immediato e utile.       & Carico Cognitivo              \\
+        Q3          & Il sistema di notifiche mi ha avvisato in modo tempestivo.          & Visibilità di Stato           \\
+        Q4          & L'interfaccia si comporta in modo prevedibile in ogni schermata.    & Coerenza Visiva               \\
+        Q5          & Quando ho sbagliato a inserire un filtro, è stato facile rimediare. & Controllo Utente              \\
+        Q6          & I messaggi del sistema sono rassicuranti e costruttivi.             & Gestione Errori               \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Questionario di gradimento (Adattamento SUS).}
+    \label{tab:usability_survey}
 \end{table}
 
 \subsubsection{Analisi e Discussione dei Risultati}
 I dati raccolti certificano l'eccellente usabilità del prodotto. Sul fronte dell'efficienza oggettiva (Figura \ref{fig:times}), l'interazione con le Notifiche (Task 3) e lo Storico (Task 2) ha richiesto tempi brevissimi (rispettivamente 12 e 15 secondi di media), dimostrando che le feature abbattono efficacemente i tempi di navigazione. Il Task 1, prevedibilmente più lungo (65 secondi), rientra comunque in un range ottimale per la compilazione di moduli complessi.
 
 \begin{figure}[h!]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    xbar,
-    y axis line style = { opacity = 0 },
-    axis x line       = none,
-    tickwidth         = 0pt,
-    enlarge y limits  = 0.2,
-    enlarge x limits  = 0.02,
-    symbolic y coords = {Task 4 - Contatto, Task 3 - Alert, Task 2 - Recupero, Task 1 - Ricerca},
-    nodes near coords,
-    nodes near coords align={horizontal},
-    width=10cm,
-    height=6cm,
-    bar width=15pt,
-    fill=blue!30,
-    draw=blue!80
-  ]
-  \addplot coordinates { (45,Task 4 - Contatto) (12,Task 3 - Alert) (15,Task 2 - Recupero) (65,Task 1 - Ricerca) };
-\end{axis}
-\end{tikzpicture}
-\caption{Metriche oggettive: Tempo medio speso per Task (in secondi).}
-\label{fig:times}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                xbar,
+                y axis line style = { opacity = 0 },
+                axis x line       = none,
+                tickwidth         = 0pt,
+                enlarge y limits  = 0.2,
+                enlarge x limits  = 0.02,
+                symbolic y coords = {Task 4 - Contatto, Task 3 - Alert, Task 2 - Recupero, Task 1 - Ricerca},
+                nodes near coords,
+                nodes near coords align={horizontal},
+                width=10cm,
+                height=6cm,
+                bar width=15pt,
+                fill=blue!30,
+                draw=blue!80
+            ]
+            \addplot coordinates { (45,Task 4 - Contatto) (12,Task 3 - Alert) (15,Task 2 - Recupero) (65,Task 1 - Ricerca) };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Metriche oggettive: Tempo medio speso per Task (in secondi).}
+    \label{fig:times}
 \end{figure}
 
 L'analisi soggettiva derivata dal survey (Figura \ref{fig:radar}) conferma pienamente le metriche temporali. La voce Q2 (relativa allo Storico) ha dominato il questionario con un punteggio di 4.8 su 5, confermandosi la funzionalità più apprezzata per l'abbattimento del carico cognitivo. Ottimi risultati anche per le Notifiche (Q3 - 4.6/5). Le uniche lievi flessioni si registrano sulla voce Q5 (4.0/5), suggerendo che, per futuri aggiornamenti, i pulsanti di reset delle form dovrebbero essere resi ancor più evidenti visivamente.

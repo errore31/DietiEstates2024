@@ -42,43 +42,49 @@
 \contentsline {subsubsection}{\numberline {3.5.1}Creazione del database}{34}{subsubsection.3.5.1}%
 \contentsline {subsubsection}{\numberline {3.5.2}Creazione di un modello}{35}{subsubsection.3.5.2}%
 \contentsline {subsection}{\numberline {3.6}Descrizione delle scelte di design dell'interfaccia utente}{37}{subsection.3.6}%
-\contentsline {subsection}{\numberline {3.7}Diagramma delle Classi}{37}{subsection.3.7}%
-\contentsline {subsubsection}{\numberline {3.7.1}Organizzazione a Livelli e Responsabilità}{37}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}Diagramma UML del modulo "Auth \& User"}{38}{subsubsection.3.7.2}%
-\contentsline {subsubsection}{\numberline {3.7.3}Diagramma UML del modulo "Properties \& Images"}{39}{subsubsection.3.7.3}%
-\contentsline {subsubsection}{\numberline {3.7.4}Diagramma UML del modello "PropertiesFeatures"}{40}{subsubsection.3.7.4}%
-\contentsline {subsubsection}{\numberline {3.7.5}Diagramma UML del modello "Agencies"}{41}{subsubsection.3.7.5}%
-\contentsline {subsubsection}{\numberline {3.7.6}Diagramma UML del modello "RequestAgencies"}{42}{subsubsection.3.7.6}%
-\contentsline {subsubsection}{\numberline {3.7.7}Diagramma UML del modello "Notifications"}{43}{subsubsection.3.7.7}%
-\contentsline {subsubsection}{\numberline {3.7.8}Diagramma UML del modello "Searches"}{44}{subsubsection.3.7.8}%
-\contentsline {subsection}{\numberline {3.8}Diagrammi di sequenza di design}{45}{subsection.3.8}%
-\contentsline {subsection}{\numberline {3.9}Diagramma di sequenza aggiornamento immobile}{45}{subsection.3.9}%
-\contentsline {subsection}{\numberline {3.10}Diagramma di sequenza caricamento immobile}{46}{subsection.3.10}%
-\contentsline {subsection}{\numberline {3.11}Diagramma di sequenza creazione agente immobiliare}{47}{subsection.3.11}%
-\contentsline {subsection}{\numberline {3.12}Diagramma di sequenza ricerca immobile}{48}{subsection.3.12}%
-\contentsline {subsection}{\numberline {3.13}Diagramma di sequenza ricerca tramite prezzo}{49}{subsection.3.13}%
-\contentsline {subsection}{\numberline {3.14}Diagramma di sequenza ricerca tramite mappa}{50}{subsection.3.14}%
-\contentsline {subsection}{\numberline {3.15}Diagramma di sequenza ricerca tramite filtri}{51}{subsection.3.15}%
-\contentsline {subsection}{\numberline {3.16}Sistema di versionamento}{52}{subsection.3.16}%
-\contentsline {subsubsection}{\numberline {3.16.1}Report della qualità del codice}{53}{subsubsection.3.16.1}%
-\contentsline {section}{\numberline {4}Testing}{54}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Strategia e tecnologie}{54}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Metodi di test}{55}{subsection.4.2}%
-\contentsline {subsubsection}{\numberline {4.2.1}TEST 1: Registrazione utente}{55}{subsubsection.4.2.1}%
-\contentsline {paragraph}{Strategia Adottata}{55}{section*.2}%
-\contentsline {subsubsection}{\numberline {4.2.2}TEST 2: Controllo input creazione proprietà}{57}{subsubsection.4.2.2}%
-\contentsline {paragraph}{Strategia Adottata}{57}{section*.3}%
-\contentsline {subsubsection}{\numberline {4.2.3}TEST 3: Matching Località}{59}{subsubsection.4.2.3}%
-\contentsline {paragraph}{Strategia Adottata}{59}{section*.4}%
-\contentsline {subsubsection}{\numberline {4.2.4}TEST 4: Generazione titolo notifica}{61}{subsubsection.4.2.4}%
-\contentsline {paragraph}{Strategia Adottata}{61}{section*.5}%
-\contentsline {subsection}{\numberline {4.3}Risultati}{63}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Analisi dell'Usabilità e Validazione UI}{64}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Fase 1: Expert Review e Ispezione Euristica}{64}{subsection.5.1}%
-\contentsline {subsubsection}{\numberline {5.1.1}Definizione della Checklist Sistematica}{64}{subsubsection.5.1.1}%
-\contentsline {subsubsection}{\numberline {5.1.2}Applicazione della Checklist e Interventi Correttivi}{64}{subsubsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.2}Fase 2: Usability Testing sul Campo}{64}{subsection.5.2}%
-\contentsline {subsubsection}{\numberline {5.2.1}Procedura Sperimentale, Metriche e Soggetti}{65}{subsubsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.2}Definizione dei Task (Scenari d'Uso)}{65}{subsubsection.5.2.2}%
-\contentsline {subsubsection}{\numberline {5.2.3}Survey Post-Esperimento}{65}{subsubsection.5.2.3}%
-\contentsline {subsubsection}{\numberline {5.2.4}Analisi e Discussione dei Risultati}{66}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {3.6.1}Introduzione}{37}{subsubsection.3.6.1}%
+\contentsline {subsubsection}{\numberline {3.6.2}Visualizzazione della Palette}{37}{subsubsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.3}Il Pilastro della Fiducia: Deep Navy (\#173857)}{37}{subsubsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.4}Elementi Materici e Accoglienza}{37}{subsubsection.3.6.4}%
+\contentsline {subsubsection}{\numberline {3.6.5}Il Trigger di Conversione: Arancione Ambra (\#F39C12)}{37}{subsubsection.3.6.5}%
+\contentsline {subsubsection}{\numberline {3.6.6}Conclusioni}{38}{subsubsection.3.6.6}%
+\contentsline {subsection}{\numberline {3.7}Diagramma delle Classi}{39}{subsection.3.7}%
+\contentsline {subsubsection}{\numberline {3.7.1}Organizzazione a Livelli e Responsabilità}{39}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}Diagramma UML del modulo "Auth \& User"}{40}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}Diagramma UML del modulo "Properties \& Images"}{41}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.4}Diagramma UML del modello "PropertiesFeatures"}{42}{subsubsection.3.7.4}%
+\contentsline {subsubsection}{\numberline {3.7.5}Diagramma UML del modello "Agencies"}{43}{subsubsection.3.7.5}%
+\contentsline {subsubsection}{\numberline {3.7.6}Diagramma UML del modello "RequestAgencies"}{44}{subsubsection.3.7.6}%
+\contentsline {subsubsection}{\numberline {3.7.7}Diagramma UML del modello "Notifications"}{45}{subsubsection.3.7.7}%
+\contentsline {subsubsection}{\numberline {3.7.8}Diagramma UML del modello "Searches"}{46}{subsubsection.3.7.8}%
+\contentsline {subsection}{\numberline {3.8}Diagrammi di sequenza di design}{47}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}Diagramma di sequenza aggiornamento immobile}{47}{subsection.3.9}%
+\contentsline {subsection}{\numberline {3.10}Diagramma di sequenza caricamento immobile}{48}{subsection.3.10}%
+\contentsline {subsection}{\numberline {3.11}Diagramma di sequenza creazione agente immobiliare}{49}{subsection.3.11}%
+\contentsline {subsection}{\numberline {3.12}Diagramma di sequenza ricerca immobile}{50}{subsection.3.12}%
+\contentsline {subsection}{\numberline {3.13}Diagramma di sequenza ricerca tramite prezzo}{51}{subsection.3.13}%
+\contentsline {subsection}{\numberline {3.14}Diagramma di sequenza ricerca tramite mappa}{52}{subsection.3.14}%
+\contentsline {subsection}{\numberline {3.15}Diagramma di sequenza ricerca tramite filtri}{53}{subsection.3.15}%
+\contentsline {subsection}{\numberline {3.16}Sistema di versionamento}{54}{subsection.3.16}%
+\contentsline {subsubsection}{\numberline {3.16.1}Report della qualità del codice}{55}{subsubsection.3.16.1}%
+\contentsline {section}{\numberline {4}Testing}{56}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Strategia e tecnologie}{56}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Metodi di test}{57}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}TEST 1: Registrazione utente}{57}{subsubsection.4.2.1}%
+\contentsline {paragraph}{Strategia Adottata}{57}{section*.2}%
+\contentsline {subsubsection}{\numberline {4.2.2}TEST 2: Controllo input creazione proprietà}{59}{subsubsection.4.2.2}%
+\contentsline {paragraph}{Strategia Adottata}{59}{section*.3}%
+\contentsline {subsubsection}{\numberline {4.2.3}TEST 3: Matching Località}{61}{subsubsection.4.2.3}%
+\contentsline {paragraph}{Strategia Adottata}{61}{section*.4}%
+\contentsline {subsubsection}{\numberline {4.2.4}TEST 4: Generazione titolo notifica}{63}{subsubsection.4.2.4}%
+\contentsline {paragraph}{Strategia Adottata}{63}{section*.5}%
+\contentsline {subsection}{\numberline {4.3}Risultati}{65}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Analisi dell'Usabilità e Validazione UI}{66}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Fase 1: Expert Review e Ispezione Euristica}{66}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Definizione della Checklist Sistematica}{66}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Applicazione della Checklist e Interventi Correttivi}{66}{subsubsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.2}Fase 2: Usability Testing sul Campo}{66}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Procedura Sperimentale, Metriche e Soggetti}{67}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Definizione dei Task (Scenari d'Uso)}{67}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Survey Post-Esperimento}{67}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Analisi e Discussione dei Risultati}{68}{subsubsection.5.2.4}%
