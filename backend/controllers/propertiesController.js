@@ -1,23 +1,95 @@
 import fs from "fs";
-
 import { Properties, PropertiesFeatures, Images, Users, Searches, Notifications, Agencies } from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 import { Op } from 'sequelize';
 
-
 export class propertiesController {
 
+    //funzioni helper
+    static getUsersToNotify(propertyAddress, propertyTitle, recentSearches) {
+        const address = propertyAddress ? propertyAddress.toLowerCase() : '';
+        const title = propertyTitle ? propertyTitle.toLowerCase() : '';
+
+        // Group by userId e prendi solo le ultime 3 ricerche per utente
+        const userRecentSearches = {};
+        for (const search of recentSearches) {
+            if (!userRecentSearches[search.userId]) {
+                userRecentSearches[search.userId] = [];
+            }
+            if (userRecentSearches[search.userId].length < 3) {
+                userRecentSearches[search.userId].push(search);
+            }
+        }
+
+        // Controlla il match
+        const usersToNotify = new Set();
+        for (const userId in userRecentSearches) {
+            const searches = userRecentSearches[userId];
+            for (const search of searches) {
+                // Check se i criteri della ricerca testuale matchano la keyword
+                const searchTitle = search.criteria && (search.criteria['area/title'] || search.criteria.text);
+                if (searchTitle) {
+                    // Prendi solo la prima parte della stringa di ricerca (es: da "Napoli, NA, Italia" prendi "napoli")
+                    const searchTerm = searchTitle.split(',')[0].trim().toLowerCase();
+
+                    // Controlla se l'indirizzo o il titolo dell'immobile contengono il termine cercato
+                    if (address.includes(searchTerm) || title.includes(searchTerm)) {
+                        usersToNotify.add(parseInt(userId));
+                        break; // Basta una ricerca matchata per notificare l'utente
+                    }
+                }
+            }
+        }
+
+        return Array.from(usersToNotify);
+    }
+
+    
+    static buildAdvancedSearchQuery(queryParams) {
+        const { text, type, maxPrice, roomCount, area, floor, energyClass, hasElevator } = queryParams;
+
+        const propertyWhere = {};
+        if (text) {
+            const searchText = text.split(',')[0].trim();
+            propertyWhere[Op.or] = [
+                { address: { [Op.iLike]: `%${searchText}%` } }
+            ];
+        }
+        if (type) {
+            propertyWhere.type = type;
+        }
+        if (maxPrice) {
+            propertyWhere.price = { [Op.lte]: parseFloat(maxPrice) };
+        }
+
+        const featuresWhere = {};
+        if (roomCount) {
+            featuresWhere.roomCount = { [Op.gte]: parseInt(roomCount) };
+        }
+        if (area) {
+            featuresWhere.area = { [Op.gte]: parseInt(area) };
+        }
+        if (floor) {
+            featuresWhere.floor = parseInt(floor);
+        }
+        if (energyClass) {
+            featuresWhere.energyClass = energyClass;
+        }
+        if (hasElevator === 'true') {
+            featuresWhere.hasElevator = true;
+        }
+
+        return { propertyWhere, featuresWhere };
+    }
 
 
     /**
     * @param {http.IncomingMessage} req 
     * @param {http.ServerResponse} res 
     **/
-
     static async createPropertyWithImage(req) {
         let property = null;
         try {
-
             if (!req.files || req.files.length === 0) {
                 const error = new Error('Almeno una immagine è richiesta');
                 error.status = 400;
@@ -25,14 +97,11 @@ export class propertiesController {
             }
 
             property = await this.createProperty(req);
-
             await imagesController.createImages(property.id, req.files);
 
             return property;
 
-        } catch (error) { //delete uploaded files in case of error (server/db error)
-            //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            //da capire meglio
+        } catch (error) { 
             if (property) {
                 await this.deleteProperty(property.id);
             }
@@ -49,7 +118,6 @@ export class propertiesController {
     }
 
     static async createProperty(req) {
-
         let featuresData = req.body.PropertiesFeature;
         if (typeof featuresData === 'string') {
             featuresData = JSON.parse(featuresData);
@@ -79,49 +147,17 @@ export class propertiesController {
             });
         }
 
-        // TRIGGER NOTIFICHE: Controlla se il nuovo immobile corrisponde a recenti ricerche
+        // TRIGGER NOTIFICHE 
         try {
-            const propertyAddress = newProperty.address ? newProperty.address.toLowerCase() : '';
-            const propertyTitle = newProperty.title ? newProperty.title.toLowerCase() : '';
-
-            // Trova tutte le ricerche salvate
+        
             const recentSearches = await Searches.findAll({
                 order: [['createdAt', 'DESC']]
             });
 
-            // Group by userId e prendi solo le ultime 3 ricerche per utente
-            const userRecentSearches = {};
-            for (const search of recentSearches) {
-                if (!userRecentSearches[search.userId]) {
-                    userRecentSearches[search.userId] = [];
-                }
-                if (userRecentSearches[search.userId].length < 3) {
-                    userRecentSearches[search.userId].push(search);
-                }
-            }
+            const usersToNotify = this.getUsersToNotify(newProperty.address, newProperty.title, recentSearches);
 
-            // Controlla il match e crea le notifiche
-            const usersToNotify = new Set();
-            for (const userId in userRecentSearches) {
-                const searches = userRecentSearches[userId];
-                for (const search of searches) {
-                    // Check se i criteri della ricerca testuale matchano la keyword
-                    const searchTitle = search.criteria && (search.criteria['area/title'] || search.criteria.text);
-                    if (searchTitle) {
-                        // Prendi solo la prima parte della stringa di ricerca (es: da "Napoli, NA, Italia" prendi "napoli")
-                        const searchTerm = searchTitle.split(',')[0].trim().toLowerCase();
-
-                        // Controlla se l'indirizzo o il titolo dell'immobile contengono il termine cercato
-                        if (propertyAddress.includes(searchTerm) || propertyTitle.includes(searchTerm)) {
-                            usersToNotify.add(userId);
-                            break; // Basta una ricerca matchata per notificare l'utente
-                        }
-                    }
-                }
-            }
-
-            // Crea le notifiche in blocco
-            const notificationPromises = Array.from(usersToNotify).map(userId => {
+            // 3. Crea le notifiche in blocco
+            const notificationPromises = usersToNotify.map(userId => {
                 return Notifications.create({
                     type: 'property',
                     message: `Un nuovo immobile in "${newProperty.address}" è appena stato aggiunto e corrisponde alle tue ultime ricerche!`,
@@ -132,17 +168,17 @@ export class propertiesController {
             await Promise.all(notificationPromises);
         } catch (error) {
             console.error('Errore durante la generazione delle notifiche automatiche:', error);
-            // Non bloccare la creazione della proprietà se le notifiche falliscono
         }
 
         return newProperty;
     }
 
-
     static async deleteProperty(idPropriety) {
         const property = await Properties.findByPk(idPropriety);
         if (!property) {
-            throw new customError('Immobile non trovato', 404);
+            const error = new Error('Immobile non trovato');
+            error.status = 404;
+            throw error;
         }
 
         await property.destroy();
@@ -150,10 +186,11 @@ export class propertiesController {
     }
 
     static async updateProperty(idPropriety, req) {
-
         const property = await Properties.findByPk(idPropriety);
         if (!property) {
-            throw new customError('Immobile non trovato', 404);
+            const error = new Error('Immobile non trovato');
+            error.status = 404;
+            throw error;
         }
 
         const allowedUpdates = ['title', 'description', 'price', 'address', 'type', 'category', 'latitude', 'longitude'];
@@ -165,7 +202,6 @@ export class propertiesController {
         });
 
         await property.save();
-
         return property;
     }
 
@@ -222,24 +258,15 @@ export class propertiesController {
         return Properties.findOne({
             where: { id: propertyId },
             include: [
-                {
-                    model: PropertiesFeatures,
-                },
-                {
-                    model: Images
-                },
+                { model: PropertiesFeatures },
+                { model: Images },
                 {
                     model: Users,
-                    include: [
-                        {
-                            model: Agencies
-                        }
-                    ]
+                    include: [{ model: Agencies }]
                 }
             ]
         });
     }
-
 
     static async getSearchedProperties(propertyText, req, res) {
         try {
@@ -253,12 +280,8 @@ export class propertiesController {
                     ]
                 },
                 include: [
-                    {
-                        model: PropertiesFeatures,
-                    },
-                    {
-                        model: Images
-                    }
+                    { model: PropertiesFeatures },
+                    { model: Images }
                 ]
             });
             return properties;
@@ -268,43 +291,12 @@ export class propertiesController {
         }
     }
 
-
-
     static async getAdvancedSearchedProperties(req) {
         try {
-            const { text, type, maxPrice, roomCount, area, floor, energyClass, hasElevator } = req.query;
+            // 1. Deleghiamo la costruzione della query all'helper pura
+            const { propertyWhere, featuresWhere } = this.buildAdvancedSearchQuery(req.query);
 
-            const propertyWhere = {};
-            if (text) {
-                const searchText = text.split(',')[0].trim();
-                propertyWhere[Op.or] = [
-                    { address: { [Op.iLike]: `%${searchText}%` } }
-                ];
-            }
-            if (type) {
-                propertyWhere.type = type;
-            }
-            if (maxPrice) {
-                propertyWhere.price = { [Op.lte]: parseFloat(maxPrice) };
-            }
-
-            const featuresWhere = {};
-            if (roomCount) {
-                featuresWhere.roomCount = { [Op.gte]: parseInt(roomCount) };
-            }
-            if (area) {
-                featuresWhere.area = { [Op.gte]: parseInt(area) };
-            }
-            if (floor) {
-                featuresWhere.floor = parseInt(floor);
-            }
-            if (energyClass) {
-                featuresWhere.energyClass = energyClass;
-            }
-            if (hasElevator === 'true') {
-                featuresWhere.hasElevator = true;
-            }
-
+            // 2. Eseguiamo la chiamata al DB
             const properties = await Properties.findAll({
                 where: propertyWhere,
                 include: [
@@ -337,7 +329,6 @@ export class propertiesController {
                     { model: Images },
                     { model: PropertiesFeatures }
                 ],
-                // ordina per data di creazione per avere le più recenti
                 order: [
                     ['createdAt', 'DESC'],
                     [Images, 'order', 'ASC']
@@ -352,7 +343,6 @@ export class propertiesController {
     }
 
     static async getPropertiesByAgencyId(agencyId) {
-
         try {
             const properties = await Properties.findAll({
                 include: [
@@ -360,7 +350,7 @@ export class propertiesController {
                     { model: PropertiesFeatures },
                     {
                         model: Users,
-                        where: { agencyId: agencyId }, //Mi prendo gli immobili degli utenti associati all'agenzia
+                        where: { agencyId: agencyId },
                         attributes: []
                     }
                 ]
@@ -388,47 +378,18 @@ export class propertiesController {
                 throw error;
             }
 
-            const propertyAddress = property.address ? property.address.toLowerCase() : '';
-            const propertyTitle = property.title ? property.title.toLowerCase() : '';
-
-            // Trova tutte le ricerche salvate
+            // TRIGGER NOTIFICHE PROMOZIONALI (Ora utilizza la funzione helper)
+            
+            // 1. Trova tutte le ricerche salvate
             const recentSearches = await Searches.findAll({
                 order: [['createdAt', 'DESC']]
             });
 
-            // Group by userId e prendi solo le ultime 3 ricerche per utente
-            const userRecentSearches = {};
-            for (const search of recentSearches) {
-                if (!userRecentSearches[search.userId]) {
-                    userRecentSearches[search.userId] = [];
-                }
-                if (userRecentSearches[search.userId].length < 3) {
-                    userRecentSearches[search.userId].push(search);
-                }
-            }
+            // 2. Determina gli utenti tramite la logica pura
+            const usersToNotify = this.getUsersToNotify(property.address, property.title, recentSearches);
 
-            // Controlla il match e crea le notifiche
-            const usersToNotify = new Set();
-            for (const userId in userRecentSearches) {
-                const searches = userRecentSearches[userId];
-                for (const search of searches) {
-                    // Check se i criteri della ricerca testuale matchano la keyword
-                    const searchTitle = search.criteria && (search.criteria['area/title'] || search.criteria.text);
-                    if (searchTitle) {
-                        // Prendi solo la prima parte della stringa di ricerca (es: da "Napoli, NA, Italia" prendi "napoli")
-                        const searchTerm = searchTitle.split(',')[0].trim().toLowerCase();
-
-                        // Controlla se l'indirizzo o il titolo dell'immobile contengono il termine cercato
-                        if (propertyAddress.includes(searchTerm) || propertyTitle.includes(searchTerm)) {
-                            usersToNotify.add(userId);
-                            break; // Basta una ricerca matchata per notificare l'utente
-                        }
-                    }
-                }
-            }
-
-            // Crea le notifiche promozionali in blocco
-            const notificationPromises = Array.from(usersToNotify).map(userId => {
+            // 3. Crea le notifiche promozionali in blocco
+            const notificationPromises = usersToNotify.map(userId => {
                 return Notifications.create({
                     type: 'promo',
                     title: `Promozione su ${property.title}`,
@@ -445,5 +406,4 @@ export class propertiesController {
             throw error;
         }
     }
-
 }

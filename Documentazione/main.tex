@@ -345,7 +345,7 @@ Questo diagramma rappresenta le funzionalità accessibili a un amministratore de
 
 \newpage
 \subsection{Personas}
-Le \textit{Personas} di riferimento per delineare i requisiti funzionali e di usabilità del sistema. La scelta dei profili è stata guidata dalla necessità di rappresentare scenari d'uso estremamente eterogenei, garantendo che il software possa rispondere efficacemente a diverse categorie di utenti.
+La scelta dei profili è stata guidata dalla necessità di rappresentare scenari d'uso estremamente eterogenei, garantendo che il software possa rispondere efficacemente a diverse categorie di utenti.
 
 I casi analizzati di seguito sono stati selezionati per coprire un ampio spettro di target:
 \begin{itemize}
@@ -925,74 +925,85 @@ export function createModel(database){
 
 \subsection{Descrizione delle scelte di design dell'interfaccia utente}
 
-\subsubsection{Introduzione}
-Abbiamo adottato per la piattaforma di compravendita immobiliare una palette di colori che risponde a precise necessità psicologiche: la generazione di fiducia, il richiamo alla solidità materica e la massimizzazione dei tassi di conversione attraverso il contrasto visivo.
+\subsubsection{Introduzione e Strategia Cromatica}
+La piattaforma DietiEstates adotta una palette che risponde a precise necessità psicologiche: la generazione di fiducia, il richiamo alla solidità materica e la massimizzazione dei tassi di conversione attraverso il contrasto visivo. L'obiettivo è bilanciare l'autorevolezza istituzionale con il calore dell'ambiente domestico.
 
 \subsubsection{Visualizzazione della Palette}
-
-Di seguito sono riportati i codici colore principali che compongono l'identità visiva:
+Di seguito sono riportati i codici colore principali che compongono l'identità visiva e che vengono richiamati nel sistema tramite variabili CSS (es. \texttt{--site-primary}, \texttt{--site-orange}):
 
 \begin{center}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=DeepNavy, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Navy}, center title]
-            \vfill \centering \color{white} \#173857
+        \begin{tcolorbox}[colback=DeepNavy, colframe=black!10, height=3cm, title=\textcolor{white}{Deep Navy}, center title]
+            \vfill \centering \color{white} \#173857 \\ \small (Primary)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=SteelBlue, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Steel Blue}, center title]
-            \vfill \centering \color{white} \#4D7396
+        \begin{tcolorbox}[colback=SteelBlue, colframe=black!10, height=3cm, title=\textcolor{white}{Steel Blue}, center title]
+            \vfill \centering \color{white} \#4D7396 \\ \small (Secondary)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=DeepEarth, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Earth}, center title]
-            \vfill \centering \color{white} \#573E17
+        \begin{tcolorbox}[colback=DeepEarth, colframe=black!10, height=3cm, title=\textcolor{white}{Deep Earth}, center title]
+            \vfill \centering \color{white} \#573E17 \\ \small (Earth)
         \end{tcolorbox}
     \end{minipage}
 
     \vspace{0.5cm}
 
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=SandGold, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Sand Gold}, center title]
-            \vfill \centering \color{white} \#AC9166
+        \begin{tcolorbox}[colback=SandGold, colframe=black!10, height=3cm, title=\textcolor{white}{Sand Gold}, center title]
+            \vfill \centering \color{white} \#AC9166 \\ \small (Gold)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
         \begin{tcolorbox}[colback=WarmCream, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Warm Cream}, center title]
-            \vfill \centering \color{DeepEarth} \#FFF3DF
+            \vfill \centering \color{DeepEarth} \#FFF3DF \\ \small (Background)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=AccentOrange, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Accent Color}, center title]
-            \vfill \centering \color{white} \#F39C12
+        \begin{tcolorbox}[colback=AccentOrange, colframe=black!10, height=3cm, title=\textcolor{white}{Accent Color}, center title]
+            \vfill \centering \color{white} \#F39C12 \\ \small (Call to Action)
         \end{tcolorbox}
     \end{minipage}
 \end{center}
 
-\subsubsection{Il Pilastro della Fiducia: Deep Navy (\#173857)}
-Il colore dominante della composizione è il \textbf{Deep Navy}. In un mercato dove l'investimento del cliente è massivo, il blu scuro funge da ancora psicologica.
+\subsubsection{Logica dei Pilastri Visivi}
 \begin{itemize}
-    \item \textbf{Istituzionalità:} Comunica che l'agenzia non è solo un intermediario, ma un'istituzione solida.
-    \item \textbf{Serietà Finanziaria:} È il colore associato globalmente ai servizi bancari e legali, essenziali nella fase di rogito e mutuo.
-    \item \textbf{Leggibilità:} Utilizzato per gli header e la tipografia principale, garantisce un'esperienza utente riposante e autorevole.
+    \item \textbf{La Fiducia (Deep Navy):} Utilizzato per gli header e la tipografia principale, comunica serietà finanziaria e stabilità, elementi critici nel mercato immobiliare.
+    \item \textbf{L'Accoglienza (Warm Cream):} Utilizzato come sfondo (\texttt{--site-cream}) per eliminare la freddezza del bianco puro, evocando il comfort domestico.
+    \item \textbf{La Conversione (Accent Color):} L'arancione funge da trigger visivo. Essendo complementare ai toni blu, attira istantaneamente l'occhio sui pulsanti di azione e sui dati economici.
 \end{itemize}
 
-\subsubsection{Elementi Materici e Accoglienza}
-Mentre il blu stabilisce la professionalità, i toni terra (\textbf{\#573E17} e \textbf{\#AC9166}) introducono il concetto di ``Casa''.
+\subsubsection{Applicazione Pratica: La Property Card}
+L'unione di questi principi trova la sua massima espressione nella \textbf{Card Immobiliare}, l'atomo informativo fondamentale della piattaforma. La card è stata progettata seguendo i principi del \textit{Minimalismo Informativo} per condensare i dati senza generare sovraccarico cognitivo.
+
+\paragraph{Gerarchia Visiva e Layout}
+La struttura segue un pattern di lettura naturale (F-pattern):
 \begin{itemize}
-    \item \textbf{Richiamo Naturale:} Questi colori evocano materiali nobili come il legno di rovere, il cuoio e la pietra.
-    \item \textbf{Comfort Domestico:} Il \textbf{Warm Cream (\#FFF3DF)}, utilizzato per gli sfondi delle schede o delle sezioni, sostituisce il bianco puro per eliminare il senso di freddezza, creando un ambiente digitale accogliente.
+    \item \textbf{Impatto Visivo:} L'immagine superiore ($230px$) utilizza la proprietà \texttt{object-fit: cover} per garantire coerenza estetica indipendentemente dalle proporzioni della foto caricata.
+    \item \textbf{Enfasi sul Valore:} Il prezzo è l'elemento con il maggior peso visivo (\texttt{font-weight: 800}), evidenziato dal colore \texttt{Accent Color} (\#F39C12). Questa scelta accelera il filtraggio mentale dell'utente in base al budget.
+    \item \textbf{Semplificazione Tecnica:} L'uso di icone grafiche per locali e metratura permette un riconoscimento immediato dei parametri tecnici senza appesantire il layout con etichette testuali prolisse.
 \end{itemize}
 
-\subsubsection{Il Trigger di Conversione: Arancione Ambra (\#F39C12)}
-L'elemento di forza della strategia è l'uso di piccoli ma intensi punti di contrasto in \textbf{Arancione Ambra}. Questo colore è posizionato strategicamente al di fuori dell'armonia principale per creare un'interruzione visiva.
+\paragraph{Micro-interazioni e Affordance}
+Per rendere l'interfaccia reattiva, sono state implementate transizioni CSS che migliorano la percezione di controllo:
+\begin{itemize}
+    \item \textbf{Hover Effect:} Al passaggio del mouse, la card subisce una traslazione verso l'alto (\texttt{translateY(-10px)}) e un aumento dell'ombra portata. Questo feedback visivo comunica chiaramente l'interattività dell'elemento.
+    \item \textbf{Feedback di Navigazione:} L'uso del cursore \texttt{pointer} su tutta la superficie della card assicura che l'utente percepisca l'intero blocco come un collegamento ipertestuale verso il dettaglio.
+\end{itemize}
 
-\begin{tcolorbox}[colback=AccentOrange!10, colframe=AccentOrange, title=Logica della Call to Action (CTA)]
-    L'arancione è il colore complementare dinamico dei toni bluastri. Quando l'utente scorre una lista di immobili (dominata dai blu e dai marroni), l'occhio viene naturalmente attratto dai pulsanti \textit{``Cerca''} o \textit{``Prezzo''} colorati con \#F39C12. Questo riduce il carico cognitivo e accelera la decisione d'acquisto.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/FotoCard.png}
+    \caption{Card Immobiliare}
+\end{figure}
+
+\paragraph{Gestione della Robustezza (Error Handling)}
+Dal punto di vista della User Experience, è stata implementata una logica di \textit{fallback} per le immagini. Tramite il metodo \texttt{handleImageError} nel componente Angular, il sistema rileva eventuali link corrotti o assenze di foto, sostituendoli istantaneamente con un segnaposto (\texttt{housePlaceholder.jpg}). Questo garantisce che l'integrità visiva della pagina non venga mai compromessa da icone di errore "rotte".
+
+\begin{tcolorbox}[colback=AccentOrange!10, colframe=AccentOrange, title=Sintesi del Design]
+L'equilibrio tra la freddezza autorevole del \textit{Deep Navy} e il calore organico dei toni \textit{Cream} e \textit{Earth} crea un'immagine di marca premium. L'integrazione dell'arancione come elemento di contrasto puro assicura che il portale non sia solo una vetrina elegante, ma un'interfaccia orientata alla conversione.
 \end{tcolorbox}
-
-\subsubsection{Conclusioni}
-L'equilibrio tra la freddezza autorevole del blu e il calore organico dei toni sabbia crea un'immagine di marca premium. L'integrazione dell'arancione come elemento di contrasto puro garantisce che il sito non sia solo una vetrina elegante, ma una macchina da conversione efficiente.
-
 \newpage
 
 \subsection{Diagramma delle Classi}
@@ -1095,7 +1106,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
     Il processo di "Ricerca Immobile" è stato suddiviso in diagrammi distinti (Ricerca per Mappa, Ricerca per Filtri e Ricerca per Prezzo). Questa scelta è stata adottata per ridurre la complessità visiva dei singoli schemi, facilitando la comprensione granulare di come i diversi parametri di input interagiscano con il controller e il database per restituire i risultati filtrati.
 \end{tcolorbox}
 
-\subsection{Diagramma di sequenza aggiornamento immobile}
+\subsubsection{Diagramma di sequenza aggiornamento immobile}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/aggiornametoImmobile.png}
@@ -1103,7 +1114,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 \end{figure}
 
 \newpage
-\subsection{Diagramma di sequenza caricamento immobile}
+\subsubsection{Diagramma di sequenza caricamento immobile}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/caricamentoImmobile.png}
@@ -1111,7 +1122,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 \end{figure}
 \newpage
 
-\subsection{Diagramma di sequenza creazione agente immobiliare}
+\subsubsection{Diagramma di sequenza creazione agente immobiliare}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/creazioneAgenteImmobiliare.png}
@@ -1119,7 +1130,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 \end{figure}
 \newpage
 
-\subsection{Diagramma di sequenza ricerca immobile}
+\subsubsection{Diagramma di sequenza ricerca immobile}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/ricercaImmobile.png}
@@ -1128,7 +1139,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 
 \newpage
 
-\subsection{Diagramma di sequenza ricerca tramite prezzo}
+\subsubsection{Diagramma di sequenza ricerca tramite prezzo}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/ricercaPrezzo.png}
@@ -1137,7 +1148,7 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 
 \newpage
 
-\subsection{Diagramma di sequenza ricerca tramite mappa}
+\subsubsection{Diagramma di sequenza ricerca tramite mappa}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/ricercaMappa.png}
@@ -1146,12 +1157,57 @@ Sono stati analizzati e modellati i flussi critici per le diverse tipologie di a
 
 \newpage
 
-\subsection{Diagramma di sequenza ricerca tramite filtri}
+\subsubsection{Diagramma di sequenza ricerca tramite filtri}
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.1\textwidth]{images/fotoSequenceDiagram/ricercaFiltri.png}
     \caption{Schema UML Searches}
 \end{figure}
+
+\newpage
+
+\subsection{Esecuzione del programma}
+Per garantire il corretto avvio dell'intero ecosistema DietiEstates2024, è stata implementata una procedura di deployment automatizzata tramite containerizzazione, riducendo al minimo la complessità della configurazione manuale.
+
+\subsubsection{Prerequisiti di sistema}
+Prima di procedere con l'avvio, è necessario verificare i seguenti punti:
+\begin{itemize}
+    \item \textbf{Docker Desktop}: Deve essere installato e correttamente avviato (icona di stato verde).
+    \item \textbf{Disponibilità Porte}: Assicurarsi che le porte critiche \texttt{5432} (Database), \texttt{3000} (Backend) e \texttt{4200} (Angular) non siano occupate da altri servizi locali.
+\end{itemize}
+
+\subsubsection{Posizionamento e navigazione}
+Aprire l'interfaccia a riga di comando (Terminale, PowerShell o Bash) e posizionarsi nella cartella radice del progetto:
+\begin{lstlisting}[language=bash]
+cd path/to/project/DietiEstates24
+\end{lstlisting}
+
+\subsubsection{Esecuzione del processo di Build}
+L'avvio dell'infrastruttura è gestito da uno script unificato (\texttt{build.bat} per Windows o \texttt{build.sh} per Linux/macOS). Lo script automatizza le seguenti fasi:
+\begin{enumerate}
+    \item \textbf{Infrastruttura}: Costruzione dell'immagine personalizzata per il backend e avvio dei container per il database PostgreSQL, il backend Node.js e il frontend Angular tramite Docker Compose.
+    \item \textbf{Verifica dell'avvio}: Controllo dello stato dei container e conferma del corretto avvio del sistema.
+\end{enumerate}
+
+Per avviare su \textbf{Windows}:
+\begin{lstlisting}[language=bash]
+.\build.bat
+\end{lstlisting}
+
+Per avviare su \textbf{Linux/macOS}:
+\begin{lstlisting}[language=bash]
+./build.sh
+\end{lstlisting}
+
+\subsubsection{Verifica dell'avvio}
+Il completamento con successo della procedura è confermato dal messaggio:
+\begin{lstlisting}[language=bash]
+======================================================
+  Sistema avviato! Collegati su http://localhost:4200
+======================================================
+\end{lstlisting}
+A questo punto, si potrà accedere all'applicazione operativa localmente all'indirizzo: \texttt{http://localhost:4200} (frontend).
+
 
 \newpage
 
@@ -1177,328 +1233,359 @@ Per garantire la qualità del codice, è stato utilizzato SonarQube, un tool di 
 \newpage
 
 \section{Testing}
-La fase di testing ha l'obiettivo di garantire che i moduli software sviluppati rispondano correttamente ai requisiti funzionali individuati in fase di analisi. La di verifica si è concentrata sulla ricerca di eventuali difetti logici e sulla validazione della robustezza del backend, assicurando che il sistema sia in grado di gestire correttamente non solo gli input validi, ma anche situazioni di errore o casi limite.
+La fase di testing ha l'obiettivo di garantire che i moduli software sviluppati rispondano correttamente ai requisiti funzionali individuati in fase di analisi. La verifica si è concentrata sulla ricerca di eventuali difetti logici e sulla validazione della robustezza del backend, assicurando che il sistema sia in grado di gestire correttamente non solo gli input validi, ma anche situazioni di errore o casi limite.
 
 \subsection{Strategia e tecnologie}
-Per la fase di verifica del backend, sviluppato in Node.js, è stato adottato il framework \textbf{Jasmine}, che ha permesso l'implementazione di unit test conformi allo standard xUnit. La strategia di testing è stata focalizzata su un approccio puramente funzionale, integrando metodiche avanzate per garantire la massima affidabilità delle componenti critiche.
+Per la fase di verifica del backend, sviluppato in Node.js, è stato adottato il framework \textbf{Jasmine}, che ha permesso l'implementazione di unit test conformi allo standard xUnit. La strategia di testing è stata progettata integrando metodologie complementari per coprire sia la validazione degli ingressi che la logica algoritmica interna.
 
-Di seguito sono descritti i pilastri metodologici utilizzati:
+Di seguito sono descritte le tecniche di testing adottate e le motivazioni alla base di ciascuna scelta:
 
 \begin{itemize}
-    \item \textbf{Approccio Signature-based}: I test sono stati progettati basandosi esclusivamente sulla \textit{firma} dei metodi (parametri di input e tipi di ritorno). Questo ha permesso di validare l'interfaccia dei controller garantendo che il sistema risponda correttamente alle sollecitazioni esterne previste dal contratto software.
+    \item \textbf{Testing Black Box (Input Validation)}: Applicato ai middleware di validazione. In questo scenario, le componenti vengono trattate come "scatole nere", verificando esclusivamente che a fronte di un input malformato (es. email non valida o password debole) il sistema risponda con i codici di errore e i messaggi previsti dal contratto dell'API.
+    
+    \item \textbf{Testing White Box (Logic \& Business Rules)}: Utilizzato per i metodi core dei controller. Grazie alla visibilità del codice sorgente, i test sono stati progettati per sollecitare i diversi rami decisionali (\textit{branch coverage}) e i flussi di dati (\textit{data flow}), come nel caso del matching delle notifiche, assicurando che l'algoritmo processi correttamente le informazioni in memoria.
 
-    \item \textbf{Copertura R-WECT} (\textit{Robust Weak Equivalence Class Testing}): Si è scelto questo specifico approccio di partizione per bilanciare efficacia e manutenibilità.
+    \item \textbf{Copertura R-WECT} (\textit{Robust Weak Equivalence Class Testing}): Si è scelto questo approccio di partizione per bilanciare efficacia e manutenibilità.
           \begin{itemize}
-              \item \textbf{Weak (Debole)}: Si assume che le anomalie siano causate raramente dalla combinazione simultanea di più errori; pertanto, ogni test case sollecita una sola classe invalida alla volta, mantenendo gli altri parametri entro i range di validità.
-              \item \textbf{Robust (Robusta)}: A differenza del WECT standard, questa variante include esplicitamente il testing delle \textbf{classi di errore} (input nulli, fuori range o malformati), garantendo che il backend gestisca le eccezioni senza crash di sistema.
+              \item \textbf{Weak (Debole)}: Si assume che le anomalie siano causate raramente dalla combinazione simultanea di più errori; pertanto, ogni test case sollecita una sola classe invalida alla volta.
+              \item \textbf{Robust (Robusta)}: Include esplicitamente il testing delle \textbf{classi di errore} (input nulli, fuori range o malformati), garantendo che il backend gestisca le eccezioni senza crash.
           \end{itemize}
 
-    \item \textbf{Analisi dei Valori al Limite} (\textit{Boundary Value Analysis}): Integrata alla partizione in classi, questa tecnica è stata fondamentale per verificare il comportamento del sistema in corrispondenza delle soglie critiche (es. lunghezze minime delle password o soglie di prezzo per il contratto), dove statisticamente si annida la maggior parte dei bug logici.
+    \item \textbf{Analisi dei Valori al Limite} (\textit{Boundary Value Analysis}): Integrata alla partizione in classi, questa tecnica ha permesso di verificare le soglie critiche (es. lunghezze minime delle descrizioni o la gestione del limite delle ultime 3 ricerche per utente).
 \end{itemize}
 
 \newpage
-
 \subsection{Metodi di test}
-In questa sezione vengono illustrati i casi di test relativi a quattro componenti core del sistema, selezionati per l'articolazione della loro logica di business e per la criticità rivestita nel mantenimento dell'integrità dei dati.
+In questa sezione vengono illustrati i casi di test relativi a quattro componenti core del sistema, selezionati per l'articolazione della loro logica di business e per la criticità rivestita nel mantenimento dell'integrità dei dati. Per ciascuna componente, viene presentato un caso di test rappresentativo, completo di descrizione, strategia adottata e classi di equivalenza identificate. 
 
 \subsubsection{TEST 1: Registrazione utente}
-\begin{lstlisting}[language=javascript, caption=Unit Test della logica di registrazione]
- validateRegistration: (email, password, role) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const validRoles = ['User', 'Agency', 'Admin'];
 
-        if (!emailRegex.test(email)) return "EMAIL_INVALIDA";
-        if (!password || password.length < 8) return "PASSWORD_TROPPO_CORTA";
-        if (!validRoles.includes(role)) return "RUOLO_NON_VALIDO";
-        
-        return "REGISTRAZIONE_OK";
-    }
-
-describe("Metodo: validateRegistration", () => {
-        it("TC_01 - Email errata", () => {
-            const result = TestTarget.validateRegistration("mario.rossi", "Segreta123", "User");
-            expect(result).toBe("EMAIL_INVALIDA");
-        });
-        it("TC_02 - Password troppo corta", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "Pass123", "User");
-            expect(result).toBe("PASSWORD_TROPPO_CORTA");
-        });
-        it("TC_03 - Ruolo non valido", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "PasswordSicura123", "Guest");
-            expect(result).toBe("RUOLO_NON_VALIDO");
-        });
-         it("TC_04 - Registrazione corretta", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "PasswordSicura123", "User");
-            expect(result).toBe("REGISTRAZIONE_OK");
-        });
+\begin{lstlisting}[caption=Unit Test della validazione signup (validationSignup)]
+// Test della catena di validazione express-validator per la registrazione
+describe("Funzionalita': Validazione Signup (validationSignup)", () => {
+    
+    it("TC_01_A (Negativo) - Dovrebbe fallire con email malformata", async () => {
+        const req = { body: { email: "mario.rossi@", password: "Password123!", role: "user" } };
+        await runValidationChain(req, validationSignup);
+        const errors = validationResult(req);
+        expect(errors.array().some(e => e.msg === "Inserisci una email valida.")).toBeTrue();
     });
+
+    it("TC_01_B (Negativo) - Dovrebbe fallire con password troppo debole", async () => {
+        const req = { body: { email: "test@test.it", password: "123", role: "user" } };
+        await runValidationChain(req, validationSignup);
+        const errors = validationResult(req);
+        expect(errors.array().some(e => e.msg.includes("minimo 8 caratteri"))).toBeTrue();
+    });
+
+    it("TC_01_C (Negativo) - Dovrebbe fallire se il ruolo non e' tra quelli previsti", async () => {
+        const req = { body: { email: "test@test.it", password: "Password123!", role: "hacker_role" } };
+        await runValidationChain(req, validationSignup);
+        const errors = validationResult(req);
+        expect(errors.array().some(e => e.msg === "Ruolo non valido.")).toBeTrue();
+    });
+
+    it("TC_01_D (Positivo) - Dovrebbe passare con dati tutti corretti", async () => {
+        const req = { body: { username: "mario88", name: "Mario", surname: "Rossi", email: "mario@gmail.com", password: "Password123!", role: "user" } };
+        await runValidationChain(req, validationSignup);
+        const errors = validationResult(req);
+        expect(errors.isEmpty()).toBeTrue();
+    });
+});
 \end{lstlisting}
 
 \begin{itemize}
-    \item \textbf{email}: Stringa rappresentante l'indirizzo di posta elettronica dell'utente. Viene validata tramite espressione regolare per garantirne il formato standard.
-    \item \textbf{password}: Stringa alfanumerica scelta dall'utente. Il sistema impone un vincolo di sicurezza minimo di 8 caratteri.
-    \item \textbf{role}: Stringa che definisce il livello di accesso dell'account. I valori ammessi sono limitati a un set predefinito: \texttt{'User'}, \texttt{'Agency'}, \texttt{'Admin'}.
+    \item \textbf{email}: Stringa validata tramite \texttt{isEmail()}. Verifica se l'indirizzo email è ben formato e se è presente un dominio valido.
+    \item \textbf{password}: Validata tramite \texttt{isStrongPassword()}. Impone requisiti di complessità: $\ge$ 8 caratteri, maiuscole, minuscole, numeri e simboli.
+    \item \textbf{role}: Stringa opzionale che definisce il privilegio. Deve corrispondere a uno dei valori: \texttt{'admin', 'agencyAdmin', 'agent', 'user'}.
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
-Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura \textbf{R-WECT}. La logica di test è focalizzata sulla validazione dei vincoli d'integrità del profilo utente: si verifica il corretto filtraggio delle email tramite espressioni regolari e la gestione della sicurezza della password, assicurando che il sistema rifiuti ruoli non previsti dal dominio applicativo.
+Strategia \textbf{Black Box} con approccio \textbf{R-WECT} (Revised Weak Robust Equivalence Class Testing). La logica di test si focalizza sull'esecuzione dei middleware di \texttt{express-validator} in un ambiente isolato. Attraverso la funzione \texttt{runValidationChain}, si simula il passaggio della richiesta attraverso i filtri di sicurezza per garantire che input malevoli o malformati vengano intercettati prima di raggiungere il controller, validando al contempo il corretto processamento dei dati validi.
 
 \newpage
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]
     \centering
-    \caption{Classi di Equivalenza - validateRegistration}
+    \caption{Classi di Equivalenza - validationSignup}
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
         \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{email}                  & Formato sintatticamente corretto (es. user@test.it) & Valida                         & CE1                         \\ \hline
-        \textit{email}                  & Formato mancante di @ o dominio (es. user.it)       & Invalida                       & CE2                         \\ \hline
+        \textit{email}                  & Formato email corretto (es. user@test.it)           & Valida                         & CE1                         \\ \hline
+        \textit{email}                  & Formato mancante di @ o dominio (es. user@)         & Invalida                       & CE2                         \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{password}               & Lunghezza superiore o uguale a 8 caratteri          & Valida                         & CE3                         \\ \hline
-        \textit{password}               & Lunghezza inferiore a 8 caratteri                   & Invalida                       & CE4                         \\ \hline
+        \textit{password}               & Soddisfa i criteri di robustezza ($\ge$8 char + mix) & Valida                         & CE3                         \\ \hline
+        \textit{password}               & Sotto soglia o priva di caratteri speciali          & Invalida                       & CE4                         \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{role}                   & Valore incluso nel set \{User, Agency, Admin\}      & Valida                         & CE5                         \\ \hline
-        \textit{role}                   & Valore non censito o nullo                          & Invalida                       & CE6                         \\ \hline
+        \textit{role}                   & Valore presente nel set \{admin, agencyAdmin, agent, user\} & Valida                         & CE5                         \\ \hline
+        \textit{role}                   & Valore non censito (es. hacker\_role)               & Invalida                       & CE6                         \\ \hline
     \end{tabularx}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \caption{Matrice dei Casi di Test - validateRegistration}
+    \caption{Matrice dei Casi di Test - validationSignup}
     \rowcolors{2}{white}{gray!10}
     \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)}   & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_01}               & CE2 + CE3 + CE5               & ("mario.rossi", "Segreta123", "User")            & EMAIL\_INVALIDA                     & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_02}               & CE1 + CE4 + CE5               & ("mario@email.it", "Pass123", "User")            & PASSWORD\_TROPPO\_CORTA             & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_03}               & CE1 + CE3 + CE6               & ("mario@email.it", "PasswordSicura123", "Guest") & RUOLO\_NON\_VALIDO                  & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_04}               & CE1 + CE3 + CE5               & ("mario@email.it", "PasswordSicura123", "User")  & REGISTRAZIONE\_OK                   & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)}   & \textbf{\color{white}Messaggio Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_01\_A}            & CE2 + CE3 + CE5               & ("mario.rossi@", "Pass123!", "user")             & Inserisci una email valida.           & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_B}            & CE1 + CE4 + CE5               & ("test@test.it", "123", "user")                  & La password deve contenere...         & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_C}            & CE1 + CE3 + CE6               & ("test@test.it", "Pass123!", "hacker\_role")     & Ruolo non valido.                     & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_D}            & CE1 + CE3 + CE5               & ("mario@gmail.com", "Pass123!", "user")          & [Nessun Errore]                       & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
 
 \newpage
-\subsubsection{TEST 2: Controllo input creazione proprietà}
-\begin{lstlisting}[language=javascript, caption=Unit Test della logica di validione input proprietà]
- checkPropertyConstraints: (price, contractType, description) => {
-        if (!price || price <= 0) return "PREZZO_NON_VALIDO";
-        if (!description || description.length < 10) return "DESCRIZIONE_INSUFFICIENTE";
-        
-        // Logica di business: coerenza prezzo/contratto
-        if (contractType === 'Affitto' && price > 5000) return "ANOMALIA_PREZZO_AFFITTO";
-        if (contractType === 'Vendita' && price < 10000) return "ANOMALIA_PREZZO_VENDITA";
-        
-        return "VALIDO";
-    },
+\subsubsection{TEST 2: Creazione Immobile}
 
-describe("Metodo: checkPropertyConstraints", () => {
-        it("TC_05 - Descrizione troppo breve", () => {
-            const result = TestTarget.checkPropertyConstraints(150000, 'Vendita', 'Casa');
-            expect(result).toBe("DESCRIZIONE_INSUFFICIENTE");
-        });
-        it("TC_06 - Prezzo incoerente per affitto", () => {
-            const result = TestTarget.checkPropertyConstraints(6000, 'Affitto', 'Bellissimo attico panoramico');
-            expect(result).toBe("ANOMALIA_PREZZO_AFFITTO");
-        });
-        it("TC_07 - Inserimento giusto", () => {
-            const result = TestTarget.checkPropertyConstraints(3000, 'Affitto', 'Bellissimo attico panoramico');
-            expect(result).toBe("VALIDO");
-        });
+\begin{lstlisting}[caption=Unit Test della validazione immobili (validationCreateProperties)]
+describe("Funzionalita: Validazione Immobile (validationCreateProperties)", () => {
+
+    it("TC_02_A (Negativo) - Dovrebbe bloccare la creazione se il prezzo e negativo", async () => {
+        const req = { body: { title: "Casa", price: -500, address: "Via Roma", type: "Vendita", latitude: 40.85, longitude: 14.26, description: "Bellissima casa di test" } };
+        await runValidationChain(req, validationCreateProperties);
+        const errors = validationResult(req);
+        expect(errors.array().some(err => err.msg === "Il prezzo deve essere un numero positivo maggiore di 0")).toBeTrue();
     });
-\end{lstlisting}
 
-\begin{itemize}
-    \item \textbf{price}: Valore numerico indicante il costo dell'immobile. Deve essere un numero positivo e coerente con la tipologia di contratto scelta.
-    \item \textbf{contractType}: Stringa che definisce la natura della transazione. I valori ammessi (in linea con i validatori del backend) sono \texttt{'Affitto'} e \texttt{'Vendita'}.
-    \item \textbf{description}: Stringa descrittiva dell'immobile. Per garantire la qualità degli annunci, il sistema impone una lunghezza minima di 10 caratteri.
-\end{itemize}
-
-\paragraph{Strategia Adottata} \mbox{} \\
-Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura \textbf{R-WECT}. In questo scenario, il testing mira a garantire la solidità delle \textbf{regole di business}. Si verifica che il sistema intercetti le anomalie tra prezzo e tipologia di contratto (evitando, ad esempio, prezzi di vendita irrisori o affitti fuori mercato) e che non vengano accettate descrizioni troppo brevi per gli annunci.
-
-\newpage
-
-\renewcommand{\arraystretch}{1.5}
-\begin{table}[H]
-    \centering
-    \caption{Classi di Equivalenza - checkPropertyConstraints}
-    \begin{tabularx}{\textwidth}{|l|X|c|c|}
-        \hline
-        \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}      & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
-        \rowcolor[gray]{0.95}
-        \textit{price}                  & Valore numerico strettamente positivo ($> 0$)    & Valida                         & CE7                         \\ \hline
-        \textit{price}                  & Valore nullo, negativo o non numerico            & Invalida                       & CE8                         \\ \hline
-        \rowcolor[gray]{0.95}
-        \textit{description}            & Lunghezza della stringa $\geq 10$ caratteri      & Valida                         & CE9                         \\ \hline
-        \textit{description}            & Lunghezza della stringa $< 10$ caratteri         & Invalida                       & CE10                        \\ \hline
-        \rowcolor[gray]{0.95}
-        \textit{contractType}           & Prezzo $> 5000$ con contratto di tipo 'Affitto'  & Invalida                       & CE11                        \\ \hline
-        \textit{contractType}           & Prezzo $< 10000$ con contratto di tipo 'Vendita' & Invalida                       & CE12                        \\ \hline
-    \end{tabularx}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \caption{Matrice dei Casi di Test - checkPropertyConstraints}
-    \rowcolors{2}{white}{gray!10}
-    \begin{tabularx}{\textwidth}{|l|c|X|l|l|}
-        \hline
-        \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (price, type, desc)}   & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_05}               & CE7 + CE10                    & (150000, 'Vendita', 'Casa')                       & DESCRIZIONE\_INSUFFICIENTE          & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_06}               & CE7 + CE11 + CE9              & (6000, 'Affitto', 'Bellissimo attico panoramico') & ANOMALIA\_PREZZO\_AFFITTO           & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_07}               & CE7 + CE9                     & (3000, 'Affitto', 'Bellissimo attico panoramico') & VALIDO                              & {\color{codegreen}\textbf{PASS}} \\ \hline
-    \end{tabularx}
-\end{table}
-
-\newpage
-\subsubsection{TEST 3: Matching Località}
-\begin{lstlisting}[language=javascript, caption=Unit Test della logica di matching della ricerca con la località ]
-checkMatch: (propertyAddress, searchString) => {
-    if (!propertyAddress || !searchString) return false;
-    const searchTerm = searchString.split(',')[0].trim().toLowerCase();
-    return propertyAddress.toLowerCase().includes(searchTerm);
-},
-
-describe("Metodo: checkMatch", () => {
-   it("TC_08 - Dovrebbe matchare la localita ignorando spazi e case", () => {
-        expect(TestTarget.checkMatch("Via Roma 10, Napoli", "NAPOLI , NA")).toBeTrue();
+    it("TC_02_B (Negativo) - Dovrebbe bloccare la creazione se la descrizione e troppo corta", async () => {
+        const req = { body: { title: "Casa", price: 150000, description: "Corta", address: "Via Roma", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
+        await runValidationChain(req, validationCreateProperties);
+        const errors = validationResult(req);
+        expect(errors.array().some(err => err.msg === "La descrizione deve avere tra 10 e 3000 caratteri")).toBeTrue();
     });
-    it("TC_09 - Dovrebbe restituire false se la localita non matcha", () => {
-        expect(TestTarget.checkMatch("Via Roma 10, Napoli", "Milano, MI")).toBeFalse();
+
+    it("TC_02_C (Negativo) - Dovrebbe bloccare la creazione se mancano le coordinate", async () => {
+        const req = { body: { title: "Casa", description: "Bellissima casa di test", price: 150000, address: "Via Roma", type: "Vendita" } };
+        await runValidationChain(req, validationCreateProperties);
+        const errors = validationResult(req);
+        expect(errors.array().some(err => err.msg === "la latitudine deve essere inserita")).toBeTrue();
+        expect(errors.array().some(err => err.msg === "la longitudine deve essere inserita")).toBeTrue();
     });
-    it("TC_10 - Dovrebbe restituire false con i parametri nulli", () => {
-        expect(TestTarget.checkMatch(null, "Napoli, NA")).toBeFalse();
-        expect(TestTarget.checkMatch("Via Roma 10, Napoli", null)).toBeFalse();
+
+    it("TC_02_D (Positivo) - Dovrebbe passare con tutti i dati dell'immobile corretti", async () => {
+        const req = { body: { title: "Casa in centro", description: "Bellissimo appartamento spazioso", price: 200000, address: "Via Roma, Napoli", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
+        await runValidationChain(req, validationCreateProperties);
+        const errors = validationResult(req);
+        expect(errors.isEmpty()).toBeTrue();
     });
 });
 \end{lstlisting}
 
 \begin{itemize}
-    \item \textbf{propertyAddress}: Stringa contenente l'indirizzo completo dell'immobile (es. "Via Roma 10, Napoli").
-    \item \textbf{searchString}: Stringa di ricerca inserita dall'utente, che può contenere informazioni aggiuntive separate da virgole (es. "Napoli, NA, Italia").
+    \item \textbf{title}: Stringa (2-100 char). Obbligatoria per l'identificazione rapida dell'annuncio.
+    \item \textbf{description}: Stringa (10-3000 char). Deve fornire dettagli sufficienti all'utente.
+    \item \textbf{price}: Valore numerico decimale. Deve essere strettamente maggiore di zero.
+    \item \textbf{latitude/longitude}: Coordinate geografiche obbligatorie per il posizionamento sulla mappa.
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
-Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura \textbf{R-WECT}. La strategia è volta a testare l'algoritmo di manipolazione delle stringhe di ricerca. Viene verificata la capacità della funzione di normalizzare l'input dell'utente, garantendo un matching efficace indipendentemente dalla capitalizzazione (\textit{case-insensitivity}), dalla presenza di spazi superflui o dall'inserimento di dettagli geografici aggiuntivi dopo la virgola.
+Strategia \textbf{Black Box} con approccio \textbf{EP} e \textbf{Boundary Value Analysis (BVA)}. Il test verifica la robustezza dei middleware di validazione immobili, assicurando che il sistema rifiuti dati incoerenti (prezzi negativi) o incompleti (mancanza di coordinate). La copertura garantisce l'integrità del database impedendo l'inserimento di stringhe che violano i limiti di lunghezza definiti nel dominio applicativo.
 
 \newpage
-\renewcommand{\arraystretch}{1.5}
+
 \begin{table}[H]
     \centering
-    \caption{Classi di Equivalenza - checkMatch}
+    \caption{Classi di Equivalenza - validationCreateProperties}
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}           & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{propertyAddress}        & Stringa indirizzo valida (es. "Via Roma")             & Valida                         & CE13                        \\ \hline
-        \textit{propertyAddress}        & Valore nullo o non definito (\texttt{null})           & Invalida                       & CE14                        \\ \hline
+        \textit{price}                  & Numero positivo ($> 0$)                             & Valida                         & CE7                         \\ \hline
+        \textit{price}                  & Numero negativo o zero ($\le 0$)                    & Invalida                       & CE8                         \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{searchString}           & Sottostringa presente nell'indirizzo                  & Valida                         & CE15                        \\ \hline
-        \textit{searchString}           & Sottostringa NON presente nell'indirizzo              & Valida                         & CE16                        \\ \hline
+        \textit{description}            & Lunghezza compresa tra 10 e 3000 caratteri          & Valida                         & CE9                         \\ \hline
+        \textit{description}            & Lunghezza inferiore a 10 o superiore a 3000         & Invalida                       & CE10                        \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{searchString}           & Formato con spazi/maiuscole/virgole (es. " NAPOLI ,") & Valida                         & CE17                        \\ \hline
-        \textit{searchString}           & Valore nullo o non definito (\texttt{null})           & Invalida                       & CE18                        \\ \hline
+        \textit{coordinates}            & Latitudine e Longitudine presenti (float)            & Valida                         & CE11                        \\ \hline
+        \textit{coordinates}            & Uno o entrambi i valori mancanti                    & Invalida                       & CE12                        \\ \hline
     \end{tabularx}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \caption{Matrice dei Casi di Test - checkMatch}
+    \caption{Matrice dei Casi di Test - validationCreateProperties}
     \rowcolors{2}{white}{gray!10}
-    \begin{tabularx}{\textwidth}{|l|c|X|X|c|}
+    \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (address, search)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_08}               & CE13 + CE15 + CE17            & ("Via Roma 10, Napoli", "NAPOLI , NA")        & \texttt{true}                       & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_09}               & CE13 + CE16 + CE17            & ("Via Roma 10, Napoli", "Milano, MI")         & \texttt{false}                      & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_10}               & CE14 + CE18                   & (\texttt{null}, \texttt{null})                & \texttt{false}                      & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (price, desc, coords)} & \textbf{\color{white}Messaggio Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_02\_A}            & CE8 + CE9 + CE11              & (-500, "Bellissima casa...", [40, 14])            & Prezzo deve essere positivo...         & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_02\_B}            & CE7 + CE10 + CE11             & (150000, "Corta", [40, 14])                       & Descrizione tra 10 e 3000...           & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_02\_C}            & CE7 + CE9 + CE12              & (150000, "Bellissima casa...", [null, null])      & Latitudine/Longitudine inserita        & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_02\_D}            & CE7 + CE9 + CE11              & (200000, "Appartamento spazioso", [40.8, 14.2])   & [Nessun Errore]                       & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
+
+
 \newpage
-\subsubsection{TEST 4: Generazione titolo notifica}
-\begin{lstlisting}[language=javascript, caption=Unit Test della logica di Generazione del titolo della notifica]
-generateNotificationText: (type, propertyTitle) => {
-    if (!propertyTitle) return "Nuova Notifica";
-    const title = propertyTitle.toUpperCase();
+\subsubsection{TEST 3: Logica di Notifica}
+
+\begin{lstlisting}[caption=Unit Test della logica di business per le notifiche (getUsersToNotify)]
+describe("Funzionalita: Logica di Notifica (getUsersToNotify)", () => {
+    const mockSearches = [
+        { userId: 1, criteria: { text: "Napoli" } },
+        { userId: 2, criteria: { text: "Roma" } },
+        { userId: 1, criteria: { text: "Salerno" } },
+        { userId: 1, criteria: { text: "Milano" } } // Quarta ricerca per utente 1 (vecchia)
+    ];
+
+    it("TC_03_A (Positivo) - Match per Indirizzo", () => {
+        const result = propertiesController.getUsersToNotify("Via Toledo, Napoli", "Appartamento", mockSearches);
+        expect(result).toContain(1);
+    });
+
+    it("TC_03_B (Positivo) - Match per Titolo", () => {
+        const result = propertiesController.getUsersToNotify("Genova", "Attico a Roma", mockSearches);
+        expect(result).toContain(2);
+    });
+
+    it("TC_03_C (Edge Case) - Limite 3 ricerche per utente", () => {
+        const result = propertiesController.getUsersToNotify("Milano", "Ufficio", mockSearches);
+        expect(result).not.toContain(1); // Milano era la quarta ricerca
+    });
+
+    it("TC_03_D (Negativo) - Nessun Match", () => {
+        const result = propertiesController.getUsersToNotify("Torino", "Villa", mockSearches);
+        expect(result.length).toBe(0);
+    });
+});
+\end{lstlisting}
+
+\begin{itemize}
+    \item \textbf{propertyAddress/propertyTitle}: Stringhe dell'immobile appena creato che vengono messe in match con le ricerche salvate.
+    \item \textbf{recentSearches}: Array di oggetti contenenti i criteri di ricerca storici degli utenti.
+\end{itemize}
+
+\paragraph{Strategia Adottata} \mbox{} \\
+Strategia \textbf{White Box} basata su \textbf{Data Flow Testing}. Il test verifica il corretto fluire dei dati attraverso la logica di filtraggio, assicurando che il sistema identifichi correttamente le corrispondenze testuali ignorando le ricerche obsolete (oltre il limite di 3 per utente) come richiesto dai vincoli di performance e rilevanza.
+
+\newpage
+
+\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]
+    \centering
+    \caption{Classi di Equivalenza - getUsersToNotify}
+    \begin{tabularx}{\textwidth}{|l|X|c|c|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{Match}                  & Parola chiave presente in Indirizzo o Titolo        & Valida                         & CE13                        \\ \hline
+        \textit{Match}                  & Parola chiave assente                               & Invalida                       & CE14                        \\ \hline
+        \rowcolor[gray]{0.95}
+        \textit{Cronologia}             & Ricerca rientrante nelle ultime 3 dell'utente       & Valida                         & CE15                        \\ \hline
+        \textit{Cronologia}             & Ricerca oltre la terza posizione (più vecchia)      & Invalida                       & CE16                        \\ \hline
+    \end{tabularx}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Matrice dei Casi di Test - getUsersToNotify}
+    \rowcolors{2}{white}{gray!10}
+    \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
+        \hline
+        \rowcolor{DarkBlue}
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Scenario di Input}           & \textbf{\color{white}Risultato Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_03\_A}            & CE13 + CE15                   & Match su indirizzo ("Napoli")                     & Utente 1 notificato                   & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_B}            & CE13 + CE15                   & Match su titolo ("Roma")                          & Utente 2 notificato                   & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_C}            & CE13 + CE16                   & Match su 4° ricerca ("Milano")                    & Utente 1 NON notificato               & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_D}            & CE14                          & Nessuna corrispondenza                            & Array vuoto []                        & {\color{codegreen}\textbf{PASS}} \\ \hline
+    \end{tabularx}
+\end{table}
+
+\newpage
+
+\subsubsection{TEST 4: Builder Query Avanzata}
+
+\begin{lstlisting}[caption=Unit Test per la costruzione dinamica delle query Sequelize]
+describe("Funzionalita: Builder Query (buildAdvancedSearchQuery)", () => {
     
-    if (type === 'promo') return `OFFERTA SPECIALE: ${title}`;
-    if (type === 'property') return `CORRISPONDENZA TROVATA: ${title}`;
-    return `Aggiornamento su ${title}`;
-}
+    it("TC_04_A (Positivo) - Filtro Prezzo Massimo", () => {
+        const res = propertiesController.buildAdvancedSearchQuery({ maxPrice: "200000" });
+        const lte = Object.getOwnPropertySymbols(res.propertyWhere.price)[0];
+        expect(res.propertyWhere.price[lte]).toBe(200000);
+    });
 
-describe("Metodo: generateNotificationText", () => {
-    it("TC_11 - Dovrebbe formattare il titolo in maiuscolo per le promo", () => {
-        const result = TestTarget.generateNotificationText('promo', 'Appartamento centro');
-        expect(result).toBe("OFFERTA SPECIALE: APPARTAMENTO CENTRO");
+    it("TC_04_B (Positivo) - Filtri multipli Features", () => {
+        const res = propertiesController.buildAdvancedSearchQuery({ roomCount: "3", hasElevator: "true" });
+        const gte = Object.getOwnPropertySymbols(res.featuresWhere.roomCount)[0];
+        expect(res.featuresWhere.roomCount[gte]).toBe(3);
+        expect(res.featuresWhere.hasElevator).toBeTrue();
     });
-    it("TC_12 - Dovrebbe formattare il titolo in maiuscolo per le property", () => {
-        const result = TestTarget.generateNotificationText('property', 'Villa con piscina');
-        expect(result).toBe("CORRISPONDENZA TROVATA: VILLA CON PISCINA");
+
+    it("TC_04_C (Positivo) - Sanitizzazione stringa indirizzo", () => {
+        const res = propertiesController.buildAdvancedSearchQuery({ text: "Napoli, NA" });
+        const or = Object.getOwnPropertySymbols(res.propertyWhere)[0];
+        const ilike = Object.getOwnPropertySymbols(res.propertyWhere[or][0].address)[0];
+        expect(res.propertyWhere[or][0].address[ilike]).toBe("%Napoli%");
     });
-    it("TC_13 - Dovrebbe restituire un titolo generico se il titolo della proprieta e mancante", () => {
-        const result = TestTarget.generateNotificationText('promo', '');
-        expect(result).toBe("Nuova Notifica");
+
+    it("TC_04_D (Edge Case) - Parametri vuoti", () => {
+        const res = propertiesController.buildAdvancedSearchQuery({});
+        expect(res.propertyWhere).toEqual({});
+        expect(res.featuresWhere).toEqual({});
     });
 });
 \end{lstlisting}
 
 \begin{itemize}
-    \item \textbf{type}: Stringa che definisce la categoria della notifica[cite: 202]. Determina il prefisso del messaggio (es. \texttt{'promo'}, \texttt{'property'})[cite: 202].
-    \item \textbf{propertyTitle}: Stringa contenente il nome dell'immobile[cite: 203]. Viene elaborata per essere visualizzata in maiuscolo all'interno del messaggio[cite: 203].
+    \item \textbf{text}: Stringa di ricerca testuale (indirizzo). Viene suddivisa tramite \texttt{split()} per estrarre la sola keyword geografica principale.
+    \item \textbf{maxPrice}: Valore stringa proveniente dall'URL convertito in \texttt{float} per alimentare l'operatore \texttt{Op.lte}.
+    \item \textbf{hasElevator}: Filtro booleano passato come stringa e mappato al tipo \texttt{boolean} nativo per la query SQL.
+    \item \textbf{roomCount}: Numero minimo di vani, convertito in \texttt{integer} per l'uso con l'operatore di confronto \texttt{Op.gte}.
 \end{itemize}
 
 \paragraph{Strategia Adottata} \mbox{} \\
-Strategia \textbf{Black Box} con approccio \textbf{signature-based} e copertura \textbf{R-WECT}. Il test si concentra sulla trasformazione dei dati per l'interfaccia utente (\textit{UI string processing}). Si convalida la corretta generazione dei prefissi dinamici in base al tipo di notifica e la trasformazione in maiuscolo del titolo, verificando inoltre la presenza di una logica di \textit{fallback} che garantisca un messaggio di default qualora i metadati dell'immobile fossero mancanti.
+Strategia \textbf{White Box} focalizzata sulla \textbf{Logic Mapping}. Poiché la funzione è un trasformatore di dati interno, il test verifica che la logica di mapping converta correttamente le stringhe provenienti dalla URL query in oggetti tipizzati e operatori simbolici (\texttt{Op.lte}, \texttt{Op.iLike}) richiesti dall'ORM Sequelize.
 
 \newpage
-\renewcommand{\arraystretch}{1.5}
+
 \begin{table}[H]
     \centering
-    \caption{Classi di Equivalenza - generateNotificationText}
+    \caption{Classi di Equivalenza - buildAdvancedSearchQuery}
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}       & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{type}                   & Categoria promozionale (\texttt{'promo'})         & Valida                         & CE19                        \\ \hline
-        \textit{type}                   & Categoria di corrispondenza (\texttt{'property'}) & Valida                         & CE20                        \\ \hline
+        \textit{maxPrice}               & Stringa numerica convertibile in float              & Valida                         & CE17                        \\ \hline
+        \textit{hasElevator}            & Stringa "true" o "false"                            & Valida                         & CE18                        \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{type}                   & Qualsiasi altro valore (Categoria generica)       & Valida                         & CE21                        \\ \hline
-        \textit{propertyTitle}          & Stringa titolo valida (non vuota)                 & Valida                         & CE22                        \\ \hline
-        \rowcolor[gray]{0.95}
-        \textit{propertyTitle}          & Stringa vuota o non definita (\texttt{null})      & Invalida                       & CE23                        \\ \hline
+        \textit{text}                   & Stringa contenente virgole (es. "Città, Prov")      & Valida                         & CE19                        \\ \hline
+        \textit{queryParams}            & Oggetto vuoto \{\}                                  & Valida                         & CE20                        \\ \hline
     \end{tabularx}
 \end{table}
 
 \begin{table}[H]
     \centering
-    \caption{Matrice dei Casi di Test - generateNotificationText}
+    \caption{Matrice dei Casi di Test - buildAdvancedSearchQuery}
     \rowcolors{2}{white}{gray!10}
-    \begin{tabularx}{\textwidth}{|l|c|X|X|c|}
+    \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (type, title)} & \textbf{\color{white}Output Atteso}         & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_11}               & CE19 + CE22                   & ('promo', 'Appartamento centro')          & 'OFFERTA SPECIALE: APPARTAMENTO CENTRO'     & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_12}               & CE20 + CE22                   & ('property', 'Villa con piscina')         & 'CORRISPONDENZA TROVATA: VILLA CON PISCINA' & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_13}               & CE19 + CE23                   & ('promo', '')                             & 'Nuova Notifica'                            & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (query object)}        & \textbf{\color{white}Output Atteso}    & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_04\_A}            & CE17                          & \{ maxPrice: "200000" \}                          & Op.lte: 200000.0                       & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_B}            & CE18                          & \{ hasElevator: "true" \}                         & features.hasElevator: true             & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_C}            & CE19                          & \{ text: "Napoli, NA" \}                          & address: \%Napoli\%                    & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_D}            & CE20                          & \{ \}                                             & \{ propertyWhere: \{\} \}              & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
-
 \newpage
 
 \subsection{Risultati}
-Al termine della fase di \textbf{Unit Testing}, sono stati eseguiti complessivamente \textbf{13 casi di test} distribuiti sui quattro moduli principali del backend. L'applicazione della strategia \textbf{R-WECT} ha permesso di verificare non solo il corretto funzionamento dei flussi nominali, ma anche la resilienza del sistema di fronte a input malformati o mancanti.
+Al termine della fase di \textbf{Unit Testing}, sono stati eseguiti complessivamente \textbf{16 casi di test} distribuiti sui quattro moduli critici del backend. L'integrazione tra la strategia \textbf{R-WECT} per la validazione degli ingressi e l'approccio \textbf{White Box} per la logica algoritmica ha permesso di certificare la totale aderenza del software ai requisiti funzionali, garantendo al contempo un'elevata resilienza verso input degradati e la correttezza del processamento dei dati in memoria.
 
 \begin{figure}[H] % L'opzione [H] forza la posizione "qui"
     \centering
     \includegraphics[width=0.7\linewidth]{images/TestResult.png}
-    \caption{Esito dell'esecuzione dei 13 Unit Test tramite console (con Jasmine)}
+    \caption{Esito dell'esecuzione dei 16 Unit Test tramite console (con Jasmine)}
     \label{fig:risultati-console}
 \end{figure}
 \newpage

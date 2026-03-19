@@ -1,111 +1,153 @@
-const TestTarget = {
-    // TEST 1: Registrazione Utente 
-    validateRegistration: (email, password, role) => {
-        
-        if (!email || email.length > 254) return "EMAIL_INVALIDA";
+import { validationResult } from 'express-validator';
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const validRoles = ['User', 'Agency', 'Admin'];
+// Import validazioni
+import { validationSignup } from '../middleware/validation/validationAuth.js'; 
+import { validationCreateProperties } from '../middleware/validation/validationProperties.js';
 
-        if (!emailRegex.test(email)) return "EMAIL_INVALIDA";
-        if (!password || password.length < 8) return "PASSWORD_TROPPO_CORTA";
-        if (!validRoles.includes(role)) return "RUOLO_NON_VALIDO";
-        
-        return "REGISTRAZIONE_OK";
-    },
+// Import controller
+import { propertiesController } from '../controllers/propertiesController.js';
 
-    // TEST 2:  Creazione Immobile
-    checkPropertyConstraints: (price, contractType, description) => {
-        if (!price || price <= 0) return "PREZZO_NON_VALIDO";
-        if (!description || description.length < 10) return "DESCRIZIONE_INSUFFICIENTE";
-        
-        // Logica di business: coerenza prezzo/contratto
-        if (contractType === 'Affitto' && price > 5000) return "ANOMALIA_PREZZO_AFFITTO";
-        if (contractType === 'Vendita' && price < 10000) return "ANOMALIA_PREZZO_VENDITA";
-        
-        return "VALIDO";
-    },
-
-    // TEST 3: Matching Località 
-    checkMatch: (propertyAddress, searchString) => {
-        if (!propertyAddress || !searchString) return false;
-        // Isola la città dalla stringa di ricerca (es. "Napoli, NA" -> "napoli")
-        const searchTerm = searchString.split(',')[0].trim().toLowerCase();
-        return propertyAddress.toLowerCase().includes(searchTerm);
-    },
-
-    // TEST 4: Generazione Titolo Notifica 
-    generateNotificationText: (type, propertyTitle) => {
-        if (!propertyTitle) return "Nuova Notifica";
-        const title = propertyTitle.toUpperCase();
-        
-        if (type === 'promo') return `OFFERTA SPECIALE: ${title}`;
-        if (type === 'property') return `CORRISPONDENZA TROVATA: ${title}`;
-        return `Aggiornamento su ${title}`;
+// Helper per eseguire i middleware di express-validator nei test
+async function runValidationChain(req, validationChain) {
+    for (const validation of validationChain) {
+        await validation.run(req);
     }
-};
+}
 
-describe("Verifica Funzionalità Critiche Backend - DietiEstates2024", () => {
+describe("Suite Completa di Unit Test - DietiEstates2024", () => {
 
-    describe("Metodo: validateRegistration", () => {
-        it("TC_01 - Email errata", () => {
-            const result = TestTarget.validateRegistration("mario.rossi", "Segreta123", "User");
-            expect(result).toBe("EMAIL_INVALIDA");
+    // ============================================================
+    // 1. VALIDAZIONE REGISTRAZIONE (Scenario Multiplo)
+    // ============================================================
+    describe("Funzionalità: Validazione Signup (validationSignup)", () => {
+        
+        it("TC_01_A (Negativo) - Dovrebbe fallire con email malformata", async () => {
+            const req = { body: { email: "mario.rossi@", password: "Password123!", username: "mario", name: "M", surname: "R", role: "user" } };
+            await runValidationChain(req, validationSignup);
+            const errors = validationResult(req);
+            expect(errors.array().some(e => e.msg === "Inserisci una email valida.")).toBeTrue();
         });
-        it("TC_02 - Password troppo corta", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "Pass123", "User");
-            expect(result).toBe("PASSWORD_TROPPO_CORTA");
+
+        it("TC_01_B (Negativo) - Dovrebbe fallire con password troppo debole", async () => {
+            const req = { body: { email: "test@test.it", password: "123", username: "mario", name: "M", surname: "R", role: "user" } };
+            await runValidationChain(req, validationSignup);
+            const errors = validationResult(req);
+            expect(errors.array().some(e => e.msg.includes("minimo 8 caratteri"))).toBeTrue();
         });
-        it("TC_03 - Ruolo non valido", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "PasswordSicura123", "Guest");
-            expect(result).toBe("RUOLO_NON_VALIDO");
+
+        it("TC_01_C (Negativo) - Dovrebbe fallire se il ruolo non è tra quelli previsti", async () => {
+            const req = { body: { email: "test@test.it", password: "Password123!", role: "hacker_role", username: "m", name: "n", surname: "s" } };
+            await runValidationChain(req, validationSignup);
+            const errors = validationResult(req);
+            expect(errors.array().some(e => e.msg === "Ruolo non valido.")).toBeTrue();
         });
-         it("TC_04 - Registrazione corretta", () => {
-            const result = TestTarget.validateRegistration("mario@email.it", "PasswordSicura123", "User");
-            expect(result).toBe("REGISTRAZIONE_OK");
+
+        it("TC_01_D (Positivo) - Dovrebbe passare con dati tutti corretti", async () => {
+            const req = { body: { username: "mario88", name: "Mario", surname: "Rossi", email: "mario@gmail.com", password: "Password123!", role: "user" } };
+            await runValidationChain(req, validationSignup);
+            const errors = validationResult(req);
+            expect(errors.isEmpty()).toBeTrue();
         });
     });
 
-    describe("Metodo: checkPropertyConstraints", () => {
-        it("TC_05 - Descrizione troppo breve", () => {
-            const result = TestTarget.checkPropertyConstraints(150000, 'Vendita', 'Casa');
-            expect(result).toBe("DESCRIZIONE_INSUFFICIENTE");
+    // ============================================================
+    // 2. VALIDAZIONE IMMOBILI (Scenario Multiplo)
+    // ============================================================
+    describe("Funzionalità: Validazione Immobile (validationCreateProperties)", () => {
+
+        it("TC_02_A (Negativo) - Dovrebbe bloccare la creazione se il prezzo è negativo", async () => {
+            const req = { body: { title: "Casa", description: "Bellissima casa di test", price: -500, address: "Via Roma", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
+            await runValidationChain(req, validationCreateProperties);
+            const errors = validationResult(req);
+            expect(errors.array().some(err => err.msg === "Il prezzo deve essere un numero positivo maggiore di 0")).toBeTrue();
         });
-        it("TC_06 - Prezzo incoerente per affitto", () => {
-            const result = TestTarget.checkPropertyConstraints(6000, 'Affitto', 'Bellissimo attico panoramico');
-            expect(result).toBe("ANOMALIA_PREZZO_AFFITTO");
+
+        it("TC_02_B (Negativo) - Dovrebbe bloccare la creazione se la descrizione è troppo corta", async () => {
+            const req = { body: { title: "Casa", description: "Corta", price: 150000, address: "Via Roma", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
+            await runValidationChain(req, validationCreateProperties);
+            const errors = validationResult(req);
+            expect(errors.array().some(err => err.msg === "La descrizione deve avere tra 10 e 3000 caratteri")).toBeTrue();
         });
-        it("TC_07 - Inserimento giusto", () => {
-            const result = TestTarget.checkPropertyConstraints(3000, 'Affitto', 'Bellissimo attico panoramico');
-            expect(result).toBe("VALIDO");
+
+        it("TC_02_C (Negativo) - Dovrebbe bloccare la creazione se mancano le coordinate", async () => {
+            const req = { body: { title: "Casa", description: "Bellissima casa di test", price: 150000, address: "Via Roma", type: "Vendita" } }; // Niente lat/long
+            await runValidationChain(req, validationCreateProperties);
+            const errors = validationResult(req);
+            expect(errors.array().some(err => err.msg === "la latitudine deve essere inserita")).toBeTrue();
+            expect(errors.array().some(err => err.msg === "la longitudine deve essere inserita")).toBeTrue();
+        });
+
+        it("TC_02_D (Positivo) - Dovrebbe passare con tutti i dati dell'immobile corretti", async () => {
+            const req = { body: { title: "Casa in centro", description: "Bellissimo appartamento spazioso", price: 200000, address: "Via Roma, Napoli", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
+            await runValidationChain(req, validationCreateProperties);
+            const errors = validationResult(req);
+            expect(errors.isEmpty()).toBeTrue(); // Nessun errore!
         });
     });
 
-    describe("Metodo: checkMatch", () => {
-        it("TC_08 - Dovrebbe matchare la località ignorando spazi e case", () => {
-            expect(TestTarget.checkMatch("Via Roma 10, Napoli", "NAPOLI , NA")).toBeTrue();
+    // ============================================================
+    // 3. LOGICA NOTIFICHE (Scenario Multiplo)
+    // ============================================================
+    describe("Funzionalità: Logica di Notifica (getUsersToNotify)", () => {
+        const mockSearches = [
+            { userId: 1, criteria: { text: "Napoli" } },
+            { userId: 2, criteria: { text: "Roma" } },
+            { userId: 1, criteria: { text: "Caserta" } },
+            { userId: 1, criteria: { text: "Salerno" } },
+            { userId: 1, criteria: { text: "Milano" } } // Questa è la 4a per l'utente 1 (sarà ignorata)
+        ];
+
+        it("TC_03_A (Positivo) - Dovrebbe notificare l'utente se l'indirizzo contiene la keyword", () => {
+            const result = propertiesController.getUsersToNotify("Via Toledo, Napoli", "Appartamento", mockSearches);
+            expect(result).toContain(1);
         });
-        it("TC_09 - Dovrebbe restituire false se la località non matcha", () => {
-        expect(TestTarget.checkMatch("Via Roma 10, Napoli", "Milano, MI")).toBeFalse();
+
+        it("TC_03_B (Positivo) - Dovrebbe notificare l'utente se il titolo contiene la keyword", () => {
+            const result = propertiesController.getUsersToNotify("Indirizzo Generico", "Bellissimo attico a Roma", mockSearches);
+            expect(result).toContain(2);
         });
-        it("TC_10 - Dovrebbe restituire false con i parametri nulli", () => {
-        expect(TestTarget.checkMatch(null, "Napoli, NA")).toBeFalse();
-        expect(TestTarget.checkMatch("Via Roma 10, Napoli", null)).toBeFalse();
+
+        it("TC_03_C (Edge Case) - Non dovrebbe notificare se il match avviene sulla 4a ricerca (vecchia)", () => {
+            const result = propertiesController.getUsersToNotify("Piazza Duomo, Milano", "Casa", mockSearches);
+            expect(result).not.toContain(1); // L'utente 1 cercava Milano ma era la sua ricerca più vecchia
+        });
+
+        it("TC_03_D (Negativo) - Dovrebbe restituire array vuoto se nessuno cerca quella zona", () => {
+            const result = propertiesController.getUsersToNotify("Via Torino, Venezia", "Villa", mockSearches);
+            expect(result.length).toBe(0);
         });
     });
 
-    describe("Metodo: generateNotificationText", () => {
-        it("TC_11 - Dovrebbe formattare il titolo in maiuscolo per le promo", () => {
-            const result = TestTarget.generateNotificationText('promo', 'Appartamento centro');
-            expect(result).toBe("OFFERTA SPECIALE: APPARTAMENTO CENTRO");
+    // ============================================================
+    // 4. COSTRUZIONE QUERY (Scenario Multiplo)
+    // ============================================================
+    describe("Funzionalità: Costruzione Query Avanzata (buildAdvancedSearchQuery)", () => {
+        
+        it("TC_04_A (Positivo) - Dovrebbe gestire correttamente il filtro del prezzo massimo", () => {
+            const res = propertiesController.buildAdvancedSearchQuery({ maxPrice: "200000" });
+            const lte = Object.getOwnPropertySymbols(res.propertyWhere.price)[0];
+            expect(res.propertyWhere.price[lte]).toBe(200000);
+            expect(res.featuresWhere).toEqual({}); // Nessuna feature richiesta
         });
-        it("TC_12 - Dovrebbe formattare il titolo in maiuscolo per le property", () => {
-            const result = TestTarget.generateNotificationText('property', 'Villa con piscina');
-            expect(result).toBe("CORRISPONDENZA TROVATA: VILLA CON PISCINA");
+
+        it("TC_04_B (Positivo) - Dovrebbe gestire filtri multipli (stanze e ascensore)", () => {
+            const res = propertiesController.buildAdvancedSearchQuery({ roomCount: "3", hasElevator: "true" });
+            const gte = Object.getOwnPropertySymbols(res.featuresWhere.roomCount)[0];
+            expect(res.featuresWhere.roomCount[gte]).toBe(3);
+            expect(res.featuresWhere.hasElevator).toBeTrue();
         });
-        it("TC_13 - Dovrebbe restituire un titolo generico se il titolo della proprietà è mancante", () => {
-            const result = TestTarget.generateNotificationText('promo', '');
-            expect(result).toBe("Nuova Notifica");
+
+        it("TC_04_C (Positivo) - Dovrebbe pulire il testo inserito dall'utente per la ricerca indirizzo", () => {
+            const res = propertiesController.buildAdvancedSearchQuery({ text: "Napoli, NA" });
+            const or = Object.getOwnPropertySymbols(res.propertyWhere)[0];
+            const ilike = Object.getOwnPropertySymbols(res.propertyWhere[or][0].address)[0];
+            expect(res.propertyWhere[or][0].address[ilike]).toBe("%Napoli%");
+        });
+
+        it("TC_04_D (Edge Case) - Dovrebbe restituire oggetti vuoti se non viene passato alcun parametro", () => {
+            const res = propertiesController.buildAdvancedSearchQuery({});
+            expect(res.propertyWhere).toEqual({});
+            expect(res.featuresWhere).toEqual({});
         });
     });
 });
