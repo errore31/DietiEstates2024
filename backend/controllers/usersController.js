@@ -4,7 +4,6 @@ import bcrypt from "bcrypt";
 export class userController {
 
     /**
-    * Handles post requests on /auth/signup. Create a new user 
     * @param {http.IncomingMessage} req 
     * @param {http.ServerResponse} res 
     */
@@ -66,18 +65,17 @@ export class userController {
             throw error;
         }
 
-        // Definiamo i campi che possono essere aggiornati
+
         const allowedUpdates = ['name', 'surname', 'username', 'email', 'role', 'agencyId'];
 
         allowedUpdates.forEach((field) => {
-            if (req.body[field] !== undefined && req.body[field]!== "") {
+            if (req.body[field] !== undefined && req.body[field] !== "") {
                 user[field] = req.body[field];
             }
         });
 
-        // Se nella richiesta è presente una nuova password, dobbiamo compararla con quella vecchia prima di aggiornarla
         if (req.body.newPassword) {
-            
+
             if (!req.body.oldPassword) {
                 const error = new Error('Devi inserire la vecchia password per poterla cambiare');
                 error.status = 400;
@@ -104,7 +102,6 @@ export class userController {
 
 
     /**
-   * Handles post requests on /auth/user. Check if the username exists
    * @param {http.IncomingMessage} req 
    * @param {http.ServerResponse} res 
    */

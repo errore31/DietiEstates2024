@@ -1,22 +1,17 @@
-/* Layout Principale */
 .main-container {
     max-width: 1200px;
     margin: 30px auto;
     padding: 0 20px;
 }
 
-/* --- GALLERIA IBRIDA --- */
 .gallery-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    /* 2 parti a sinistra (carosello), 1 a destra (miniature) */
     gap: 15px;
     margin-bottom: 30px;
     height: 450px;
-    /* Altezza fissa per tenere tutto allineato */
 }
 
-/* Colonna Sinistra (Carosello) */
 .main-img-wrapper {
     width: 100%;
     height: 100%;
@@ -39,17 +34,13 @@ swiper-container {
     display: block;
 }
 
-/* Colonna Destra (Miniature) */
 .side-imgs-wrapper {
     display: flex;
     flex-direction: column;
     gap: 15px;
     overflow-y: auto;
-    /* Scroll se ci sono tante foto */
     padding-right: 5px;
-    /* Spazio per la scrollbar */
 
-    /* Scrollbar personalizzata più carina */
     &::-webkit-scrollbar {
         width: 6px;
     }
@@ -66,10 +57,8 @@ swiper-container {
 
 .side-img {
     width: 100%;
-    /* Calcolo preciso: (100% altezza - 15px di gap) diviso 2 immagini = 2 immagini piene visibili */
     height: calc(50% - 7.5px);
     min-height: 200px;
-    /* Sicurezza per schermi strani */
     object-fit: cover;
     border-radius: 12px;
     cursor: pointer;
@@ -81,14 +70,12 @@ swiper-container {
     opacity: 1;
 }
 
-/* --- CONTENUTO (Info + Sidebar) --- */
 .content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 30px;
 }
 
-/* Info Immobile */
 .property-info {
     background: white;
     padding: 30px;
@@ -133,7 +120,6 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* Griglia Caratteristiche */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -169,7 +155,6 @@ h1 {
     line-height: 1.8;
 }
 
-/* Sidebar Placeholder */
 .sidebar {
     position: sticky;
     top: 20px;
@@ -231,22 +216,18 @@ h1 {
     font-style: italic;
 }
 
-/* Responsive Tablet e Mobile */
 @media (max-width: 900px) {
     .gallery-container {
         grid-template-columns: 1fr;
-        /* Una sola colonna */
         height: auto;
     }
 
     .main-img-wrapper {
         height: 300px;
-        /* Altezza fissa per il carosello su mobile */
     }
 
     .side-imgs-wrapper {
         flex-direction: row;
-        /* Miniature in orizzontale sotto */
         overflow-x: auto;
         height: 120px;
         margin-top: 0;

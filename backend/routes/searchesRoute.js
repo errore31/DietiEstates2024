@@ -6,7 +6,6 @@ import { geoapifySuggestion } from '../services/GeoapifyAPI.js';
 export const searchesRouter = express.Router();
 
 /**
- * This route handles saving searches
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/

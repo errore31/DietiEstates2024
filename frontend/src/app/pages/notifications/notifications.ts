@@ -31,19 +31,16 @@ export class Notifications implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Errore durante il recupero delle notifiche:', err);
         this.errorMessage = 'Impossibile caricare le notifiche in questo momento.';
         this.isLoading = false;
       }
     });
   }
 
-  // Metodo chiamato al click sui bottoni della UI per cambiare categoria
   setFilter(filter: FilterType): void {
     this.activeFilter = filter;
   }
 
-  // Getter che applica la logica di filtraggio sulla base del filtro attualmente attivo.
   get filteredNotifications(): AppNotification[] {
     if (this.activeFilter === 'all') {
       return this.notifications;

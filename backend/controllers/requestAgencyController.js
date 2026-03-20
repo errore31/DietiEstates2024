@@ -57,11 +57,10 @@ export class RequestAgencyController {
             throw error;
         }
 
-        
+
         const hashedPassword = await bcrypt.hash("admin", 10);
 
         try {
-            // 1. Crea l'agenzia
             const agency = await Agencies.create({
                 businessName: request.businessName,
                 name: request.agencyName,
@@ -70,7 +69,6 @@ export class RequestAgencyController {
                 email: request.email,
             });
 
-            // 2. Crea l'utente agencyAdmin collegato all'agenzia
             const agencyAdmin = await Users.create({
                 name: request.name,
                 surname: request.surname,
@@ -81,7 +79,6 @@ export class RequestAgencyController {
                 agencyId: agency.id,
             });
 
-            // 3. Elimina la richiesta pendente
             await request.destroy();
 
             return { agency, agencyAdmin };
@@ -96,11 +93,6 @@ export class RequestAgencyController {
         }
     }
 
-    /**
-     * Rifiuta una richiesta: elimina la richiesta pendente (solo admin).
-     * DELETE /request-agency/:id/reject
-     * @param {number} id - ID della RequestAgency
-     */
     static async rejectRequest(id) {
         const request = await RequestAgencies.findByPk(id);
         if (!request) {

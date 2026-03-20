@@ -51,7 +51,6 @@ export class Account implements OnInit {
   saveProfile() {
 
     if (!this.currentUser || !this.currentUser.id) {
-      console.error('Errore nel recupero utente');
       return;
     }
 
@@ -60,7 +59,6 @@ export class Account implements OnInit {
       return;
     }
 
-    console.log('Dati inviati per aggiornamento:', this.editUser);
 
     this.userService.updateUser(this.currentUser.id, this.editUser).subscribe({
       next: (response: any) => {

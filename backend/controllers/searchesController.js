@@ -2,7 +2,6 @@ import { Searches } from "../models/database.js";
 
 export class searchesController {
     /**
-     * Handles post requests on /auth. Checks that the given credentials are valid
      * @param {http.IncomingMessage} req 
      * @param {http.ServerResponse} res 
      */
@@ -23,7 +22,6 @@ export class searchesController {
         return true;
     }
     /**
-     * Handles post requests on /auth/user. Check if the username exists
      * @param {http.IncomingMessage} req 
      * @param {http.ServerResponse} res 
      */

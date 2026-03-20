@@ -1,5 +1,5 @@
 import { Component, inject, Output, EventEmitter, OnInit } from '@angular/core';
-import { Geoapify } from '../../services/geoapify/geoapify';
+import { Geoapify, GeoapifyBbox } from '../../services/geoapify/geoapify';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -24,11 +24,12 @@ export class Searchbar implements OnInit {
   isFiltersOpen = false;
   isInputFocused = false;
 
-  // Variabili per i suggerimenti
   recentSearches: any[] = [];
   locationSuggestions: string[] = [];
 
-  // Variabili per lo slider del prezzo
+  private suggestionBboxMap: Map<string, GeoapifyBbox | null> = new Map();
+  selectedBbox: GeoapifyBbox | null = null;
+
   maxPrice: number = 1000000;
   minRange: number = 50000;
   maxRange: number = 2000000;
@@ -59,7 +60,6 @@ export class Searchbar implements OnInit {
       }
     });
 
-    // Per gestire il focus inziale
     if (this.authService.currentUserSubject.value) {
       this.loadRecentSearches();
     }
@@ -68,7 +68,6 @@ export class Searchbar implements OnInit {
   loadRecentSearches() {
     this.searchesService.getSearches().subscribe({
       next: (data) => {
-        // Prendi le ultime 3 inserite in ordine decrescente, filtrando per quelle che hanno una text/title (area/title)
         this.recentSearches = data
           .filter(s => s.criteria && s.criteria['area/title'])
           .reverse()
@@ -83,7 +82,6 @@ export class Searchbar implements OnInit {
   }
 
   onInputBlur() {
-    // Ritardo per permettere il click sul menu a tendina prima che sparisca
     setTimeout(() => {
       this.isInputFocused = false;
     }, 200);
@@ -92,6 +90,7 @@ export class Searchbar implements OnInit {
   suggestion(event: Event) {
     const valore = (event.target as HTMLInputElement).value;
     this.inputText = valore;
+    this.selectedBbox = null;
 
     if (!valore.trim()) {
       this.locationSuggestions = [];
@@ -101,9 +100,13 @@ export class Searchbar implements OnInit {
     this.geoService.getAutocomplete(valore).subscribe({
       next: (res) => {
         const uniqueSuggestions = new Set<string>();
+        this.suggestionBboxMap.clear();
         for (const result of res.results) {
           if (result.formatted) {
-            uniqueSuggestions.add(result.formatted);
+            if (!uniqueSuggestions.has(result.formatted)) {
+              uniqueSuggestions.add(result.formatted);
+              this.suggestionBboxMap.set(result.formatted, result.bbox || null);
+            }
           }
         }
         this.locationSuggestions = Array.from(uniqueSuggestions);
@@ -114,14 +117,13 @@ export class Searchbar implements OnInit {
 
   selectSuggestion(suggestion: string) {
     this.inputText = suggestion;
+    this.selectedBbox = this.suggestionBboxMap.get(suggestion) || null;
     this.isInputFocused = false;
-    // this.goToSearch(); // Optional: do we automatically search upon clicking?
   }
 
   selectRecentSearch(search: any) {
     this.inputText = search.criteria['area/title'];
-
-    // Ripristiniamo anche eventuali filtri se presenti
+    this.selectedBbox = null;
     if (search.criteria) {
       this.searchParams.type = search.criteria.type || 'Tutte le tipologie';
       this.maxPrice = search.criteria.maxPrice || 1000000;
@@ -133,7 +135,7 @@ export class Searchbar implements OnInit {
     }
 
     this.isInputFocused = false;
-    this.applyFilters(); // Usiamo applyFilters per assicurare che vengano considerati i filtri avanzati
+    this.applyFilters();
   }
 
   onPriceChange(event: any): void {
@@ -142,7 +144,6 @@ export class Searchbar implements OnInit {
 
   toggleFilters() {
     this.isFiltersOpen = !this.isFiltersOpen;
-    // Se apriamo i filtri, chiudiamo i suggerimenti
     if (this.isFiltersOpen) {
       this.isInputFocused = false;
     }
@@ -166,7 +167,6 @@ export class Searchbar implements OnInit {
       return;
     }
 
-    // Validazioni per i filtri numerici
     if (this.searchParams.roomCount !== null && (this.searchParams.roomCount < 0 || this.searchParams.roomCount > 100)) {
       this.toastr.error('Il numero di stanze deve essere compreso tra 0 e 100.', 'Valore non valido');
       return;
@@ -185,7 +185,6 @@ export class Searchbar implements OnInit {
     this.isInputFocused = false;
     this.searchApplied.emit();
 
-    // Prepara i query parameters per passare lo stato, omettendo i valori di default per pulizia URL
     const queryParams: any = {};
     if (this.searchParams.type !== 'Tutte le tipologie') queryParams.type = this.searchParams.type;
     if (this.maxPrice !== 1000000) queryParams.maxPrice = this.maxPrice;
@@ -194,6 +193,13 @@ export class Searchbar implements OnInit {
     if (this.searchParams.floor) queryParams.floor = this.searchParams.floor;
     if (this.searchParams.hasElevator) queryParams.hasElevator = true;
     if (this.searchParams.energyClass !== 'Tutte le classi') queryParams.energyClass = this.searchParams.energyClass;
+
+    if (this.selectedBbox) {
+      queryParams.bboxLon1 = this.selectedBbox.lon1;
+      queryParams.bboxLat1 = this.selectedBbox.lat1;
+      queryParams.bboxLon2 = this.selectedBbox.lon2;
+      queryParams.bboxLat2 = this.selectedBbox.lat2;
+    }
 
     this.router.navigate(['/searches', this.inputText], { queryParams });
   }

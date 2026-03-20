@@ -27,7 +27,6 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class Map implements AfterViewInit, OnChanges, OnDestroy {
 
-  // FIX 1: Generiamo un ID univoco casuale di default per evitare conflitti nel DOM
   @Input() mapId: string = `map-${Math.random().toString(36).substring(2, 9)}`;
 
   @Input() center: [number, number] = [41.9028, 12.4964];
@@ -36,19 +35,18 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
   @Input() markers: any[] = [];
   @Input() initialMarker: [number, number] | null = null;
   @Input() cityBoundary: string = '';
-  @Input() navigationOnMapClick: boolean = false; // Nuovo input per abilitare/disabilitare il click navigazione
+  @Input() navigationOnMapClick: boolean = false;
 
   constructor(private router: Router) { }
 
   @Output() locationSelected = new EventEmitter<{ lat: number, lng: number }>();
-  @Output() mapClicked = new EventEmitter<string>(); // Nuovo output che emette il nome del luogo
+  @Output() mapClicked = new EventEmitter<string>();
 
   private map!: L.Map;
   private singleMarker: L.Marker | undefined;
   private markerLayer = L.layerGroup();
   private boundaryLayer: L.GeoJSON | undefined;
 
-  // Aggiungiamo il ResizeObserver
   private resizeObserver: ResizeObserver | undefined;
 
   ngAfterViewInit() {
@@ -56,7 +54,6 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy() {
-    // FIX 2: Pulizia accurata dell'observer e della mappa
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }
@@ -150,7 +147,6 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
       this.displayMarkers();
       if (this.cityBoundary) this.drawCityBoundary();
 
-      // Quando clicco sulla mappa in modalità non-editabile, se la navigazione è abilitata cerco il luogo
       this.map.on('click', (e: L.LeafletMouseEvent) => {
         if (this.navigationOnMapClick) {
           const { lat, lng } = e.latlng;
@@ -171,7 +167,6 @@ export class Map implements AfterViewInit, OnChanges, OnDestroy {
           const locationName = address.city || address.town || address.village || address.suburb || data.display_name.split(',')[0];
 
           if (locationName) {
-            console.log('Emissione luogo cliccato:', locationName);
             this.mapClicked.emit(locationName);
             this.router.navigate(['/searches', locationName]);
           }

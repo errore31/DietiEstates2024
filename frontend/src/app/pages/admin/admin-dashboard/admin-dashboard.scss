@@ -26,13 +26,13 @@
     }
 }
 
-/* States */
-.loading-state, .empty-state {
+.loading-state,
+.empty-state {
     background: white;
     padding: 60px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .empty-state .icon {
@@ -40,7 +40,6 @@
     margin-bottom: 20px;
 }
 
-/* Grid & Cards */
 .request-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));

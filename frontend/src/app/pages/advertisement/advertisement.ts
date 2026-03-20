@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; //angular riconosce qualsiasi tipo di tag
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Property } from '../../models/property';
 import { PropertyService } from '../../services/property/property';
@@ -18,10 +18,10 @@ export class Advertisement implements OnInit {
   property: Property | undefined;
 
   ngOnInit(): void {
-    const idParam = this.route.snapshot.paramMap.get('id'); //restituisce stringa
+    const idParam = this.route.snapshot.paramMap.get('id');
 
     if (idParam) {
-      const propertyId = +idParam; //conversione a number
+      const propertyId = +idParam;
 
       this.propertyService.getPropertyById(propertyId).subscribe({
         next: (data) => {

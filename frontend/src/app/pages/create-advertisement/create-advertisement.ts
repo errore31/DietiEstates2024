@@ -27,7 +27,7 @@ export class CreateAdvertisement implements OnInit {
   newAddress: string = '';
   city: string = '';
 
-  initialMapCenter: [number, number] = [40.8518, 14.2681]; // Default center (Napoli)
+  initialMapCenter: [number, number] = [40.8518, 14.2681];
   initialMapMarker: [number, number] | null = null;
 
   newProperty = {
@@ -50,7 +50,6 @@ export class CreateAdvertisement implements OnInit {
     }
   };
 
-  //array di immagini
   selectedFiles: File[] = [];
 
   imagePreviews: string[] = [];
@@ -82,7 +81,6 @@ export class CreateAdvertisement implements OnInit {
   }
 
 
-  //Recupero agente e eventuale immobile da modificare
   ngOnInit(): void {
     this.authService.currentUser$.subscribe(user => {
       if (user && user.id) {
@@ -169,10 +167,8 @@ export class CreateAdvertisement implements OnInit {
       return;
     }
 
-    // Creazione del FormData per passare le immagini (come su postman)
     const formData = new FormData();
 
-    // Appendi i dati testuali (FormData accetta stringhe)
     formData.append('title', this.newProperty.title);
     formData.append('description', this.newProperty.description);
     formData.append('price', (this.newProperty.price || 0).toString());
@@ -186,11 +182,10 @@ export class CreateAdvertisement implements OnInit {
       formData.append('agentId', this.newProperty.agentId.toString());
     }
 
-    // Appendi l'oggetto PropertiesFeature convertendolo in stringa JSON
     formData.append('PropertiesFeature', JSON.stringify(this.newProperty.PropertiesFeature));
 
     this.selectedFiles.forEach((file) => {
-      formData.append('image', file, file.name);
+      formData.append('images', file, file.name);
     });
 
     if (this.isEditMode && this.editingPropertyId) {
@@ -215,7 +210,7 @@ export class CreateAdvertisement implements OnInit {
       this.propertyService.createProperty(formData).subscribe({
         next: () => {
           this.toastr.success('Immobile creato con successo!');
-          this.imagePreviews.forEach(url => URL.revokeObjectURL(url)); //pulizia memoria browser
+          this.imagePreviews.forEach(url => URL.revokeObjectURL(url));
           this.location.back();
         },
         error: (err) => {

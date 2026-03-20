@@ -8,12 +8,11 @@ import { propertiesController } from '../controllers/propertiesController.js';
 export const agenciesRouter = express.Router();
 
 /**
- * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
- **/ 
+ **/
 
-agenciesRouter.post('/create', enforceAuthentication, ensureIsAgencyAdmin, validationCreateAgency, errorValidation,  async (req, res, next) => {
+agenciesRouter.post('/create', enforceAuthentication, ensureIsAgencyAdmin, validationCreateAgency, errorValidation, async (req, res, next) => {
 
     try {
         const agency = await agenciesController.createAgency(req);
@@ -60,21 +59,21 @@ agenciesRouter.put('/update/:id', enforceAuthentication, ensureIsAgencyAdmin, va
 
 agenciesRouter.get('/:id', async (req, res, next) => {
 
-    try{
+    try {
         const idAgency = req.params.id;
         const agency = await agenciesController.getAgencyById(idAgency);
         res.send(agency);
-    }catch (error){
+    } catch (error) {
         next(error);
     }
 });
 
 agenciesRouter.get('/:id/properties', async (req, res, next) => {
-    try{
+    try {
         const agencyId = req.params.id;
         const properties = await propertiesController.getPropertiesByAgencyId(agencyId);
         res.send(properties);
-    }catch (error){
+    } catch (error) {
         next(error);
     }
 });

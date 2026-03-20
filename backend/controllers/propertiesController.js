@@ -2,15 +2,14 @@ import fs from "fs";
 import { Properties, PropertiesFeatures, Images, Users, Searches, Notifications, Agencies } from "../models/database.js";
 import { imagesController } from "./imagesController.js";
 import { Op } from 'sequelize';
+import { geoapifyGeocode } from '../services/GeoapifyAPI.js';
 
 export class propertiesController {
 
-    //funzioni helper
     static getUsersToNotify(propertyAddress, propertyTitle, recentSearches) {
         const address = propertyAddress ? propertyAddress.toLowerCase() : '';
         const title = propertyTitle ? propertyTitle.toLowerCase() : '';
 
-        // Group by userId e prendi solo le ultime 3 ricerche per utente
         const userRecentSearches = {};
         for (const search of recentSearches) {
             if (!userRecentSearches[search.userId]) {
@@ -21,21 +20,17 @@ export class propertiesController {
             }
         }
 
-        // Controlla il match
         const usersToNotify = new Set();
         for (const userId in userRecentSearches) {
             const searches = userRecentSearches[userId];
             for (const search of searches) {
-                // Check se i criteri della ricerca testuale matchano la keyword
                 const searchTitle = search.criteria && (search.criteria['area/title'] || search.criteria.text);
                 if (searchTitle) {
-                    // Prendi solo la prima parte della stringa di ricerca (es: da "Napoli, NA, Italia" prendi "napoli")
                     const searchTerm = searchTitle.split(',')[0].trim().toLowerCase();
 
-                    // Controlla se l'indirizzo o il titolo dell'immobile contengono il termine cercato
                     if (address.includes(searchTerm) || title.includes(searchTerm)) {
                         usersToNotify.add(parseInt(userId));
-                        break; // Basta una ricerca matchata per notificare l'utente
+                        break;
                     }
                 }
             }
@@ -44,17 +39,27 @@ export class propertiesController {
         return Array.from(usersToNotify);
     }
 
-    
+
     static buildAdvancedSearchQuery(queryParams) {
-        const { text, type, maxPrice, roomCount, area, floor, energyClass, hasElevator } = queryParams;
+        const { text, type, maxPrice, roomCount, area, floor, energyClass, hasElevator,
+            bboxLon1, bboxLat1, bboxLon2, bboxLat2 } = queryParams;
 
         const propertyWhere = {};
-        if (text) {
-            const searchText = text.split(',')[0].trim();
+
+        if (bboxLon1 && bboxLat1 && bboxLon2 && bboxLat2) {
+            const minLat = Math.min(parseFloat(bboxLat1), parseFloat(bboxLat2));
+            const maxLat = Math.max(parseFloat(bboxLat1), parseFloat(bboxLat2));
+            const minLon = Math.min(parseFloat(bboxLon1), parseFloat(bboxLon2));
+            const maxLon = Math.max(parseFloat(bboxLon1), parseFloat(bboxLon2));
+            propertyWhere.latitude = { [Op.between]: [minLat, maxLat] };
+            propertyWhere.longitude = { [Op.between]: [minLon, maxLon] };
+        } else if (text) {
+            const searchText = text.trim();
             propertyWhere[Op.or] = [
                 { address: { [Op.iLike]: `%${searchText}%` } }
             ];
         }
+
         if (type) {
             propertyWhere.type = type;
         }
@@ -101,7 +106,7 @@ export class propertiesController {
 
             return property;
 
-        } catch (error) { 
+        } catch (error) {
             if (property) {
                 await this.deleteProperty(property.id);
             }
@@ -123,7 +128,6 @@ export class propertiesController {
             featuresData = JSON.parse(featuresData);
         }
 
-        // Creiamo la proprietà nel database
         const newProperty = await Properties.create({
             title: req.body.title,
             description: req.body.description,
@@ -147,16 +151,14 @@ export class propertiesController {
             });
         }
 
-        // TRIGGER NOTIFICHE 
         try {
-        
+
             const recentSearches = await Searches.findAll({
                 order: [['createdAt', 'DESC']]
             });
 
             const usersToNotify = this.getUsersToNotify(newProperty.address, newProperty.title, recentSearches);
 
-            // 3. Crea le notifiche in blocco
             const notificationPromises = usersToNotify.map(userId => {
                 return Notifications.create({
                     type: 'property',
@@ -270,15 +272,42 @@ export class propertiesController {
 
     static async getSearchedProperties(propertyText, req, res) {
         try {
-            const searchText = propertyText.split(',')[0].trim();
-            const properties = await Properties.findAll({
-                where: {
+            const { bboxLon1, bboxLat1, bboxLon2, bboxLat2 } = req.query || {};
+            let whereClause = {};
+
+            let effectiveBbox = null;
+
+            if (bboxLon1 && bboxLat1 && bboxLon2 && bboxLat2) {
+                effectiveBbox = {
+                    lon1: parseFloat(bboxLon1), lat1: parseFloat(bboxLat1),
+                    lon2: parseFloat(bboxLon2), lat2: parseFloat(bboxLat2)
+                };
+            } else if (propertyText && propertyText.trim()) {
+                effectiveBbox = await geoapifyGeocode(propertyText.trim());
+            }
+
+            if (effectiveBbox) {
+                const minLat = Math.min(effectiveBbox.lat1, effectiveBbox.lat2);
+                const maxLat = Math.max(effectiveBbox.lat1, effectiveBbox.lat2);
+                const minLon = Math.min(effectiveBbox.lon1, effectiveBbox.lon2);
+                const maxLon = Math.max(effectiveBbox.lon1, effectiveBbox.lon2);
+                whereClause = {
+                    latitude: { [Op.between]: [minLat, maxLat] },
+                    longitude: { [Op.between]: [minLon, maxLon] }
+                };
+            } else {
+                const searchText = propertyText.trim();
+                whereClause = {
                     [Op.or]: [
                         { address: { [Op.iLike]: `%${searchText}%` } },
                         { title: { [Op.iLike]: `%${searchText}%` } },
                         { description: { [Op.iLike]: `%${searchText}%` } }
                     ]
-                },
+                };
+            }
+
+            const properties = await Properties.findAll({
+                where: whereClause,
                 include: [
                     { model: PropertiesFeatures },
                     { model: Images }
@@ -293,10 +322,24 @@ export class propertiesController {
 
     static async getAdvancedSearchedProperties(req) {
         try {
-            // 1. Deleghiamo la costruzione della query all'helper pura
-            const { propertyWhere, featuresWhere } = this.buildAdvancedSearchQuery(req.query);
+            let { propertyWhere, featuresWhere } = this.buildAdvancedSearchQuery(req.query);
 
-            // 2. Eseguiamo la chiamata al DB
+            const hasBboxFilter = propertyWhere.latitude !== undefined;
+            const { text } = req.query;
+
+            if (!hasBboxFilter && text && text.trim()) {
+                const bbox = await geoapifyGeocode(text.trim());
+                if (bbox) {
+                    const minLat = Math.min(bbox.lat1, bbox.lat2);
+                    const maxLat = Math.max(bbox.lat1, bbox.lat2);
+                    const minLon = Math.min(bbox.lon1, bbox.lon2);
+                    const maxLon = Math.max(bbox.lon1, bbox.lon2);
+                    delete propertyWhere[Op.or];
+                    propertyWhere.latitude = { [Op.between]: [minLat, maxLat] };
+                    propertyWhere.longitude = { [Op.between]: [minLon, maxLon] };
+                }
+            }
+
             const properties = await Properties.findAll({
                 where: propertyWhere,
                 include: [
@@ -317,7 +360,6 @@ export class propertiesController {
 
             return properties;
         } catch (error) {
-            console.error("Errore nel recupero proprietà (advanced search):", error);
             throw error;
         }
     }
@@ -337,7 +379,6 @@ export class propertiesController {
 
             return properties;
         } catch (error) {
-            console.error("Errore nel recupero proprietà:", error);
             throw error;
         }
     }
@@ -357,7 +398,6 @@ export class propertiesController {
             });
             return properties;
         } catch (error) {
-            console.error("Errore nel recupero delle proprietà:", error);
             throw error;
         }
     }
@@ -378,17 +418,13 @@ export class propertiesController {
                 throw error;
             }
 
-            // TRIGGER NOTIFICHE PROMOZIONALI (Ora utilizza la funzione helper)
-            
-            // 1. Trova tutte le ricerche salvate
+
             const recentSearches = await Searches.findAll({
                 order: [['createdAt', 'DESC']]
             });
 
-            // 2. Determina gli utenti tramite la logica pura
             const usersToNotify = this.getUsersToNotify(property.address, property.title, recentSearches);
 
-            // 3. Crea le notifiche promozionali in blocco
             const notificationPromises = usersToNotify.map(userId => {
                 return Notifications.create({
                     type: 'promo',
@@ -402,7 +438,6 @@ export class propertiesController {
             return true;
 
         } catch (error) {
-            console.error('Errore durante la creazione delle notifiche promo:', error);
             throw error;
         }
     }

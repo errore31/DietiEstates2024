@@ -7,9 +7,9 @@ import { errorValidation } from '../middleware/validation/errorValidation.js';
 export const requestAgencyRouter = express.Router();
 
 /**
- * POST /request-agency/
- * Invia una nuova richiesta di creazione agenzia (accessibile a tutti).
- */
+ * @param {http.IncomingMessage} req 
+ * @param {http.ServerResponse} res 
+ **/
 requestAgencyRouter.post('/', validationCreateRequestAgency, errorValidation, async (req, res, next) => {
     try {
         const request = await RequestAgencyController.createRequest(req);
@@ -23,9 +23,9 @@ requestAgencyRouter.post('/', validationCreateRequestAgency, errorValidation, as
 });
 
 /**
- * GET /request-agency/
- * Restituisce tutte le richieste pendenti (solo admin di sistema).
- */
+ * @param {http.IncomingMessage} req 
+ * @param {http.ServerResponse} res 
+ **/
 requestAgencyRouter.get('/', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
         const requests = await RequestAgencyController.getAllRequests();
@@ -36,9 +36,9 @@ requestAgencyRouter.get('/', enforceAuthentication, ensureIsAdmin, async (req, r
 });
 
 /**
- * POST /request-agency/:id/approve
- * Approva la richiesta: crea agenzia + agencyAdmin ed elimina la richiesta (solo admin di sistema).
- */
+ * @param {http.IncomingMessage} req 
+ * @param {http.ServerResponse} res 
+ **/
 requestAgencyRouter.post('/:id/approve', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
         const id = req.params.id;
@@ -54,9 +54,9 @@ requestAgencyRouter.post('/:id/approve', enforceAuthentication, ensureIsAdmin, a
 });
 
 /**
- * DELETE /request-agency/:id/reject
- * Rifiuta la richiesta: elimina la richiesta pendente (solo admin di sistema).
- */
+ * @param {http.IncomingMessage} req 
+ * @param {http.ServerResponse} res 
+ **/
 requestAgencyRouter.delete('/:id/reject', enforceAuthentication, ensureIsAdmin, async (req, res, next) => {
     try {
         const id = req.params.id;

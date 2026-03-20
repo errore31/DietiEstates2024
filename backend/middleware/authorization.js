@@ -1,10 +1,6 @@
 import { Properties } from "../models/database.js";
 import { Searches } from "../models/database.js";
 
-/**
- *  This middleware ensures that the user is currently authenticated and has the appropriate role.
- * If not, it responds with an error message.
- */
 
 export function enforceAuthentication(req, res, next) {
     if (req.session && req.session.auth) {

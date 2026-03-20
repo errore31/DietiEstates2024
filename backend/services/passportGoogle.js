@@ -10,26 +10,22 @@ passport.use(new GoogleStrategy({
 },
     async (req, accessToken, refreshToken, profile, done) => {
         try {
-            // 1. Cerchiamo se l'utente esiste già nel DB tramite googleId
             let user = await Users.findOne({ where: { googleId: profile.id } });
 
             if (user) {
                 return done(null, user);
             }
 
-            // Aggiunta: controlliamo se l'email esiste già sul database per una registrazione classica
             let existingEmail = await Users.findOne({ where: { email: profile.emails[0].value } });
             if (existingEmail) {
                 return done(null, false, { message: 'email_exists' });
             }
-
-            // 2. Se non esiste, lo creiamo usando i dati forniti da Google
             user = await Users.create({
                 googleId: profile.id,
                 name: profile.name.givenName,
                 surname: profile.name.familyName,
                 email: profile.emails[0].value,
-                username: profile.emails[0].value.split('@')[0], // Generiamo un username dall'email
+                username: profile.emails[0].value.split('@')[0],
                 role: 'user'
             });
 
@@ -40,7 +36,7 @@ passport.use(new GoogleStrategy({
     }
 ));
 
-// Serve per salvare l'utente nella sessione
+// Serve per salvare l'utente nella sessione    
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
     const user = await Users.findByPk(id);

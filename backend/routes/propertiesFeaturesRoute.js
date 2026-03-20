@@ -9,10 +9,9 @@ import { ensureAgentOwnsProperty } from '../middleware/authorization.js';
 export const proprietiesFeaturesRouter = express.Router();
 
 /**
- * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
- **/ 
+ **/
 
 proprietiesFeaturesRouter.post('/create', enforceAuthentication, ensureIsAgent, validationCreatePropertiesFeatures, errorValidation, async (req, res, next) => {
 
@@ -39,8 +38,8 @@ proprietiesFeaturesRouter.put('/update/:id', enforceAuthentication, ensureAgentO
         const idPropertyFeature = req.params.id;
         const featureUpdate = await proprietiesFeaturesController.updateProprietyFeatures(idPropertyFeature, req);
 
-        res.status(200).json({ message: "Caratteristiche proprietà aggiornate con successo!", data : featureUpdate });
-       
+        res.status(200).json({ message: "Caratteristiche proprietà aggiornate con successo!", data: featureUpdate });
+
     } catch (error) {
         next(error);
     }

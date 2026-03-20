@@ -1,32 +1,32 @@
 import { Images } from "../models/database.js";
 
-export class imagesController{
+export class imagesController {
 
-    static async createImages(propertyId, files){
+    static async createImages(propertyId, files) {
         const ImagePromise = files.map((file, index) => {
             return Images.create({
                 url: file.filename,
-                order: index, // use a position based on the order of files
+                order: index,
                 propertyId: propertyId
             });
         });
-        return Promise.all(ImagePromise); //attend all the promises 
+        return Promise.all(ImagePromise);
     }
-  
-    static async deleteImage(idImage){
+
+    static async deleteImage(idImage) {
         const image = await Images.findByPk(idImage);
-        if(!image){
-            throw new customError('Immagine non trovata', 404);    
+        if (!image) {
+            throw new customError('Immagine non trovata', 404);
         }
 
         await image.destroy();
         return true;
     }
 
-    static async updateImage(req, idImage){
+    static async updateImage(req, idImage) {
         const image = await Images.findByPk(idImage);
-        if(!image){
-            throw new customError('Immagine non trovata', 404);    
+        if (!image) {
+            throw new customError('Immagine non trovata', 404);
         }
 
         const allowedUpdates = ['url', 'order'];
@@ -38,7 +38,7 @@ export class imagesController{
         });
 
         await image.save();
-        
+
         return image;
     }
 

@@ -10,7 +10,4 @@ import { Footer } from './shared/footer/footer';
 })
 export class App {
   protected readonly title = signal('frontend');
-
-
-  //mettere la funzione ngOnInit() per recuperare ogni volta la sessione
 }

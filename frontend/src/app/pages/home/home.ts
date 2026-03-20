@@ -27,7 +27,6 @@ export class Home implements OnInit {
     this.propertyService.getAllProperties().subscribe({
       next: (data) => {
         this.properties = data;
-        console.log('Proprietà caricate:', this.properties);
       },
       error: (err) => console.error('Errore nel caricamento:', err)
     });

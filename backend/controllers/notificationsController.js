@@ -2,7 +2,6 @@ import { Notifications } from "../models/database.js";
 
 export class notificationsController {
     /**
-     * Handles post requests on /auth. Checks that the given credentials are valid
      * @param {http.IncomingMessage} req 
      * @param {http.ServerResponse} res 
      */
@@ -21,7 +20,7 @@ export class notificationsController {
         };
         return Notifications.update(
             updateData,
-            {where: {id : req.body.id} });
+            { where: { id: req.body.id } });
     }
     static async getNotifications(req, res) {
         try {

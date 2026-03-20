@@ -15,7 +15,6 @@ import { UserService } from '../../services/user/user';
 })
 export class Register {
 
-  // Oggetto per raccogliere i dati del form
   registerData: any = {
     name: '',
     surname: '',
@@ -31,13 +30,10 @@ export class Register {
   ) { }
 
   onRegister() {
-    // Validazione base nel frontend
     if (!this.registerData.name || !this.registerData.surname || !this.registerData.username || !this.registerData.email || !this.registerData.password) {
       this.toastr.error('Per favore, compila tutti i campi.', 'Attenzione');
       return;
     }
-
-    // Chiamata al backend per creare l'utente
     this.userService.createUser(this.registerData).subscribe({
       next: () => {
         this.toastr.success('Effettua il login.', 'Registrazione riuscita');
@@ -46,9 +42,7 @@ export class Register {
       error: (error) => {
         console.error('Errore registrazione:', error);
 
-        // Gestione errori di validazione del backend
         if (error.status === 400 && error.error?.error && Array.isArray(error.error.error)) {
-          // Cicla l'array degli errori di express-validator
           error.error.error.forEach((errItem: any) => {
             this.toastr.error(errItem.msg, 'Errore di Validazione');
           });

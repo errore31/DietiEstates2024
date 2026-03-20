@@ -24,7 +24,7 @@ import { AuthService } from '../../services/auth-service/auth';
 })
 export class Agency implements OnInit {
 
-  //variabili di sessione
+
   currentUser$;
 
   constructor(private agencyService: AgencyService, private activateRoute: ActivatedRoute,
@@ -35,20 +35,20 @@ export class Agency implements OnInit {
 
   }
 
-  //dati presi dal backend
+
   agency: AgencyModel | undefined;
   allProperties: Property[] = [];
   selectedCategory: 'vendita' | 'affitto' = 'vendita';
 
-  //variabili form
-  isEditing = false; // Flag per capire se il form è in modalità modifica
-  currentEditId: number | null = null; //id dell'utente da modificare
+
+  isEditing = false;
+  currentEditId: number | null = null;
   showAddMemberForm = false;
   editingField: string | null = null;
   isAgencyAdmin = false;
   isAgent = false;
 
-  //dati per modfica aggiunta
+
   newAgent: User = {
     name: '',
     surname: '',
@@ -71,15 +71,15 @@ export class Agency implements OnInit {
 
 
   ngOnInit(): void {
-    const idParam = this.activateRoute.snapshot.paramMap.get('id'); //restituisce stringa
+    const idParam = this.activateRoute.snapshot.paramMap.get('id');
 
     if (idParam) {
-      const agencyId = +idParam; //conversione a number
+      const agencyId = +idParam;
 
       this.agencyService.getAgencyById(agencyId).subscribe({
         next: (data) => {
           this.agency = data;
-          //recuperiamo utente solo ora per no navere probelmi di asicronità
+
           this.authService.currentUser$.subscribe(user => {
             this.checkAdminPermissions(user);
           });
@@ -87,11 +87,10 @@ export class Agency implements OnInit {
         error: (err) => console.error('Errore Agency:', err)
       });
 
-      // prendo gli immobili 
+
       this.propertyService.getPropertiesByAgency(agencyId).subscribe({
         next: (data) => {
           this.allProperties = data;
-          console.log('Immobili caricati con foto:', this.allProperties);
         },
         error: (err) => console.error('Errore Properties:', err)
       });
@@ -105,14 +104,12 @@ export class Agency implements OnInit {
     this.selectedCategory = category;
   }
 
-  // Getter che restituisce solo gli immobili della categoria selezionata
   get filteredProperties() {
     return this.allProperties.filter(prop =>
       prop.category?.toLowerCase() === this.selectedCategory
     );
   }
 
-  //verifca se è un agency admin di quella azienda
   private checkAdminPermissions(user: any) {
     if (user && user.role === 'agencyAdmin' && user.agencyId === this.agency?.id) {
       this.isAgencyAdmin = true;
@@ -128,7 +125,6 @@ export class Agency implements OnInit {
 
   }
 
-  // --- Funzioni di Gestione ---
   createProperty() {
     this.router.navigate(['/properties/create']);
   }
@@ -157,7 +153,6 @@ export class Agency implements OnInit {
         } else {
           this.toastr.error('Errore durante l\'eliminazione dell\'immobile', 'Errore');
         }
-        console.log('Status Errore:', err.status);
       }
     });
   }
@@ -188,19 +183,18 @@ export class Agency implements OnInit {
       return;
     }
 
-    if (this.agency?.id) { //serve per aggiungere l'id all'utente
+    if (this.agency?.id) {
 
       this.newAgent.agencyId = this.agency.id;
 
       this.userService.createAgent(this.newAgent).subscribe({
         next: (response: any) => {
-          const user = response.user; //estraggo utente dalla risposta
+          const user = response.user;
           if (this.agency && this.agency.Users) {
             this.agency.Users = [...this.agency.Users, user];
           }
           this.closerForm();
           this.toastr.success(`Agente aggiunto con successo`, 'Agente aggiunto')
-          console.log('Agente aggiunto con successo');
         },
         error: (err) => {
 
@@ -242,7 +236,6 @@ export class Agency implements OnInit {
     this.userService.deleteUser(id).subscribe({
       next: () => {
         if (this.agency && this.agency.Users) {
-          // ricrea l'array escludendo l'agente eliminato
           this.agency.Users = this.agency.Users.filter(user => user.id !== id);
         }
         this.toastr.success(`Agente eliminato con successo`, 'Agente eliminato')
@@ -296,9 +289,8 @@ export class Agency implements OnInit {
         next: (response: any) => {
           const updatedAgency = response.agency;
           const currentUsers = this.agency?.Users;
-          this.agency = updatedAgency; // Aggiorna la vista
+          this.agency = updatedAgency;
 
-          //Riattacchiamo i membri all'oggetto aggiornato
           if (this.agency) {
             this.agency.Users = currentUsers;
           }
@@ -351,7 +343,6 @@ export class Agency implements OnInit {
         this.closePromoModal();
       },
       error: (err) => {
-        console.error(err);
         this.toastr.error('Errore durante l\'invio della promozione', 'Errore');
         this.closePromoModal();
       }

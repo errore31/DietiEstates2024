@@ -27,11 +27,10 @@
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
 }
 
-// Styling per i popup di Leaflet
 :host ::ng-deep {
     .leaflet-popup-content-wrapper {
         border-radius: 12px;
-        padding: 0; // Più compatto
+        padding: 0;
         overflow: hidden;
     }
 

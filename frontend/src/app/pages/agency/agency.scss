@@ -36,11 +36,9 @@
     font-weight: 600;
 }
 
-/* --- CONTAINER E SCHEDE BIANCHE --- */
 .container {
     max-width: 1200px;
     margin: 40px auto;
-    /* Spazio netto per evitare sovrapposizioni */
     padding: 0 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -50,13 +48,11 @@
 .main-content-card,
 .sidebar-card {
     background: #ffffff;
-    /* Sfondo bianco per le sezioni di gestione */
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     height: fit-content;
 
-    /* Override per il testo scuro dentro le card bianche */
     h2,
     h3,
     p,
@@ -75,7 +71,6 @@
     padding-bottom: 10px;
 }
 
-/* --- GRIGLIA E CARD PROPIETA'--- */
 .property-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -121,7 +116,6 @@
     }
 }
 
-/* --- PULSANTI AZIONE PROPRIETA'--- */
 .action-admin {
     display: flex;
     border-top: 1px solid #eee;
@@ -163,7 +157,6 @@
     background: #fff0f0;
 }
 
-/* --- TEAM --- */
 .agent-item {
     display: flex;
     flex-direction: column;
@@ -203,16 +196,12 @@
     font-size: small;
 }
 
-
-/* --- STILE FORM AGGIUNTA MEMBRO --- */
 .add-member-container {
     background: var(--site-cream);
-    /* Sfondo leggermente colorato per distinguere il form */
     padding: 20px;
     border-radius: 12px;
     margin-bottom: 25px;
     border: 1px solid rgba(24, 47, 83, 0.1);
-    /* site-primary con trasparenza */
     animation: fadeIn 0.3s ease-in-out;
 
     h3 {
@@ -250,7 +239,6 @@
     select {
         cursor: pointer;
         appearance: none;
-        /* Rimuove lo stile di default del browser */
         background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 10px center;
@@ -261,7 +249,6 @@
 .form-actions {
     display: flex;
     flex-direction: column;
-    /* Come da tua preferenza precedente per i pulsanti sovrapposti */
     gap: 10px;
 
     button {
@@ -290,7 +277,6 @@
     .btn-cancel {
         background: transparent;
         color: #e74c3c;
-        /* Colore errore/pericolo */
         border: 1px solid #e74c3c;
 
         &:hover {
@@ -299,7 +285,6 @@
     }
 }
 
-/* Animazione semplice per l'apertura */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -315,16 +300,11 @@
 .editable-row {
     display: flex;
     justify-content: center;
-    /* Mantiene il layout centrato della Hero */
     align-items: center;
-    /* Allinea verticalmente testo e bottoni */
     gap: 15px;
-    /* Spazio tra il testo e la matitina */
     min-height: 50px;
-    /* Altezza minima per evitare che la pagina "salti" al cambio view/edit */
     margin-bottom: 5px;
 
-    /* Rimuoviamo i margini default per allineare perfettamente input e bottoni */
     h1,
     p {
         margin: 0;
@@ -339,7 +319,6 @@
     }
 }
 
-/* Bottone "Modifica" testuale (per i campi piccoli) */
 .btn-text-mod {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -357,7 +336,6 @@
     }
 }
 
-/* Input generico per la Hero (Indirizzo, Email, Tel) */
 .input-edit {
     padding: 8px 12px;
     border-radius: 6px;
@@ -370,20 +348,15 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Input specifico per il Titolo (Nome Agenzia) */
 .input-edit-hero {
     @extend .input-edit;
-    /* Eredita lo stile base */
     font-size: 2rem;
-    /* Grandezza simile all'H1 */
     font-weight: 800;
     text-align: center;
     min-width: 300px;
-    /* Larghezza minima per non schiacciarsi */
 
 }
 
-/* Bottoni Salva/Annulla */
 .btn-save-mini,
 .btn-cancel-mini {
     border: none;
@@ -438,7 +411,6 @@
     }
 }
 
-/* Modale Promozione */
 .modal-overlay {
     position: fixed;
     top: 0;

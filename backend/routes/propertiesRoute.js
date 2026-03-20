@@ -11,7 +11,6 @@ import { uploadImage } from '../middleware/uploadPhoto.js';
 export const proprietiesRouter = express.Router();
 
 /**
- * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/

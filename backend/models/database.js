@@ -16,7 +16,7 @@ const database = new Sequelize(
   {
     host: process.env.DB_HOST || 'localhost',
     dialect: 'postgres',
-    retry: { // if connection fails, retry
+    retry: {
       match: [/ECONNREFUSED/],
       max: 5
     },
@@ -67,7 +67,6 @@ export async function startConnection() {
 }
 
 async function createAgencyAndUsers(hashedPassword) {
-  // 1. Crea Agenzia
   const agency = await Agencies.create({
     businessName: 'Best Estates',
     name: 'Best Estates Agency',
@@ -76,7 +75,6 @@ async function createAgencyAndUsers(hashedPassword) {
     email: 'bestestates@example.com'
   });
 
-  // 2. Crea Utenti
   const alice = await Users.create({
     name: 'Alice',
     surname: 'Smith',
@@ -115,54 +113,209 @@ async function createAgencyAndUsers(hashedPassword) {
     agencyId: agency.id
   });
 
-  // Ritorniamo l'agente e alice perché ci serve il loro ID per creare dati mockup
   return { agent, alice };
 }
-
-/**
- * Crea le 4 proprietà, le caratteristiche e le immagini collegate a un agente specifico
- */
 async function createPropertiesForAgent(agentId) {
   const propertiesData = [
     {
-      title: 'Beautiful Family Home',
-      description: 'A lovely 3-bedroom family home in a great neighborhood.',
-      price: 350000,
-      address: '456 Oak St, Cityville',
-      type: 'house',
+      title: 'Trilocale Vista Duomo',
+      description: 'Elegante appartamento ristrutturato con finiture di pregio e affaccio panoramico.',
+      price: 890000,
+      address: 'Via Torino 15, Milano',
+      type: 'appartamento',
       category: 'vendita',
-      latitude: 40.7128, longitude: -74.0060,
-      features: { roomCount: 3, area: 120, hasElevator: false, floor: 1, energyClass: 'B' }
+      latitude: 45.4627, longitude: 9.1865,
+      features: { roomCount: 3, area: 110, hasElevator: true, floor: 4, energyClass: 'A+' }
     },
     {
-      title: 'Modern City Apartment',
-      description: 'Luxurious apartment in the heart of the city.',
-      price: 550000,
-      address: '789 Pine Ave, Cityville',
-      type: 'apartment',
-      category: 'vendita',
-      latitude: 40.7138, longitude: -74.0070,
-      features: { roomCount: 2, area: 90, hasElevator: true, floor: 5, energyClass: 'A' }
-    },
-    {
-      title: 'Cozy Studio Loft',
-      description: 'Perfect for singles or young couples.',
-      price: 180000,
-      address: '101 Maple Blvd, Cityville',
-      type: 'studio',
+      title: 'Attico Trastevere',
+      description: 'Caratteristico attico nel cuore di Roma con ampio terrazzo vivibile.',
+      price: 3200,
+      address: 'Vicolo del Cinque, Roma',
+      type: 'attico',
       category: 'affitto',
-      latitude: 40.7118, longitude: -74.0050,
-      features: { roomCount: 1, area: 45, hasElevator: true, floor: 2, energyClass: 'C' }
+      latitude: 41.8894, longitude: 12.4692,
+      features: { roomCount: 2, area: 85, hasElevator: false, floor: 5, energyClass: 'G' }
     },
     {
-      title: 'Spacious Villa with Garden',
-      description: 'Exclusive villa with private pool.',
-      price: 950000,
-      address: '202 Hilltop Rd, Cityville',
+      title: 'Villa Unifamiliare con Piscina',
+      description: 'Splendida villa moderna immersa nel verde con giardino privato di 1000mq.',
+      price: 1250000,
+      address: 'Via dei Colli 42, Forte dei Marmi',
       type: 'villa',
+      category: 'vendita',
+      latitude: 43.9592, longitude: 10.1747,
+      features: { roomCount: 6, area: 280, hasElevator: false, floor: 0, energyClass: 'A3' }
+    },
+    {
+      title: 'Loft Industriale Isola',
+      description: 'Open space di design ricavato da un ex laboratorio tessile, soffitti alti 5 metri.',
+      price: 640000,
+      address: 'Via Gaetano de Castillia, Milano',
+      type: 'loft',
+      category: 'vendita',
+      latitude: 45.4862, longitude: 9.1904,
+      features: { roomCount: 2, area: 120, hasElevator: true, floor: 1, energyClass: 'B' }
+    },
+    {
+      title: 'Bilocale Moderno Cit Turin',
+      description: 'Appartamento appena arredato comodo alla stazione Porta Susa e metro.',
+      price: 950,
+      address: 'Corso Francia 22, Torino',
+      type: 'appartamento',
       category: 'affitto',
-      latitude: 40.7158, longitude: -74.0090,
-      features: { roomCount: 5, area: 250, hasElevator: false, floor: 0, energyClass: 'A+' }
+      latitude: 45.0761, longitude: 7.6652,
+      features: { roomCount: 2, area: 65, hasElevator: true, floor: 3, energyClass: 'C' }
+    },
+    {
+      title: 'Rustico Toscano Ristrutturato',
+      description: 'Casale in pietra con travi a vista e vista sulle colline del Chianti.',
+      price: 480000,
+      address: 'Strada Provinciale 3, Gaiole in Chianti',
+      type: 'rustico',
+      category: 'vendita',
+      latitude: 43.4681, longitude: 11.4339,
+      features: { roomCount: 5, area: 190, hasElevator: false, floor: 0, energyClass: 'D' }
+    },
+    {
+      title: 'Appartamento Fronte Mare',
+      description: 'Accesso diretto alla spiaggia, ideale come casa vacanze o investimento.',
+      price: 320000,
+      address: 'Via Lungomare 112, Rimini',
+      type: 'appartamento',
+      category: 'vendita',
+      latitude: 44.0628, longitude: 12.5808,
+      features: { roomCount: 3, area: 75, hasElevator: true, floor: 2, energyClass: 'E' }
+    },
+    {
+      title: 'Palazzetto Storico Centro',
+      description: 'Intero stabile cielo-terra nel centro storico con corte interna.',
+      price: 2100000,
+      address: 'Via dell Indipendenza 5, Bologna',
+      type: 'stabile',
+      category: 'vendita',
+      latitude: 44.4989, longitude: 11.3435,
+      features: { roomCount: 12, area: 450, hasElevator: true, floor: 0, energyClass: 'G' }
+    },
+    {
+      title: 'Appartamento Design Vomero',
+      description: 'Ristrutturazione minimalista, molto luminoso con doppia esposizione.',
+      price: 520000,
+      address: 'Via Scarlatti, Napoli',
+      type: 'appartamento',
+      category: 'vendita',
+      latitude: 40.8437, longitude: 14.2323,
+      features: { roomCount: 4, area: 130, hasElevator: true, floor: 6, energyClass: 'B' }
+    },
+    {
+      title: 'Monolocale Universitario',
+      description: 'Piccolo appartamento funzionale a pochi passi dalla facoltà di economia.',
+      price: 650,
+      address: 'Via Valotti 3, Brescia',
+      type: 'monolocale',
+      category: 'affitto',
+      latitude: 45.5621, longitude: 10.2312,
+      features: { roomCount: 1, area: 35, hasElevator: true, floor: 2, energyClass: 'F' }
+    },
+    {
+      title: 'Villetta a Schiera con Giardino',
+      description: 'Contesto residenziale tranquillo, box auto doppio e taverna.',
+      price: 275000,
+      address: 'Via Leopardi 8, Treviso',
+      type: 'villa',
+      category: 'vendita',
+      latitude: 45.6669, longitude: 12.2431,
+      features: { roomCount: 4, area: 155, hasElevator: false, floor: 0, energyClass: 'C' }
+    },
+    {
+      title: 'Appartamento di Lusso San Marco',
+      description: 'Rifiniture classiche veneziane, pavimenti in seminato e soffitti decorati.',
+      price: 1350000,
+      address: 'Calle Larga XXII Marzo, Venezia',
+      type: 'appartamento',
+      category: 'vendita',
+      latitude: 45.4335, longitude: 12.3364,
+      features: { roomCount: 5, area: 170, hasElevator: false, floor: 1, energyClass: 'E' }
+    },
+    {
+      title: 'Attico Moderno Bari City',
+      description: 'Costruzione recente con domotica e ampio balcone perimetrale.',
+      price: 1800,
+      address: 'Corso Vittorio Emanuele, Bari',
+      type: 'attico',
+      category: 'affitto',
+      latitude: 41.1257, longitude: 16.8667,
+      features: { roomCount: 3, area: 105, hasElevator: true, floor: 7, energyClass: 'A2' }
+    },
+    {
+      title: 'Casa Indipendente vista Etna',
+      description: 'Ampia proprietà circondata da agrumeto e splendida vista sul vulcano.',
+      price: 215000,
+      address: 'Via Garibaldi, Nicolosi',
+      type: 'casa',
+      category: 'vendita',
+      latitude: 37.6146, longitude: 15.0219,
+      features: { roomCount: 4, area: 140, hasElevator: false, floor: 0, energyClass: 'F' }
+    },
+    {
+      title: 'Elegante Quadrilocale Prati',
+      description: 'Signorile stabile d epoca con servizio di portineria intera giornata.',
+      price: 980000,
+      address: 'Via Cola di Rienzo, Roma',
+      type: 'appartamento',
+      category: 'vendita',
+      latitude: 41.9085, longitude: 12.4641,
+      features: { roomCount: 4, area: 160, hasElevator: true, floor: 3, energyClass: 'D' }
+    },
+    {
+      title: 'Chalet di Montagna',
+      description: 'Struttura in legno e pietra a pochi minuti dagli impianti sciistici.',
+      price: 390000,
+      address: 'Strada Larzey-Entreves, Courmayeur',
+      type: 'chalet',
+      category: 'vendita',
+      latitude: 45.7968, longitude: 6.9664,
+      features: { roomCount: 3, area: 95, hasElevator: false, floor: 0, energyClass: 'B' }
+    },
+    {
+      title: 'Appartamento Moderno Portello',
+      description: 'Soggiorno living, cucina a vista e camera matrimoniale con cabina armadio.',
+      price: 1400,
+      address: 'Via Grosotto 7, Milano',
+      type: 'appartamento',
+      category: 'affitto',
+      latitude: 45.4897, longitude: 9.1456,
+      features: { roomCount: 2, area: 78, hasElevator: true, floor: 10, energyClass: 'A' }
+    },
+    {
+      title: 'Attico Panoramico Genova',
+      description: 'Vista mare a 180 gradi su tutto il porto antico e la Lanterna.',
+      price: 580000,
+      address: 'Corso Magellano, Genova',
+      type: 'attico',
+      category: 'vendita',
+      latitude: 44.4071, longitude: 8.9340,
+      features: { roomCount: 5, area: 145, hasElevator: true, floor: 8, energyClass: 'C' }
+    },
+    {
+      title: 'Trilocale Borgo Vecchio',
+      description: 'Appartamento caratteristico ristrutturato rispettando lo stile originale.',
+      price: 185000,
+      address: 'Via Maqueda, Palermo',
+      type: 'appartamento',
+      category: 'vendita',
+      latitude: 38.1157, longitude: 13.3614,
+      features: { roomCount: 3, area: 88, hasElevator: false, floor: 2, energyClass: 'G' }
+    },
+    {
+      title: 'Villa Unifamiliare Olbia',
+      description: 'Villa di testa in complesso residenziale esclusivo vicino a Porto Rotondo.',
+      price: 740000,
+      address: 'Località Rudalza, Olbia',
+      type: 'villa',
+      category: 'vendita',
+      latitude: 41.0189, longitude: 9.5312,
+      features: { roomCount: 4, area: 165, hasElevator: false, floor: 0, energyClass: 'B' }
     }
   ];
 
@@ -181,7 +334,7 @@ async function createPropertiesForAgent(agentId) {
 
     await PropertiesFeatures.create({
       id: property.id,
-      ...propData.features // Spread operator per copiare roomCount, area, etc.
+      ...propData.features
     });
 
     await Images.create({
@@ -192,9 +345,6 @@ async function createPropertiesForAgent(agentId) {
   }
 }
 
-/**
- * Crea dati accessori come ricerche salvate e notifiche
- */
 async function createExtras(userId) {
   await Searches.create({
     criteria: { maxPrice: 400000, type: 'house' },
@@ -208,24 +358,18 @@ async function createExtras(userId) {
   });
 }
 
-// --- FUNZIONE PRINCIPALE (ESPORTATA) ---
-
 export async function setDataTest() {
   try {
     console.log('Starting data initialization...');
 
-    // 1. Reset Database
     await database.sync({ force: true });
 
-    // 2. Preparazione
     const hashedPassword = await bcrypt.hash('agentpassword', 10);
 
-    // 3. Esecuzione Step Logici
-    const { agent, alice } = await createAgencyAndUsers(hashedPassword); // Crea Utenti
-    await createPropertiesForAgent(agent.id);                 // Crea Proprietà
-    await createExtras(agent.id);                             // Crea Extra
+    const { agent, alice } = await createAgencyAndUsers(hashedPassword);
+    await createPropertiesForAgent(agent.id);
+    await createExtras(agent.id);
 
-    // Generiamo notifiche mock "immobiliari" e "promozionali" specifiche per l'utente Alice Smith
     await Notifications.create({
       type: 'property',
       message: 'Un nuovo appartamento moderno è stato aggiunto in Cityville! Corrisponde alle ultime tue ricerche in "Centro".',

@@ -14,7 +14,6 @@ import { AuthService } from '../../services/auth-service/auth';
   styleUrl: './login.scss',
 })
 export class Login implements OnInit {
-  // Oggetto per il binding dei campi
   loginData = {
     username: '',
     password: ''
@@ -45,14 +44,12 @@ export class Login implements OnInit {
       return;
     }
 
-    console.log('Dati inviati:', this.loginData);
-    // Qui chiamerai il tuo service per fare il login al backend
     this.authService.login(this.loginData).subscribe({
       next: (response) => {
         if (response.user && response.user.role === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/']); // vai in home se login OK
+          this.router.navigate(['/']);
         }
         this.toastr.success(`Bentornat* ${this.loginData.username}!`, 'Accesso riuscito');
       },
@@ -72,7 +69,6 @@ export class Login implements OnInit {
   }
 
   loginWithGoogle() {
-    // Reindirizziamo direttamente al backend, sarà lui a gestire Google
     window.location.href = 'http://localhost:3000/auth/google';
   }
 }

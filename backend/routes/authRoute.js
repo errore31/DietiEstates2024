@@ -9,7 +9,6 @@ import passport from '../services/passportGoogle.js';
 export const authRouter = express.Router();
 
 /**
- * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/
@@ -41,7 +40,6 @@ authRouter.post('/', validationLogin, errorValidation, async (req, res, next) =>
 });
 
 /**
- * This route handles user authentication
  * @param {http.IncomingMessage} req 
  * @param {http.ServerResponse} res 
  **/
@@ -63,7 +61,7 @@ authRouter.post('/signup', validationSignup, errorValidation, async (req, res, n
 });
 
 authRouter.get('/session', (req, res) => {
-    if (req.session && req.session.auth) {  // Check if session exists and user is authenticated
+    if (req.session && req.session.auth) {
         res.status(200).json({
             loggedIn: true,
             user: {
@@ -92,7 +90,6 @@ authRouter.post('/logout', (req, res) => {
 //Google route
 authRouter.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-//Callback dove Google rimanda l'utente
 authRouter.get('/google/callback', (req, res, next) => {
     passport.authenticate('google', (err, user, info) => {
         if (err) {
@@ -100,13 +97,9 @@ authRouter.get('/google/callback', (req, res, next) => {
         }
 
         if (!user) {
-            // User wasn't created/found, check info.message
             const errorMsg = info && info.message ? info.message : 'auth_failed';
             return res.redirect(`http://localhost:4200/auth?error=${errorMsg}`);
         }
-
-        // Il login ha avuto successo
-        // Salviamo i dati nella TUA sessione
         req.session.userId = user.id;
         req.session.username = user.username;
         req.session.role = user.role;
@@ -115,7 +108,6 @@ authRouter.get('/google/callback', (req, res, next) => {
         req.session.email = user.email;
         req.session.auth = true;
 
-        // Reindirizziamo l'utente alla home di Angular
         res.redirect('http://localhost:4200/');
     })(req, res, next);
 });

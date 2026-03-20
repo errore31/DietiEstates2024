@@ -21,14 +21,11 @@ span {
     border: 1px solid #e0e6ed;
     gap: 10px;
     z-index: 101;
-    /* To be above dropdown */
 }
 
-/* Custom Dropdown Suggestions */
 .suggestions-panel {
     position: absolute;
     top: 60px;
-    /* Right below search input */
     left: 20px;
     width: 100%;
     max-width: 450px;
@@ -77,7 +74,6 @@ span {
     color: #4361ee !important;
 }
 
-/* Recent Search specific styles */
 .recent-item {
     border-bottom: 1px solid #edf2f7;
 }
@@ -101,8 +97,6 @@ span {
     color: #718096;
     margin-top: 3px;
 }
-
-/* Other inputs classes (existing) */
 
 .input-group {
     display: flex;
@@ -199,7 +193,6 @@ span {
     filter: brightness(1.1);
 }
 
-/* Filters Panel */
 .filters-panel {
     position: absolute;
     top: calc(100% + 15px);

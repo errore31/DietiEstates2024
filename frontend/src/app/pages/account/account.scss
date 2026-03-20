@@ -6,7 +6,8 @@
 }
 
 .page-container {
-    max-width: 1100px; /* Un po' più largo per fare spazio alla sidebar */
+    max-width: 1100px;
+    /* Un po' più largo per fare spazio alla sidebar */
     margin: 40px auto;
     padding: 0 20px;
     font-family: 'Google Sans', sans-serif;
@@ -18,18 +19,22 @@
     border-radius: 12px;
     padding: 30px;
     margin-bottom: 25px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
 }
 
 .form-grid {
     display: grid;
-    gap: 25px 30px; 
+    gap: 25px 30px;
     width: 100%;
 
-    &.col-2 { grid-template-columns: repeat(2, 1fr); }
-    
-    .full-width { grid-column: 1 / -1; }
+    &.col-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
 
     @media (max-width: 768px) {
         grid-template-columns: 1fr !important;
@@ -41,7 +46,7 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    width: 100%; 
+    width: 100%;
     min-width: 0;
 
     label {
@@ -50,7 +55,9 @@
         font-size: 0.9rem;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
         box-sizing: border-box !important;
         width: 100%;
         padding: 12px;
@@ -60,7 +67,7 @@
         color: #333;
         background: #fafafa;
         transition: 0.2s;
-        
+
         &:focus {
             outline: none;
             border-color: var(--site-orange);
@@ -71,7 +78,7 @@
 }
 
 .btn-submit {
-    background: var(--site-orange); 
+    background: var(--site-orange);
     color: white;
     padding: 14px 28px;
     border-radius: 8px;
@@ -82,14 +89,19 @@
     transition: transform 0.1s;
     box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
 
-    &:hover { filter: brightness(1.1); }
-    &:active { transform: scale(0.98); }
+    &:hover {
+        filter: brightness(1.1);
+    }
+
+    &:active {
+        transform: scale(0.98);
+    }
 
     /* Modifica per il tasto nell'header */
     &.mini {
         padding: 10px 20px;
         font-size: 0.95rem;
-        margin: 0; 
+        margin: 0;
     }
 }
 
@@ -99,10 +111,10 @@
     display: grid;
     grid-template-columns: 300px 1fr;
     gap: 30px;
-    align-items: start; 
+    align-items: start;
 
     @media (max-width: 900px) {
-        grid-template-columns: 1fr; 
+        grid-template-columns: 1fr;
     }
 }
 
@@ -157,7 +169,9 @@
     margin: 0;
     text-align: left;
 
-    li { margin-bottom: 8px; }
+    li {
+        margin-bottom: 8px;
+    }
 
     a {
         display: flex;
@@ -170,7 +184,8 @@
         font-weight: 600;
         transition: all 0.2s;
 
-        &:hover, &.active {
+        &:hover,
+        &.active {
             background: var(--site-cream);
             color: var(--site-primary);
         }
@@ -181,7 +196,7 @@
             border-top: 1px solid #eee;
             padding-top: 20px;
             border-radius: 0;
-            
+
             &:hover {
                 background: transparent;
                 color: #c0392b;
@@ -191,7 +206,6 @@
     }
 }
 
-/* Modifiche specifiche per i form del profilo */
 .section-header-flex {
     display: flex;
     justify-content: space-between;
@@ -201,7 +215,7 @@
     margin-bottom: 25px;
 
     .card-title {
-        border-bottom: none; 
+        border-bottom: none;
         margin-bottom: 0;
         padding-bottom: 0;
         font-size: 1.4rem;
@@ -209,7 +223,6 @@
     }
 }
 
-/* Input disabilitato (per il ruolo) */
 .input-disabled {
     background: #f0f2f5 !important;
     color: #888 !important;

@@ -1,4 +1,3 @@
-/* Utilizzo la classe contenitore richiesta .page-container e lo sfondo --site-cream */
 .page-container {
   min-height: 100vh;
   background-color: var(--site-cream);
@@ -21,7 +20,6 @@
   text-align: center;
 }
 
-/* Stile dei bottoni Filtro (Tab) */
 .filter-tabs {
   display: flex;
   justify-content: center;
@@ -44,19 +42,17 @@
 
     &.active {
       background-color: var(--site-primary);
-      color: var(--site-cream); /* Testo diventa color panna/chiaro se attivo */
+      color: var(--site-cream);
     }
   }
 }
 
-/* Lista card Notifiche */
 .notifications-list {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
 
-/* Stile architetturale .form-card rivisitato per lista notifiche */
 .form-card.notification-card {
   display: flex;
   align-items: flex-start;
@@ -67,14 +63,12 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease;
 
-  /* Bordo laterale standard (blu scuro) per property */
   border-left: 5px solid var(--site-primary);
 
   &:hover {
     transform: translateY(-3px);
   }
 
-  /* Modifichiamo colore bordo laterale a livello visivo se promozionale */
   &.type-promo {
     border-left-color: var(--site-orange);
   }
@@ -100,7 +94,7 @@
       line-height: 1.5;
       font-size: 1rem;
     }
-    
+
     .date {
       font-size: 0.85rem;
       color: #888;

@@ -45,7 +45,6 @@ userRouter.put('/updateUser/:id', enforceAuthentication, validationUpdateUser, e
         const idUser = req.params.id;
         const user = await userController.updateUser(idUser, req);
 
-        // Se l'utente aggiornato è quello attualmente in sessione, aggiorniamo i dati della sessione
         if (req.session.userId === user.id) {
             req.session.username = user.username;
             req.session.name = user.name;
@@ -70,7 +69,6 @@ userRouter.put('/updateAgent/:id', enforceAuthentication, ensureIsAgencyAdmin, v
         const idUser = req.params.id;
         const user = await userController.updateUser(idUser, req);
 
-        // Se l'utente aggiornato è quello attualmente in sessione, aggiorniamo i dati della sessione
         if (req.session.userId === user.id) {
             req.session.username = user.username;
             req.session.name = user.name;

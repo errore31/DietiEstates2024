@@ -933,17 +933,17 @@ Di seguito sono riportati i codici colore principali che compongono l'identità 
 
 \begin{center}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=DeepNavy, colframe=black!10, height=3cm, title=\textcolor{white}{Deep Navy}, center title]
+        \begin{tcolorbox}[colback=DeepNavy, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Navy}, center title]
             \vfill \centering \color{white} \#173857 \\ \small (Primary)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=SteelBlue, colframe=black!10, height=3cm, title=\textcolor{white}{Steel Blue}, center title]
+        \begin{tcolorbox}[colback=SteelBlue, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Steel Blue}, center title]
             \vfill \centering \color{white} \#4D7396 \\ \small (Secondary)
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=DeepEarth, colframe=black!10, height=3cm, title=\textcolor{white}{Deep Earth}, center title]
+        \begin{tcolorbox}[colback=DeepEarth, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Deep Earth}, center title]
             \vfill \centering \color{white} \#573E17 \\ \small (Earth)
         \end{tcolorbox}
     \end{minipage}
@@ -951,7 +951,7 @@ Di seguito sono riportati i codici colore principali che compongono l'identità 
     \vspace{0.5cm}
 
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=SandGold, colframe=black!10, height=3cm, title=\textcolor{white}{Sand Gold}, center title]
+        \begin{tcolorbox}[colback=SandGold, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Sand Gold}, center title]
             \vfill \centering \color{white} \#AC9166 \\ \small (Gold)
         \end{tcolorbox}
     \end{minipage}
@@ -961,7 +961,7 @@ Di seguito sono riportati i codici colore principali che compongono l'identità 
         \end{tcolorbox}
     \end{minipage}
     \begin{minipage}{0.3\textwidth}
-        \begin{tcolorbox}[colback=AccentOrange, colframe=black!10, height=3cm, title=\textcolor{white}{Accent Color}, center title]
+        \begin{tcolorbox}[colback=AccentOrange, colframe=black!10, height=3cm, title=\textcolor{DeepEarth}{Accent Color}, center title]
             \vfill \centering \color{white} \#F39C12 \\ \small (Call to Action)
         \end{tcolorbox}
     \end{minipage}
@@ -974,6 +974,20 @@ Di seguito sono riportati i codici colore principali che compongono l'identità 
     \item \textbf{La Conversione (Accent Color):} L'arancione funge da trigger visivo. Essendo complementare ai toni blu, attira istantaneamente l'occhio sui pulsanti di azione e sui dati economici.
 \end{itemize}
 
+\subsubsection{Tipografia e Leggibilità}
+La scelta tipografica di DietiEstates è orientata alla massimizzazione della leggibilità e alla creazione di un'interfaccia che risulti familiare ma tecnologicamente avanzata. Il sistema utilizza una gerarchia basata su un set di font sans-serif:
+\begin{center}
+    \texttt{font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;}
+\end{center}
+
+\paragraph{Razionale della Scelta}
+L'utilizzo di \textbf{Google Sans} come font primario risponde alla necessità di un'estetica moderna e pulita. La sua geometria ottimizzata per il rendering digitale garantisce che i dettagli degli annunci rimangano nitidi su diverse densità di pixel. I font di fallback (\textit{Tahoma}, \textit{Verdana}) sono stati selezionati per la loro robustezza strutturale, assicurando che la gerarchia visiva rimanga intatta anche in assenza di connessione ai web-font (prevenendo fenomeni di \textit{Cumulative Layout Shift}).
+
+\paragraph{Gerarchia Visiva del Testo}
+\begin{itemize}
+    \item \textbf{Enfasi sui Dati:} Per i prezzi e le metrature è stato adottato un peso \texttt{800} (Extra Bold), permettendo all'utente di scansionare rapidamente i parametri economici della pagina.
+    \item \textbf{Corpo del Testo:} Per le descrizioni è stata scelta un'interlinea di \textbf{1.5}, garantendo che i blocchi di testo non risultino oppressivi e facilitando la lettura su dispositivi mobili.
+\end{itemize}
 \subsubsection{Applicazione Pratica: La Property Card}
 L'unione di questi principi trova la sua massima espressione nella \textbf{Card Immobiliare}, l'atomo informativo fondamentale della piattaforma. La card è stata progettata seguendo i principi del \textit{Minimalismo Informativo} per condensare i dati senza generare sovraccarico cognitivo.
 
@@ -1002,7 +1016,7 @@ Per rendere l'interfaccia reattiva, sono state implementate transizioni CSS che 
 Dal punto di vista della User Experience, è stata implementata una logica di \textit{fallback} per le immagini. Tramite il metodo \texttt{handleImageError} nel componente Angular, il sistema rileva eventuali link corrotti o assenze di foto, sostituendoli istantaneamente con un segnaposto (\texttt{housePlaceholder.jpg}). Questo garantisce che l'integrità visiva della pagina non venga mai compromessa da icone di errore "rotte".
 
 \begin{tcolorbox}[colback=AccentOrange!10, colframe=AccentOrange, title=Sintesi del Design]
-L'equilibrio tra la freddezza autorevole del \textit{Deep Navy} e il calore organico dei toni \textit{Cream} e \textit{Earth} crea un'immagine di marca premium. L'integrazione dell'arancione come elemento di contrasto puro assicura che il portale non sia solo una vetrina elegante, ma un'interfaccia orientata alla conversione.
+    L'equilibrio tra la freddezza autorevole del \textit{Deep Navy} e il calore organico dei toni \textit{Cream} e \textit{Earth} crea un'immagine di marca premium. L'integrazione dell'arancione come elemento di contrasto puro assicura che il portale non sia solo una vetrina elegante, ma un'interfaccia orientata alla conversione.
 \end{tcolorbox}
 \newpage
 
@@ -1242,7 +1256,7 @@ Di seguito sono descritte le tecniche di testing adottate e le motivazioni alla 
 
 \begin{itemize}
     \item \textbf{Testing Black Box (Input Validation)}: Applicato ai middleware di validazione. In questo scenario, le componenti vengono trattate come "scatole nere", verificando esclusivamente che a fronte di un input malformato (es. email non valida o password debole) il sistema risponda con i codici di errore e i messaggi previsti dal contratto dell'API.
-    
+
     \item \textbf{Testing White Box (Logic \& Business Rules)}: Utilizzato per i metodi core dei controller. Grazie alla visibilità del codice sorgente, i test sono stati progettati per sollecitare i diversi rami decisionali (\textit{branch coverage}) e i flussi di dati (\textit{data flow}), come nel caso del matching delle notifiche, assicurando che l'algoritmo processi correttamente le informazioni in memoria.
 
     \item \textbf{Copertura R-WECT} (\textit{Robust Weak Equivalence Class Testing}): Si è scelto questo approccio di partizione per bilanciare efficacia e manutenibilità.
@@ -1256,7 +1270,7 @@ Di seguito sono descritte le tecniche di testing adottate e le motivazioni alla 
 
 \newpage
 \subsection{Metodi di test}
-In questa sezione vengono illustrati i casi di test relativi a quattro componenti core del sistema, selezionati per l'articolazione della loro logica di business e per la criticità rivestita nel mantenimento dell'integrità dei dati. Per ciascuna componente, viene presentato un caso di test rappresentativo, completo di descrizione, strategia adottata e classi di equivalenza identificate. 
+In questa sezione vengono illustrati i casi di test relativi a quattro componenti core del sistema, selezionati per l'articolazione della loro logica di business e per la criticità rivestita nel mantenimento dell'integrità dei dati. Per ciascuna componente, viene presentato un caso di test rappresentativo, completo di descrizione, strategia adottata e classi di equivalenza identificate.
 
 \subsubsection{TEST 1: Registrazione utente}
 
@@ -1312,16 +1326,16 @@ Strategia \textbf{Black Box} con approccio \textbf{R-WECT} (Revised Weak Robust 
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}                 & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{email}                  & Formato email corretto (es. user@test.it)           & Valida                         & CE1                         \\ \hline
-        \textit{email}                  & Formato mancante di @ o dominio (es. user@)         & Invalida                       & CE2                         \\ \hline
+        \textit{email}                  & Formato email corretto (es. user@test.it)                   & Valida                         & CE1                         \\ \hline
+        \textit{email}                  & Formato mancante di @ o dominio (es. user@)                 & Invalida                       & CE2                         \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{password}               & Soddisfa i criteri di robustezza ($\ge$8 char + mix) & Valida                         & CE3                         \\ \hline
-        \textit{password}               & Sotto soglia o priva di caratteri speciali          & Invalida                       & CE4                         \\ \hline
+        \textit{password}               & Soddisfa i criteri di robustezza ($\ge$8 char + mix)        & Valida                         & CE3                         \\ \hline
+        \textit{password}               & Sotto soglia o priva di caratteri speciali                  & Invalida                       & CE4                         \\ \hline
         \rowcolor[gray]{0.95}
         \textit{role}                   & Valore presente nel set \{admin, agencyAdmin, agent, user\} & Valida                         & CE5                         \\ \hline
-        \textit{role}                   & Valore non censito (es. hacker\_role)               & Invalida                       & CE6                         \\ \hline
+        \textit{role}                   & Valore non censito (es. hacker\_role)                       & Invalida                       & CE6                         \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1332,11 +1346,11 @@ Strategia \textbf{Black Box} con approccio \textbf{R-WECT} (Revised Weak Robust 
     \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)}   & \textbf{\color{white}Messaggio Atteso} & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_01\_A}            & CE2 + CE3 + CE5               & ("mario.rossi@", "Pass123!", "user")             & Inserisci una email valida.           & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_01\_B}            & CE1 + CE4 + CE5               & ("test@test.it", "123", "user")                  & La password deve contenere...         & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_01\_C}            & CE1 + CE3 + CE6               & ("test@test.it", "Pass123!", "hacker\_role")     & Ruolo non valido.                     & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_01\_D}            & CE1 + CE3 + CE5               & ("mario@gmail.com", "Pass123!", "user")          & [Nessun Errore]                       & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (email, psw, role)} & \textbf{\color{white}Messaggio Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_01\_A}            & CE2 + CE3 + CE5               & ("mario.rossi@", "Pass123!", "user")           & Inserisci una email valida.            & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_B}            & CE1 + CE4 + CE5               & ("test@test.it", "123", "user")                & La password deve contenere...          & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_C}            & CE1 + CE3 + CE6               & ("test@test.it", "Pass123!", "hacker\_role")   & Ruolo non valido.                      & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_01\_D}            & CE1 + CE3 + CE5               & ("mario@gmail.com", "Pass123!", "user")        & [Nessun Errore]                        & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1395,16 +1409,16 @@ Strategia \textbf{Black Box} con approccio \textbf{EP} e \textbf{Boundary Value 
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza} & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{price}                  & Numero positivo ($> 0$)                             & Valida                         & CE7                         \\ \hline
-        \textit{price}                  & Numero negativo o zero ($\le 0$)                    & Invalida                       & CE8                         \\ \hline
+        \textit{price}                  & Numero positivo ($> 0$)                     & Valida                         & CE7                         \\ \hline
+        \textit{price}                  & Numero negativo o zero ($\le 0$)            & Invalida                       & CE8                         \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{description}            & Lunghezza compresa tra 10 e 3000 caratteri          & Valida                         & CE9                         \\ \hline
-        \textit{description}            & Lunghezza inferiore a 10 o superiore a 3000         & Invalida                       & CE10                        \\ \hline
+        \textit{description}            & Lunghezza compresa tra 10 e 3000 caratteri  & Valida                         & CE9                         \\ \hline
+        \textit{description}            & Lunghezza inferiore a 10 o superiore a 3000 & Invalida                       & CE10                        \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{coordinates}            & Latitudine e Longitudine presenti (float)            & Valida                         & CE11                        \\ \hline
-        \textit{coordinates}            & Uno o entrambi i valori mancanti                    & Invalida                       & CE12                        \\ \hline
+        \textit{coordinates}            & Latitudine e Longitudine presenti (float)   & Valida                         & CE11                        \\ \hline
+        \textit{coordinates}            & Uno o entrambi i valori mancanti            & Invalida                       & CE12                        \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1419,7 +1433,7 @@ Strategia \textbf{Black Box} con approccio \textbf{EP} e \textbf{Boundary Value 
         \textbf{TC\_02\_A}            & CE8 + CE9 + CE11              & (-500, "Bellissima casa...", [40, 14])            & Prezzo deve essere positivo...         & {\color{codegreen}\textbf{PASS}} \\ \hline
         \textbf{TC\_02\_B}            & CE7 + CE10 + CE11             & (150000, "Corta", [40, 14])                       & Descrizione tra 10 e 3000...           & {\color{codegreen}\textbf{PASS}} \\ \hline
         \textbf{TC\_02\_C}            & CE7 + CE9 + CE12              & (150000, "Bellissima casa...", [null, null])      & Latitudine/Longitudine inserita        & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_02\_D}            & CE7 + CE9 + CE11              & (200000, "Appartamento spazioso", [40.8, 14.2])   & [Nessun Errore]                       & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_02\_D}            & CE7 + CE9 + CE11              & (200000, "Appartamento spazioso", [40.8, 14.2])   & [Nessun Errore]                        & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1475,13 +1489,13 @@ Strategia \textbf{White Box} basata su \textbf{Data Flow Testing}. Il test verif
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}    & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{Match}                  & Parola chiave presente in Indirizzo o Titolo        & Valida                         & CE13                        \\ \hline
-        \textit{Match}                  & Parola chiave assente                               & Invalida                       & CE14                        \\ \hline
+        \textit{Match}                  & Parola chiave presente in Indirizzo o Titolo   & Valida                         & CE13                        \\ \hline
+        \textit{Match}                  & Parola chiave assente                          & Invalida                       & CE14                        \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{Cronologia}             & Ricerca rientrante nelle ultime 3 dell'utente       & Valida                         & CE15                        \\ \hline
-        \textit{Cronologia}             & Ricerca oltre la terza posizione (più vecchia)      & Invalida                       & CE16                        \\ \hline
+        \textit{Cronologia}             & Ricerca rientrante nelle ultime 3 dell'utente  & Valida                         & CE15                        \\ \hline
+        \textit{Cronologia}             & Ricerca oltre la terza posizione (più vecchia) & Invalida                       & CE16                        \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1492,11 +1506,11 @@ Strategia \textbf{White Box} basata su \textbf{Data Flow Testing}. Il test verif
     \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Scenario di Input}           & \textbf{\color{white}Risultato Atteso} & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_03\_A}            & CE13 + CE15                   & Match su indirizzo ("Napoli")                     & Utente 1 notificato                   & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_03\_B}            & CE13 + CE15                   & Match su titolo ("Roma")                          & Utente 2 notificato                   & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_03\_C}            & CE13 + CE16                   & Match su 4° ricerca ("Milano")                    & Utente 1 NON notificato               & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_03\_D}            & CE14                          & Nessuna corrispondenza                            & Array vuoto []                        & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Scenario di Input} & \textbf{\color{white}Risultato Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_03\_A}            & CE13 + CE15                   & Match su indirizzo ("Napoli")           & Utente 1 notificato                    & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_B}            & CE13 + CE15                   & Match su titolo ("Roma")                & Utente 2 notificato                    & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_C}            & CE13 + CE16                   & Match su 4° ricerca ("Milano")          & Utente 1 NON notificato                & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_03\_D}            & CE14                          & Nessuna corrispondenza                  & Array vuoto []                         & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1553,13 +1567,13 @@ Strategia \textbf{White Box} focalizzata sulla \textbf{Logic Mapping}. Poiché l
     \begin{tabularx}{\textwidth}{|l|X|c|c|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}         & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
+        \textbf{\color{white}Parametro} & \textbf{\color{white}Classe di Equivalenza}    & \textbf{\color{white}Validità} & \textbf{\color{white}ID CE} \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{maxPrice}               & Stringa numerica convertibile in float              & Valida                         & CE17                        \\ \hline
-        \textit{hasElevator}            & Stringa "true" o "false"                            & Valida                         & CE18                        \\ \hline
+        \textit{maxPrice}               & Stringa numerica convertibile in float         & Valida                         & CE17                        \\ \hline
+        \textit{hasElevator}            & Stringa "true" o "false"                       & Valida                         & CE18                        \\ \hline
         \rowcolor[gray]{0.95}
-        \textit{text}                   & Stringa contenente virgole (es. "Città, Prov")      & Valida                         & CE19                        \\ \hline
-        \textit{queryParams}            & Oggetto vuoto \{\}                                  & Valida                         & CE20                        \\ \hline
+        \textit{text}                   & Stringa contenente virgole (es. "Città, Prov") & Valida                         & CE19                        \\ \hline
+        \textit{queryParams}            & Oggetto vuoto \{\}                             & Valida                         & CE20                        \\ \hline
     \end{tabularx}
 \end{table}
 
@@ -1570,11 +1584,11 @@ Strategia \textbf{White Box} focalizzata sulla \textbf{Logic Mapping}. Poiché l
     \begin{tabularx}{\textwidth}{|l|l|X|l|l|}
         \hline
         \rowcolor{DarkBlue}
-        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (query object)}        & \textbf{\color{white}Output Atteso}    & \textbf{\color{white}Esito}      \\ \hline
-        \textbf{TC\_04\_A}            & CE17                          & \{ maxPrice: "200000" \}                          & Op.lte: 200000.0                       & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_04\_B}            & CE18                          & \{ hasElevator: "true" \}                         & features.hasElevator: true             & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_04\_C}            & CE19                          & \{ text: "Napoli, NA" \}                          & address: \%Napoli\%                    & {\color{codegreen}\textbf{PASS}} \\ \hline
-        \textbf{TC\_04\_D}            & CE20                          & \{ \}                                             & \{ propertyWhere: \{\} \}              & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{\color{white}ID Test} & \textbf{\color{white}CE Rif.} & \textbf{\color{white}Input (query object)} & \textbf{\color{white}Output Atteso} & \textbf{\color{white}Esito}      \\ \hline
+        \textbf{TC\_04\_A}            & CE17                          & \{ maxPrice: "200000" \}                   & Op.lte: 200000.0                    & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_B}            & CE18                          & \{ hasElevator: "true" \}                  & features.hasElevator: true          & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_C}            & CE19                          & \{ text: "Napoli, NA" \}                   & address: \%Napoli\%                 & {\color{codegreen}\textbf{PASS}} \\ \hline
+        \textbf{TC\_04\_D}            & CE20                          & \{ \}                                      & \{ propertyWhere: \{\} \}           & {\color{codegreen}\textbf{PASS}} \\ \hline
     \end{tabularx}
 \end{table}
 \newpage

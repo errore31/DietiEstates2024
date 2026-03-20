@@ -1,8 +1,4 @@
-/**
- * This middleware controls the input for Login and Signup
- */
-
-import { body} from "express-validator";
+import { body } from "express-validator";
 
 export const validationSignup = [
     body("username").trim().notEmpty().withMessage("L'username è obbligatorio.").escape(),
@@ -13,7 +9,7 @@ export const validationSignup = [
     body("role").trim().optional().notEmpty().withMessage("Il ruolo è obbligatorio.").isIn(['admin', 'agencyAdmin', 'agent', 'user']).withMessage("Ruolo non valido.")
 ]
 
-export const validationLogin =[
+export const validationLogin = [
     body("username").trim().notEmpty().withMessage("L'username è obbligatorio.").escape(),
     body("password").notEmpty().withMessage("La password è obbligatoria.")
 ]

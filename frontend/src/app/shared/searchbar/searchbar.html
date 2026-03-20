@@ -10,10 +10,8 @@
                 [(ngModel)]="inputText" autocomplete="off" placeholder="Inserisci un luogo (es. Milano, Roma...)" />
         </div>
 
-        <!-- Pannello dei suggerimenti autocompletamento custom -->
         <div class="suggestions-panel" *ngIf="isInputFocused">
 
-            <!-- Mostra Ricerche Recenti se input è vuoto e l'utente ha uno storico -->
             <div class="recent-searches" *ngIf="!inputText && recentSearches.length > 0">
                 <div class="suggestion-header">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -44,12 +42,6 @@
                 </div>
             </div>
 
-            <!-- Mostra un messaggio di fallback se input è vuoto e NON ci sono ricerche recenti
-      <div class="recent-searches-empty" *ngIf="!inputText && recentSearches.length === 0">
-        Inizia a digitare per cercare una località.
-      </div> -->
-
-            <!-- Mostra Suggerimenti se ci sono elementi -->
             <div class="location-suggestions" *ngIf="inputText && locationSuggestions.length > 0">
                 <div class="suggestion-item" *ngFor="let suggestion of locationSuggestions"
                     (click)="selectSuggestion(suggestion)">
@@ -108,7 +100,6 @@
     <div class="filters-panel" *ngIf="isFiltersOpen">
         <div class="filters-grid">
 
-            <!-- Prezzo Massimo -->
             <div class="filter-section">
                 <div class="section-title text-dark">
                     <strong>€ Prezzo Massimo: {{maxPrice | number:'1.0-0'}}€</strong>
@@ -124,7 +115,6 @@
                 </div>
             </div>
 
-            <!-- Caratteristiche Spazio -->
             <div class="filter-section">
                 <div class="section-title text-dark">
                     <svg style="margin-right: 5px; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +144,6 @@
                 </div>
             </div>
 
-            <!-- Classe Energetica -->
             <div class="filter-section">
                 <div class="section-title text-dark">
                     <svg style="margin-right: 5px; vertical-align: middle;" xmlns="http://www.w3.org/2000/svg"
@@ -187,7 +176,6 @@
 
         </div>
 
-        <!-- Footer -->
         <div class="filters-footer">
             <a href="javascript:void(0)" class="reset-link" (click)="resetFilters()">Resetta filtri</a>
             <div class="action-buttons">

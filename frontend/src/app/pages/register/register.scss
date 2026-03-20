@@ -3,40 +3,63 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 81vh; 
-  background-color: var(--site-cream); 
+  min-height: 81vh;
+  background-color: var(--site-cream);
   font-family: 'Google Sans', sans-serif;
-  padding: 40px 20px; // Aggiunto un po' di padding per chi usa schermi piccoli
+  padding: 40px 20px;
 }
 
 .register-card {
-  background: white; 
+  background: white;
   padding: 30px;
   border-radius: 25px;
   width: 100%;
-  max-width: 480px; // Leggermente più larga del login per ospitare la griglia
-  box-shadow: 0 10px 30px rgba(24, 47, 83, 0.1); 
+  max-width: 480px;
+  box-shadow: 0 10px 30px rgba(24, 47, 83, 0.1);
   text-align: center;
 }
 
 .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-.logo-dieti { color: var(--site-primary); font-weight: bold; font-size: 1.8rem; }
-.logo-estate { color: var(--site-orange); font-weight: bold; font-size: 1.8rem; }
+.logo-dieti {
+  color: var(--site-primary);
+  font-weight: bold;
+  font-size: 1.8rem;
+}
 
-h2 { color: var(--site-dark); margin-top: 15px; font-weight: bold; }
-.subtitle { color: #888; font-size: 0.9rem; margin-bottom: 30px; }
+.logo-estate {
+  color: var(--site-orange);
+  font-weight: bold;
+  font-size: 1.8rem;
+}
 
-/* Form Styling */
-.form-group { text-align: left; margin-bottom: 20px; }
+h2 {
+  color: var(--site-dark);
+  margin-top: 15px;
+  font-weight: bold;
+}
 
-label { 
-  display: block; font-weight: 600; color: var(--site-dark); 
-  margin-bottom: 6px; font-size: 0.85rem; 
+.subtitle {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  color: var(--site-dark);
+  margin-bottom: 6px;
+  font-size: 0.85rem;
 }
 
 input {
@@ -48,54 +71,100 @@ input {
   font-family: inherit;
   outline: none;
   transition: border-color 0.2s;
-  color : var(--site-dark);
+  color: var(--site-dark);
   box-sizing: border-box;
 
-  &:focus { border-color: var(--site-orange); }
-}
-
-.hint-text {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 5px;
-    display: block;
-}
-
-/* Bottone Principale */
-.btn-primary {
-  width: 100%; padding: 15px; background-color: var(--site-orange);
-  color: white; border: none; border-radius: 12px; font-weight: 700;
-  font-size: 1rem; cursor: pointer; transition: transform 0.2s, filter 0.2s;
-
-  &:hover { filter: brightness(1.2); transform: translateY(-1px); }
-}
-
-/* Divider Social */
-.divider {
-  margin: 25px 0; position: relative; border-bottom: 1px solid #eee;
-  
-  span {
-    position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-    background: white; padding: 0 15px; color: #8d8b8b; font-size: 0.75rem; white-space: nowrap;
+  &:focus {
+    border-color: var(--site-orange);
   }
 }
 
-/* Social Buttons */
+.hint-text {
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 5px;
+  display: block;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 15px;
+  background-color: var(--site-orange);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s;
+
+  &:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+  }
+}
+
+.divider {
+  margin: 25px 0;
+  position: relative;
+  border-bottom: 1px solid #eee;
+
+  span {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 0 15px;
+    color: #8d8b8b;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+}
+
 .btn-social {
-  width: 100%; padding: 12px; border: 1.5px solid #eee; background: white;
-  border-radius: 12px; margin-bottom: 10px; font-weight: 600; color: #555;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  gap: 10px; transition: background 0.2s;
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid #eee;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s;
 
-  &:hover { background-color: #f9f9f9; }
-  .g-icon { color: #DB4437; }
+  &:hover {
+    background-color: #f9f9f9;
+  }
+
+  .g-icon {
+    color: #DB4437;
+  }
 }
 
-.footer-text { 
-  margin-top: 25px; font-size: 0.9rem; color: #777; 
-  a { color: var(--site-orange); font-weight: 700; text-decoration: none; cursor: pointer;}
+.footer-text {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #777;
+
+  a {
+    color: var(--site-orange);
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
 
-.back-link { 
-  display: block; margin-top: 20px; color: #8d8b8b; text-decoration: none; font-size: 0.8rem; cursor: pointer;
+.back-link {
+  display: block;
+  margin-top: 20px;
+  color: #8d8b8b;
+  text-decoration: none;
+  font-size: 0.8rem;
+  cursor: pointer;
 }

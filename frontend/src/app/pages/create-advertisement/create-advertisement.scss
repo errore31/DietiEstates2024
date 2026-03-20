@@ -7,10 +7,9 @@ label {
 }
 
 
-/* RESET FONDAMENTALE PER QUESTO COMPONENTE */
 * {
     box-sizing: border-box;
-    /* Include padding e bordi nel calcolo della larghezza */
+
 }
 
 .page-container {
@@ -20,7 +19,7 @@ label {
     font-family: 'Google Sans', sans-serif;
 }
 
-/* --- HEADER --- */
+
 .page-header {
     margin-bottom: 30px;
 
@@ -34,11 +33,11 @@ label {
 
     .page-subtitle {
         color: var(--site-dark);
-        /* Assicurati che questa var esista, altrimenti usa #333 */
+
     }
 }
 
-/* --- CARDS & STRUTTURA FORM --- */
+
 .form-card {
     background: white;
     border-radius: 12px;
@@ -57,10 +56,10 @@ label {
     }
 }
 
-/* --- GRIGLIA RESPONSIVE --- */
+
 .form-grid {
     display: grid;
-    /* Ho aumentato il gap orizzontale a 30px per sicurezza */
+
     gap: 25px 30px;
     width: 100%;
 
@@ -69,7 +68,7 @@ label {
     }
 
     &.col-4 {
-        /* minmax(150px...) assicura che se non c'è spazio vadano a capo */
+
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     }
 
@@ -77,7 +76,7 @@ label {
         grid-column: 1 / -1;
     }
 
-    /* Mobile: tutto a 1 colonna */
+
     @media (max-width: 768px) {
         grid-template-columns: 1fr !important;
         gap: 20px;
@@ -89,9 +88,9 @@ label {
     flex-direction: column;
     gap: 8px;
     width: 100%;
-    /* Occupa tutto lo spazio della cella griglia */
+
     min-width: 0;
-    /* TRUCCO CSS: evita overflow nei flex/grid items */
+
 
     &.full-width {
         grid-column: 1 / -1;
@@ -103,15 +102,14 @@ label {
         font-size: 0.9rem;
     }
 
-    /* Stile unificato Input/Select/Textarea */
+
     input,
     select,
     textarea {
         box-sizing: border-box !important;
-        /* FORZIAMO IL CALCOLO CORRETTO */
         width: 100%;
         max-width: 100%;
-        /* Impedisce di uscire dal contenitore */
+
         padding: 12px;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -129,7 +127,7 @@ label {
     }
 }
 
-/* --- ELEMENTI SPECIALI --- */
+
 .map-placeholder {
     height: 200px;
     background: var(--site-cream);
@@ -153,7 +151,7 @@ label {
     margin: 25px 0;
 }
 
-/* Checkbox a "Pillola" */
+
 .features-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -178,7 +176,7 @@ label {
         background: var(--site-cream);
     }
 
-    /* Supporto CSS moderno per selezionare il genitore */
+
     &:has(input:checked) {
         background: var(--site-orange);
         color: white;
@@ -186,7 +184,7 @@ label {
     }
 }
 
-/* Upload Area */
+
 .upload-area {
     border: 2px dashed #ccc;
     border-radius: 12px;
@@ -196,7 +194,7 @@ label {
     cursor: pointer;
     transition: 0.3s;
     box-sizing: border-box;
-    /* Aggiunto anche qui */
+
 
     &:hover {
         border-color: var(--site-orange);
@@ -209,7 +207,7 @@ label {
     }
 }
 
-/* --- FOOTER AZIONI --- */
+
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -234,7 +232,7 @@ label {
     .btn-cancel {
         background: var(--site-primary);
         color: var(--site-cream);
-        /* Modificato per contrasto migliore */
+
         border: 1px solid transparent;
 
         &:hover {
@@ -255,7 +253,7 @@ label {
 }
 
 
-/*Box immagini selezionate*/
+
 .selected-images {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -276,7 +274,7 @@ label {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        /* Ritaglia l'immagine per riempire il quadrato */
+
     }
 
     .btn-remove-overlay {
@@ -284,7 +282,6 @@ label {
         top: 5px;
         right: 5px;
         background: rgba(231, 76, 60, 0.9);
-        /* Rosso semi-trasparente */
         color: white;
         border: none;
         border-radius: 50%;

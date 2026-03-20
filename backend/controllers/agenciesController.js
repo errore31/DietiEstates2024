@@ -1,14 +1,10 @@
-import { Agencies, Properties, Users, Images, PropertiesFeatures} from "../models/database.js";
+import { Agencies, Properties, Users, Images, PropertiesFeatures } from "../models/database.js";
 
 export class agenciesController {
-
-
     /**
     * @param {http.IncomingMessage} req 
     * @param {http.ServerResponse} res 
     **/
-
-
     static async createAgency(req, res) {
 
         return Agencies.create({
@@ -52,13 +48,12 @@ export class agenciesController {
     static async getAgencyById(idAgency) {
         try {
             const agency = await Agencies.findByPk(idAgency, {
-               include: [
-                    { model: Users } //recuperiamo gli utenti di una agenzia
+                include: [
+                    { model: Users }
                 ],
             });
             return agency;
         } catch (error) {
-            console.error("Errore recupero agenzia:", error);
             throw error;
         }
     }

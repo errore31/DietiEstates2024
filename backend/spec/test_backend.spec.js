@@ -1,13 +1,10 @@
 import { validationResult } from 'express-validator';
 
-// Import validazioni
-import { validationSignup } from '../middleware/validation/validationAuth.js'; 
+import { validationSignup } from '../middleware/validation/validationAuth.js';
 import { validationCreateProperties } from '../middleware/validation/validationProperties.js';
 
-// Import controller
 import { propertiesController } from '../controllers/propertiesController.js';
 
-// Helper per eseguire i middleware di express-validator nei test
 async function runValidationChain(req, validationChain) {
     for (const validation of validationChain) {
         await validation.run(req);
@@ -20,7 +17,7 @@ describe("Suite Completa di Unit Test - DietiEstates2024", () => {
     // 1. VALIDAZIONE REGISTRAZIONE (Scenario Multiplo)
     // ============================================================
     describe("Funzionalità: Validazione Signup (validationSignup)", () => {
-        
+
         it("TC_01_A (Negativo) - Dovrebbe fallire con email malformata", async () => {
             const req = { body: { email: "mario.rossi@", password: "Password123!", username: "mario", name: "M", surname: "R", role: "user" } };
             await runValidationChain(req, validationSignup);
@@ -81,7 +78,7 @@ describe("Suite Completa di Unit Test - DietiEstates2024", () => {
             const req = { body: { title: "Casa in centro", description: "Bellissimo appartamento spazioso", price: 200000, address: "Via Roma, Napoli", type: "Vendita", latitude: 40.85, longitude: 14.26 } };
             await runValidationChain(req, validationCreateProperties);
             const errors = validationResult(req);
-            expect(errors.isEmpty()).toBeTrue(); // Nessun errore!
+            expect(errors.isEmpty()).toBeTrue();
         });
     });
 
@@ -94,7 +91,7 @@ describe("Suite Completa di Unit Test - DietiEstates2024", () => {
             { userId: 2, criteria: { text: "Roma" } },
             { userId: 1, criteria: { text: "Caserta" } },
             { userId: 1, criteria: { text: "Salerno" } },
-            { userId: 1, criteria: { text: "Milano" } } // Questa è la 4a per l'utente 1 (sarà ignorata)
+            { userId: 1, criteria: { text: "Milano" } }
         ];
 
         it("TC_03_A (Positivo) - Dovrebbe notificare l'utente se l'indirizzo contiene la keyword", () => {
@@ -122,12 +119,12 @@ describe("Suite Completa di Unit Test - DietiEstates2024", () => {
     // 4. COSTRUZIONE QUERY (Scenario Multiplo)
     // ============================================================
     describe("Funzionalità: Costruzione Query Avanzata (buildAdvancedSearchQuery)", () => {
-        
+
         it("TC_04_A (Positivo) - Dovrebbe gestire correttamente il filtro del prezzo massimo", () => {
             const res = propertiesController.buildAdvancedSearchQuery({ maxPrice: "200000" });
             const lte = Object.getOwnPropertySymbols(res.propertyWhere.price)[0];
             expect(res.propertyWhere.price[lte]).toBe(200000);
-            expect(res.featuresWhere).toEqual({}); // Nessuna feature richiesta
+            expect(res.featuresWhere).toEqual({});
         });
 
         it("TC_04_B (Positivo) - Dovrebbe gestire filtri multipli (stanze e ascensore)", () => {

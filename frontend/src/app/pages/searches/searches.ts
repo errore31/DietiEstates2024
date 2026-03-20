@@ -31,12 +31,17 @@ export class Searches implements OnInit, AfterViewInit {
   properties: Property[] = [];
 
   ngOnInit(): void {
-    // Reagisce ai cambiamenti di rotta e parametri di ricerca (URL come fonte di verità)
     combineLatest([
       this.activateRoute.params,
       this.activateRoute.queryParams
     ]).subscribe(([params, queryParams]) => {
       this.searchText = params['text'] || '';
+
+      const bboxParams: any = {};
+      if (queryParams['bboxLon1']) bboxParams.bboxLon1 = queryParams['bboxLon1'];
+      if (queryParams['bboxLat1']) bboxParams.bboxLat1 = queryParams['bboxLat1'];
+      if (queryParams['bboxLon2']) bboxParams.bboxLon2 = queryParams['bboxLon2'];
+      if (queryParams['bboxLat2']) bboxParams.bboxLat2 = queryParams['bboxLat2'];
 
       const filters: any = {
         text: this.searchText,
@@ -46,7 +51,8 @@ export class Searches implements OnInit, AfterViewInit {
         area: queryParams['area'] ? Number(queryParams['area']) : null,
         floor: queryParams['floor'] ? Number(queryParams['floor']) : null,
         hasElevator: queryParams['hasElevator'] === 'true' ? true : null,
-        energyClass: queryParams['energyClass'] || null
+        energyClass: queryParams['energyClass'] || null,
+        ...bboxParams
       };
 
       const cleanFilters: any = {};
@@ -56,28 +62,26 @@ export class Searches implements OnInit, AfterViewInit {
         }
       }
 
-      // Se ci sono filtri oltre al testo, usiamo la ricerca avanzata
-      if (Object.keys(cleanFilters).length > 1 || queryParams['maxPrice']) {
+      const hasBbox = Object.keys(bboxParams).length > 0;
+      const hasAdvancedFilters = Object.keys(cleanFilters).length > 1 || queryParams['maxPrice'];
+
+      if (hasAdvancedFilters || hasBbox) {
         this.propertyService.getPropertiesByAdvancedSearch(cleanFilters).subscribe({
           next: (data) => {
             this.properties = data;
-            console.log('Risultati applicazione filtri da URL:', this.properties);
             this.saveSearch(this.searchText, cleanFilters);
           },
           error: (err) => {
-            console.error('Errore durante i filtri:', err);
             this.properties = [];
           }
         });
       } else {
-        // Altrimenti ricerca base
         this.loadProperties(this.searchText);
       }
     });
   }
 
   ngAfterViewInit() {
-    // Sincronizza la UI della Searchbar con i parametri dell'URL
     combineLatest([
       this.activateRoute.params,
       this.activateRoute.queryParams
@@ -110,11 +114,9 @@ export class Searches implements OnInit, AfterViewInit {
     this.propertyService.getPropertiesBySearch(text).subscribe({
       next: (data) => {
         this.properties = data;
-        console.log('Proprietà trovate per "' + text + '":', this.properties);
         this.saveSearch(text);
       },
       error: (err) => {
-        console.error('Errore nel caricamento:', err);
         this.properties = [];
       }
     });

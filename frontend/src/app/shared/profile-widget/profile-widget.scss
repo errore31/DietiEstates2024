@@ -25,7 +25,6 @@ span {
     align-items: center;
 }
 
-//serve per modficare lo stile principale applicato da Angular/Material
 ::ng-deep .mat-mdc-menu-panel {
     background-color: var(--site-primary) !important;
     min-width: 150px !important;
@@ -44,7 +43,6 @@ button[mat-raised-button] {
     color: var(--site-orange) !important;
     font-family: 'Google Sans', Tahoma, Geneva, Verdana, sans-serif;
 
-    // Forza il colore anche sugli elementi interni (come lo span generato da Angular Material)
     ::ng-deep .mdc-button__label {
         color: var(--site-orange) !important;
     }
