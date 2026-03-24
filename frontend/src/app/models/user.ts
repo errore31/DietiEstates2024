@@ -7,4 +7,6 @@ export interface User {
   password: string;
   role: string;
   agencyId?: number;
+  receivePromos?: boolean;
+  receiveProperties?: boolean;
 }

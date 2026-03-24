@@ -56,6 +56,18 @@
                     <input type="email" name="email" [(ngModel)]="editUser.email" placeholder="La tua email">
                 </div>
 
+                <ng-container *ngIf="currentUser?.role === 'user'">
+                    <div class="form-group" style="flex-direction: row; align-items: center; justify-content: space-between;">
+                        <label style="margin-bottom: 0;">Ricevi Notifiche Promozionali</label>
+                        <input type="checkbox" name="receivePromos" [(ngModel)]="editUser.receivePromos" style="width: 20px; height: 20px; cursor: pointer; margin: 0; box-shadow: none;">
+                    </div>
+
+                    <div class="form-group" style="flex-direction: row; align-items: center; justify-content: space-between;">
+                        <label style="margin-bottom: 0;">Ricevi Notifiche Nuovi Immobili</label>
+                        <input type="checkbox" name="receiveProperties" [(ngModel)]="editUser.receiveProperties" style="width: 20px; height: 20px; cursor: pointer; margin: 0; box-shadow: none;">
+                    </div>
+                </ng-container>
+
                 <button class="btn-submit mini" (click)="enablePassword()">Cambia Password</button>
 
                 <div class="form-group" *ngIf="this.formPassword == true">

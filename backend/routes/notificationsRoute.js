@@ -12,6 +12,9 @@ notificationsRouter.post('/', async (req, res, next) => {
 
     try {
         const notification = await notificationsController.createNotification(req, res);
+        if (!notification) {
+            return res.status(200).json({ message: "Notifica ignorata per preferenze utente" });
+        }
         res.status(201).json({
             message: "Notifica inviata con successo",
             notification: { id: notification.id, type: notification.type, message: notification.message, createdAt: notification.createdAt, isRead: notification.isRead, userId: notification.userId }

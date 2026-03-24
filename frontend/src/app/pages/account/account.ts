@@ -26,7 +26,9 @@ export class Account implements OnInit {
     username: '',
     email: '',
     oldPassword: '',
-    newPassword: ''
+    newPassword: '',
+    receivePromos: true,
+    receiveProperties: true
   };
 
   constructor(private authService: AuthService, private userService: UserService,
@@ -43,6 +45,8 @@ export class Account implements OnInit {
             surname: user.surname,
             username: user.username,
             email: user.email,
+            receivePromos: user.receivePromos !== false,
+            receiveProperties: user.receiveProperties !== false,
           };
         }
       });
@@ -78,6 +82,8 @@ export class Account implements OnInit {
           surname: this.editUser.surname,
           username: this.editUser.username,
           email: this.editUser.email,
+          receivePromos: this.editUser.receivePromos,
+          receiveProperties: this.editUser.receiveProperties,
         };
       },
       error: (error) => {

@@ -1,4 +1,5 @@
-import { Notifications } from "../models/database.js";
+import { Notifications, Users } from "../models/database.js";
+import { Op } from "sequelize";
 
 export class notificationsController {
     /**
@@ -6,6 +7,17 @@ export class notificationsController {
      * @param {http.ServerResponse} res 
      */
     static async createNotification(req, res) {
+        const user = await Users.findByPk(req.body.userId);
+
+        if (user) {
+            if (req.body.type === 'promo' && user.receivePromos === false) {
+                return null;
+            }
+            if (req.body.type === 'property' && user.receiveProperties === false) {
+                return null;
+            }
+        }
+
         return Notifications.create({
             type: req.body.type,
             message: req.body.message,

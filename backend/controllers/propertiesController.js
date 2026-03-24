@@ -159,13 +159,23 @@ export class propertiesController {
 
             const usersToNotify = this.getUsersToNotify(newProperty.address, newProperty.title, recentSearches);
 
+            const usersData = await Users.findAll({
+                where: { id: usersToNotify },
+                attributes: ['id', 'receiveProperties']
+            });
+            const usersPrefMap = {};
+            usersData.forEach(u => usersPrefMap[u.id] = u);
+
             const notificationPromises = usersToNotify.map(userId => {
+                const u = usersPrefMap[userId];
+                if (u && u.receiveProperties === false) return null;
+
                 return Notifications.create({
                     type: 'property',
                     message: `Un nuovo immobile in "${newProperty.address}" è appena stato aggiunto e corrisponde alle tue ultime ricerche!`,
                     userId: userId
                 });
-            });
+            }).filter(Boolean);
 
             await Promise.all(notificationPromises);
         } catch (error) {
@@ -425,14 +435,24 @@ export class propertiesController {
 
             const usersToNotify = this.getUsersToNotify(property.address, property.title, recentSearches);
 
+            const usersData = await Users.findAll({
+                where: { id: usersToNotify },
+                attributes: ['id', 'receivePromos']
+            });
+            const usersPrefMap = {};
+            usersData.forEach(u => usersPrefMap[u.id] = u);
+
             const notificationPromises = usersToNotify.map(userId => {
+                const u = usersPrefMap[userId];
+                if (u && u.receivePromos === false) return null;
+
                 return Notifications.create({
                     type: 'promo',
                     title: `Promozione su ${property.title}`,
                     message: promotionText,
                     userId: userId
                 });
-            });
+            }).filter(Boolean);
 
             await Promise.all(notificationPromises);
             return true;

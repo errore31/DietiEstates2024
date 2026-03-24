@@ -40,6 +40,16 @@ export function createModel(database){
             allowNull: false,
             
         },
+        receivePromos : {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false
+        },
+        receiveProperties : {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false
+        },
         agencyId : {
             type: DataTypes.INTEGER,
             allowNull: true,

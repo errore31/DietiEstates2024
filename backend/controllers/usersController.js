@@ -66,7 +66,7 @@ export class userController {
         }
 
 
-        const allowedUpdates = ['name', 'surname', 'username', 'email', 'role', 'agencyId'];
+        const allowedUpdates = ['name', 'surname', 'username', 'email', 'role', 'agencyId', 'receivePromos', 'receiveProperties'];
 
         allowedUpdates.forEach((field) => {
             if (req.body[field] !== undefined && req.body[field] !== "") {
