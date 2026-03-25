@@ -3,15 +3,18 @@
     <div class="gallery-container">
 
         <div class="main-img-wrapper" *ngIf="property.Images && property.Images.length > 0">
-            <swiper-container [attr.slides-per-view]="1" [navigation]="true" [pagination]="true" [loop]="true"
-                observer="true" observe-parents="true"
-                style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff;">
+            <swiper-container #swiper slides-per-view="1" loop="true" observer="true" observe-parents="true"
+                pagination="true" style="--swiper-pagination-color: #fff;">
 
                 <swiper-slide *ngFor="let img of property.Images">
                     <img [src]="getImageUrl(img.url)" [alt]="property.title" class="carousel-img">
                 </swiper-slide>
 
             </swiper-container>
+
+
+            <button *ngIf="property.Images.length > 1" class="swiper-btn-prev" (click)="prevSlide()">❮</button>
+            <button *ngIf="property.Images.length > 1" class="swiper-btn-next" (click)="nextSlide()">❯</button>
         </div>
 
         <div class="side-imgs-wrapper" *ngIf="property.Images && property.Images.length > 1">

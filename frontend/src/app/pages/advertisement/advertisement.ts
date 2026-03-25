@@ -1,4 +1,4 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Property } from '../../models/property';
 import { PropertyService } from '../../services/property/property';
@@ -41,6 +41,20 @@ export class Advertisement implements OnInit {
       return url;
     }
     return 'http://localhost:3000/uploads/' + url;
+  }
+
+  @ViewChild('swiper') swiperRef: ElementRef | undefined;
+
+  nextSlide() {
+    if (this.swiperRef && this.swiperRef.nativeElement && this.swiperRef.nativeElement.swiper) {
+      this.swiperRef.nativeElement.swiper.slideNext();
+    }
+  }
+
+  prevSlide() {
+    if (this.swiperRef && this.swiperRef.nativeElement && this.swiperRef.nativeElement.swiper) {
+      this.swiperRef.nativeElement.swiper.slidePrev();
+    }
   }
 
 }

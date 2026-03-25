@@ -34,6 +34,38 @@ swiper-container {
     display: block;
 }
 
+/* Frecce Custom */
+.swiper-btn-prev, .swiper-btn-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.swiper-btn-prev {
+    left: 10px;
+}
+
+.swiper-btn-next {
+    right: 10px;
+}
+
+.swiper-btn-prev:hover, .swiper-btn-next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
 .side-imgs-wrapper {
     display: flex;
     flex-direction: column;
